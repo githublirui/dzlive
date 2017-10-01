@@ -1,0 +1,30 @@
+  <ul id="accordion" class="accordion">
+<!--      <li class="">
+         <div class="link"><i class="fa fa-paint-brush"></i>我的课程<i class="fa fa-chevron-down"></i></div>
+         <ul class="submenu" style="display: none;">
+             <li><a href="#">我购买的课程</a></li>
+             <li><a href="#">我收藏的课程</a></li>
+             <li><a href="#">浏览记录</a></li>
+         </ul>
+     </li> -->
+     <li class="open">
+         <div class="link"><i class="fa fa-code"></i>{lang zhanmishu_video:my_order}<i class="fa fa-chevron-down"></i></div>
+         <ul class="submenu" style="display: block;">
+             <li><a href="plugin.php?id=zhanmishu_video:video&mod=order">{lang zhanmishu_video:buyorder}</a></li>
+
+         </ul>
+     </li>
+     <li class="">
+         <div class="link"><i class="fa fa-mobile"></i>{lang zhanmishu_video:contract_admin}<i class="fa fa-chevron-down"></i></div>
+         <ul class="submenu" style="display: none;">
+<!--              <li><a href="#">已签订合同</a></li>
+ -->             <li><a href="plugin.php?id=zhanmishu_video:video&mod=order&act=contract">{lang zhanmishu_video:need_sign_contract}</a></li>
+         </ul>
+     </li>
+     <li class="">
+          <div class="link"><i class="fa fa-globe"></i>{lang zhanmishu_video:verify_admin}<i class="fa fa-chevron-down"></i></div>
+         <ul class="submenu" style="display: none;">
+             <li><a href="home.php?mod=spacecp&ac=profile&op=verify">{lang zhanmishu_video:verify}</a></li>
+         </ul>
+     </li>
+ </ul>

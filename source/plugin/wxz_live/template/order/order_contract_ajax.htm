@@ -1,0 +1,6 @@
+{template common/header_ajax}
+<input style="display:none;" type="file" value="" name="verifyimg{$orderk}" id="verifyimg_{$_GET['oid']}_{$orderk}" value="" onchange="ajaxpost('ordersign_{$_GET['oid']}','verifyimgshow_{$_GET['oid']}_{$orderk}')">
+<input type="hidden" name="sign_img{$orderk}" value="$images['verifyimg']">
+<img src="$images['verifyimg']">
+<input class="sbtns " type="button" value="{lang zhanmishu_video:upload}" onclick="document.getElementById('verifyimg_{$_GET['oid']}_{$orderk}').disabled=false;document.getElementById('verifyimg_{$_GET['oid']}_{$noorderk}').disabled=true;document.getElementById('verifyimg_{$_GET['oid']}_{$orderk}').click();">
+{template common/footer_ajax}

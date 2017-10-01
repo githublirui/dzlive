@@ -1,0 +1,149 @@
+{template zhanmishu_video:live_header}
+<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/fonts/Ionicons.css">
+<link rel="stylesheet" type="text/css" href="source/plugin/zhanmishu_video/template/css/common/training.css">
+<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/videostyle.css?_t=201613213w011"/>
+<div id="wrap">
+    <!-- CONTENT --> 
+    <div id="content wp">
+
+        <div class="hero_bkgd course">
+            <div class="zmscoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$_GET['cid']}">{lang zhanmishu_video:learning}{$course['course_name']}</a></h2>
+            </div>
+            <div class="zmscourse">
+                <div class="clearfix video_box">
+                  {if {$course['fileurl']}}
+                    <a href="{if $course['ispay'] || $course['course_price'] == '0'}{$course['fileurl']}{else}javascript::alert('{lang zhanmishu_video:buy_now}');{/if}" target="_blank" class="course_downfiles">{lang zhanmishu_video:filesdownload}</a>
+                  {/if}
+                    <div id="course_video_container">
+                        <div class="zmsvideoplayer">
+                            {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] == '0' || empty($course['video']))}
+                            <div class="nolook">
+                                <div class="nolooktip">
+                                   {if $course['video'][$vid]['video_urltype'] !=='2' || $course['course_type']=='0'}
+                                        $videoconfig['videourltips']
+                                   {elseif $course['video'][$vid]['video_urltype'] =='2' || $course['course_type']=='1'}
+                                        $videoconfig['downurltips']
+                                   {/if}
+                                    <div class="bottonke">
+                                      {if $videoconfig['selltype'] == '1'}
+                                       <a class="redbot" href="plugin.php?id=zhanmishu_video:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang zhanmishu_video:buy_now}</span></a>
+                                       {elseif $videoconfig['selltype'] == '2'}
+                                          <a class="redbot" href="{$videoconfig['vipbuyurl']}"><span>{lang zhanmishu_video:buy_now}</span></a>
+                                       {/if}
+                                    </div>
+                                </div>
+                            </div>
+                            {elseif ($course['video'][$vid]['video_urltype'] == '2' || $course['course_type']=='1') && $course['ispay']}
+                            <div class="nolook">
+                                <div class="nolooktip">
+                                        $videoconfig['buy_videourltips'] 
+                                    <div class="bottonke" style="width: 270px;">
+                                    <a class="redbot" href="{if $videoconfig['selltype'] == '2'}$course['baiduurl']{else}plugin.php?id=zhanmishu_video:video&mod=order{/if}"  target="_blank"><span>{lang zhanmishu_video:down_now}</span></a>
+                                    <a class="redbot" href="$videoconfig['learnurl']"  target="_blank"><span>{lang zhanmishu_video:how_to_use}</span></a>  
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            {else}
+                                {if $course['coursetype']=='str'}
+                                    {eval echo stripcslashes($course['live_url']);}
+                                {elseif $course['video'][$vid]['video_urltype'] == '4' || $course['video'][$vid]['video_urltype'] == '5'}
+                                    {eval echo $course['video'][$vid]['video_url'];}
+                                {else}
+                                     <div id="my_video"></div>
+                                     <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+
+                                {/if}
+
+                            {/if}
+                        </div>
+                        <span id="zhanmishu_videosrc"></span>
+                        <div id="captions-container" style="display:none"></div>
+                        <div id="transcript-container" style="display:none;position:absolute;top:0;right:0"></div>
+                    </div>
+                    <!-- Course Info -->
+                    <div class="zmscourse_info">
+                        <div class="teacherinfo">
+                            <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$_GET['cid']}"><h2>{$course['course_name']}</h2></a>
+                            <span>{lang zhanmishu_video:teacher_at}<a href="">{$course['username']}</a></span>
+                        </div>
+                        <div class="courselist">
+                            <div class="courselist_title">
+                                <div class="zmstable ccshow" id="zmstable_1"><a href="javascript:;" onclick="switchTab('zmstable','1','2','ccshow');">{lang zhanmishu_video:video_list}</a></div>
+                                <div class="zmstable" id="zmstable_2"><a href="javascript:;" onclick="switchTab('zmstable','2','2','ccshow');">{lang zhanmishu_video:video_reply}</a></div>
+                            </div>
+
+                            <div class="course_list"  id="zmstable_c_1">
+                                <ul>
+                                    {eval $i=0;}
+                                    {loop $course['video'] $value}
+                                        {eval ++$i;}
+                                        <li{if $vid==$value['vid']} class="playing"{/if}><i class="ion-social-youtube-outline"></i> <a{if $course['coursetype'] !=='str'} href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$cid}&vid={$value['vid']}" {/if} title="{if $course['coursetype'] !=='str' && $value['video_length']}{eval echo gmdate('H:i:s',$value['video_length']);}{/if}">$value['video_name']</a></li>
+                                    {/loop}
+                                </ul>
+
+                            </div>
+                            <div class="comments" style="display: none;"   id="zmstable_c_2">
+                                <ul>
+                                   <p style="font-size: 14px;color: #ccc;padding:10px;">{lang zhanmishu_video:livingon}</p>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="arrow arrow-hide"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" reload="1">
+ // JavaScript Document
+//获取页面的宽和高
+jQuery(function(){
+  jQuery('.arrow-hide').click(function(){
+     if (jQuery(".zmscourse").css('margin-right') == '10px') {
+         jQuery(".zmscourse_info").removeClass("hidden_courseinfo");
+         jQuery(".arrow").removeClass("arrow-show");
+         jQuery(".arrow").addClass("arrow-hide");
+         jQuery(".zmscourse").css("margin-right","370px");
+     }else{
+         jQuery(".zmscourse_info").addClass("hidden_courseinfo");
+         jQuery(".arrow").removeClass("arrow-hide");
+         jQuery(".arrow").addClass("arrow-show");
+         jQuery(".zmscourse").css("margin-right","10px");
+     }
+  });
+  autoSetHeight();
+});
+
+window.onresize = function(){  
+      autoSetHeight();
+} 
+
+function autoSetHeight(){
+    var height =  getWindowSize();
+    jQuery('.zmscourse_info').height(height - 30);
+    jQuery('embed').height(height - 30);
+    jQuery('.zmscourse').height(height - 30);
+    jQuery('.zmsvideoplayer').height(height - 30);
+    jQuery('.jwplayer').height(height - 30);
+}
+function getWindowSize(){
+    //获取窗口高度
+    if(window.innerHeight){
+        winHeight=window.innerHeight;
+        }
+    else if((document.body)&&(document.body.clientHeight)){
+        winHeight=document.body.clientHeight;
+    }
+    return winHeight;
+}
+</script>
+  <script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/lib/jwplayer.js"></script>
+
+{eval $main='data-main="source/plugin/zhanmishu_video/template/js/main"';}
+<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+
+
+{template zhanmishu_video:live_footer}

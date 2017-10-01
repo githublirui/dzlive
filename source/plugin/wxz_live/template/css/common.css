@@ -1,0 +1,41 @@
+.dhl_content{width:100%;margin:0 auto;position:relative;overflow:hidden}
+.dhl_nav_left{min-height:600px;overflow:hidden;margin-top:20px}
+.dhl_right{background:rgba(255,255,255,0.88);min-height:600px;width:78%;margin-left:2%;float:left}
+.dhl_right .dhl_hd{border-bottom:1px solid #cccccc;padding:10px 20px}
+.dhl_right_wrap{}
+.dhl_right_wrap .dhl_uc_nv{color:#81828c;font-size:12px;line-height:24px;padding:20px 20px}
+.dhl_fr{float:right}
+.dhl_right_wrap .dhl_nv li{display:inline-block;margin-right:5px}
+.dhl_right_wrap .dhl_nv .active .dhl_btn{background-color:#009aff;border:1px solid #009aff;color:white}
+.dhl_right_wrap .dhl_nv .dhl_btn{padding:0px 18px;font-size:12px;background-color:white;border:1px solid #009aff;color:#009aff;transition:background-color 0.2s,color 0.2s;display:inline-block;border-radius:5px;text-align:center}
+.dhl_right_wrap .dhl_nv li a{padding:0}
+.dhl_combo_order{border:1px solid #e6e5e6;margin-top:20px;}
+.dhl_combo_order > .hd{background-color:#f5f5f5;color:#81828c;font-size:13px;line-height:42px;padding-left:20px;height:42px;overflow:hidden}
+.dhl_combo_order > .hd > .flo{float:left}
+.dhl_combo_order > .hd .number{color:#333}
+.dhl_combo_order > .hd > div > span{margin-right:20px}
+.dhl_combo_order .dhl_item_list{border-right:1px solid #e6e5e6;float: left;width: 183px;}
+.dhl_combo_order .dhl_pic img{display:block;height:100px;width:162px}
+.dhl_combo_order .dhl_pic{float:left;margin-right:20px}
+.dhl_combo_order .dhl_item_list a{color:#009aff;text-decoration:none}
+.dhl_combo_order .dhl_item_list > .dhl_item{border-top:1px solid #e6e5e6;padding:10px 10px 30px 10px;margin-top:-1px;overflow:auto;border-right:1px solid #e6e5e6}
+.dhl_order_detail{color:#81828c;font-size:13px;line-height:24px;height:100%;width:59%;border-right:1px solid #e6e5e6;position: absolute;top: 1%;right: 18%;}
+.dhl_operate{color:#81828c;font-size:13px;line-height:24px;height:100%;width:17%;position: absolute;top: 1%;right: 0.5%;}
+.dhl_combo_order > .bd{position:relative;overflow:hidden}
+.dhl_tableMiddle{height:100%;width:100%;display:table;position:relative;text-align:center}
+.dhl_tableMiddle .dhl_tableCell{display:table-cell;vertical-align:middle;width:100%;text-align:center}
+.dhl_order_detail p{height:25px;line-height:25px;}
+.dhl_order_detail_light{color:#FF6633}
+.dhl_pay_act{}
+.dhl_cancel-order{}
+.dhl_btn_default{background-color:white;border:1px solid #009aff;border-radius:5px;color:#fff!important;}
+.dhl_combo_order .dhl_pay_act{font-size:13px;margin-top:-6px}
+.dhl_combo_order .dhl_operate p:last-child{margin-bottom:0}
+.dhl_combo_order .line{color:#aaa;margin:0 5px}
+.dhl_o_wp{margin-top:20px;padding:16px 18px 20px;width:auto!important;max-width:none!important;min-width:none!important;border:1px solid #dfdfdf;background:white;color:#424451}
+.dhl_o_wp .hd{padding:0 8px 10px}
+.dhl_o_wp .hd h2{line-height:20px;font-size:16px;color:#424451}
+.dhl_o_wp .bd{padding:20px 8px 0;border-top:1px solid #dfdfdf}
+.dhl_o_wp ul{list-style:none outside none}
+.dhl_btn{padding:4px 6px;line-height:26px;border-radius:4px;color:white;background:#009aff;border-color:#009aff;font-size:16px;font-family:"Microsoft Yahei"}
+.dhl_orange{color:#ff4200}

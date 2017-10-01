@@ -1,0 +1,9 @@
+{if $_GET['type'] == 'index'}
+    {template zhanmishu_video:inc_video_index}
+{elseif in_array($course['video'][$vid]['video_urltype'],array('5','6','7','8','9')) }
+    {template zhanmishu_video:inc_live}
+{elseif $videoconfig['videopage'] == 'video'}
+    {template zhanmishu_video:inc_video}
+{elseif $videoconfig['videopage'] == 'edu'}
+    {template zhanmishu_video:edu_video}
+{/if}

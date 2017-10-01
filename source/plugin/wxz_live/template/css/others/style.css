@@ -1,0 +1,48 @@
+.course-list .time-label{position:absolute;right:25px;top:25px;height:20px;line-height:20px;font-size:12px;color:#fff;padding:0 3px;visibility:hidden;background-color:#000;background-color:rgba(0,0,0,0.5);opacity:0;-webkit-transform:translateX(10px);-ms-transform:translateX(10px);transform:translateX(10px);-webkit-transition:.3s;transition:.3s}
+.course-list .playericon{position:absolute;z-index:120;width:50px;height:50px;display:block;left:50%;margin-left:-25px;top:50%;margin-top:-25px;background:url("/img/player_icon_5c67475.png") 0 0 no-repeat;cursor:pointer;background-size:50px 50px;-webkit-transform:translateX(10px);-ms-transform:translateX(10px);transform:translateX(10px);-webkit-transition:.3s;transition:.3s}
+.course-list-img:hover{background:rgba(0,0,0,.4)}
+.container{width: 100%;}
+.container li {list-style: none;}
+.container,.course,.banner,.recommended{float: left;}
+#course_video_container{width:75%;float: left;padding-left: 10px;}
+#course_video_container #my_video{width: 100%;height: 100%;}
+#course_detail_left_container {width: 80%;float: left;font-size: 18px;}
+#course_detail_left_container .subscribers {margin-right: 20px;}
+.hero_bkgd.course {width: 100%;}
+.hero_bkgd.course .course_info{width:23%;float: right;padding: 0;height: 464px;margin-right: 0;}
+.hero_bkgd.course .course_info .panel_group{padding: 20px;}
+.course.hero_bkgd .panel_group .collapse.panel_collapse{display: block;height: 100%;}
+.hero_bkgd.course .banner {width: 100%;position: relative;}
+.hero_bkgd.course .banner .container{padding: 10px;}
+.hero_bkgd.course .banner .bannertxt{width: 80%;}
+.hero_bkgd.course .banner .zmsbtn{width: 20%;position: absolute;right: 20px;top: 0;}
+.course_listings .column{width: 20%;}
+.inner .table_clumn a:hover {text-decoration: none;}
+.course_listings.row .column .item .inner > SPAN.main.table_column A{white-space:nowrap;}
+.recommended {margin-bottom: 40px;}
+.recommended .software_subcategory_listings .course_boxes{width: 29%;height: 150px;float: left;*margin-right: 20px;_margin-right: 10px;width: 26%\0;}
+.ie8 .recommended .software_subcategory_listings .course_boxes{margin-right: 20px;}
+.ie7 .recommended .software_subcategory_listings .course_boxes{margin-right: 20px;}
+.ie6 .recommended .software_subcategory_listings .course_boxes{margin-right: 10px;}
+.recommended .software_subcategory_listings .course_boxes .course_info_title a{line-height: 28px;}
+.recommended .software_subcategory_listings .course_boxes .course_info_software{padding:5px;}
+.recommended .software_subcategory_listings .course_thumbs .scale{width: 100%;height: 150px;}
+.recommended .software_subcategory_listings .course_thumb_info{padding:0;}
+
+.course_intro {height: 344px;width: 100%;}
+.course_intro .course_intro_content{height: 294px;}
+.course_intro .course_intro_content .course_intro_img{width: 49%;height:100%;float: left;}
+.course_intro .course_intro_content .course_intro_img img{width: 100%;height: 100%;}
+.course_intro .course_intro_content .course_intro_right{width: 49%;height:100%;float: right;}
+.course_intro .course_intro_content .course_intro_right h2{font-size: 22px;line-height: 1.2;margin-bottom: 20px;font-weight: normal;}
+.course_intro .course_intro_content .course_intro_right h2{font-size: 22px;line-height: 1.2;margin-bottom: 20px;font-weight: normal;}
+.course_intro .course_intro_content .course_intro_right .intro{border: 1px solid #e5e5e5;padding: 5px;margin:10px 0;font-size: 14px;max-height: 75px;overflow: hidden;}
+.course_intro .course_intro_content .course_intro_right .price{height: 40px;font-size: 22px;padding:0 10px;background-color: #f3f3f3;margin-bottom: 10px;line-height: 40px;}
+.course_intro .course_intro_content .course_intro_right .price .free{color: #5fb41b;}
+.course_intro .course_intro_content .course_intro_right .price .pricenum{color: #e85308;}
+.course_intro .course_intro_content .course_intro_right .price .pricenum select{color: #e85308;font-size: 14px;}
+.course_intro .course_intro_content .course_intro_right .zmsbtn {width: 100%;height: 50px;}
+.course_intro .course_intro_content .course_intro_right .zmsbtn a{width: 150px;height: 50px;font-size: 18px;border-radius: 2px;background: #188eee;color: #fff;display: block;float: left;text-align: center;line-height: 50px;margin-left: 10px;margin-top: 20px;}
+.course_intro .course_intro_content .course_intro_right .zmsbtn a.chat_seller{background: #fff;border: solid 1px #188eee;color: #188eee;width: 148px;height: 48px;}
+
+

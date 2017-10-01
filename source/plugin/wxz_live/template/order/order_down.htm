@@ -1,0 +1,119 @@
+<div class="dhl_right">
+    <div class="dhl_hd">
+        <h3>{lang zhanmishu_video:video_down}</h3>
+    </div>
+ 
+    <div class="dhl_right_wrap">
+    {if !$_GET['oid']}
+        <div class="dhl_uc_nv">
+            <p class="dhl_fr">{lang zhanmishu_video:all_num_oforder}<span class="light">1</span>{lang zhanmishu_video:order_unit}</p>
+            <ul class="dhl_nv">
+                
+                {loop $zhanmishu_videoconf['contractstatus'] $key $value}
+                <li{if $_GET['contractstatus']==$key} class="active"{/if}><a class="dhl_btn" href="plugin.php?id=zhanmishu_video:video&mod=order&act=contract&contractstatus={$key}">{$value}</a></li>
+               
+            {/loop}
+            </ul>
+        </div>
+
+    {/if}
+ 
+    <style type="text/css">
+      .dhl_combo_order .dhl_order_detail{ border: 0;}
+      .dhl_order_detail table{width: 400px;height: 120px;margin: 20px;display: block;float: left;}
+      .dhl_order_detail table tr{margin:10px 20px;}
+      .dhl_order_detail table tr td{padding:10px 5px 5px 0;min-width: 220px;}
+      .dhl_order_detail p {padding:10px;font-size: 14px;}
+
+    </style>
+    {eval $value = $o;}
+    {eval $orderstatus = $order->update_order_status_byoid($value['oid']);}
+       <div id="w0" class="dhl_order_list">
+
+            <div>
+                <div class="dhl_combo_order">
+                    <div class="bd">
+                        <div class="dhl_item_list">
+                            <div class="dhl_item">
+                                <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}" class="dhl_pic" target="_blank">
+                                    <img title="{$value['course_name']}" alt="{$value['course_name']}"
+                                         src="{$value['course_img']}">
+                                </a>
+                               <div class="dhl_desc">
+                                    <h3 class="name">
+                                        <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}" target="_blank">{$value['course_name']}</a>
+                                    </h3>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dhl_order_detail">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a class="dhl_btn dhl_btn_default" style="background:#666666;border:0;" href="{$orderconfig['videoplayerurl']}" target="_blank">{lang zhanmishu_video:videoplayerurl}</a>                                      
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+
+                                    {if $value['baiduurl']}
+                                    <td> 
+                                        <a class="dhl_btn dhl_btn_default" href="{$value['baiduurl']}" target="_blank">{lang zhanmishu_video:baidupan}</a>
+                                    <span>{lang zhanmishu_video:tiqupwd_at}{$value['baiduurlpwd']}</span>
+                                    </td>
+                                    {/if}
+                                    {if $value['360url']}
+                                    <td>
+                                        <a class="dhl_btn dhl_btn_default" href="{$value['360url']}" target="_blank">{lang zhanmishu_video:360pan}</a>                                      
+                                    <span>{lang zhanmishu_video:tiqupwd_at}{$value['360urlpwd']}</span>
+                                    </td>
+                                    {/if}
+                                    
+                                </tr>
+                                <tr>
+                                    <td>{lang zhanmishu_video:rarpwd_at}</td>
+                                    <td>{$value['rarpwd']}</td>
+                                </tr>
+                            </table>                          
+                        </div>
+                        <div class="dhl_operate">
+                            <div class="dhl_tableMiddle">
+                                <div class="dhl_tableCell">
+                                    <div class="content">
+                                        <p class="mb20">
+                                            <span id="ordersign_{$value['oid']}_show"></span>
+                                            {if $orderstatus=='2'}
+                                                <a class="dhl_btn dhl_btn_default" href="plugin.php?id=zhanmishu_video:video&mod=buy&cid={$value['cid']}&oid={$value['oid']}&formhash={FORMHASH}">{lang zhanmishu_video:pay_order}</a>
+                                            {elseif  $orderstatus=='3'}
+                                                <a class="dhl_btn dhl_btn_default" href=":;" onclick="document.getElementById('verifyimg_{$value['oid']}_2').disabled=true;document.getElementById('verifyimg_{$value['oid']}_1').disabled=true;ajaxpost('ordersign_{$value['oid']}','ordersign_{$value['oid']}_show')">{lang zhanmishu_video:submit_confirm}</a>
+                                                {if $value['sign_img2']}
+                                                    <p>{lang zhanmishu_video:confirm_is_not_access}</p>
+                                                {/if}
+                                            {elseif  $orderstatus=='4'}
+                                                <a class="dhl_btn dhl_btn_default" href=":;" onclick="document.getElementById('verifyimg_{$value['oid']}_2').disabled=true;document.getElementById('verifyimg_{$value['oid']}_1').disabled=true;ajaxpost('ordersign_{$value['oid']}','ordersign_{$value['oid']}_show')">{lang zhanmishu_video:contract_is_on_confirm}</a>
+                                            {elseif  $orderstatus=='5'}
+                                                 <a class="dhl_btn dhl_btn_default" href="plugin.php?id=zhanmishu_video:video&mod=order&act=mail&oid={$value['oid']}&ordermailsubmit=yes&formhash={FORMHASH}">{lang zhanmishu_video:set_is_mailed}</a>
+                                            {elseif  $orderstatus=='6'}
+                                                <a class="dhl_btn dhl_btn_default" >{lang zhanmishu_video:mail_onway}</a>
+                                            {elseif  $orderstatus=='1'}
+                                                <a class="dhl_btn dhl_btn_default" >{lang zhanmishu_video:finish}</a>
+
+                                            {/if}
+                                            <p class="dhl_pay_act">
+                                            <a href="plugin.php?id=zhanmishu_video:video&mod=order&act=list&oid={$value['oid']}">{lang zhanmishu_video:check_order_status}</a>
+                                        </p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
