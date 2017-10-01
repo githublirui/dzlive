@@ -1,10 +1,10 @@
 <?php
 /*
- *ÈðË¼¿ÆÈËwww.riscman.com
- *±¸ÓÃÓòÃûwww.riscman.com
- *¸ü¶à¾«Æ·×ÊÔ´Çë·ÃÎÊÈðË¼¿ÆÈË¹Ù·½ÍøÕ¾Ãâ·Ñ»ñÈ¡
- *±¾×ÊÔ´À´Ô´ÓÚÍøÂçÊÕ¼¯,½ö¹©¸öÈËÑ§Ï°½»Á÷£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾£¬²¢ÓÚÏÂÔØ24Ð¡Ê±ºóÉ¾³ý!
- *Èç¹ûÇÖ·¸ÁËÄúµÄÈ¨Òæ,Çë¼°Ê±¸æÖªÎÒÃÇ,ÎÒÃÇ¼´¿ÌÉ¾³ý!
+ *åˆè‚¥å¾®å°æ™ºwww.hfwxz.com
+ *å¤‡ç”¨åŸŸåwww.hfwxz.com
+ *æ›´å¤šç²¾å“èµ„æºè¯·è®¿é—®åˆè‚¥å¾®å°æ™ºå®˜æ–¹ç½‘ç«™å…è´¹èŽ·å–
+ *æœ¬èµ„æºæ¥æºäºŽç½‘ç»œæ”¶é›†,ä»…ä¾›ä¸ªäººå­¦ä¹ äº¤æµï¼Œè¯·å‹¿ç”¨äºŽå•†ä¸šç”¨é€”ï¼Œå¹¶äºŽä¸‹è½½24å°æ—¶åŽåˆ é™¤!
+ *å¦‚æžœä¾µçŠ¯äº†æ‚¨çš„æƒç›Š,è¯·åŠæ—¶å‘ŠçŸ¥æˆ‘ä»¬,æˆ‘ä»¬å³åˆ»åˆ é™¤!
  */
 
 if(!defined('IN_DISCUZ')) {
@@ -15,19 +15,19 @@ if(!defined('IN_DISCUZ')) {
 
 $sql = <<<EOF
 
-DROP TABLE pre_zhanmishu_video_cat;
-DROP TABLE pre_zhanmishu_video_course;
-DROP TABLE pre_zhanmishu_video;
-DROP TABLE pre_zhanmishu_video_order;
-DROP TABLE pre_zhanmishu_video_autho;
+DROP TABLE pre_wxz_live_cat;
+DROP TABLE pre_wxz_live_course;
+DROP TABLE pre_wxz_live;
+DROP TABLE pre_wxz_live_order;
+DROP TABLE pre_wxz_live_autho;
 
 EOF;
  runquery($sql);
  
-$path = DISCUZ_ROOT.'data/sysdata/cache_zhanmishu_video.php';
-$imgdir = DISCUZ_ROOT.'data/attachment/zhanmishu_video';
+$path = DISCUZ_ROOT.'data/sysdata/cache_wxz_live.php';
+$imgdir = DISCUZ_ROOT.'data/attachment/wxz_live';
 @unlink($path);
-//fix É¾³ýÉÏ´«ÀúÊ·¼ÇÂ¼µÄÍ¼Æ¬
+//fix åˆ é™¤ä¸Šä¼ åŽ†å²è®°å½•çš„å›¾ç‰‡
 zmsfolder_del($imgdir);
 $finish = TRUE;
 
@@ -42,7 +42,7 @@ function zmsfolder_del($path){
                 zmsfolder_del($path.'/'.$file);
             }
         }
-        @rmdir($path);  //ÕâÖÖ·½·¨²»ÓÃÅÐ¶ÏÎÄ¼þ¼ÐÊÇ·ñÎª¿Õ,  ÒòÎª²»¹Ü¿ªÊ¼Ê±ÎÄ¼þ¼ÐÊÇ·ñÎª¿Õ,µ½´ïÕâÀïµÄÊ±ºò,¶¼ÊÇ¿ÕµÄ     
+        @rmdir($path);  //è¿™ç§æ–¹æ³•ä¸ç”¨åˆ¤æ–­æ–‡ä»¶å¤¹æ˜¯å¦ä¸ºç©º,  å› ä¸ºä¸ç®¡å¼€å§‹æ—¶æ–‡ä»¶å¤¹æ˜¯å¦ä¸ºç©º,åˆ°è¾¾è¿™é‡Œçš„æ—¶å€™,éƒ½æ˜¯ç©ºçš„     
     }else{
         @unlink($path);
     }

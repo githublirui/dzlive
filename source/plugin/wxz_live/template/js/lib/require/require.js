@@ -1,23 +1,23 @@
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
 //Not using strict: uneven strict support in browsers, #392, and causes
 //problems with requirejs.exec()/transpiler plugins that may not be strict.
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -61,9 +61,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -79,9 +79,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -105,9 +105,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -123,9 +123,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -180,9 +180,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -247,9 +247,9 @@ var requirejs, require, define;
             unnormalizedCounter = 1;
 
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -278,9 +278,9 @@ var requirejs, require, define;
         }
 
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -417,9 +417,9 @@ var requirejs, require, define;
         }
 
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -551,9 +551,9 @@ var requirejs, require, define;
         }
 
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -735,9 +735,9 @@ var requirejs, require, define;
             this.depCount = 0;
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -839,9 +839,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1033,9 +1033,9 @@ var requirejs, require, define;
                     //context or how to 'complete' the load.
                     load.fromText = bind(this, function (text, textAlt) {
                         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1213,9 +1213,9 @@ var requirejs, require, define;
         }
 
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1267,9 +1267,9 @@ var requirejs, require, define;
             onError: onError,
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1457,9 +1457,9 @@ var requirejs, require, define;
                     isBrowser: isBrowser,
 
                     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1532,9 +1532,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1546,9 +1546,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1603,9 +1603,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1674,9 +1674,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1685,9 +1685,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1708,9 +1708,9 @@ var requirejs, require, define;
             },
 
             /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1727,9 +1727,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1770,9 +1770,9 @@ var requirejs, require, define;
     };
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1781,9 +1781,9 @@ var requirejs, require, define;
     };
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1792,9 +1792,9 @@ var requirejs, require, define;
     } : function (fn) { fn(); };
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1843,18 +1843,18 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
     req.onError = defaultOnError;
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -1869,9 +1869,9 @@ var requirejs, require, define;
     };
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -2023,9 +2023,9 @@ var requirejs, require, define;
     }
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -2097,17 +2097,17 @@ var requirejs, require, define;
 
 
     /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
     req.exec = function (text) {
         /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */

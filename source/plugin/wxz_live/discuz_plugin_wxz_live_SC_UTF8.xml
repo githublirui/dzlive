@@ -1,0 +1,866 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="ISO-8859-1"?> -->
+<root>
+    <item id="Title"><![CDATA[Discuz! Plugin]]></item>
+    <item id="Version"><![CDATA[X2,X2.5,X3,X3.1,X3.2,X3.3,L1.0,F1.0]]></item>
+    <item id="Time"><![CDATA[2017-03-01 15:55]]></item>
+    <item id="From"><![CDATA[hfwxz-合肥微小智 (http://www.hfwxz.com/)]]></item>
+    <item id="Data">
+        <item id="plugin">
+            <item id="available"><![CDATA[1]]></item>
+            <item id="adminid"><![CDATA[1]]></item>
+            <item id="name"><![CDATA[微小智直播]]></item>
+            <item id="identifier"><![CDATA[wxz_live]]></item>
+            <item id="description"><![CDATA[互联网已经进入视频时代，文字和图片已经太Low了，本插件可以让您网站集成视频点播、直播、视频交易购买、下载视频功能。]]></item>
+            <item id="datatables"><![CDATA[]]></item>
+            <item id="directory"><![CDATA[wxz_live/]]></item>
+            <item id="copyright"><![CDATA[合肥微小智]]></item>
+            <item id="version"><![CDATA[v1.5.5]]></item>
+            <item id="__modules">
+                <item id="0">
+                    <item id="name"><![CDATA[video]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[11]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="1">
+                    <item id="name"><![CDATA[input]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[课程管理]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[3]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="2">
+                    <item id="name"><![CDATA[video]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[视频课堂]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[1]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="3">
+                    <item id="name"><![CDATA[cateadmin]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[分类管理]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[3]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="4">
+                    <item id="name"><![CDATA[touchadmin]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[手机版管理]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[3]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[4]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="98">
+                    <item id="name"><![CDATA[installl]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[<b><span style="color:red">&#x5E94;&#x7528;&#x4E2D;&#x5FC3;</span></b>]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[3]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+                <item id="99">
+                    <item id="name"><![CDATA[uninstalll]]></item>
+                    <item id="param"><![CDATA[]]></item>
+                    <item id="menu"><![CDATA[<b><span style="color:red">&#x514D;&#x8D39;&#x63D2;&#x4EF6;</span></b>]]></item>
+                    <item id="url"><![CDATA[]]></item>
+                    <item id="type"><![CDATA[3]]></item>
+                    <item id="adminid"><![CDATA[0]]></item>
+                    <item id="displayorder"><![CDATA[0]]></item>
+                    <item id="navtitle"><![CDATA[]]></item>
+                    <item id="navicon"><![CDATA[]]></item>
+                    <item id="navsubname"><![CDATA[]]></item>
+                    <item id="navsuburl"><![CDATA[]]></item>
+                </item>
+            </item>
+        </item>
+        <item id="version"><![CDATA[X2,X2.5,X3,X3.1,X3.2,F1.0,L1.0,X3.3]]></item>
+        <item id="var">
+            <item id="0">
+                <item id="displayorder"><![CDATA[0]]></item>
+                <item id="title"><![CDATA[付费播放提示信息]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[videourltips]]></item>
+                <item id="type"><![CDATA[textarea]]></item>
+                <item id="value"><![CDATA[该课程是 <em>【商业课程】</em> 须 <em>需要购买后</em> 可观看]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="1">
+                <item id="displayorder"><![CDATA[0]]></item>
+                <item id="title"><![CDATA[是否开启强制认证提醒]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[isverify]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[0]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="2">
+                <item id="displayorder"><![CDATA[0]]></item>
+                <item id="title"><![CDATA[是否开启合同提交审核]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[issign]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[1]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="3">
+                <item id="displayorder"><![CDATA[0]]></item>
+                <item id="title"><![CDATA[合同是否邮寄确认]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[isemail]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[0]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="4">
+                <item id="displayorder"><![CDATA[1]]></item>
+                <item id="title"><![CDATA[七牛云accessKey]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[qiniuaccessKey]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[OcOQq18IZ7ozNQB3iWekALPYJYZRBYdeiLSEZhPO]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="5">
+                <item id="displayorder"><![CDATA[2]]></item>
+                <item id="title"><![CDATA[七牛云secretKey]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[qiniusecretKey]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[Vge5RUUyee0MCNPylQqDol_Ctca-k0B6rU199PBx]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="6">
+                <item id="displayorder"><![CDATA[3]]></item>
+                <item id="title"><![CDATA[七牛云qiniuurl]]></item>
+                <item id="description"><![CDATA[用于网站的访问域名。]]></item>
+                <item id="variable"><![CDATA[qiniuurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[https://www.playzhan.com/video/]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="7">
+                <item id="displayorder"><![CDATA[3]]></item>
+                <item id="title"><![CDATA[七牛加密URL]]></item>
+                <item id="description"><![CDATA[七牛鉴权加密域名。一般可设置为与访问域名一样。如果有访问域名->伪静态rewrite重写->七牛真实加密访问域名，则不一样。]]></item>
+                <item id="variable"><![CDATA[qiniuencdoeurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[http://v1.playzhan.com/]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="8">
+                <item id="displayorder"><![CDATA[4]]></item>
+                <item id="title"><![CDATA[支付结算方式]]></item>
+                <item id="description"><![CDATA[如选择discuz内置积分支付，即为积分支付购买视频，如采用“自助开发”，则可以自助开发对接其他支付接口]]></item>
+                <item id="variable"><![CDATA[paytype]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[2]]></item>
+                <item id="extra"><![CDATA[1=Discuz内置积分支付
+2=自助开发（对接其他支付接口）]]></item>
+            </item>
+            <item id="9">
+                <item id="displayorder"><![CDATA[5]]></item>
+                <item id="title"><![CDATA[积分支付选择交易积分类型]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[paytype_extcredits]]></item>
+                <item id="type"><![CDATA[extcredit]]></item>
+                <item id="value"><![CDATA[2]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="10">
+                <item id="displayorder"><![CDATA[6]]></item>
+                <item id="title"><![CDATA[现金/积分兑换比率]]></item>
+                <item id="description"><![CDATA[设置真实货币现金(以人民币元为单位)与站点交易积分间的兑换比率，例如设置为 10，则 1 元人民币可以兑换 10 个单位的交易积分。本功能需开启交易积分，并成功进行财付通、支付宝收款账号的相关设置后方可使用，如果禁止使用现金与交易积分的兑换功能，请设置为 0 ...]]></item>
+                <item id="variable"><![CDATA[moneyper]]></item>
+                <item id="type"><![CDATA[number]]></item>
+                <item id="value"><![CDATA[100]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="11">
+                <item id="displayorder"><![CDATA[7]]></item>
+                <item id="title"><![CDATA[点播播放页面选择]]></item>
+                <item id="description"><![CDATA[插件内置了两种播放页面，一种是普通视频播放页面，一种是教育行业播放页面。]]></item>
+                <item id="variable"><![CDATA[videopage]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[edu]]></item>
+                <item id="extra"><![CDATA[edu=教育培训行业播放页面模板
+video=普通视频播放页面]]></item>
+            </item>
+            <item id="12">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[销售方式]]></item>
+                <item id="description"><![CDATA[销售方式分为vip销售模式和单商品售卖模式。“vip销售"会隐藏列表页面商品价格，以购买vip方式销售产品。"单价销售"则每个课程会显示该课程价格，而用户只需要购买相应的款项即可观看或者下载此课程（此方式兼容vip模式） ...]]></item>
+                <item id="variable"><![CDATA[selltype]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[1]]></item>
+                <item id="extra"><![CDATA[1=单价销售
+2=vip销售]]></item>
+            </item>
+            <item id="13">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[vip开通URL]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[vipbuyurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[https://www.playzhan.com/vip/open/]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="14">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[banner图是否宽屏]]></item>
+                <item id="description"><![CDATA[如设置 banner图宽屏那么毕竟图宽度强烈建议必须大于1920像素。不然在部分浏览器会显示左右空白。]]></item>
+                <item id="variable"><![CDATA[isbannerfull]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[0]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="15">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[是否显示首页推荐视频]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[isvideobox]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[0]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="16">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[pc首页是否显示轮播]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[isswiper]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[1]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="17">
+                <item id="displayorder"><![CDATA[8]]></item>
+                <item id="title"><![CDATA[pc首页是否显示推荐 ...]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[isrecommend]]></item>
+                <item id="type"><![CDATA[radio]]></item>
+                <item id="value"><![CDATA[1]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="18">
+                <item id="displayorder"><![CDATA[9]]></item>
+                <item id="title"><![CDATA[列表页面显示栏数]]></item>
+                <item id="description"><![CDATA[即每行显示课程数量。目前支持设置3个或者5个。]]></item>
+                <item id="variable"><![CDATA[clumnnums]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[4]]></item>
+                <item id="extra"><![CDATA[3=每行显示三个
+4=每行显示四个]]></item>
+            </item>
+            <item id="19">
+                <item id="displayorder"><![CDATA[10]]></item>
+                <item id="title"><![CDATA[vip用户组观看权限]]></item>
+                <item id="description"><![CDATA[格式为【用户组ID=单价（元）】，一行一个，意思是单价小于或等于多少的视频该用户组可以免费观看。]]></item>
+                <item id="variable"><![CDATA[vipgroup]]></item>
+                <item id="type"><![CDATA[textarea]]></item>
+                <item id="value"><![CDATA[]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="20">
+                <item id="displayorder"><![CDATA[10]]></item>
+                <item id="title"><![CDATA[用户组筛选]]></item>
+                <item id="description"><![CDATA[当开启用户组方式销售课程时候，可设置筛选的用户组。]]></item>
+                <item id="variable"><![CDATA[groupselect]]></item>
+                <item id="type"><![CDATA[groups]]></item>
+                <item id="extra"><![CDATA[]]></item>
+                <item id="__value">
+                    <item id="0"><![CDATA[21]]></item>
+                    <item id="1"><![CDATA[22]]></item>
+                </item>
+            </item>
+            <item id="21">
+                <item id="displayorder"><![CDATA[10]]></item>
+                <item id="title"><![CDATA[联系客服URL设置]]></item>
+                <item id="description"><![CDATA[课程详细页面有一个联系客服，这里可以统一设置联系客服的方式，可以是qq的链接，也可以是其他网页链接]]></item>
+                <item id="variable"><![CDATA[serviceurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[https://wpa.qq.com/msgrd?V=3&uin=87883395&Site=站秘书&Menu=yes&from=zhibo]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="22">
+                <item id="displayorder"><![CDATA[11]]></item>
+                <item id="title"><![CDATA[下载播放提示信息]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[downurltips]]></item>
+                <item id="type"><![CDATA[textarea]]></item>
+                <item id="value"><![CDATA[该课程是 <em>【商业课程】</em> 须 <em>需要购买后</em> 可下载]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="23">
+                <item id="displayorder"><![CDATA[12]]></item>
+                <item id="title"><![CDATA[下载视频购买成功后提示信息]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[buy_videourltips]]></item>
+                <item id="type"><![CDATA[textarea]]></item>
+                <item id="value"><![CDATA[恭喜您完成视频购买，您可点击下面 <em>【下载视频】</em>按钮下载您购买的视频，也可以点击 <em>【如何播放？】</em>按钮插件播放加密视频教程]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="24">
+                <item id="displayorder"><![CDATA[13]]></item>
+                <item id="title"><![CDATA[关联实名认证设置]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[verify]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[6]]></item>
+                <item id="extra"><![CDATA[1=verify1
+2=verify2
+3=verify3
+4=verify4
+5=verify5
+6=verify6
+7=verify7]]></item>
+            </item>
+            <item id="25">
+                <item id="displayorder"><![CDATA[14]]></item>
+                <item id="title"><![CDATA[邮寄资料信息]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[mail_info]]></item>
+                <item id="type"><![CDATA[textarea]]></item>
+                <item id="value"><![CDATA[邮寄资料包含：合同一式两份，身份证复印件一份（如您是企业，请提供法人身份证复印件和盖公司公章的营业执照复印件一份）<br>
+收件人地址：xxxxx<br>
+收件人电话：155555<br>
+收件人姓名：王晓霞<br>
+邮寄说明：推荐使用顺丰快递，请勿用到付方式邮寄]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="26">
+                <item id="displayorder"><![CDATA[14]]></item>
+                <item id="title"><![CDATA[离线加密视频选择方案 ...]]></item>
+                <item id="description"><![CDATA[请选择金盾加密或者海海加密（非必须，可不设置）]]></item>
+                <item id="variable"><![CDATA[drmapi]]></item>
+                <item id="type"><![CDATA[select]]></item>
+                <item id="value"><![CDATA[1]]></item>
+                <item id="extra"><![CDATA[2=金盾加密
+1=海海soft加密]]></item>
+            </item>
+            <item id="27">
+                <item id="displayorder"><![CDATA[15]]></item>
+                <item id="title"><![CDATA[海海视频加密账号]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[haihaiusername]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[leighwoo@qq.com]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="28">
+                <item id="displayorder"><![CDATA[16]]></item>
+                <item id="title"><![CDATA[海海视频加密秘钥]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[haihaisec]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[sdaw,..fdDSDD22WWS123DWDSSD342WS]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="29">
+                <item id="displayorder"><![CDATA[17]]></item>
+                <item id="title"><![CDATA[海海用户组ID]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[haihaigroupid]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[13392]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="30">
+                <item id="displayorder"><![CDATA[18]]></item>
+                <item id="title"><![CDATA[实名认证身份证号字段修正]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[idcard]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[field3]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="31">
+                <item id="displayorder"><![CDATA[19]]></item>
+                <item id="title"><![CDATA[实名认证真实姓名字段修正]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[realname]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[realname]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="32">
+                <item id="displayorder"><![CDATA[20]]></item>
+                <item id="title"><![CDATA[播放教程URL]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[learnurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="33">
+                <item id="displayorder"><![CDATA[21]]></item>
+                <item id="title"><![CDATA[专用播放器下载URL]]></item>
+                <item id="description"><![CDATA[]]></item>
+                <item id="variable"><![CDATA[videoplayerurl]]></item>
+                <item id="type"><![CDATA[text]]></item>
+                <item id="value"><![CDATA[]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+            <item id="34">
+                <item id="displayorder"><![CDATA[22]]></item>
+                <item id="title"><![CDATA[下载视频最大许可授权次数 ...]]></item>
+                <item id="description"><![CDATA[海海系统最大每个月允许2000次授权，如果不做限制，一是容易被用户刷授权导致许可证次数被用完。二是用户可以更换电脑重新获取授权。]]></item>
+                <item id="variable"><![CDATA[maxplaycount]]></item>
+                <item id="type"><![CDATA[number]]></item>
+                <item id="value"><![CDATA[3]]></item>
+                <item id="extra"><![CDATA[]]></item>
+            </item>
+        </item>
+        <item id="language">
+            <item id="scriptlang">
+                <item id="logy_m_g"><![CDATA[<h2 style="text-align:-webkit-center;">
+	<span style="color:#4C33E5;">推荐一个dz商</span><span style="color:#4C33E5;">业插件模版下载的</span><span style="color:#4C33E5;"></span><span style="color:#4C33E5;">网站给大家</span><a href="http://www.hfwxz.com" target="_blank"><span style="color:#4C33E5;">合肥微小智</span></a><span style="color:#4C33E5;">（www.hfwxz.com）</span> 
+</h2>
+<h3 style="text-align:-webkit-center;">
+	<span style="color:#E53333;">这</span><span style="color:#E53333;">是一个</span><span style="color:#E53333;">dz商业</span><a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=2" target="_blank"><span style="color:#337FE5;">插</span><u><span style="color:#337FE5;"></span></u><span style="color:#337FE5;">件</span></a><a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=36" target="_blank"><u><span style="color:#337FE5;">模</span></u><u><span style="color:#337FE5;"></span></u><u><span style="color:#337FE5;">版</span></u></a><span style="color:#E53333;">资源破解分享的网站，而且还有很多精品的网站源码下载</span> 
+</h3>
+<h3 style="text-align:-webkit-center;">
+	<span style="color:#E53333;">他们资源每天更新，并且很多都是他们自己出钱在应用中心购买后破解分享出来的</span><br />
+</h3>
+<h3>
+	<div style="text-align:center;">
+		<span style="color:#E53333;">不过还是替他们说一下</span> 
+	</div>
+	<div style="text-align:center;">
+		<span style="color:#E53333;">&nbsp;他们站下载的资源只限于自己学习研究内含的设计思想和原理 请勿有任何商业盈利行为</span> 
+	</div>
+</h3>
+<h3 style="text-align:center;">
+	<span style="color:#999999;">介绍也介绍完了，给大家做个小导航吧</span> 
+</h3>
+<h3 style="text-align:center;">
+	<span style="color:#337FE5;"><a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=2" target="_blank">dz商业破解插件下载</a> &nbsp; <a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=36" target="_blank">dz商业风格模版下载</a> &nbsp; &nbsp;<a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=50" target="_blank">精品网站源码下载</a> &nbsp; &nbsp;<a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=51" target="_blank">工具素材下载</a></span><span style="color:#337FE5;">&nbsp; &nbsp; <a href="http://www.hfwxz.com/forum.php?mod=forumdisplay&fid=41" target="_blank">精选教程区</a></span> 
+</h3> ]]></item>
+                <item id="course_admin"><![CDATA[课程管理]]></item>
+                <item id="add_course"><![CDATA[添加课程]]></item>
+                <item id="must_finish_info"><![CDATA[必须填写名称、价格、数量、视频详情]]></item>
+                <item id="add_success"><![CDATA[添加成功了]]></item>
+                <item id="add_course_success_and_add_video"><![CDATA[添加课程成功，请点击编辑课程添加单节教程]]></item>
+                <item id="course_name"><![CDATA[课程名称]]></item>
+                <item id="cid"><![CDATA[课程cid]]></item>
+                <item id="title"><![CDATA[课程标题]]></item>
+                <item id="course_name_desc"><![CDATA[必填]]></item>
+                <item id="course_price"><![CDATA[单价]]></item>
+                <item id="desc"><![CDATA[详细介绍]]></item>
+                <item id="price"><![CDATA[价格]]></item>
+                <item id="img"><![CDATA[封面图]]></item>
+                <item id="course_price_desc"><![CDATA[必填]]></item>
+                <item id="course_sn"><![CDATA[产品编号]]></item>
+                <item id="goods_sn"><![CDATA[产品编号]]></item>
+                <item id="course_sn_desc"><![CDATA[]]></item>
+                <item id="num"><![CDATA[库存]]></item>
+                <item id="num_desc"><![CDATA[0表示默认课程行数即为数量]]></item>
+                <item id="selltimes"><![CDATA[销售次数]]></item>
+                <item id="maxselltimes"><![CDATA[最大销售次数]]></item>
+                <item id="maxselltimes_desc"><![CDATA[0表示无限制，1表示仅能销售一次]]></item>
+                <item id="course_img"><![CDATA[产品封面]]></item>
+                <item id="course_img_desc"><![CDATA[用于产品封面]]></item>
+                <item id="course_intro"><![CDATA[详细描述]]></item>
+                <item id="course_intro_desc"><![CDATA[]]></item>
+                <item id="course_sec"><![CDATA[课程信息]]></item>
+                <item id="course_sec_desc"><![CDATA[一行一个，课程信息]]></item>
+                <item id="datetime"><![CDATA[添加时间]]></item>
+                <item id="no_num_try_latter"><![CDATA[没有货了，请稍后再试]]></item>
+                <item id="admin_key_sec"><![CDATA[管理课程]]></item>
+                <item id="admin_course"><![CDATA[管理课程]]></item>
+                <item id="delete"><![CDATA[删除]]></item>
+                <item id="edit"><![CDATA[编辑]]></item>
+                <item id="buyer_username"><![CDATA[下单用户]]></item>
+                <item id="oid"><![CDATA[订单ID]]></item>
+                <item id="trade_no"><![CDATA[订单号]]></item>
+                <item id="isselled"><![CDATA[状态]]></item>
+                <item id="act"><![CDATA[操作]]></item>
+                <item id="sellner"><![CDATA[卖家]]></item>
+                <item id="sellnum"><![CDATA[销量]]></item>
+                <item id="delte_success"><![CDATA[删除成功]]></item>
+                <item id="outsellk"><![CDATA[<span style="color:red;">下架</span>]]></item>
+                <item id="onsellk"><![CDATA[<span style="color:green;">上架</span>]]></item>
+                <item id="haveoutsellk"><![CDATA[<span style="color:red;">已下架</span>]]></item>
+                <item id="haveonsellk"><![CDATA[<span style="color:green;">已上架</span>]]></item>
+                <item id="issell"><![CDATA[状态]]></item>
+                <item id="update_sell_success"><![CDATA[更新课程状态成功]]></item>
+                <item id="unselled"><![CDATA[<span style="color:green;">未卖出</span>]]></item>
+                <item id="selled"><![CDATA[<span style="color:#cdcdcd;">已卖出</span>]]></item>
+                <item id="set_selled"><![CDATA[设置为已销售]]></item>
+                <item id="set_hao_status_success"><![CDATA[更新课程状态信息成功]]></item>
+                <item id="delete_hao_success"><![CDATA[删除卡号成功]]></item>
+                <item id="order_admin"><![CDATA[订单管理]]></item>
+                <item id="ispayed"><![CDATA[支付状态]]></item>
+                <item id="issend"><![CDATA[是否发送至邮箱]]></item>
+                <item id="buyer_email"><![CDATA[买家邮箱]]></item>
+                <item id="buyer_uid"><![CDATA[买家用户名]]></item>
+                <item id="out_trade_no"><![CDATA[支付单号]]></item>
+                <item id="checknum"><![CDATA[是否完成支付确认]]></item>
+                <item id="buyer_mobile"><![CDATA[买家手机号]]></item>
+                <item id="pay_time"><![CDATA[付款时间]]></item>
+                <item id="email_error"><![CDATA[邮箱输入错误，请重新输入]]></item>
+                <item id="mobile_error"><![CDATA[手机号格式错误，请重新输入]]></item>
+                <item id="add_video"><![CDATA[添加视频]]></item>
+                <item id="payed_success"><![CDATA[<span style="color:green;">已支付</span>]]></item>
+                <item id="payed_unsuccess"><![CDATA[<span style="color:red;">未支付</span>]]></item>
+                <item id="checknum_success"><![CDATA[<span style="color:green;">已确认支付</span>]]></item>
+                <item id="checknum_unsuccess"><![CDATA[<span style="color:red;">未确认支付</span>]]></item>
+                <item id="learn_success"><![CDATA[<span style="color:green;">已播放</span>]]></item>
+                <item id="learn_unsuccess"><![CDATA[<span style="color:red;">未播放</span>]]></item>
+                <item id="send_success"><![CDATA[<span style="color:green;">已发送</span>]]></item>
+                <item id="send_unsuccess"><![CDATA[<span style="color:red;">未发送</span>]]></item>
+                <item id="check_success"><![CDATA[<span style="color:green;">已确认</span>]]></item>
+                <item id="check_unsuccess"><![CDATA[<span style="color:red;">未确认</span>]]></item>
+                <item id="issign_success"><![CDATA[<span style="color:green;">已签约</span>]]></item>
+                <item id="issign_unsuccess"><![CDATA[<span style="color:red;">未签约</span>]]></item>
+                <item id="isconfirm_success"><![CDATA[<span style="color:green;">签约已审核</span>]]></item>
+                <item id="isconfirm_unsuccess"><![CDATA[<span style="color:red;">签约未审核</span>]]></item>
+                <item id="ismail_success"><![CDATA[<span style="color:green;">已邮寄</span>]]></item>
+                <item id="ismail_unsuccess"><![CDATA[<span style="color:red;">未邮寄</span>]]></item>
+                <item id="isclosed_success"><![CDATA[<span style="color:#cdcdcd;">已关闭</span>]]></item>
+                <item id="isclosed_unsuccess"><![CDATA[<span style="color:green;">正常</span>]]></item>
+                <item id="issuccess_success"><![CDATA[<span style="color:green;">已完成</span>]]></item>
+                <item id="issuccess_unsuccess"><![CDATA[<span style="color:red;">未完成</span>]]></item>
+                <item id="video_length_desc"><![CDATA[请填写视频时长，单位(秒)]]></item>
+                <item id="video_url"><![CDATA[视频url]]></item>
+                <item id="video_urltype"><![CDATA[视频url类型，播放或者下载]]></item>
+                <item id="video_length"><![CDATA[视频时长]]></item>
+                <item id="video_name"><![CDATA[视频名称]]></item>
+                <item id="video_price"><![CDATA[本节视频价格]]></item>
+                <item id="video_img"><![CDATA[本节视频截图]]></item>
+                <item id="video_intro"><![CDATA[本节视频详细介绍]]></item>
+                <item id="isfree"><![CDATA[本节是否免费]]></item>
+                <item id="isfree_desc"><![CDATA[如果单节视频免费，那么无论此课程是否收费，此单节视频都可以免费播放（主要是一个试看的功能）]]></item>
+                <item id="must_finish_videoname"><![CDATA[必须填写视频的名称]]></item>
+                <item id="add_video_success"><![CDATA[添加视频成功]]></item>
+                <item id="vid"><![CDATA[视频编号]]></item>
+                <item id="video_url_desc"><![CDATA[填写视频url，可能是下载url或者播放url]]></item>
+                <item id="delete_video_success"><![CDATA[删除视频成功]]></item>
+                <item id="diff"><![CDATA[课程难度]]></item>
+                <item id="progress"><![CDATA[课程进程]]></item>
+                <item id="cat_id"><![CDATA[视频分类]]></item>
+                <item id="to_login"><![CDATA[请先登录]]></item>
+                <item id="data_error"><![CDATA[参数错误]]></item>
+                <item id="diff_1"><![CDATA[初级]]></item>
+                <item id="diff_2"><![CDATA[中级]]></item>
+                <item id="diff_3"><![CDATA[高级]]></item>
+                <item id="progress_1"><![CDATA[准备中]]></item>
+                <item id="progress_2"><![CDATA[录制中]]></item>
+                <item id="progress_3"><![CDATA[发布中]]></item>
+                <item id="progress_4"><![CDATA[已完成]]></item>
+                <item id="video_urltype_0"><![CDATA[播放URL]]></item>
+                <item id="video_urltype_1"><![CDATA[下载URL]]></item>
+                <item id="isfree_0"><![CDATA[收费]]></item>
+                <item id="isfree_1"><![CDATA[免费]]></item>
+                <item id="course_urltype_desc"><![CDATA[如果是播放url，表示直接在网页播放器在线播放，如果是下载url，表示用户得到的是一个下载的url（主要是专用播放器和加密的视频）]]></item>
+                <item id="buytips"><![CDATA[即将进入支付页面，支付完成后请勿关闭页面。]]></item>
+                <item id="verifytips"><![CDATA[您还没有完成身份认证，请先认证后再进行订单提交]]></item>
+                <item id="verifytips_submitsuccess"><![CDATA[您已经提交实名认证资料，可以先行购买，实名认证资料有误管理员会联系您补充更换]]></item>
+                <item id="verifytips_check"><![CDATA[您的资料目前正在审核中，您可以核对一下资料是否有误]]></item>
+                <item id="all"><![CDATA[全部]]></item>
+                <item id="success"><![CDATA[已完成]]></item>
+                <item id="none_pay"><![CDATA[待支付]]></item>
+                <item id="none_sign"><![CDATA[待签约]]></item>
+                <item id="none_confirm"><![CDATA[待审核]]></item>
+                <item id="none_mail"><![CDATA[待邮寄]]></item>
+                <item id="none_success"><![CDATA[待审核]]></item>
+                <item id="closed"><![CDATA[已关闭]]></item>
+                <item id="order_error"><![CDATA[订单信息错误，或者订单不存在]]></item>
+                <item id="order_is_payed"><![CDATA[订单已经支付，不需要重复支付]]></item>
+                <item id="sign_success"><![CDATA[上传合同成功，我们会尽快审核，审核通过后您还需要将本次打印的合同邮寄至我们]]></item>
+                <item id="have_signed"><![CDATA[您已经提交过审核，如需要修改可联系客服取消本次审核]]></item>
+                <item id="email_success"><![CDATA[您已经提交邮寄信息，待我们收到后会确认您的订单]]></item>
+                <item id="closed_tips"><![CDATA[您已关闭此订单。]]></item>
+                <item id="cannot_closed_tips"><![CDATA[您已购买，不能自己关闭订单]]></item>
+                <item id="site_sign_img1"><![CDATA[网站合同第一页]]></item>
+                <item id="site_sign_img2"><![CDATA[网站合同第二页]]></item>
+                <item id="click_check"><![CDATA[点击查看]]></item>
+                <item id="cname"><![CDATA[课程名称]]></item>
+                <item id="orderdateline"><![CDATA[下单时间]]></item>
+                <item id="orderstatus"><![CDATA[订单状态]]></item>
+                <item id="order_isnot_exists"><![CDATA[订单不存在]]></item>
+                <item id="uid"><![CDATA[用户UID]]></item>
+                <item id="total_fee"><![CDATA[课程总价]]></item>
+                <item id="dateline"><![CDATA[创建时间]]></item>
+                <item id="sign_time"><![CDATA[签约时间]]></item>
+                <item id="confirm_time"><![CDATA[合同审核时间]]></item>
+                <item id="success_time"><![CDATA[订单完成时间]]></item>
+                <item id="status"><![CDATA[订单状态]]></item>
+                <item id="issign"><![CDATA[是否签约]]></item>
+                <item id="isconfirm"><![CDATA[是否审核合同]]></item>
+                <item id="ismail"><![CDATA[是否邮寄]]></item>
+                <item id="issuccess"><![CDATA[是否成功]]></item>
+                <item id="isclosed"><![CDATA[是否关闭]]></item>
+                <item id="sign_img1"><![CDATA[上传合同第一页]]></item>
+                <item id="sign_img2"><![CDATA[上传合同第二页]]></item>
+                <item id="sign_img3"><![CDATA[上传合同第三页]]></item>
+                <item id="this_user_isnot_finish_verify"><![CDATA[此用户没有完成用户实名信息认证，请要求用户完成认证或者可在插件设置中关闭用户认证]]></item>
+                <item id="moneyunit"><![CDATA[元]]></item>
+                <item id="moneyunit_code"><![CDATA[￥]]></item>
+                <item id="pay_confirm"><![CDATA[支付确认]]></item>
+                <item id="pay_cancel"><![CDATA[取消支付]]></item>
+                <item id="contract_confirm"><![CDATA[合同通过]]></item>
+                <item id="contract_cancel"><![CDATA[合同退回]]></item>
+                <item id="mail_confirm"><![CDATA[邮寄通过]]></item>
+                <item id="mail_cancel"><![CDATA[邮寄打回]]></item>
+                <item id="checkorder_info"><![CDATA[查看订单详情]]></item>
+                <item id="ProfileID"><![CDATA[海海视频加密系统许可证模板编号]]></item>
+                <item id="ProfileID_desc"><![CDATA[必须与海海视频加密系统的“许可证模板的模板ID”相对应]]></item>
+                <item id="baidupan"><![CDATA[百度网盘]]></item>
+                <item id="360pan"><![CDATA[360网盘]]></item>
+                <item id="tiqupwd_at"><![CDATA[提取密码：]]></item>
+                <item id="rarpwd_at"><![CDATA[文件解压密码：]]></item>
+                <item id="baiduurl"><![CDATA[百度网盘下载地址]]></item>
+                <item id="baiduurl_desc"><![CDATA[填写百度网盘的下载地址，要求是绝对连接，即带http之类的]]></item>
+                <item id="baiduurlpwd"><![CDATA[百度网盘提取密码]]></item>
+                <item id="baiduurlpwd_desc"><![CDATA[请填写百度网盘提取密码]]></item>
+                <item id="360url"><![CDATA[360网盘的下载地址]]></item>
+                <item id="360url_desc"><![CDATA[填写360的下载地址，要求是绝对连接，即带http之类的]]></item>
+                <item id="360urlpwd"><![CDATA[请填写360网盘提取密码，没有填写空]]></item>
+                <item id="rarpwd"><![CDATA[文件解压密码]]></item>
+                <item id="rarpwd_desc"><![CDATA[文件解压密码，如果没有则不填写]]></item>
+                <item id="course_type"><![CDATA[课程类别]]></item>
+                <item id="course_type_desc"><![CDATA[课程分为播放类别和下载类别，下载课程需要签订合同才能完成交易，播放课程只需要购买即可播放]]></item>
+                <item id="cleanplaycount"><![CDATA[清除授权次数]]></item>
+                <item id="hour"><![CDATA[小时]]></item>
+                <item id="min"><![CDATA[分钟]]></item>
+                <item id="live_url"><![CDATA[直播URL地址或嵌入代码]]></item>
+                <item id="live_url_desc"><![CDATA[填写此URL或者代码表示课程为“直播课程”，不填写（为空）表示为“点播课程”,目前直播仅支持乐视云直播，新用户送15G流量。如填写为url，则会有内置播放器进行解析，url错误会导致直播错误。如填写代码，则直接替换播放器]]></item>
+                <item id="cateedittips_title"><![CDATA[分类编辑提醒]]></item>
+                <item id="cateedittips"><![CDATA[分类编辑提醒]]></item>
+                <item id="cateadmin"><![CDATA[分类编辑]]></item>
+                <item id="sort"><![CDATA[排序]]></item>
+                <item id="catename"><![CDATA[分类名称]]></item>
+                <item id="addnewcate"><![CDATA[添加分类]]></item>
+                <item id="addnewcateson"><![CDATA[添加子分类]]></item>
+                <item id="update_cate_success"><![CDATA[更新分类成功]]></item>
+                <item id="drm_user_or_password_error"><![CDATA[账号密码错误...]]></item>
+                <item id="drm_filepid_error"><![CDATA[加密文件错误或已经失效]]></item>
+                <item id="drm_licstore_is_coming"><![CDATA[正在获取许可证...]]></item>
+                <item id="drm_please_login"><![CDATA[请登录您账号...]]></item>
+                <item id="drm_licstore_error"><![CDATA[产品ID与许可证不符，请联系管理员...]]></item>
+                <item id="drm_have_not_brought"><![CDATA[您还没有完成购买操作...]]></item>
+                <item id="drm_have_not_verify"><![CDATA[你没有完成用户认证...]]></item>
+                <item id="drm_have_not_getlicstore_times"><![CDATA[您获取许可证的次数已用完，无法再次获取...]]></item>
+                <item id="drm_watermark_error"><![CDATA[水印获取失败...]]></item>
+                <item id="paytype_extcredits"><![CDATA[积分购买视频]]></item>
+                <item id="paytype_extcredits_intro"><![CDATA[订单编号:{oid}，时间：{time},视频ID:{cid},视频名称:{course_name}]]></item>
+                <item id="price_is_updated"><![CDATA[商品价格已经更新，请重新下单]]></item>
+                <item id="you_have_payed"><![CDATA[您已经支付，不能重复支付]]></item>
+                <item id="cr_isnot_enough_please_pay_times"><![CDATA[积分不足,请充值后重试]]></item>
+                <item id="pay_success"><![CDATA[支付成功]]></item>
+                <item id="buy_course_extcredits"><![CDATA[要扣除{moneyNum}金币购买此课程]]></item>
+                <item id="type_auto_set"><![CDATA[自动识别]]></item>
+                <item id="qiniuoss"><![CDATA[七牛云存储]]></item>
+                <item id="downloadurl"><![CDATA[下载链接URL]]></item>
+                <item id="videourl"><![CDATA[MP4或FLV等视频直链]]></item>
+                <item id="videohtmlcode"><![CDATA[HTML视频嵌入代码]]></item>
+                <item id="livehtmlcode"><![CDATA[HTML直播嵌入代码]]></item>
+                <item id="cat_icon"><![CDATA[分类图标]]></item>
+                <item id="cat_icon_desc"><![CDATA[主要用于移动端icon展示，建议上传98*98像素的png格式图片]]></item>
+                <item id="cat_touchorder"><![CDATA[iocn显示顺序]]></item>
+                <item id="cat_touchorder_desc"><![CDATA[移动端iocn显示顺序，也就是在移动端图标显示顺序（适用于移动端）]]></item>
+                <item id="touchadmin"><![CDATA[手机版管理]]></item>
+                <item id="swiper"><![CDATA[轮播管理]]></item>
+                <item id="best_recommend"><![CDATA[精品课程管理]]></item>
+                <item id="update_swiper_success"><![CDATA[修改轮播图成功]]></item>
+                <item id="cid_isnot_exists"><![CDATA[填写的课程cid对应课程不存在]]></item>
+                <item id="update_best_success"><![CDATA[修改精品课程成功]]></item>
+                <item id="swiper_name"><![CDATA[名称（便于区分)]]></item>
+                <item id="imgurl"><![CDATA[图片地址URL]]></item>
+                <item id="url"><![CDATA[链接URL]]></item>
+                <item id="addswiper"><![CDATA[添加轮播图]]></item>
+                <item id="edit_best_recommend"><![CDATA[编辑精品课程推荐]]></item>
+                <item id="bestimg"><![CDATA[课程AD大图URL（推荐414*132px）]]></item>
+                <item id="addbestrecommend"><![CDATA[添加精品课程推荐]]></item>
+                <item id="RTMPlive"><![CDATA[RTMP直播，手机版ios支持不友好）]]></item>
+                <item id="HLSlive"><![CDATA[HLS直播即m3u8，pc版https支持不友好]]></item>
+                <item id="FLVlive"><![CDATA[FLV直播，需要用到flash播放器，支持不友好]]></item>
+                <item id="autolive"><![CDATA[自动切换方式直播，兼容性最好,填写三行URL，第一行rtmp,第二行hls,第三行flv，播放器自动根据环境切换方式]]></item>
+                <item id="course_group"><![CDATA[vip用户组]]></item>
+                <item id="course_group_desc"><![CDATA[可选择本课程vip用户组，只要是该用户组用户可免费观看此课程]]></item>
+                <item id="fileurl"><![CDATA[下载URL]]></item>
+                <item id="course_weight"><![CDATA[权重]]></item>
+                <item id="course_weight_desc"><![CDATA[搜索的权限，默认为0，对于一些需要推荐优先展示的课程可以设置大一些的数值]]></item>
+                <item id="setvipbyhand"><![CDATA[人工授权]]></item>
+                <item id="username_desc"><![CDATA[填写需要人工授权补单的用户名称，用户名必须存在]]></item>
+                <item id="cid_desc"><![CDATA[填写该课程Cid，该课程必须存在]]></item>
+                <item id="course_isnot_exists"><![CDATA[课程cid对应课程不存在]]></item>
+                <item id="course_teacher"><![CDATA[课程老师]]></item>
+                <item id="course_teacher_desc"><![CDATA[可自定义课程老师，填写老师的用户名或者UID，系统会优先UID进行识别]]></item>
+                <item id="course_teacher_isnot_exists"><![CDATA[您填写的老师不存在]]></item>
+            </item>
+            <item id="templatelang">
+                <item id="hour"><![CDATA[小时]]></item>
+                <item id="min"><![CDATA[分钟]]></item>
+                <item id="pay_success"><![CDATA[支付成功]]></item>
+                <item id="pay_error"><![CDATA[支付未成功]]></item>
+                <item id="goods_name"><![CDATA[课程名称]]></item>
+                <item id="course_info"><![CDATA[课程信息]]></item>
+                <item id="tips"><![CDATA[温馨提示]]></item>
+                <item id="num"><![CDATA[库存]]></item>
+                <item id="limit1"><![CDATA[限购买一个]]></item>
+                <item id="price"><![CDATA[价格]]></item>
+                <item id="your_mobile"><![CDATA[您的手机号：]]></item>
+                <item id="require"><![CDATA[（必填）]]></item>
+                <item id="your_email"><![CDATA[您的邮箱：]]></item>
+                <item id="pay_method"><![CDATA[付款方式]]></item>
+                <item id="buy"><![CDATA[赞助购买]]></item>
+                <item id="unit"><![CDATA[节]]></item>
+                <item id="all_course"><![CDATA[所有课程]]></item>
+                <item id="forword"><![CDATA[方向：]]></item>
+                <item id="all"><![CDATA[全部]]></item>
+                <item id="cat_at"><![CDATA[分类：]]></item>
+                <item id="diff_at"><![CDATA[难度：]]></item>
+                <item id="new_est"><![CDATA[最新]]></item>
+                <item id="hot_est"><![CDATA[最热]]></item>
+                <item id="learn_from_me"><![CDATA[跟我学]]></item>
+                <item id="gong"><![CDATA[共]]></item>
+                <item id="courses"><![CDATA[个课程]]></item>
+                <item id="learns"><![CDATA[人已学习]]></item>
+                <item id="buys"><![CDATA[人已购买]]></item>
+                <item id="author"><![CDATA[作者]]></item>
+                <item id="author_at"><![CDATA[作者:]]></item>
+                <item id="return_course_list"><![CDATA[返回课程列表]]></item>
+                <item id="course_intro_at"><![CDATA[课程简介：]]></item>
+                <item id="buy_this_course"><![CDATA[购买本课程]]></item>
+                <item id="course_intro"><![CDATA[课程详情]]></item>
+                <item id="course_list"><![CDATA[课程列表]]></item>
+                <item id="other_course_at"><![CDATA[该课程同学还学过：]]></item>
+                <item id="learn_num"><![CDATA[已学习]]></item>
+                <item id="buy_now"><![CDATA[立即购买]]></item>
+                <item id="moneyunit"><![CDATA[元]]></item>
+                <item id="moneyunit_code"><![CDATA[￥]]></item>
+                <item id="down_now"><![CDATA[下载视频]]></item>
+                <item id="how_to_use"><![CDATA[如何播放？]]></item>
+                <item id="myorder"><![CDATA[我的课程中心]]></item>
+                <item id="buyorder"><![CDATA[购买订单]]></item>
+                <item id="all_num_oforder"><![CDATA[共有]]></item>
+                <item id="order_unit"><![CDATA[笔]]></item>
+                <item id="order_num_at"><![CDATA[订单号：]]></item>
+                <item id="teacher_at"><![CDATA[主讲老师：]]></item>
+                <item id="orderstatus_at"><![CDATA[订单状态：]]></item>
+                <item id="pay_order"><![CDATA[支付订单]]></item>
+                <item id="upload_sign"><![CDATA[上传合同]]></item>
+                <item id="sign_is_onconfrim"><![CDATA[合同审核中]]></item>
+                <item id="gomail"><![CDATA[去邮寄]]></item>
+                <item id="mail_onway"><![CDATA[邮寄中，耐心等待]]></item>
+                <item id="check_contract"><![CDATA[查看合同]]></item>
+                <item id="check_order_status"><![CDATA[查看订单状态]]></item>
+                <item id="check_mail_info"><![CDATA[查看邮寄资料]]></item>
+                <item id="closed_order"><![CDATA[取消订单]]></item>
+                <item id="contract_sing"><![CDATA[支付订单]]></item>
+                <item id="submit_confirm"><![CDATA[提交审核]]></item>
+                <item id="confirm_is_not_access"><![CDATA[审核没通过，请重新提交审核]]></item>
+                <item id="contract_is_on_confirm"><![CDATA[合同审核中]]></item>
+                <item id="set_is_mailed"><![CDATA[点击确认我已邮寄]]></item>
+                <item id="mycontract"><![CDATA[我的合同]]></item>
+                <item id="sitecontract"><![CDATA[网站方合同]]></item>
+                <item id="upload"><![CDATA[上传]]></item>
+                <item id="download"><![CDATA[下载]]></item>
+                <item id="verify"><![CDATA[实名认证]]></item>
+                <item id="verify_admin"><![CDATA[认证管理]]></item>
+                <item id="contract_admin"><![CDATA[合同管理]]></item>
+                <item id="my_order"><![CDATA[我的订单]]></item>
+                <item id="need_sign_contract"><![CDATA[待签合同]]></item>
+                <item id="order_is_closed"><![CDATA[已取消]]></item>
+                <item id="studynow"><![CDATA[开始学习]]></item>
+                <item id="contractmail"><![CDATA[合同邮寄]]></item>
+                <item id="video_down"><![CDATA[教程下载]]></item>
+                <item id="finish"><![CDATA[已完成]]></item>
+                <item id="baidupan"><![CDATA[百度网盘]]></item>
+                <item id="360pan"><![CDATA[360网盘]]></item>
+                <item id="tiqupwd_at"><![CDATA[提取密码：]]></item>
+                <item id="rarpwd_at"><![CDATA[文件解压密码：]]></item>
+                <item id="baiduurl"><![CDATA[百度网盘下载地址]]></item>
+                <item id="baiduurl_desc"><![CDATA[填写百度网盘的下载地址，要求是绝对连接，即带http之类的]]></item>
+                <item id="baiduurlpwd"><![CDATA[百度网盘提取密码]]></item>
+                <item id="baiduurlpwd_desc"><![CDATA[请填写百度网盘提取密码]]></item>
+                <item id="360url_desc"><![CDATA[填写360的下载地址，要求是绝对连接，即带http之类的]]></item>
+                <item id="360urlpwd"><![CDATA[请填写360网盘提取密码，没有填写空]]></item>
+                <item id="rarpwd"><![CDATA[文件解压密码]]></item>
+                <item id="rarpwd_desc"><![CDATA[文件解压密码，如果没有则不填写]]></item>
+                <item id="videoplayerurl"><![CDATA[专用播放器下载]]></item>
+                <item id="cat"><![CDATA[分类]]></item>
+                <item id="online_course"><![CDATA[在线视频课堂]]></item>
+                <item id="best_course"><![CDATA[5星课程]]></item>
+                <item id="learn"><![CDATA[观看]]></item>
+                <item id="discount_tips"><![CDATA[特惠，名额有限抢完即止]]></item>
+                <item id="free_tips"><![CDATA[限时免费，名额有限抢完即止]]></item>
+                <item id="bbs"><![CDATA[社区]]></item>
+                <item id="course"><![CDATA[课堂]]></item>
+                <item id="my"><![CDATA[我的]]></item>
+                <item id="free"><![CDATA[免费]]></item>
+                <item id="discount_time"><![CDATA[限时优惠]]></item>
+                <item id="aditor_recomment"><![CDATA[编辑推荐]]></item>
+                <item id="chaper"><![CDATA[章节]]></item>
+                <item id="have_bought"><![CDATA[已购买]]></item>
+                <item id="liveing"><![CDATA[【正在直播】]]></item>
+                <item id="allperson"><![CDATA[所有人]]></item>
+                <item id="nologinone"><![CDATA[游客]]></item>
+                <item id="getinchatroom"><![CDATA[进入了聊天室]]></item>
+                <item id="login"><![CDATA[登录成功]]></item>
+                <item id="onlineone"><![CDATA[在线用户]]></item>
+                <item id="chatsubmit"><![CDATA[发送]]></item>
+                <item id="learning"><![CDATA[【正在学习】]]></item>
+                <item id="video_list"><![CDATA[列表]]></item>
+                <item id="video_reply"><![CDATA[评论]]></item>
+                <item id="livingon"><![CDATA[即将上线......]]></item>
+                <item id="buynums"><![CDATA[报名人数]]></item>
+                <item id="score"><![CDATA[好评]]></item>
+                <item id="chat_seller"><![CDATA[咨询客服]]></item>
+                <item id="views"><![CDATA[人关注]]></item>
+                <item id="filesdownload"><![CDATA[资料下载]]></item>
+                <item id="vipgroup_at"><![CDATA[归属：]]></item>
+                <item id="thisshare"><![CDATA[专享]]></item>
+                <item id="freelearn"><![CDATA[免费试学]]></item>
+                <item id="logout"><![CDATA[退出了]]></item>
+                <item id="cname"><![CDATA[课程名称]]></item>
+                <item id="chatroom"><![CDATA[在线交流]]></item>
+                <item id="inputchatcontenttips"><![CDATA[请先输入聊天内容]]></item>
+                <item id="recommend"><![CDATA[推荐]]></item>
+                <item id="login_and_recommond"><![CDATA[登录后才能参加互动哦~]]></item>
+                <item id="chatsafetips"><![CDATA[下载播放器和加密视频后，请联系客服完成一次实名认证等相关审核，完成审核后即可在各平台上播放]]></item>
+                <item id="inlearnroom"><![CDATA[加入课程]]></item>
+            </item>
+        </item>
+        <item id="installfile"><![CDATA[install.php]]></item>
+        <item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+        <item id="upgradefile"><![CDATA[upgrade.php]]></item>
+    </item>
+</root>

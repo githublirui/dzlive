@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */	
@@ -19,7 +19,7 @@ if (!$_GET['vid'] && !$_GET['type']) {
 	$_GET['type'] = 'index';
 }
 
-$video = new zhanmishu_video();
+$video = new wxz_live();
 $videoconfig = $video->config;
 
 if ($input['sign'] || $input['ispay']) {
@@ -30,7 +30,7 @@ $video->issueorderbyuid();
 $cid = $input['cid'];
 
 if (!$cid) {
-	showmessage(lang('plugin/zhanmishu_video', 'data_error'));
+	showmessage(lang('plugin/wxz_live', 'data_error'));
 }
 
 $course = $video->get_course_bycid($cid,true,true);
@@ -95,5 +95,5 @@ if ($_GET['dtype'] && ($course['ispay'] == '1' || $course['course_price'] == '0'
 	exit;
 }
 
- include template('zhanmishu_video:'.$mod);
+ include template('wxz_live:'.$mod);
 ?>

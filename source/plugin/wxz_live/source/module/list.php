@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */	
@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 $input = daddslashes($_GET);
 
-$video = new zhanmishu_video();
+$video = new wxz_live();
 $videoconfig = $video->config;
 
 
@@ -21,7 +21,7 @@ $catpid = $input['cat_id'] ? $video->get_pidbycat_id($input['cat_id']) : '0';
 $catid = $input['cat_id'] ? $input['cat_id'] : '';
 $catson =  $video->get_cat_tree($catpid ? $catpid : $input['cat_id']);
 
-$videoBaseUrl = 'plugin.php?id=zhanmishu_video:video';
+$videoBaseUrl = 'plugin.php?id=wxz_live:video';
 $pdata = $input;
 unset($pdata['page']);
 $mpurl = 'plugin.php?'.urldecode(http_build_query($pdata));
@@ -107,7 +107,7 @@ if ($_GET['dtype']) {
 
 
 
-include template('zhanmishu_video:'.$mod);
+include template('wxz_live:'.$mod);
 
 
 ?>

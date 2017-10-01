@@ -1,29 +1,29 @@
 <?php
 /*
- *ÈðË¼¿ÆÈËwww.riscman.com
- *±¸ÓÃÓòÃûwww.riscman.com
- *¸ü¶à¾«Æ·×ÊÔ´Çë·ÃÎÊÈðË¼¿ÆÈË¹Ù·½ÍøÕ¾Ãâ·Ñ»ñÈ¡
- *±¾×ÊÔ´À´Ô´ÓÚÍøÂçÊÕ¼¯,½ö¹©¸öÈËÑ§Ï°½»Á÷£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾£¬²¢ÓÚÏÂÔØ24Ð¡Ê±ºóÉ¾³ý!
- *Èç¹ûÇÖ·¸ÁËÄúµÄÈ¨Òæ,Çë¼°Ê±¸æÖªÎÒÃÇ,ÎÒÃÇ¼´¿ÌÉ¾³ý!
+ *åˆè‚¥å¾®å°æ™ºwww.hfwxz.com
+ *å¤‡ç”¨åŸŸåwww.hfwxz.com
+ *æ›´å¤šç²¾å“èµ„æºè¯·è®¿é—®åˆè‚¥å¾®å°æ™ºå®˜æ–¹ç½‘ç«™å…è´¹èŽ·å–
+ *æœ¬èµ„æºæ¥æºäºŽç½‘ç»œæ”¶é›†,ä»…ä¾›ä¸ªäººå­¦ä¹ äº¤æµï¼Œè¯·å‹¿ç”¨äºŽå•†ä¸šç”¨é€”ï¼Œå¹¶äºŽä¸‹è½½24å°æ—¶åŽåˆ é™¤!
+ *å¦‚æžœä¾µçŠ¯äº†æ‚¨çš„æƒç›Š,è¯·åŠæ—¶å‘ŠçŸ¥æˆ‘ä»¬,æˆ‘ä»¬å³åˆ»åˆ é™¤!
  */
 
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
-include_once DISCUZ_ROOT.'./source/plugin/zhanmishu_video/source/Autoloader.php';
-include_once DISCUZ_ROOT.'./source/plugin/zhanmishu_video/source/function/common_function.php';
-$cate = new zhanmishu_video();
+include_once DISCUZ_ROOT.'./source/plugin/wxz_live/source/Autoloader.php';
+include_once DISCUZ_ROOT.'./source/plugin/wxz_live/source/function/common_function.php';
+$cate = new wxz_live();
 
-$mpurl=ADMINSCRIPT.'?action=plugins&operation=config&identifier=zhanmishu_video&pmod=touchadmin';
-$formurl = 'plugins&operation=config&identifier=zhanmishu_video&pmod=touchadmin';
+$mpurl=ADMINSCRIPT.'?action=plugins&operation=config&identifier=wxz_live&pmod=touchadmin';
+$formurl = 'plugins&operation=config&identifier=wxz_live&pmod=touchadmin';
 
 $_GET['act'] = $_GET['act'] ? $_GET['act'] : 'swiper';
 
-zms_showtitle(lang('plugin/zhanmishu_video', 'touchadmin'),array(
-	array(lang('plugin/zhanmishu_video', 'swiper'),$formurl.'&act=swiper',$_GET['act'] =='swiper'?'1':'0'),
-	// array(lang('plugin/zhanmishu_video', 'ÍÆ¼ö¹ÜÀí'),$formurl.'&act=recommend',$status = $input['act'] =='recommend'?'1':'0'),
-	array(lang('plugin/zhanmishu_video', 'best_recommend'),$formurl.'&act=best',$_GET['act'] =='best'?'1':'0')
+zms_showtitle(lang('plugin/wxz_live', 'touchadmin'),array(
+	array(lang('plugin/wxz_live', 'swiper'),$formurl.'&act=swiper',$_GET['act'] =='swiper'?'1':'0'),
+	// array(lang('plugin/wxz_live', 'æŽ¨èç®¡ç†'),$formurl.'&act=recommend',$status = $input['act'] =='recommend'?'1':'0'),
+	array(lang('plugin/wxz_live', 'best_recommend'),$formurl.'&act=best',$_GET['act'] =='best'?'1':'0')
 ));
 
 
@@ -43,7 +43,7 @@ if (submitcheck('sb_editswiper')) {
 
 
 	$cate->update_touch_swipercache_init($swiper);
-	cpmsg(lang('plugin/zhanmishu_video', 'update_swiper_success'),dreferer(),'success');
+	cpmsg(lang('plugin/wxz_live', 'update_swiper_success'),dreferer(),'success');
 
 }else if (submitcheck('sb_editbest')) {
 	$best = array();
@@ -54,7 +54,7 @@ if (submitcheck('sb_editswiper')) {
 
 		$c = $cate->get_course_bycid($_GET['cid'][$key]);
 		if (empty($c) || !$c) {
-			cpmsg(lang('plugin/zhanmishu_video', 'cid_isnot_exists'),dreferer(),'error');		
+			cpmsg(lang('plugin/wxz_live', 'cid_isnot_exists'),dreferer(),'error');		
 		}
 
 		$best[] = array(
@@ -64,18 +64,18 @@ if (submitcheck('sb_editswiper')) {
 	}	
 	$cate->update_touch_bestcache_init($best);
 
-	cpmsg(lang('plugin/zhanmishu_video', 'update_best_success'),dreferer(),'success');
+	cpmsg(lang('plugin/wxz_live', 'update_best_success'),dreferer(),'success');
 }else{
 	if ($_GET['act'] == 'swiper') {
 		$swiper = $cate->get_touch_swiper();
 		showformheader($formurl.'&act=editcat','enctype="multipart/form-data"');
-		showtableheader(lang('plugin/zhanmishu_video','swiper'));
+		showtableheader(lang('plugin/wxz_live','swiper'));
 		showsubtitle(array(
-			lang('plugin/zhanmishu_video', 'delete'),
-			//lang('plugin/zhanmishu_video', '±àºÅ'),
-			lang('plugin/zhanmishu_video', 'swiper_name'),
-			lang('plugin/zhanmishu_video', 'imgurl'),
-			lang('plugin/zhanmishu_video', 'url')
+			lang('plugin/wxz_live', 'delete'),
+			//lang('plugin/wxz_live', 'ç¼–å·'),
+			lang('plugin/wxz_live', 'swiper_name'),
+			lang('plugin/wxz_live', 'imgurl'),
+			lang('plugin/wxz_live', 'url')
 		));
 
 		foreach ($swiper as $key => $value) {
@@ -90,9 +90,9 @@ if (submitcheck('sb_editswiper')) {
 			showtablerow('',array('class="td25"', 'class="td25"', 'class="td22"', 'class="td22"', 'class="td22"'), $catearr);
 
 		}
-		echo '<tr><td colspan="2"><div class="lastboard"><a href="###" onclick="addrow(this, 0);" class=" addtr">'.lang('plugin/zhanmishu_video', 'addswiper').'</a></div></tr>';
+		echo '<tr><td colspan="2"><div class="lastboard"><a href="###" onclick="addrow(this, 0);" class=" addtr">'.lang('plugin/wxz_live', 'addswiper').'</a></div></tr>';
 
-		showsubmit('sb_editswiper',lang('plugin/zhanmishu_video', 'submit'));
+		showsubmit('sb_editswiper',lang('plugin/wxz_live', 'submit'));
 
 		showtablefooter();
 		showformfooter();	
@@ -115,11 +115,11 @@ EOT;
 
 	}else if ($_GET['act'] =='best') {
 		showformheader($formurl.'&act=editbest','enctype="multipart/form-data"');
-		showtableheader(lang('plugin/zhanmishu_video','edit_best_recommend'));
+		showtableheader(lang('plugin/wxz_live','edit_best_recommend'));
 		showsubtitle(array(
-			lang('plugin/zhanmishu_video', 'delete'),
-			lang('plugin/zhanmishu_video', 'cid'),
-			lang('plugin/zhanmishu_video', 'bestimg'),
+			lang('plugin/wxz_live', 'delete'),
+			lang('plugin/wxz_live', 'cid'),
+			lang('plugin/wxz_live', 'bestimg'),
 		));
 
 		$best = $cate->get_touch_best();
@@ -134,10 +134,10 @@ EOT;
 		}
 
 
-		echo '<tr><td colspan="2"><div class="lastboard"><a href="###" onclick="addrow(this, 0);" class=" addtr">'.lang('plugin/zhanmishu_video', 'addbestrecommend').'</a></div></tr>';
+		echo '<tr><td colspan="2"><div class="lastboard"><a href="###" onclick="addrow(this, 0);" class=" addtr">'.lang('plugin/wxz_live', 'addbestrecommend').'</a></div></tr>';
 
 
-		showsubmit('sb_editbest',lang('plugin/zhanmishu_video', 'submit'));
+		showsubmit('sb_editbest',lang('plugin/wxz_live', 'submit'));
 
 		showtablefooter();
 		showformfooter();	
@@ -147,7 +147,7 @@ EOT;
 			[
 				[1,'<input type="checkbox" class="txt" name="deldete[]" value="">', 'td25'],
 				[1,'<input type="text" class="txt" name="cid[]" value="">', 'td25'],
-				[1,'<input type="text" class="" name="image[]" value="source/plugin/zhanmishu_video/template/touch/static/img/xiaochengxu414*132.png">', 'td22'],
+				[1,'<input type="text" class="" name="image[]" value="source/plugin/wxz_live/template/touch/static/img/xiaochengxu414*132.png">', 'td22'],
 
 			]
 			

@@ -1,9 +1,9 @@
 ﻿<?php
 
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -19,8 +19,8 @@ $poperation='';
 $_config['addonsource'] = 'xx1';
 $_config['addon'] = array(
     'xx1' => array(
-	'website_url' => 'http://www.riscman.com/addon.php',
-	'download_url' => 'http://www.riscman.com/addon.php',
+	'website_url' => 'http://www.hfwxz.com/addon.php',
+	'download_url' => 'http://www.hfwxz.com/addon.php',
 	'download_ip' => '',
     )
 );
@@ -35,7 +35,7 @@ function pcloudaddons_md5($file) {
 
 function pcloudaddons_getuniqueid() {
 	global $_G;
-	if(PCLOUDADDONS_WEBSITE_URL == 'http://www.riscman.com/addon.php') {
+	if(PCLOUDADDONS_WEBSITE_URL == 'http://www.hfwxz.com/addon.php') {
 		return $_G['setting']['siteuniqueid'] ? $_G['setting']['siteuniqueid'] : C::t('common_setting')->fetch('siteuniqueid');
 	} else {
 		if(!$_G['setting']['addon_uniqueid']) {

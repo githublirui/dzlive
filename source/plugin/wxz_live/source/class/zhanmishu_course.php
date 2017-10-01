@@ -1,8 +1,8 @@
 ﻿<?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -14,7 +14,7 @@ class zhanmishu_course{
 	
 	public $config=array();
 
-	public $cachefile = 'zhanmishu_video';
+	public $cachefile = 'wxz_live';
 	
 	public function get_cache_file(){
 		return DISCUZ_ROOT.'./data/sysdata/cache_'.$this->cachefile.'.php';
@@ -24,7 +24,7 @@ class zhanmishu_course{
 	{
 		if (empty($config)) {
 			if (!function_exists('zms_video_getconfig')) {
-				include DISCUZ_ROOT.'./source/plugin/zhanmishu_video/source/function/common_function.php';
+				include DISCUZ_ROOT.'./source/plugin/wxz_live/source/function/common_function.php';
 			}
 			$config = zms_video_getconfig();
 		}
@@ -37,7 +37,7 @@ class zhanmishu_course{
 	}
 
 	public function get_one_course_byfield($field){
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->get_one_course_byfield($field);
+		return C::t("#wxz_live#wxz_live_course")->get_one_course_byfield($field);
 	}
 	public function auto_to_utf8($data){
 		if (is_string($data)) {
@@ -56,11 +56,11 @@ class zhanmishu_course{
 	}
 
 	public function get_type_course_num($field=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->get_type_course_num($field);
+		return C::t("#wxz_live#wxz_live_course")->get_type_course_num($field);
 	}
 	public function add_courseselltimes($cid,$num='1'){
 		$course = $this->get_course_bycid($cid);
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->update($cid,array('selltimes'=>$course['selltimes'] + $num));
+		return C::t("#wxz_live#wxz_live_course")->update($cid,array('selltimes'=>$course['selltimes'] + $num));
 	}
 
 	public function get_rand_trade_no($cid,$hid,$oid){
@@ -68,7 +68,7 @@ class zhanmishu_course{
 	}
 
 	public function get_type_course_fmt($start = 0, $limit = 0, $sort = '',$type = '',$field){
-		global $url,$zhanmishu_videoconf;
+		global $url,$wxz_liveconf;
 		$url = ADMINSCRIPT.'?action='.$url;
 		$courses = $this->get_type_course($start, $limit, $sort,$type,$field);
 		$courses_fmt = array();
@@ -77,16 +77,16 @@ class zhanmishu_course{
 			$courses_fmt[$key]['cid'] = $value['cid'];
 			$courses_fmt[$key]['username'] = $this->get_usernamebyuid($value['uid']);
 			$courses_fmt[$key]['course_name'] = $value['course_name'];
-			$courses_fmt[$key]['issell'] = $value['issell'] ? lang('plugin/zhanmishu_video', 'haveonsellk') : lang('plugin/zhanmishu_video', 'haveoutsellk');
+			$courses_fmt[$key]['issell'] = $value['issell'] ? lang('plugin/wxz_live', 'haveonsellk') : lang('plugin/wxz_live', 'haveoutsellk');
 			$courses_fmt[$key]['selltimes'] = $value['selltimes'];
 			$courses_fmt[$key]['course_price'] = intval($value['course_price']) / 100;
-			$courses_fmt[$key]['diff'] = $zhanmishu_videoconf['diff'][$value['diff']];
-			$courses_fmt[$key]['progress'] = $zhanmishu_videoconf['progress'][$value['progress']];
+			$courses_fmt[$key]['diff'] = $wxz_liveconf['diff'][$value['diff']];
+			$courses_fmt[$key]['progress'] = $wxz_liveconf['progress'][$value['progress']];
 			$courses_fmt[$key]['course_img'] = '<a href="'.$value['course_img'].'" target="_blank"><img src="'.$value['course_img'].'" width="40px" height="40px"></a>';
 			$courses_fmt[$key]['course_intro'] = $value['course_intro'];
 			$courses_fmt[$key]['dateline'] = date('Y-m-d H:i:s',$value['dateline']);
-			$sellact = $value['issell'] ? lang('plugin/zhanmishu_video', 'outsellk') : lang('plugin/zhanmishu_video', 'onsellk');
-			$courses_fmt[$key]['act'] = '<a href="'.$url.'&act=adminvideo&m=add&cid='.$value['cid'].'">'.lang('plugin/zhanmishu_video', 'add_video').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=adminvideo&m=admin&cid='.$value['cid'].'">'.lang('plugin/zhanmishu_video', 'admin_course').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=editk&editk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video', 'edit').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=outsellk&outsellk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.$sellact.'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=delk&delk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video', 'delete').'</a>';
+			$sellact = $value['issell'] ? lang('plugin/wxz_live', 'outsellk') : lang('plugin/wxz_live', 'onsellk');
+			$courses_fmt[$key]['act'] = '<a href="'.$url.'&act=adminvideo&m=add&cid='.$value['cid'].'">'.lang('plugin/wxz_live', 'add_video').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=adminvideo&m=admin&cid='.$value['cid'].'">'.lang('plugin/wxz_live', 'admin_course').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=editk&editk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live', 'edit').'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=outsellk&outsellk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.$sellact.'</a>&nbsp;&nbsp;&nbsp;<a href="'.$url.'&act=delk&delk=yes&cid='.$value['cid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live', 'delete').'</a>';
 		}
 
 		return $courses_fmt;
@@ -106,18 +106,18 @@ class zhanmishu_course{
 		if (!$cid) {
 			return false;
 		}
-		$c = C::t("#zhanmishu_video#zhanmishu_video_course")->fetch($cid);
+		$c = C::t("#wxz_live#wxz_live_course")->fetch($cid);
 
 		$up = array();
 		if ($isaddview) {
 			$up['views'] = $c['views'] + 1;
 		}
 		if ($isupdateorder) {
-			$num = C::t("#zhanmishu_video#zhanmishu_video_order")->get_orders_num(array('cid'=>$c['cid'],'ispayed'=>'1'));
+			$num = C::t("#wxz_live#wxz_live_order")->get_orders_num(array('cid'=>$c['cid'],'ispayed'=>'1'));
 			$up['learns'] = $num;
 		}
 		if (!empty($up)) {
-			C::t("#zhanmishu_video#zhanmishu_video_course")->update($cid,$up);	
+			C::t("#wxz_live#wxz_live_course")->update($cid,$up);	
 		}
 
 		return $c;
@@ -130,7 +130,7 @@ class zhanmishu_course{
 			return false;
 		}
 
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->update($cid,array('isdel'=>'1'));
+		return C::t("#wxz_live#wxz_live_course")->update($cid,array('isdel'=>'1'));
 	}
 	public function  set_course_upatesale($cid){
 		if (!$cid) {
@@ -143,11 +143,11 @@ class zhanmishu_course{
 		}
 		$issell = $k['issell'] ? '0' : '1';
 
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->update($cid,array('issell'=>$issell));
+		return C::t("#wxz_live#wxz_live_course")->update($cid,array('issell'=>$issell));
 	}
 
 	public function get_type_course($start = 0, $limit = 0, $sort = '',$type = '',$field){
-		return C::t("#zhanmishu_video#zhanmishu_video_course")->get_type_course($start, $limit, $sort,$type,$field);
+		return C::t("#wxz_live#wxz_live_course")->get_type_course($start, $limit, $sort,$type,$field);
 	}
 
 	public function get_recommend_course($cid){
@@ -180,7 +180,7 @@ class zhanmishu_course{
 			$field['isdel'] = $issel;
 		}
 
-		$cat = C::t("#zhanmishu_video#zhanmishu_video_cat")->get_type_video_cat('','','sort','',$field);
+		$cat = C::t("#wxz_live#wxz_live_cat")->get_type_video_cat('','','sort','',$field);
 		if (empty($cat)) {
 			return false;
 		}
@@ -206,7 +206,7 @@ class zhanmishu_course{
 		$this->ZmswriteToCache('cat',$catetreevar);
 		// require_once libfile('function/cache');
 		// $datacache = "\$catetreevar=".arrayeval($catetreevar).";\n";
-		// writetocache('zhanmishu_videocate', $datacache);
+		// writetocache('wxz_livecate', $datacache);
 	}
 
 	public function get_cat_tree_formcache(){
@@ -217,7 +217,7 @@ class zhanmishu_course{
 		if(file_exists($cachefile = $this->get_cache_file())) {
 			@include $cachefile;
 			
-			return $zhanmishu_video_cache[$key];
+			return $wxz_live_cache[$key];
 		}
 		return false;		
 	}
@@ -227,11 +227,11 @@ class zhanmishu_course{
 		if(file_exists($cachefile = $this->get_cache_file())) {
 			@include $cachefile;
 		}
-		$zhanmishu_video_cache[$key] = $data;
+		$wxz_live_cache[$key] = $data;
 
 		require_once libfile('function/cache');
-		$zhanmishu_video_cache_str = "\$zhanmishu_video_cache=".arrayeval($zhanmishu_video_cache).";\n";
-		writetocache('zhanmishu_video', $zhanmishu_video_cache_str);
+		$wxz_live_cache_str = "\$wxz_live_cache=".arrayeval($wxz_live_cache).";\n";
+		writetocache('wxz_live', $wxz_live_cache_str);
 
 	}
 
@@ -271,7 +271,7 @@ class zhanmishu_course{
 			return '0';
 		}
 
-		$cat = C::t("#zhanmishu_video#zhanmishu_video_cat")->fetch($cat_id);
+		$cat = C::t("#wxz_live#wxz_live_cat")->fetch($cat_id);
 		if (empty($cat)) {
 			return '0';
 		}

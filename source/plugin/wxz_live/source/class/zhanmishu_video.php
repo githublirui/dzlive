@@ -1,25 +1,25 @@
 <?php
 /*
- *ÈðË¼¿ÆÈËwww.riscman.com
- *±¸ÓÃÓòÃûwww.riscman.com
- *¸ü¶à¾«Æ·×ÊÔ´Çë·ÃÎÊÈðË¼¿ÆÈË¹Ù·½ÍøÕ¾Ãâ·Ñ»ñÈ¡
- *±¾×ÊÔ´À´Ô´ÓÚÍøÂçÊÕ¼¯,½ö¹©¸öÈËÑ§Ï°½»Á÷£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾£¬²¢ÓÚÏÂÔØ24Ð¡Ê±ºóÉ¾³ý!
- *Èç¹ûÇÖ·¸ÁËÄúµÄÈ¨Òæ,Çë¼°Ê±¸æÖªÎÒÃÇ,ÎÒÃÇ¼´¿ÌÉ¾³ý!
+ *ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½www.hfwxz.com
+ *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½www.hfwxz.com
+ *ï¿½ï¿½ï¿½à¾«Æ·ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½Ë¹Ù·ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ñ»ï¿½È¡
+ *ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Í¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½24Ð¡Ê±ï¿½ï¿½É¾ï¿½ï¿½!
+ *ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½,ï¿½ë¼°Ê±ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½É¾ï¿½ï¿½!
  */
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 } 
 
-// C::import('zhanmishu_course','plugin/zhanmishu_video/source/class');
+// C::import('zhanmishu_course','plugin/wxz_live/source/class');
 
-class zhanmishu_video extends zhanmishu_course{
+class wxz_live extends zhanmishu_course{
 
 	public function get_type_video($start = 0, $limit = 0, $sort = '',$type = '',$field=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video")->get_type_video($start, $limit, $sort,$type,$field);
+		return C::t("#wxz_live#wxz_live")->get_type_video($start, $limit, $sort,$type,$field);
 	}
 
 	public function get_type_video_num($field){
-		return C::t("#zhanmishu_video#zhanmishu_video")->get_type_video_num($field);
+		return C::t("#wxz_live#wxz_live")->get_type_video_num($field);
 	}
 
 	public function checkuser_ispay_course($cid,$uid){
@@ -55,14 +55,14 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function get_one_order_byfield($field=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->get_one_order_byfield($field);
+		return C::t("#wxz_live#wxz_live_order")->get_one_order_byfield($field);
 	}
 
 	public function issueorderbyuid($uid){
 		global $_G;
 		$uid = $uid ? $uid : $_G['uid'];
 
-		$o = C::t("#zhanmishu_video#zhanmishu_video_order")->get_type_order(0,0,'','',array('buyer_uid'=>$uid,'ispayed'=>'0'));
+		$o = C::t("#wxz_live#wxz_live_order")->get_type_order(0,0,'','',array('buyer_uid'=>$uid,'ispayed'=>'0'));
 		foreach ($o as $key => $value) {
 			$this->check_ispay_byout_trade_no($value['out_trade_no']);
 		}
@@ -84,7 +84,7 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function get_orders_num($filed=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->get_orders_num($field);
+		return C::t("#wxz_live#wxz_live_order")->get_orders_num($field);
 	}
 
 	public function get_video_bycid($cid){
@@ -111,7 +111,7 @@ class zhanmishu_video extends zhanmishu_course{
 
 
 	public function delete_video($vid){
-		return C::t("#zhanmishu_video#zhanmishu_video")->delete($vid);
+		return C::t("#wxz_live#wxz_live")->delete($vid);
 	}
 
 	public function get_order_byoid($oid){
@@ -119,25 +119,25 @@ class zhanmishu_video extends zhanmishu_course{
 			return false;
 		}
 
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->fetch($oid);
+		return C::t("#wxz_live#wxz_live_order")->fetch($oid);
 	}
 
 	public function order_video($oid,$buyer_uid){
 		if (!$oid) {
 			return array('code'=>'-5','msg'=>'oid_isnot_exixts');
 		}
-	  $o = C::t("#zhanmishu_video#zhanmishu_video_order")->fetch($oid);
+	  $o = C::t("#wxz_live#wxz_live_order")->fetch($oid);
 	  if (empty($o)) {
 	  	return array('code'=>'-5','msg'=>'cid_isnot_exixts');
 	  }
 
 
-	  return C::t("#zhanmishu_video#zhanmishu_video")->order_video($oid,$o['cid'],$buyer_uid);
+	  return C::t("#wxz_live#wxz_live")->order_video($oid,$o['cid'],$buyer_uid);
 
 	}
 
 	public function get_order_by_out_trade_no($out_trade_no){
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->get_order_by_out_trade_no($out_trade_no);
+		return C::t("#wxz_live#wxz_live_order")->get_order_by_out_trade_no($out_trade_no);
 	}
 
 	public function selledsuccess($oid){
@@ -150,7 +150,7 @@ class zhanmishu_video extends zhanmishu_course{
 			'out_trade_no'=>$o['out_trade_no'],
 		 	);
 
-		 C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],$oupdate);
+		 C::t("#wxz_live#wxz_live_order")->update($o['oid'],$oupdate);
 	}
 
 	public function  setsuccess($oid){
@@ -164,14 +164,14 @@ class zhanmishu_video extends zhanmishu_course{
 			'checknum'=>'1',
 		 	);
 
-		return  C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,$oupdate);
+		return  C::t("#wxz_live#wxz_live_order")->update($oid,$oupdate);
 	}
 
 	public function get_orders($start = 0, $limit = 0, $sort = '',$type = '',$field=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->get_type_order($start, $limit, $sort,$type,$field);
+		return C::t("#wxz_live#wxz_live_order")->get_type_order($start, $limit, $sort,$type,$field);
 	}
 	public function get_orders_fmt($start = 0, $limit = 0, $sort = '',$type = '',$field=array()){
-		global $zhanmishu_videoconf,$url;
+		global $wxz_liveconf,$url;
 		$url = ADMINSCRIPT.'?action='.$url;
 		$orders = $this->get_orders($start, $limit, $sort,$type,$field);
 		$return = array();
@@ -179,51 +179,51 @@ class zhanmishu_video extends zhanmishu_course{
 		foreach ($orders as $key => $value) { 
 			$return[$key]['oid'] = $value['oid'];
 			$return[$key]['cid'] = $value['cid'] > 0 ? $value['cid'] : '';
-			$return[$key]['cname'] = '<a href="plugin.php?id=zhanmishu_video:video&mod=video&cid='.$value['cid'].'" target="_blank">'.$value['course_name'].'</a>';
+			$return[$key]['cname'] = '<a href="plugin.php?id=wxz_live:video&mod=video&cid='.$value['cid'].'" target="_blank">'.$value['course_name'].'</a>';
 			$return[$key]['vid'] = $value['vid'] > 0 ? $value['vid'] : '';
-			$return[$key]['ispayed'] = $value['ispayed']? lang('plugin/zhanmishu_video', 'payed_success') : lang('plugin/zhanmishu_video', 'payed_unsuccess');
+			$return[$key]['ispayed'] = $value['ispayed']? lang('plugin/wxz_live', 'payed_success') : lang('plugin/wxz_live', 'payed_unsuccess');
 			$return[$key]['course_price'] = intval($value['course_price']) / 100;
 			$return[$key]['buyer_uid'] =  '<a href="home.php?mod=space&uid='.$value['buyer_uid'].'" target="_blank">'.$this->get_usernamebyuid($value['buyer_uid']).'</a>';
 			$return[$key]['out_trade_no'] = $value['out_trade_no'];
 			$return[$key]['dateline'] = date('Y-m-d',$value['dateline']);
 			$return[$key]['pay_time'] = $value['pay_time'] ? date('Y-m-d H:i:s',$value['pay_time']) : $value['pay_time'];
-			$return[$key]['orderstatus'] = $zhanmishu_videoconf['orderstatus'][$value['status']];
+			$return[$key]['orderstatus'] = $wxz_liveconf['orderstatus'][$value['status']];
 			$acturl = '';
 			if ($value['ispayed'] =='0') {
-				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setpay&paystatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','pay_confirm').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setpay&paystatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','pay_confirm').'</a>&nbsp;&nbsp;';
 			}else{
-				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setpay&paystatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','pay_cancel').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setpay&paystatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','pay_cancel').'</a>&nbsp;&nbsp;';
 			}
 			if ($value['issign'] =='1' && $value['isconfirm'] =='0') {
-				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setcontract&contractstatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','contract_confirm').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setcontract&contractstatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','contract_confirm').'</a>&nbsp;&nbsp;';
 			}else{
-				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/zhanmishu_video','contract_confirm').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/wxz_live','contract_confirm').'</a>&nbsp;&nbsp;';
 			}
 
 			if ($value['issign'] =='1') {
-				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setcontract&contractstatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','contract_cancel').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setcontract&contractstatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','contract_cancel').'</a>&nbsp;&nbsp;';
 			}else{
-				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/zhanmishu_video','contract_cancel').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/wxz_live','contract_cancel').'</a>&nbsp;&nbsp;';
 			}
 
 			if ($value['issuccess'] =='0' && $value['isconfirm'] =='1') {
-				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setmail&mailstatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','mail_confirm').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:green;" href="'.$url.'&act=order&m=setmail&mailstatus=1&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','mail_confirm').'</a>&nbsp;&nbsp;';
 
 			}else{
-				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/zhanmishu_video','mail_confirm').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/wxz_live','mail_confirm').'</a>&nbsp;&nbsp;';
 			}
 			if ($value['ismail'] =='1') {
-				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setmail&mailstatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','mail_cancel').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=setmail&mailstatus=0&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','mail_cancel').'</a>&nbsp;&nbsp;';
 			}else{
-				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/zhanmishu_video','mail_cancel').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/wxz_live','mail_cancel').'</a>&nbsp;&nbsp;';
 			}
 			if ($value['order_type'] =='1') {
-				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=cleanplaycount&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','cleanplaycount').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:red;" href="'.$url.'&act=order&m=cleanplaycount&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','cleanplaycount').'</a>&nbsp;&nbsp;';
 			}else{
-				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/zhanmishu_video','cleanplaycount').'</a>&nbsp;&nbsp;';
+				$acturl .= '<a style="color:#cdcdcd;" >'.lang('plugin/wxz_live','cleanplaycount').'</a>&nbsp;&nbsp;';
 			}
 
-			$acturl .= '<a href="'.$url.'&act=order&m=checkorder&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video','checkorder_info').'</a>&nbsp;&nbsp;';
+			$acturl .= '<a href="'.$url.'&act=order&m=checkorder&oid='.$value['oid'].'&formhash='.FORMHASH.'">'.lang('plugin/wxz_live','checkorder_info').'</a>&nbsp;&nbsp;';
 
 			$return[$key]['act'] = $acturl;
 		}
@@ -238,7 +238,7 @@ class zhanmishu_video extends zhanmishu_course{
 		if (empty($o)) {
 			return false;
 		}
-		C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],array('playcount'=>'0'));
+		C::t("#wxz_live#wxz_live_order")->update($o['oid'],array('playcount'=>'0'));
 		return array('code'=>'1','msg'=>'succeed');
 	}
 
@@ -261,7 +261,7 @@ class zhanmishu_video extends zhanmishu_course{
 				return array('code'=>'-3','msg'=>'this_order_is_issuccess_before');
 			}
 
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('isconfirm'=>'1','ismail'=>$status,'issuccess'=>$status,'success_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('isconfirm'=>'1','ismail'=>$status,'issuccess'=>$status,'success_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}else if ($status =='0') {
@@ -272,7 +272,7 @@ class zhanmishu_video extends zhanmishu_course{
 			}else if ($o['isconfirm'] =='0') {
 				return array('code'=>'-3','msg'=>'this_order_isnot_isconfirm_yet');
 			}
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('ismail'=>$status,'issuccess'=>$status,'success_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('ismail'=>$status,'issuccess'=>$status,'success_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}
@@ -299,19 +299,19 @@ class zhanmishu_video extends zhanmishu_course{
 				return array('code'=>'-3','msg'=>'this_order_is_isconfirm_before');
 			}
 
-			//¼ì²éÊÇ·ñÍê³ÉÁËÊµÃûÈÏÖ¤
+			//ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ö¤
 			if (!$this->check_user_isverify($o['buyer_uid']) && $config['isverify']) {
 				return array('code'=>'-3','msg'=>'this_user_isnot_finish_verify');
 			}
 
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('issign'=>$status,'isconfirm'=>$status,'confirm_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('issign'=>$status,'isconfirm'=>$status,'confirm_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}else if ($status =='0') {
 			if ($o['ispayed'] =='0') {
 				return array('code'=>'-2','msg'=>'this_order_is_not_payed_yet');
 			}
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('ismail'=>'0','issuccess'=>'0','issign'=>$status,'isconfirm'=>$status,'confirm_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('ismail'=>'0','issuccess'=>'0','issign'=>$status,'isconfirm'=>$status,'confirm_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}
@@ -334,14 +334,14 @@ class zhanmishu_video extends zhanmishu_course{
 				return array('code'=>'-3','msg'=>'this_order_is_closed_before');
 			}
 
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('ispayed'=>$status,'pay_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('ispayed'=>$status,'pay_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}else if ($status =='0') {
 			if ($o['ispayed'] =='0') {
 				return array('code'=>'-2','msg'=>'this_order_is_not_payed_yet');
 			}
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('ispayed'=>$status,'checknum'=>'1','pay_time'=>TIMESTAMP));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('ispayed'=>$status,'checknum'=>'1','pay_time'=>TIMESTAMP));
 			$this->update_order_status_byoid($oid);
 			return array('code'=>'1','msg'=>'succeed');
 		}
@@ -350,7 +350,7 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function get_video_by_vid($vid){
-		return C::t("#zhanmishu_video#zhanmishu_video")->fetch($vid);
+		return C::t("#wxz_live#wxz_live")->fetch($vid);
 	}
 
 	public function set_selled($vid,$data=array()){
@@ -363,7 +363,7 @@ class zhanmishu_video extends zhanmishu_course{
 		 	'buyer_mobile'=>$data['buyer_mobile'],
 		 	'buyer_email'=>$data['buyer_email'],
 		 	);
-		$rs = C::t("#zhanmishu_video#zhanmishu_video")->update($vid,$data);
+		$rs = C::t("#wxz_live#wxz_live")->update($vid,$data);
 
 		if ($rs) {
 			$video = $this->get_video_by_vid($vid);
@@ -394,7 +394,7 @@ class zhanmishu_video extends zhanmishu_course{
 
 		$succeed = sendmail($o['buyer_email'], $content , $_G['setting']['bbname']."\n\n\n$message");
 		if ($succeed) {
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($oid,array('issend'=>'1'));
+			C::t("#wxz_live#wxz_live_order")->update($oid,array('issend'=>'1'));
 		}
 	}
 
@@ -415,7 +415,7 @@ class zhanmishu_video extends zhanmishu_course{
 			$videos_fmt[$key]['selltimes'] = $value['selltimes'];
 			$videos_fmt[$key]['video_img'] = '<a href="'.$value['video_img'].'" target="_blank"><img src="'.$value['video_img'].'" width="40px" height="40px"></a>';
 			$videos_fmt[$key]['dateline'] = date('Y-m-d H:i:s',$value['dateline']);
-			$videos_fmt[$key]['act'] = '<a href="'.$url.'&act=adminvideo&m=edit&vid='.$value['vid'].'&set_selled=yes&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video', 'edit').'</a>&nbsp;&nbsp;<a href="'.$url.'&act=adminvideo&m=delete&vid='.$value['vid'].'&delete=yes&formhash='.FORMHASH.'">'.lang('plugin/zhanmishu_video', 'delete').'</a>';
+			$videos_fmt[$key]['act'] = '<a href="'.$url.'&act=adminvideo&m=edit&vid='.$value['vid'].'&set_selled=yes&formhash='.FORMHASH.'">'.lang('plugin/wxz_live', 'edit').'</a>&nbsp;&nbsp;<a href="'.$url.'&act=adminvideo&m=delete&vid='.$value['vid'].'&delete=yes&formhash='.FORMHASH.'">'.lang('plugin/wxz_live', 'delete').'</a>';
 		}
 
 		return $videos_fmt;
@@ -494,7 +494,7 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function get_type_order($start = 0, $limit = 0, $sort = '',$type = '',$field=array()){
-		return C::t("#zhanmishu_video#zhanmishu_video_order")->get_type_order($start, $limi, $sort,$type,$field);
+		return C::t("#wxz_live#wxz_live_order")->get_type_order($start, $limi, $sort,$type,$field);
 	}
 
 	public function update_order_status_byoid($oid){
@@ -526,7 +526,7 @@ class zhanmishu_video extends zhanmishu_course{
 		}
 		
 		if ($status) {
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],array('status'=>$status));
+			C::t("#wxz_live#wxz_live_order")->update($o['oid'],array('status'=>$status));
 			$config = $this->config;
 			if (!$config['issign'] && $status >= 3 && $status <=5) {
 				$status = '1';
@@ -540,7 +540,7 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function get_order_byoid_fmt($oid){
-		global $zhanmishu_videoconf;
+		global $wxz_liveconf;
 		$o = $this->get_order_byoid($oid);
 		if (empty($o)) {
 			return false;
@@ -550,30 +550,30 @@ class zhanmishu_video extends zhanmishu_course{
 
 		}
 
-		$o['course_name'] = '<a href="plugin.php?id=zhanmishu_video:video&mod=video&cid='.$o['cid'].'" target="_blank">'.$o['course_name'].'</a>';
+		$o['course_name'] = '<a href="plugin.php?id=wxz_live:video&mod=video&cid='.$o['cid'].'" target="_blank">'.$o['course_name'].'</a>';
 		$o['course_img'] = '<a href="'.$o['course_img'].'" target="_blank">'.'<img src="'.$o['course_img'].'" width="40px" height="40px"></a>';
 		$o['sign_img1'] = '<a href="'.$o['sign_img1'].'" target="_blank">'.'<img src="'.$o['sign_img1'].'" width="40px" height="40px"></a>';
 		$o['sign_img2'] = '<a href="'.$o['sign_img2'].'" target="_blank">'.'<img src="'.$o['sign_img2'].'" width="40px" height="40px"></a>';
 		$o['sign_img3'] = '<a href="'.$o['sign_img3'].'" target="_blank">'.'<img src="'.$o['sign_img3'].'" width="40px" height="40px"></a>';
 		$o['vid'] = $o['vid'] ? $o['vid'] : '';
 		$o['cid'] = $o['cid'] ? $o['cid'] : '';
-		$o['video_price'] = lang('plugin/zhanmishu_video','moneyunit_code').($o['video_price'] / 100 ).lang('plugin/zhanmishu_video','moneyunit');
-		$o['course_price'] = lang('plugin/zhanmishu_video','moneyunit_code').($o['course_price'] / 100 ).lang('plugin/zhanmishu_video','moneyunit');
-		$o['total_fee'] = lang('plugin/zhanmishu_video','moneyunit_code').($o['total_fee'] / 100 ).lang('plugin/zhanmishu_video','moneyunit');
+		$o['video_price'] = lang('plugin/wxz_live','moneyunit_code').($o['video_price'] / 100 ).lang('plugin/wxz_live','moneyunit');
+		$o['course_price'] = lang('plugin/wxz_live','moneyunit_code').($o['course_price'] / 100 ).lang('plugin/wxz_live','moneyunit');
+		$o['total_fee'] = lang('plugin/wxz_live','moneyunit_code').($o['total_fee'] / 100 ).lang('plugin/wxz_live','moneyunit');
 		$o['dateline'] = $o['dateline'] ? date("Y-m-d H:i:s",$o['dateline']) : '' ;
 		$o['sign_time'] = $o['sign_time'] ? date("Y-m-d H:i:s",$o['sign_time']) : '' ;
 		$o['pay_time'] = $o['pay_time'] ? date("Y-m-d H:i:s",$o['pay_time']) : '' ;
 		$o['confirm_time'] = $o['confirm_time'] ? date("Y-m-d H:i:s",$o['confirm_time']) : '' ;
 		$o['success_time'] = $o['success_time'] ? date("Y-m-d H:i:s",$o['success_time']) : '' ;
-		$o['ispayed'] = $o['ispayed'] ? lang('plugin/zhanmishu_video','payed_success') : lang('plugin/zhanmishu_video','payed_unsuccess');
-		$o['isselled'] = $o['isselled'] ? lang('plugin/zhanmishu_video','learn_success') : lang('plugin/zhanmishu_video','learn_unsuccess');
-		$o['checknum'] = $o['checknum'] ? lang('plugin/zhanmishu_video','checknum_success') : lang('plugin/zhanmishu_video','checknum_unsuccess');
-		$o['issign'] = $o['issign'] ? lang('plugin/zhanmishu_video','issign_success') : lang('plugin/zhanmishu_video','issign_unsuccess');
-		$o['isconfirm'] = $o['isconfirm'] ? lang('plugin/zhanmishu_video','isconfirm_success') : lang('plugin/zhanmishu_video','isconfirm_unsuccess');
-		$o['ismail'] = $o['ismail'] ? lang('plugin/zhanmishu_video','ismail_success') : lang('plugin/zhanmishu_video','ismail_unsuccess');
-		$o['isclosed'] = $o['isclosed'] ? lang('plugin/zhanmishu_video','isclosed_success') : lang('plugin/zhanmishu_video','isclosed_unsuccess');
-		$o['issuccess'] = $o['issuccess'] ? lang('plugin/zhanmishu_video','issuccess_success') : lang('plugin/zhanmishu_video','issuccess_unsuccess');
-		$o['status'] = $zhanmishu_videoconf['orderstatus'][$o['status']];
+		$o['ispayed'] = $o['ispayed'] ? lang('plugin/wxz_live','payed_success') : lang('plugin/wxz_live','payed_unsuccess');
+		$o['isselled'] = $o['isselled'] ? lang('plugin/wxz_live','learn_success') : lang('plugin/wxz_live','learn_unsuccess');
+		$o['checknum'] = $o['checknum'] ? lang('plugin/wxz_live','checknum_success') : lang('plugin/wxz_live','checknum_unsuccess');
+		$o['issign'] = $o['issign'] ? lang('plugin/wxz_live','issign_success') : lang('plugin/wxz_live','issign_unsuccess');
+		$o['isconfirm'] = $o['isconfirm'] ? lang('plugin/wxz_live','isconfirm_success') : lang('plugin/wxz_live','isconfirm_unsuccess');
+		$o['ismail'] = $o['ismail'] ? lang('plugin/wxz_live','ismail_success') : lang('plugin/wxz_live','ismail_unsuccess');
+		$o['isclosed'] = $o['isclosed'] ? lang('plugin/wxz_live','isclosed_success') : lang('plugin/wxz_live','isclosed_unsuccess');
+		$o['issuccess'] = $o['issuccess'] ? lang('plugin/wxz_live','issuccess_success') : lang('plugin/wxz_live','issuccess_unsuccess');
+		$o['status'] = $wxz_liveconf['orderstatus'][$o['status']];
 		return $o;
 	}
 
@@ -589,19 +589,19 @@ class zhanmishu_video extends zhanmishu_course{
 		if ($v['video_urltype'] !== '1') {
 			return;
 		}
-		//ÐèÒªÌîÐ´ÄãµÄ Access Key ºÍ Secret Key
+		//ï¿½ï¿½Òªï¿½ï¿½Ð´ï¿½ï¿½ï¿½ Access Key ï¿½ï¿½ Secret Key
 	    $accessKey = $config['qiniuaccessKey'];
 	    $secretKey = $config['qiniusecretKey'];
 
-	    // ¹¹½¨¼øÈ¨¶ÔÏó
+	    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½
 	    $auth = new Qiniu_Auth($accessKey, $secretKey);
 	    $f = $this->getfileexten(trim($v['video_url']));
-	    //baseUrl¹¹Ôì³ÉË½ÓÐ¿Õ¼äµÄÓòÃû/keyµÄÐÎÊ½
+	    //baseUrlï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½Ð¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/keyï¿½ï¿½ï¿½ï¿½Ê½
 	    $baseUrl = $config['qiniuencdoeurl'].rawurlencode($this->auto_to_utf8($f['0'])).$f['1'].'?avinfo';
 	    $authUrl = $auth->privateDownloadUrl($baseUrl);
 	    $length = $this->get_duration_video($authUrl);
 	    if ($length) {
-	    	C::t("#zhanmishu_video#zhanmishu_video")->update($v['vid'],array('video_length'=>ceil($length)));
+	    	C::t("#wxz_live#wxz_live")->update($v['vid'],array('video_length'=>ceil($length)));
 	    }
 	}
 
@@ -644,16 +644,16 @@ class zhanmishu_video extends zhanmishu_course{
 			return $v['video_url'];
 		}
 
-		//ÐèÒªÌîÐ´ÄãµÄ Access Key ºÍ Secret Key
+		//ï¿½ï¿½Òªï¿½ï¿½Ð´ï¿½ï¿½ï¿½ Access Key ï¿½ï¿½ Secret Key
 	    $accessKey = $config['qiniuaccessKey'];
 	    $secretKey = $config['qiniusecretKey'];
 
-	    // ¹¹½¨¼øÈ¨¶ÔÏó
+	    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½
 	    $auth = new Qiniu_Auth($accessKey, $secretKey);
 	    $f = $this->getfileexten(trim($v['video_url']));
 
 
-	    //baseUrl¹¹Ôì³ÉË½ÓÐ¿Õ¼äµÄÓòÃû/keyµÄÐÎÊ½
+	    //baseUrlï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½Ð¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/keyï¿½ï¿½ï¿½ï¿½Ê½
 	    $baseUrl = $config['qiniuencdoeurl'].rawurlencode($this->auto_to_utf8($f['0'])).$f['1'];
 	    $authUrl = $auth->privateDownloadUrl($baseUrl);
 
@@ -684,8 +684,8 @@ class zhanmishu_video extends zhanmishu_course{
 		$_G;
 		$ch = curl_init();
 		curl_setopt($ch,CURLOPT_URL,$url);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //²»ÑéÖ¤Ö¤Êé
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //²»ÑéÖ¤Ö¤Êé
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //ï¿½ï¿½ï¿½ï¿½Ö¤Ö¤ï¿½ï¿½
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //ï¿½ï¿½ï¿½ï¿½Ö¤Ö¤ï¿½ï¿½
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 		curl_setopt ($ch, CURLOPT_REFERER, $_G['siteurl']);
 		$resultj = curl_exec($ch);
@@ -698,11 +698,11 @@ class zhanmishu_video extends zhanmishu_course{
 		if (!$cat_id) {
 			return false;
 		}
-		return C::t("#zhanmishu_video#zhanmishu_video_cat")->fetch($cat_id);
+		return C::t("#wxz_live#wxz_live_cat")->fetch($cat_id);
 	}
 
 	public function get_cat_by_level($level='0',$order){
-		return C::t("#zhanmishu_video#zhanmishu_video_cat")->get_cat_by_level($level,$order);
+		return C::t("#wxz_live#wxz_live_cat")->get_cat_by_level($level,$order);
 	}
 
 	public function get_touch_swiper($updateCache=false){
@@ -739,11 +739,11 @@ class zhanmishu_video extends zhanmishu_course{
 	}
 
 	public function update_touch_swipercache_init($swiper){
-		global $zhanmishu_videoconf;
+		global $wxz_liveconf;
 		if (is_array($swiper) && !empty($swiper)) {
 			$touch_swiper = $swiper;
 		}else{
-			$touch_swiper = $zhanmishu_videoconf['touch']['swiper'];
+			$touch_swiper = $wxz_liveconf['touch']['swiper'];
 		}
 		
 		$this->ZmswriteToCache('touch_swiper',$touch_swiper);

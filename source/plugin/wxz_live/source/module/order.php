@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */	
@@ -17,12 +17,12 @@ if (!$_G['uid']) {
 $input = daddslashes($_GET);
 
 $act = $input['act'] ? $input['act'] : 'list';
-$order = new zhanmishu_video();
+$order = new wxz_live();
 $orderconfig = $order->config;
 if ($input['oid']) {
 	$o = $order->get_order_byoid($input['oid'] + 0);
 	if (empty($o) || $o['buyer_uid'] !== $_G['uid']) {
-		showmessage(lang('plugin/zhanmishu_video', 'data_error'));
+		showmessage(lang('plugin/wxz_live', 'data_error'));
 	}
 }
 
@@ -45,7 +45,7 @@ if ($act =='list') {
 		if (submitcheck('ordersignsubmit')) {
 			$input = daddslashes($input);
 
-			$images = zms_uploadimg('zhanmishu_video/sign/');
+			$images = zms_uploadimg('wxz_live/sign/');
 			if (!empty($images)) {
 				if ($images['verifyimg1']) {
 					$orderk= '1';
@@ -56,11 +56,11 @@ if ($act =='list') {
 				}
 
 				$noorderk = $orderk == '1' ? '2' : '1';
-				include template('zhanmishu_video:order/order_contract_ajax');
+				include template('wxz_live:order/order_contract_ajax');
 				exit;
 			}
 			if (!$input['sign_img1'] || !$input['sign_img2']) {
-				showmessage(lang('plugin/zhanmishu_video', 'data_error'));
+				showmessage(lang('plugin/wxz_live', 'data_error'));
 			}
 
 			if ($o['issign'] =='0') {
@@ -70,14 +70,14 @@ if ($act =='list') {
 				'issign'=>'1',
 				'sign_time'=>TIMESTAMP
 				);
-				C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],$img);
-				$msg = lang('plugin/zhanmishu_video','sign_success');
+				C::t("#wxz_live#wxz_live_order")->update($o['oid'],$img);
+				$msg = lang('plugin/wxz_live','sign_success');
 			}else{
-				$msg = lang('plugin/zhanmishu_video','have_signed');
+				$msg = lang('plugin/wxz_live','have_signed');
 			}
 
 			$js = '<script type="text/javascript">showDialog("'.$msg.'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
-			showmessage(lang('plugin/zhanmishu_video',''), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
+			showmessage(lang('plugin/wxz_live',''), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
 		}
 
 
@@ -143,20 +143,20 @@ if ($act =='list') {
 }else if ($act=='mail') {
 
 	if ($input['formhash'] == formhash()) {
-		C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],array('ismail'=>'1'));
-		$msg = lang('plugin/zhanmishu_video','email_success');
+		C::t("#wxz_live#wxz_live_order")->update($o['oid'],array('ismail'=>'1'));
+		$msg = lang('plugin/wxz_live','email_success');
 		$js = '<script type="text/javascript">showDialog("'.$msg.'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
-		showmessage(lang('plugin/zhanmishu_video',''), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
+		showmessage(lang('plugin/wxz_live',''), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
 	}
 }else if ($act=='closed') {
 	if ($o['ispayed'] =='1') {
-		$js = '<script type="text/javascript">showDialog("'.lang('plugin/zhanmishu_video','cannot_closed_tips').'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
-		showmessage(lang('plugin/zhanmishu_video','cannot_closed_tips'), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
+		$js = '<script type="text/javascript">showDialog("'.lang('plugin/wxz_live','cannot_closed_tips').'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
+		showmessage(lang('plugin/wxz_live','cannot_closed_tips'), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
 	}
 	if ($input['formhash'] == formhash() && $o['oid']) {
-		C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],array('isclosed'=>'1'));
-		$js = '<script type="text/javascript">showDialog("'.lang('plugin/zhanmishu_video','closed_tips').'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
-		showmessage(lang('plugin/zhanmishu_video','closed_tips'), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
+		C::t("#wxz_live#wxz_live_order")->update($o['oid'],array('isclosed'=>'1'));
+		$js = '<script type="text/javascript">showDialog("'.lang('plugin/wxz_live','closed_tips').'","notice","",function(){top.location.href="'.dreferer().'";})</script>';
+		showmessage(lang('plugin/wxz_live','closed_tips'), '', array(), array('msgtype' => 3,'showdialog'=>true,'showmsg'=>false,'extrajs'=>$js));
 	}
 }else if ($act=='down') {
 	if ($o['status'] =='1') {
@@ -183,6 +183,6 @@ if ($_GET['dtype']) {
 
 //print_r($orders);
 
-include template('zhanmishu_video:'.$mod);
+include template('wxz_live:'.$mod);
 
 ?>

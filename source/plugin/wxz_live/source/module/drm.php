@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */	
@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 $input = daddslashes($_GET);
 
-$video = new zhanmishu_video();
+$video = new wxz_live();
 $config = $video->config;
 
 if ($config['drmapi'] =='2') {
@@ -59,7 +59,7 @@ if ($config['drmapi'] =='2') {
 
 
 		if ($result[0] < 1 && !$_G['uid']) {
-			echo lang('plugin/zhanmishu_video','drm_user_or_password_error');exit;
+			echo lang('plugin/wxz_live','drm_user_or_password_error');exit;
 		}
 
 		$member = getuserbyuid($result[0], 1);
@@ -73,7 +73,7 @@ if ($config['drmapi'] =='2') {
 		//check yourproductid
 		$c = $video->get_one_course_byfield(array('cid'=>$fileid));
 		if (empty($c)) {
-			echo lang('plugin/zhanmishu_video','drm_filepid_error');exit;
+			echo lang('plugin/wxz_live','drm_filepid_error');exit;
 		}
 
 		$ispay = $video->checkuser_isfinish_course($fileid,$_G['uid'],false,false);
@@ -83,7 +83,7 @@ if ($config['drmapi'] =='2') {
 		$isvip = check_isvip($c);
 
 		if (!$ispay && !$isvip) {
-			echo lang('plugin/zhanmishu_video','drm_have_not_brought');exit;
+			echo lang('plugin/wxz_live','drm_have_not_brought');exit;
 		}
 
 		$time = date('Y-m-d',TIMESTAMP + 180*24*3600);
@@ -93,9 +93,9 @@ if ($config['drmapi'] =='2') {
 		//$fileid['device'] = $input['code'];
 		$field['cid'] = $c['cid'];
 		$field['isautho'] = '1';
-		$authonum = C::t("#zhanmishu_video#zhanmishu_video_autho")->get_autho_num_byuidcid($c['cid'],$_G['uid'],$input['code'],'1');
+		$authonum = C::t("#wxz_live#wxz_live_autho")->get_autho_num_byuidcid($c['cid'],$_G['uid'],$input['code'],'1');
 		if ($authonum['num'] >=3) {
-			echo lang('plugin/zhanmishu_video', 'drm_have_not_getlicstore_times').$authonum['num'];exit;
+			echo lang('plugin/wxz_live', 'drm_have_not_getlicstore_times').$authonum['num'];exit;
 		}
 
 		echo 'AAAAAA274E052AD619232D026E602F16B92318|'.'20|'.'2028-11-11'.'||'.md5($_GET['code']);
@@ -110,7 +110,7 @@ if ($config['drmapi'] =='2') {
 		);
 		array_merge($ip_array,$autho);
 
-		C::t("#zhanmishu_video#zhanmishu_video_autho")->insert($autho,false,false);
+		C::t("#wxz_live#wxz_live_autho")->insert($autho,false,false);
 
 		exit;
 	}else{
@@ -133,8 +133,8 @@ if ($config['drmapi'] =='2') {
 			$result = uc_user_login($name,$pwd,0);
 
 			if ($result[0] < 1 && !$_G['uid']) {
-				echo '<br />'.lang('plugin/zhanmishu_video', 'drm_user_or_password_error');
-				echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_user_or_password_error').'");window.location="plugin.php?id=zhanmishu_video:video&mod=drm";</script>';exit;
+				echo '<br />'.lang('plugin/wxz_live', 'drm_user_or_password_error');
+				echo '<script>alert("'.lang('plugin/wxz_live', 'drm_user_or_password_error').'");window.location="plugin.php?id=wxz_live:video&mod=drm";</script>';exit;
 			}
 
 			$member = getuserbyuid($result[0], 1);
@@ -144,7 +144,7 @@ if ($config['drmapi'] =='2') {
 			dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
 			C::t('common_member_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
 		
-			echo '<br />'.lang('plugin/zhanmishu_video', 'drm_licstore_is_coming');
+			echo '<br />'.lang('plugin/wxz_live', 'drm_licstore_is_coming');
 			echo "<script>window.location=\"licstoreing.php\";</script>"; 
 			
 			exit;
@@ -158,7 +158,7 @@ if ($config['drmapi'] =='2') {
 		dsetcookie('yourproductid',$input["yourproductid"],3600);
 
 
-		include template('zhanmishu_video:drm/login');
+		include template('wxz_live:drm/login');
 		exit;
 	}
 
@@ -175,7 +175,7 @@ if ($config['drmapi'] =='2') {
 	$name 			= 	$_G['username'];
 
 	if (!$_G['uid']) {
-		echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_please_login').'");</script>';exit;
+		echo '<script>alert("'.lang('plugin/wxz_live', 'drm_please_login').'");</script>';exit;
 	}
 
 
@@ -184,8 +184,8 @@ if ($config['drmapi'] =='2') {
 	$c = $video->get_one_course_byfield(array('ProfileID'=>$ProfileID));
 	if (empty($c)) {
 
-		echo '<br />'.lang('plugin/zhanmishu_video', 'drm_licstore_error');
-		echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_licstore_error').'");</script>';exit;
+		echo '<br />'.lang('plugin/wxz_live', 'drm_licstore_error');
+		echo '<script>alert("'.lang('plugin/wxz_live', 'drm_licstore_error').'");</script>';exit;
 
 	}
 
@@ -200,29 +200,29 @@ if ($config['drmapi'] =='2') {
 
 	if ($act =='licstoreing' ) {
 		if (!$ispay && !$isvip) {
-			echo "<br />".lang('plugin/zhanmishu_video', 'drm_have_not_brought');
-			echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_have_not_brought').'");</script>';exit;
+			echo "<br />".lang('plugin/wxz_live', 'drm_have_not_brought');
+			echo '<script>alert("'.lang('plugin/wxz_live', 'drm_have_not_brought').'");</script>';exit;
 		}
 
 		//检测是否已经完成认证
 		if (!$video->check_user_isverify() && $config['isverify']) {
-			echo "<br />".lang('plugin/zhanmishu_video', 'drm_have_not_verify');
-			echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_have_not_verify').'");</script>';exit;
+			echo "<br />".lang('plugin/wxz_live', 'drm_have_not_verify');
+			echo '<script>alert("'.lang('plugin/wxz_live', 'drm_have_not_verify').'");</script>';exit;
 		}
 
 		if ($ispay && ($o['playcount'] >= $config['maxplaycount'] || empty($o))) {
-			echo "<br />".lang('plugin/zhanmishu_video', 'drm_have_not_getlicstore_times');
-			echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_have_not_getlicstore_times').'");</script>';exit;
+			echo "<br />".lang('plugin/wxz_live', 'drm_have_not_getlicstore_times');
+			echo '<script>alert("'.lang('plugin/wxz_live', 'drm_have_not_getlicstore_times').'");</script>';exit;
 		}
 
-		$num = C::t("#zhanmishu_video#zhanmishu_video_autho")->get_authos_num(array('uid'=>$_G['uid'],'cid'=>$c['cid']));
+		$num = C::t("#wxz_live#wxz_live_autho")->get_authos_num(array('uid'=>$_G['uid'],'cid'=>$c['cid']));
 
 
 
 
 		if (strlen($wotarname) < 3 && false) {
-			echo "<br />".lang('plugin/zhanmishu_video', 'drm_watermark_error');
-			echo '<script>alert("'.lang('plugin/zhanmishu_video', 'drm_watermark_error').'");</script>';exit;
+			echo "<br />".lang('plugin/wxz_live', 'drm_watermark_error');
+			echo '<script>alert("'.lang('plugin/wxz_live', 'drm_watermark_error').'");</script>';exit;
 		}
 		 echo "<SCRIPT language=JavaScript>location='licstore.php';</SCRIPT>";
 		 die;
@@ -242,7 +242,7 @@ if ($config['drmapi'] =='2') {
 			exit;
 		}
 
-		$num = C::t("#zhanmishu_video#zhanmishu_video_autho")->get_authos_num(array('uid'=>$_G['uid'],'cid'=>$c['cid']));
+		$num = C::t("#wxz_live#wxz_live_autho")->get_authos_num(array('uid'=>$_G['uid'],'cid'=>$c['cid']));
 
 
 
@@ -369,7 +369,7 @@ if ($config['drmapi'] =='2') {
 		}
 
 		if (!empty($o)) {
-			C::t("#zhanmishu_video#zhanmishu_video_order")->update($o['oid'],array('playcount'=>$o['playcount'] + 1));
+			C::t("#wxz_live#wxz_live_order")->update($o['oid'],array('playcount'=>$o['playcount'] + 1));
 		}
 
 		$ip_array = explode('.', $_G['clientip']);
@@ -383,7 +383,7 @@ if ($config['drmapi'] =='2') {
 		);
 		array_merge($ip_array,$autho);
 
-		C::t("#zhanmishu_video#zhanmishu_video_autho")->insert($autho,false,false);
+		C::t("#wxz_live#wxz_live_autho")->insert($autho,false,false);
 
 
 		print_r('<html><head><meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>'. $license.'</body></html> ');

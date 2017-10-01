@@ -42,14 +42,14 @@ define(function(){
 	            q:'start'
 		        };
 		        var video=[f];
-		    CKobject.embed('source/plugin/zhanmishu_video/template/touch/ckplayer/ckplayer.swf','my_video','ckplayer_my_video','100%',jw_height,false,flashvars,video);
+		    CKobject.embed('source/plugin/wxz_live/template/touch/ckplayer/ckplayer.swf','my_video','ckplayer_my_video','100%',jw_height,false,flashvars,video);
 		}else if (f.toLowerCase().indexOf(".m3u8") > 0) {
 			console.log(f);
 			zmsshowPlayer(f,'my_video')
 			function zmsshowPlayer(src, id){
 			     //player
 			   var flashvars={
-			        f : 'source/plugin/zhanmishu_video/template/touch/ckplayer/m3u8.swf',
+			        f : 'source/plugin/wxz_live/template/touch/ckplayer/m3u8.swf',
 			        a : src,
 			        c : 0,
 			        p : 1,
@@ -62,7 +62,7 @@ define(function(){
 			    };
 			    var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
 			    var video=[src];
-			    CKobject.embed('source/plugin/zhanmishu_video/template/touch/ckplayer/ckplayer.swf',id ,'my_video','100%',jw_height,false, flashvars ,video, params);
+			    CKobject.embed('source/plugin/wxz_live/template/touch/ckplayer/ckplayer.swf',id ,'my_video','100%',jw_height,false, flashvars ,video, params);
 			 
 			}
 

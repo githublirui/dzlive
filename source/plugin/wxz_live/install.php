@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $sql = <<<EOF
-CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_course (
+CREATE TABLE IF NOT EXISTS pre_wxz_live_course (
   `cid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_course (
   KEY ProfileID (ProfileID),
   KEY course_price (course_price)
 );
-CREATE TABLE IF NOT EXISTS pre_zhanmishu_video (
+CREATE TABLE IF NOT EXISTS pre_wxz_live (
   `vid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `cid` mediumint(8) unsigned NOT NULL,
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS pre_zhanmishu_video (
   KEY video_price (video_price)
 );
 
-CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_order (
+CREATE TABLE IF NOT EXISTS pre_wxz_live_order (
   `oid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `cid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `vid` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_order (
   KEY ismail (ismail),
   KEY trade_no (trade_no)
 );
-CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_cat (
+CREATE TABLE IF NOT EXISTS pre_wxz_live_cat (
   `cat_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `sort` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_cat (
   KEY cat_name (cat_name)
 
 );
-CREATE TABLE IF NOT EXISTS pre_zhanmishu_video_autho (
+CREATE TABLE IF NOT EXISTS pre_wxz_live_autho (
   `aid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `oid` mediumint(8) unsigned NOT NULL DEFAULT '0',

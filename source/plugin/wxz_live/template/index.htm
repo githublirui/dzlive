@@ -1,5 +1,5 @@
-{template zhanmishu_video:video_header}
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/course.css?aa" type="text/css">
+{template wxz_live:video_header}
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/course.css?aa" type="text/css">
 
 {if $mod == 'index' && !$_GET['cat_id']}
     {if $videoconfig['isbannerfull'] > 0}
@@ -17,8 +17,8 @@
 .unslider li,
 .unslider ol,
 .unslider ul{list-style:none;margin:0;padding:0;border:none;}
-.unslider-arrow{position:absolute;left:5%;z-index:2;cursor:pointer;top:40%;background: url(source/plugin/zhanmishu_video/template/img/arrowsleft.png) no-repeat;width: 30px;height: 80px;}
-.unslider-arrow.next{left:auto;right:5%;background: url(source/plugin/zhanmishu_video/template/img/arrowsright.png) no-repeat;}
+.unslider-arrow{position:absolute;left:5%;z-index:2;cursor:pointer;top:40%;background: url(source/plugin/wxz_live/template/img/arrowsleft.png) no-repeat;width: 30px;height: 80px;}
+.unslider-arrow.next{left:auto;right:5%;background: url(source/plugin/wxz_live/template/img/arrowsright.png) no-repeat;}
 .unslider-nav {position: absolute;bottom: 20px;left: 48%}
 .unslider-nav ol{list-style:none;text-align:center;}
 .unslider-nav ol li{display:inline-block;width:6px;height:6px;margin:0 4px;background:transparent;border-radius:5px;overflow:hidden;text-indent:-999em;border:2px solid #fff;cursor:pointer;}
@@ -45,19 +45,19 @@
 #zmsvideobox .inroomon { background: #f61;color: #fff;display: block;}
 </style>
 
-<script src="source/plugin/zhanmishu_video/template/js/slider/unslider-min.js"></script>
+<script src="source/plugin/wxz_live/template/js/slider/unslider-min.js"></script>
 
     {if $videoconfig['isswiper'] > 0}
     <div class="banner">
         <ul>
             <li>
-                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_01.jpg);"></div>
+                <div class="imgback" style="background-image: url(source/plugin/wxz_live/template/img/index1_01.jpg);"></div>
             </li>
             <li style="float: left;">
-                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_05.jpg);"></div>
+                <div class="imgback" style="background-image: url(source/plugin/wxz_live/template/img/index1_05.jpg);"></div>
             </li>
             <li style="float: left;">
-                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_06.jpg);"></div>
+                <div class="imgback" style="background-image: url(source/plugin/wxz_live/template/img/index1_06.jpg);"></div>
             </li>
        </ul>
     </div>
@@ -73,7 +73,7 @@
                     <div id="my_video">
                     </div>
                 </div>
-                <a href="javascript:;" id="inroom" class="hid">{lang zhanmishu_video:inlearnroom}</a>
+                <a href="javascript:;" id="inroom" class="hid">{lang wxz_live:inlearnroom}</a>
             </div>
             <div id="videolist">
                 <ul> 
@@ -99,7 +99,7 @@
                     </li>
                     <li>
                         <i class="arrow"></i>
-                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/162325bqgfhezqfen59iip.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/36816083.mp4"><input type="hidden" name="url" value="http://psc4d.com/plugin.php?id=zhanmishu_video:video&mod=video&cid=77&type=learn">
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/162325bqgfhezqfen59iip.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/36816083.mp4"><input type="hidden" name="url" value="http://psc4d.com/plugin.php?id=wxz_live:video&mod=video&cid=77&type=learn">
                     </li>
                 </ul>
             </div>
@@ -114,9 +114,9 @@
 
     {if $videoconfig['isrecommend'] > 0}
         <div class="index-recommond">
-            <div class="recommon-box"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=133" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2Gu78XSJjpuFjy0FdXXXmoFXa-121630866.jpg" alt=""></a></div>
-            <div class="recommon-box recommon-box-center"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=169"target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2ctvfX9FmpuFjSZFrXXayOXXa-121630866.jpg" alt=""></a></div>
-            <div class="recommon-box"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=64" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB27ygfem4mpuFjSZFOXXaUqpXa-121630866.jpg" alt=""></a></div>
+            <div class="recommon-box"><a href="plugin.php?id=wxz_live:video&mod=video&cid=133" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2Gu78XSJjpuFjy0FdXXXmoFXa-121630866.jpg" alt=""></a></div>
+            <div class="recommon-box recommon-box-center"><a href="plugin.php?id=wxz_live:video&mod=video&cid=169"target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2ctvfX9FmpuFjSZFrXXayOXXa-121630866.jpg" alt=""></a></div>
+            <div class="recommon-box"><a href="plugin.php?id=wxz_live:video&mod=video&cid=64" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB27ygfem4mpuFjSZFOXXaUqpXa-121630866.jpg" alt=""></a></div>
         </div>
     {/if}
 
@@ -180,7 +180,7 @@
                     q:'start'
                     };
                     var video=[f];
-                CKobject.embed('source/plugin/zhanmishu_video/template/touch/ckplayer/ckplayer.swf','my_video','ckplayer_my_video','100%',jw_height,false,flashvars,video);
+                CKobject.embed('source/plugin/wxz_live/template/touch/ckplayer/ckplayer.swf','my_video','ckplayer_my_video','100%',jw_height,false,flashvars,video);
             }else{
                 jwplayer.key="aYB2Ya1BAkZIWfRiC6kkx/dlNzydIi1TAey8iA==";
 
@@ -241,7 +241,7 @@
         jQuery("#inroom").click(function(){
             var url = jQuery(".vhover").find("input[name=url]").val();
             if (!isNaN(url) && url) {
-                self.location.href='plugin.php?id=zhanmishu_video:video&mod=video&cid='+url;
+                self.location.href='plugin.php?id=wxz_live:video&mod=video&cid='+url;
             }else {
                 self.location.href=url;
             }
@@ -260,9 +260,9 @@
     data = slidey.data('unslider');
     
 </script>
-<script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/lib/jwplayer.js"></script>
-{eval $main='data-main="source/plugin/zhanmishu_video/template/js/main"';}
-<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/template/js/lib/jwplayer.js"></script>
+{eval $main='data-main="source/plugin/wxz_live/template/js/main"';}
+<script {$main} src="source/plugin/wxz_live/template/js/lib/require/require.min.js"></script>
 <div id="main" class="zmsvideolistmain">
 
     <div class="container">
@@ -270,12 +270,12 @@
             <div class="course-nav-box">
                 <a name="groupselect"></a>
                 <div class="course-nav-row clearfix">
-                    <span class="hd l">{lang zhanmishu_video:forword}</span>
+                    <span class="hd l">{lang wxz_live:forword}</span>
 
                     <div class="bd">
                         <ul class="">
                             <li class="course-nav-item {if !$_GET['cat_id']}on{/if}">
-                                <a href="{$caturl}&cat_id=$catpid">{lang zhanmishu_video:all}</a>
+                                <a href="{$caturl}&cat_id=$catpid">{lang wxz_live:all}</a>
                             </li>
                             {loop $cat $key $value}
                             <li class="course-nav-item{if $value['cat_id'] == $_GET['cat_id'] || ($catpid > 0 && $catpid ==$value['cat_id'])} on{/if}">
@@ -292,7 +292,7 @@
                     <div class="bd">
                         <ul class="">
                             <li class="course-nav-item">
-                                <a >{lang zhanmishu_video:cat}</a>
+                                <a >{lang wxz_live:cat}</a>
                             </li>
                             {loop $catson['son']  $value}
                             <li class="course-nav-item{if $value['cat_id'] == $_GET['cat_id']} on{/if}">
@@ -304,14 +304,14 @@
                 </div>
                 {/if} 
                 <div class="course-nav-row clearfix">
-                    <span class="hd l">{lang zhanmishu_video:diff_at}</span>
+                    <span class="hd l">{lang wxz_live:diff_at}</span>
 
                     <div class="bd">
                         <ul class="">
                             <li class="course-nav-item {if !$_GET['diff']}on{/if}">
-                                <a href="$durl">{lang zhanmishu_video:all}</a>
+                                <a href="$durl">{lang wxz_live:all}</a>
                             </li>
-                            {loop $zhanmishu_videoconf['diff'] $key $value}
+                            {loop $wxz_liveconf['diff'] $key $value}
                             <li class="course-nav-item {if $key == $_GET['diff']} on{/if}">
                                 <a href="{$durl}&diff={$key}">$value</a>
                             </li>
@@ -321,12 +321,12 @@
                     </div>
                 </div>
                 <!-- <div class="course-nav-row clearfix">
-                    <span class="hd l">{lang zhanmishu_video:vipgroup_at}</span>
+                    <span class="hd l">{lang wxz_live:vipgroup_at}</span>
 
                     <div class="bd">
                         <ul class="">
                             <li class="course-nav-item {if !$_GET['groupselect']}on{/if}">
-                                <a href="$gurl">{lang zhanmishu_video:all}</a>
+                                <a href="$gurl">{lang wxz_live:all}</a>
                             </li>
                             {loop $videoconfig['groupselect'] $key $value}
                             <li class="course-nav-item  {if $value == $_GET['groupselect']} on{/if}">
@@ -340,19 +340,19 @@
             </div>
             <div class="course-tool-bar clearfix">
                 <div class="tool-left l">
-                    <a href="{$ourl}" class="sort-item{if !$_GET['order']} active{/if}">{lang zhanmishu_video:recommend}</a>
-                    <a href="{$ourl}&order=new" class="sort-item{if $_GET['order'] =='new'} active{/if}">{lang zhanmishu_video:new_est}</a>
-                    <a href="{$ourl}&order=hot" class="sort-item{if $_GET['order'] =='hot'} active{/if}">{lang zhanmishu_video:hot_est}</a>
+                    <a href="{$ourl}" class="sort-item{if !$_GET['order']} active{/if}">{lang wxz_live:recommend}</a>
+                    <a href="{$ourl}&order=new" class="sort-item{if $_GET['order'] =='new'} active{/if}">{lang wxz_live:new_est}</a>
+                    <a href="{$ourl}&order=hot" class="sort-item{if $_GET['order'] =='hot'} active{/if}">{lang wxz_live:hot_est}</a>
                 </div>
                 <div class="l">
                     <span class="tool-item" style="display: none;">
-                        <a class="follow-learn tool-chk" href="">{lang zhanmishu_video:learn_from_me}</a>
+                        <a class="follow-learn tool-chk" href="">{lang wxz_live:learn_from_me}</a>
                     </span>
                 </div>
                 {if $videoconfig['selltype'] == '2'}
                 <div class="tool-right r">
                    <!--  <span class="tool-item total-num">
-                        {lang zhanmishu_video:gong}<b>553</b>{lang zhanmishu_video:courses}
+                        {lang wxz_live:gong}<b>553</b>{lang wxz_live:courses}
                     </span> -->
                     {loop $videoconfig['groupselect'] $key $value}
                             <span class="tool-item total-num" {if $value == $_GET['groupselect']} on{/if}">
@@ -372,7 +372,7 @@
                         <li class="course-one" style="{if $videoconfig['clumnnums'] == '3'}width: 27%;{elseif $videoconfig['clumnnums'] == '4'}width:21.25%{/if}">
                            
                                 <div class="course-list-img">
-                                     <a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"><img width="240" height="135" alt="{$value['course_name']}"
+                                     <a target="_blank" href="plugin.php?id=wxz_live:video&mod=video&cid={$value['cid']}"><img width="240" height="135" alt="{$value['course_name']}"
                                         src="{$value['course_img']}"></a>
                                     <span class="playericon"></span>
                                 </div>
@@ -381,7 +381,7 @@
                                     {if $videoconfig['selltype'] == '2'}
                                         {eval $group = $video->course_group_toarray($value['course_group']);}
                                         {if !$value['course_price']}
-                                            <span class="l viptags" style="background-color:#5fb41b;">{lang zhanmishu_video:free}</span>
+                                            <span class="l viptags" style="background-color:#5fb41b;">{lang wxz_live:free}</span>
                                          {elseif count($group) > 1}
                                          <select name="" id=""  class="l viptags"  style="background-color:#5fb41b;">
                                             {loop $group $v}
@@ -403,31 +403,31 @@
                                         &nbsp;&nbsp;
                                     {/if}
                                    
-                                   <a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"><span>{$value['course_name']}</span></a>
+                                   <a target="_blank" href="plugin.php?id=wxz_live:video&mod=video&cid={$value['cid']}"><span>{$value['course_name']}</span></a>
                                 </h5>
                                 <div class="tips l_tips">
                                     
                                     {if $videoconfig['selltype'] == '1'}
                                          {if !$value['course_price']}
-                                            <span class="l viptags" style="background-color:#5fb41b;">{lang zhanmishu_video:free}</span>
+                                            <span class="l viptags" style="background-color:#5fb41b;">{lang wxz_live:free}</span>
                                         {else}
                                          <span class="l l_price">
                                         
-                                         {lang zhanmishu_video:moneyunit_code}{eval echo $value['course_price']/100;}</span>
+                                         {lang wxz_live:moneyunit_code}{eval echo $value['course_price']/100;}</span>
                                         {/if}
                                     {elseif $videoconfig['selltype'] == '2'}
                                         <span class="l">
                                         {$value['views']}
-                                        {lang zhanmishu_video:views}</span>
+                                        {lang wxz_live:views}</span>
                                     {/if}
                                     
                                     <span class="l ml20 l_float_right">
                                      {$value['learns']}
-                                    {lang zhanmishu_video:learns}</span>
+                                    {lang wxz_live:learns}</span>
                                 </div>
-                                <div class="l_description text-ellipsis"><a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}">{$value['course_intro']}</a></div>
+                                <div class="l_description text-ellipsis"><a target="_blank" href="plugin.php?id=wxz_live:video&mod=video&cid={$value['cid']}">{$value['course_intro']}</a></div>
                             <span class="time-label">
-                                   {$value['course_length']} | {$zhanmishu_videoconf['diff'][$value['diff']]}
+                                   {$value['course_length']} | {$wxz_liveconf['diff'][$value['diff']]}
                             </span>
                             
                         </li>

@@ -4,4 +4,4 @@ if(!defined('IN_DISCUZ')) {
 }
 
 global $_G;
-echo lang("plugin/zhanmishu_video", "logy_m_g");
+echo lang("plugin/wxz_live", "logy_m_g");

@@ -1,28 +1,28 @@
-{template zhanmishu_video:video_header}
+{template wxz_live:video_header}
 
-<link rel="stylesheet" type="text/css" href="source/plugin/zhanmishu_video/template/css/common/fontface.css">
-<link rel="stylesheet" type="text/css" href="source/plugin/zhanmishu_video/template/css/common/training.css">
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/layer.css"/>
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/style.css"/>
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/ionicons.css"/>
+<link rel="stylesheet" type="text/css" href="source/plugin/wxz_live/template/css/common/fontface.css">
+<link rel="stylesheet" type="text/css" href="source/plugin/wxz_live/template/css/common/training.css">
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/others/layer.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/others/style.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/ionicons.css"/>
 <!--  person -->
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/common.css"/>
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/person/style.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/common.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/person/style.css"/>
 
 
 <div class="dhl_content">
     <!-- CONTENT -->
    <div class="dhl_nav_left">
-       {template zhanmishu_video:order/order_left}
+       {template wxz_live:order/order_left}
 
        {if $act =='list'}
-            {template zhanmishu_video:order/order_list}
+            {template wxz_live:order/order_list}
        {elseif $act =='contract'}
-            {template zhanmishu_video:order/order_contract}
+            {template wxz_live:order/order_contract}
        {elseif $act =='mail'}
-            {template zhanmishu_video:order/order_mail}
+            {template wxz_live:order/order_mail}
        {elseif $act =='down'}
-            {template zhanmishu_video:order/order_down}
+            {template wxz_live:order/order_down}
        {/if}
 
     </div>
@@ -30,8 +30,8 @@
 
 </div>
 
-{eval $main='data-main="/source/plugin/zhanmishu_video/template/js/main"';}
-<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+{eval $main='data-main="/source/plugin/wxz_live/template/js/main"';}
+<script {$main} src="source/plugin/wxz_live/template/js/lib/require/require.min.js"></script>
 <!--person-->
-<script src="source/plugin/zhanmishu_video/template/js/app/person.js"></script>
+<script src="source/plugin/wxz_live/template/js/app/person.js"></script>
 {template common/footer}

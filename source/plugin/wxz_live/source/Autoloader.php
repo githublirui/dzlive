@@ -1,25 +1,25 @@
 <?php
 /*
- *ÈðË¼¿ÆÈËwww.riscman.com
- *±¸ÓÃÓòÃûwww.riscman.com
- *¸ü¶à¾«Æ·×ÊÔ´Çë·ÃÎÊÈðË¼¿ÆÈË¹Ù·½ÍøÕ¾Ãâ·Ñ»ñÈ¡
- *±¾×ÊÔ´À´Ô´ÓÚÍøÂçÊÕ¼¯,½ö¹©¸öÈËÑ§Ï°½»Á÷£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾£¬²¢ÓÚÏÂÔØ24Ð¡Ê±ºóÉ¾³ý!
- *Èç¹ûÇÖ·¸ÁËÄúµÄÈ¨Òæ,Çë¼°Ê±¸æÖªÎÒÃÇ,ÎÒÃÇ¼´¿ÌÉ¾³ý!
+ *åˆè‚¥å¾®å°æ™ºwww.hfwxz.com
+ *å¤‡ç”¨åŸŸåwww.hfwxz.com
+ *æ›´å¤šç²¾å“èµ„æºè¯·è®¿é—®åˆè‚¥å¾®å°æ™ºå®˜æ–¹ç½‘ç«™å…è´¹èŽ·å–
+ *æœ¬èµ„æºæ¥æºäºŽç½‘ç»œæ”¶é›†,ä»…ä¾›ä¸ªäººå­¦ä¹ äº¤æµï¼Œè¯·å‹¿ç”¨äºŽå•†ä¸šç”¨é€”ï¼Œå¹¶äºŽä¸‹è½½24å°æ—¶åŽåˆ é™¤!
+ *å¦‚æžœä¾µçŠ¯äº†æ‚¨çš„æƒç›Š,è¯·åŠæ—¶å‘ŠçŸ¥æˆ‘ä»¬,æˆ‘ä»¬å³åˆ»åˆ é™¤!
  */
 
 if(!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
-include_once DISCUZ_ROOT.'./source/plugin/zhanmishu_video/conf/conf.php';
+include_once DISCUZ_ROOT.'./source/plugin/wxz_live/conf/conf.php';
 
 class Zms_video_Autoloader{
   
   /*
- *ÈðË¼¿ÆÈËwww.riscman.com
- *±¸ÓÃÓòÃûwww.riscman.com
- *¸ü¶à¾«Æ·×ÊÔ´Çë·ÃÎÊÈðË¼¿ÆÈË¹Ù·½ÍøÕ¾Ãâ·Ñ»ñÈ¡
- *±¾×ÊÔ´À´Ô´ÓÚÍøÂçÊÕ¼¯,½ö¹©¸öÈËÑ§Ï°½»Á÷£¬ÇëÎðÓÃÓÚÉÌÒµÓÃÍ¾£¬²¢ÓÚÏÂÔØ24Ð¡Ê±ºóÉ¾³ý!
- *Èç¹ûÇÖ·¸ÁËÄúµÄÈ¨Òæ,Çë¼°Ê±¸æÖªÎÒÃÇ,ÎÒÃÇ¼´¿ÌÉ¾³ý!
+ *åˆè‚¥å¾®å°æ™ºwww.hfwxz.com
+ *å¤‡ç”¨åŸŸåwww.hfwxz.com
+ *æ›´å¤šç²¾å“èµ„æºè¯·è®¿é—®åˆè‚¥å¾®å°æ™ºå®˜æ–¹ç½‘ç«™å…è´¹èŽ·å–
+ *æœ¬èµ„æºæ¥æºäºŽç½‘ç»œæ”¶é›†,ä»…ä¾›ä¸ªäººå­¦ä¹ äº¤æµï¼Œè¯·å‹¿ç”¨äºŽå•†ä¸šç”¨é€”ï¼Œå¹¶äºŽä¸‹è½½24å°æ—¶åŽåˆ é™¤!
+ *å¦‚æžœä¾µçŠ¯äº†æ‚¨çš„æƒç›Š,è¯·åŠæ—¶å‘ŠçŸ¥æˆ‘ä»¬,æˆ‘ä»¬å³åˆ»åˆ é™¤!
  */
     public static function autoload($class) {
         $name = $class;
@@ -30,12 +30,12 @@ class Zms_video_Autoloader{
           exit('your server is not support soapclient');
           return ;
         }
-        $filename = DISCUZ_ROOT.'source/plugin/zhanmishu_video/source/class/'.$name.'.php';
+        $filename = DISCUZ_ROOT.'source/plugin/wxz_live/source/class/'.$name.'.php';
         if(is_file($filename)) {
             include $filename;
             return;
         }
-        $filename = DISCUZ_ROOT.'source/plugin/zhanmishu_video/source/sdk/Qiniu/'.$name.'.php';
+        $filename = DISCUZ_ROOT.'source/plugin/wxz_live/source/sdk/Qiniu/'.$name.'.php';
         if(is_file($filename)) {
             include $filename;
             return;
@@ -47,7 +47,7 @@ if (version_compare(phpversion(),'5.3.0','>=')) {
     spl_autoload_register('Zms_video_Autoloader::autoload',false,true);
 }else{
     Zms_video_Autoloader::autoload("zhanmishu_course");
-    Zms_video_Autoloader::autoload("zhanmishu_video");
+    Zms_video_Autoloader::autoload("wxz_live");
     Zms_video_Autoloader::autoload("zhanmishu_api");
     Zms_video_Autoloader::autoload("Qiniu_Auth");
     Zms_video_Autoloader::autoload("Qiniu_Config");

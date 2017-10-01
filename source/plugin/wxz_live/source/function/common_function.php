@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -19,7 +19,7 @@ function remove_nopromissword($str){
 function zms_video_getconfig(){
 	global $_G;
 	loadcache('plugin');
-	$config = $_G['cache']['plugin']['zhanmishu_video'];
+	$config = $_G['cache']['plugin']['wxz_live'];
 	$config['realname'] = $config['realname'] ? $config['realname'] : 'realname';
 	$config['idcard'] = $config['idcard'] ? $config['idcard'] : 'idcard';
 	$config['vipgroup'] = zms_video_vipgroups($config['vipgroup']);
@@ -75,7 +75,7 @@ function zms_showtitle($name,$array=array()){
 }
 
 
-function zms_uploadimg($savedir='zhanmishu_video/',$thumb=false,$width='220',$height='220',$iskeybili='1'){ 
+function zms_uploadimg($savedir='wxz_live/',$thumb=false,$width='220',$height='220',$iskeybili='1'){ 
 
 	//上传图片
 	$images = array();
@@ -138,7 +138,7 @@ function zms_rewriteoutput($type, $returntype, $host) {
 			'{fid}' => empty($_G['setting']['forumkeys'][$fid]) ? $fid : $_G['setting']['forumkeys'][$fid],
 			'{page}' => $page ? $page : 1,
 		);
-	} elseif($type == 'zhanmishu_video') {
+	} elseif($type == 'wxz_live') {
 		list(,,, $mod, $cid, $vod) = func_get_args();
 		$r = array(
 			'{mod}' => $mod,

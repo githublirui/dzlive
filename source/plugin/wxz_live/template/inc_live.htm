@@ -1,18 +1,18 @@
-{template zhanmishu_video:live_header}
+{template wxz_live:live_header}
 
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/common/fontface.css">
-<link rel="stylesheet" type="text/css" href="source/plugin/zhanmishu_video/template/css/common/training.css">
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/layer.css"/>
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/livestyle.css?_t=20161208"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/common/fontface.css">
+<link rel="stylesheet" type="text/css" href="source/plugin/wxz_live/template/css/common/training.css">
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/others/layer.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/others/livestyle.css?_t=20161208"/>
 <!-- stormfx-->
-<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/ionicons.css"/>
+<link rel="stylesheet" href="source/plugin/wxz_live/template/css/ionicons.css"/>
 
 <div id="wrap">
     <!-- CONTENT --> 
     <div id="content wp">
 
         <div class="hero_bkgd course">
-            <div class="zmscoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$_GET['cid']}">{lang zhanmishu_video:liveing}{$course['course_name']}</a></h2>
+            <div class="zmscoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}">{lang wxz_live:liveing}{$course['course_name']}</a></h2>
             <div class="zmscourse">
                 <div class="clearfix">
                     <div id="course_video_container">
@@ -26,7 +26,7 @@
                                         $videoconfig['downurltips']
                                    {/if}
                                     <div class="bottonke">
-                                    <a class="redbot" href="plugin.php?id=zhanmishu_video:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang zhanmishu_video:buy_now}</span></a>
+                                    <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -35,8 +35,8 @@
                                 <div class="nolooktip">
                                         $videoconfig['buy_videourltips'] 
                                     <div class="bottonke" style="width: 270px;">
-                                    <a class="redbot" href="plugin.php?id=zhanmishu_video:video&mod=order"  target="_blank"><span>{lang zhanmishu_video:down_now}</span></a>
-                                    <a class="redbot" href="$videoconfig['learnurl']"  target="_blank"><span>{lang zhanmishu_video:how_to_use}</span></a>
+                                    <a class="redbot" href="plugin.php?id=wxz_live:video&mod=order"  target="_blank"><span>{lang wxz_live:down_now}</span></a>
+                                    <a class="redbot" href="$videoconfig['learnurl']"  target="_blank"><span>{lang wxz_live:how_to_use}</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
 
                             {/if}
                         </div>
-                        <span id="zhanmishu_videosrc"></span>
+                        <span id="wxz_livesrc"></span>
                         <div id="captions-container" style="display:none"></div>
                         <div id="transcript-container" style="display:none;position:absolute;top:0;right:0"></div>
                     </div>
@@ -71,10 +71,10 @@
                                          </div>
                                          <form id="livechatzms" onsubmit="onSubmit(); return false;">
                                               <select style="margin-bottom:8px;display: none;" id="client_list" style="display: none;">
-                                                  <option value="all">{lang zhanmishu_video:allperson}</option>
+                                                  <option value="all">{lang wxz_live:allperson}</option>
                                               </select>
                                               <textarea class="textarea" id="livesaytextarea"></textarea>
-                                              <div class="say-btn"><input onclick="onSubmit(); return false;" type="button" class="btn btn-default" value="{lang zhanmishu_video:chatsubmit}" /></div>
+                                              <div class="say-btn"><input onclick="onSubmit(); return false;" type="button" class="btn btn-default" value="{lang wxz_live:chatsubmit}" /></div>
                                          </form>
                                       </div>
                                   </div>
@@ -85,8 +85,8 @@
             </div>
         </div>
     </div>
-{eval $main='data-main="/source/plugin/zhanmishu_video/template/js/main"';}
-<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+{eval $main='data-main="/source/plugin/wxz_live/template/js/main"';}
+<script {$main} src="source/plugin/wxz_live/template/js/lib/require/require.min.js"></script>
 
 <script type="text/javascript">
  // JavaScript Document
@@ -133,7 +133,7 @@ function getWindowSize(){
     var name = "{$_G['username']}";
     var uid = "{$_G['uid']}";
     {else}
-    var name = "{lang zhanmishu_video:nologinone}{TIMESTAMP}";
+    var name = "{lang wxz_live:nologinone}{TIMESTAMP}";
     var uid = 0;
     {/if}
     name = name + '###$$$' + uid;
@@ -184,7 +184,7 @@ function getWindowSize(){
                 //{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
                 var uinfo = data['client_name'].split("###$$$");
               
-                say(data['client_id'], data['client_name'],  uinfo[0]+' {lang zhanmishu_video:getinchatroom}', data['time'],data['uid']);
+                say(data['client_id'], data['client_name'],  uinfo[0]+' {lang wxz_live:getinchatroom}', data['time'],data['uid']);
 
                 if(data['client_list'])
                 {
@@ -195,7 +195,7 @@ function getWindowSize(){
                     client_list[data['client_id']] = data['client_name']; 
                 }
                 flush_client_list();
-                //console.log(data['client_name']+"{lang zhanmishu_video:login}");
+                //console.log(data['client_name']+"{lang wxz_live:login}");
                 break;
             // 发言
             case 'say':
@@ -205,7 +205,7 @@ function getWindowSize(){
             // 用户退出 更新用户列表
             case 'logout':
                 //{"type":"logout","client_id":xxx,"time":"xxx"}
-                // say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' {lang zhanmishu_video:logout}', data['time']);
+                // say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' {lang wxz_live:logout}', data['time']);
                 delete client_list[data['from_client_id']];
                 flush_client_list(); 
         }
@@ -229,7 +229,7 @@ function getWindowSize(){
         input.focus();
 
       }else{
-        alert('{lang zhanmishu_video:inputchatcontenttips}');
+        alert('{lang wxz_live:inputchatcontenttips}');
       }
     }
 
@@ -239,8 +239,8 @@ function getWindowSize(){
         var client_list_slelect = jQuery("#client_list");
         userlist_window.empty();
         client_list_slelect.empty();
-        userlist_window.append('<h4>{lang zhanmishu_video:onlineone}</h4><ul>');
-        client_list_slelect.append('<option value="all" id="cli_all">{lang zhanmishu_video:allperson}</option>');
+        userlist_window.append('<h4>{lang wxz_live:onlineone}</h4><ul>');
+        client_list_slelect.append('<option value="all" id="cli_all">{lang wxz_live:allperson}</option>');
         for(var p in client_list){
             userlist_window.append('<li id="'+p+'">'+client_list[p]+'</li>');
             client_list_slelect.append('<option value="'+p+'">'+client_list[p]+'</option>');
@@ -289,10 +289,10 @@ function goToBottom(){
 
   </script>
   <!-- Include these three JS files: -->
-  <script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/chat/swfobject.js"></script>
-  <script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/chat/web_socket.js"></script>
-  <script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/lib/jwplayer.js"></script>
+  <script type="text/javascript" src="source/plugin/wxz_live/template/js/chat/swfobject.js"></script>
+  <script type="text/javascript" src="source/plugin/wxz_live/template/js/chat/web_socket.js"></script>
+  <script type="text/javascript" src="source/plugin/wxz_live/template/js/lib/jwplayer.js"></script>
 
 
 
-{template zhanmishu_video:live_footer}
+{template wxz_live:live_footer}

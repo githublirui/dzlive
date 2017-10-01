@@ -1,8 +1,8 @@
 <?php
 /*
- *瑞思科人www.riscman.com
- *备用域名www.riscman.com
- *更多精品资源请访问瑞思科人官方网站免费获取
+ *合肥微小智www.hfwxz.com
+ *备用域名www.hfwxz.com
+ *更多精品资源请访问合肥微小智官方网站免费获取
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
@@ -11,10 +11,10 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class table_zhanmishu_video_course extends discuz_table {
+class table_wxz_live_course extends discuz_table {
 
 	public function __construct() {
-		$this->_table = 'zhanmishu_video_course';
+		$this->_table = 'wxz_live_course';
 		$this->_pk = 'cid';
 
 		parent::__construct();
@@ -46,9 +46,9 @@ class table_zhanmishu_video_course extends discuz_table {
 			$where = '';
 		}
 		if ($field['cat_id']) {
-			$cat = C::t("#zhanmishu_video#zhanmishu_video_cat")->fetch($field['cat_id']);
+			$cat = C::t("#wxz_live#wxz_live_cat")->fetch($field['cat_id']);
 			if ($cat['parent_id'] == '0') {
-				$cats = C::t("#zhanmishu_video#zhanmishu_video_cat")->get_type_video_cat(0, 0, '','',array('parent_id'=>$field['cat_id']));
+				$cats = C::t("#wxz_live#wxz_live_cat")->get_type_video_cat(0, 0, '','',array('parent_id'=>$field['cat_id']));
 			
 				if (!empty($cats)) {
 					$where .= ' cat_id in ('.implode(',',array_keys($cats)).') ';
@@ -98,9 +98,9 @@ class table_zhanmishu_video_course extends discuz_table {
 			$where = '';
 		}
 		if ($field['cat_id']) {
-			$cat = C::t("#zhanmishu_video#zhanmishu_video_cat")->fetch($field['cat_id']);
+			$cat = C::t("#wxz_live#wxz_live_cat")->fetch($field['cat_id']);
 			if ($cat['parent_id'] == '0') {
-				$cats = C::t("#zhanmishu_video#zhanmishu_video_cat")->get_type_video_cat(0, 0, '','',array('parent_id'=>$field['cat_id']));
+				$cats = C::t("#wxz_live#wxz_live_cat")->get_type_video_cat(0, 0, '','',array('parent_id'=>$field['cat_id']));
 			
 				if (!empty($cats)) {
 					$where .= ' cat_id in ('.implode(',',array_keys($cats)).') ';
