@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class zhanmishu_course{
+class wxz_course{
 	
 	public $config=array();
 
@@ -32,7 +32,7 @@ class zhanmishu_course{
 
 	}
 	public function ZmsIsWepayExists(){
-		return is_dir(DISCUZ_ROOT.'./source/plugin/zhanmishu_wepay');
+		return is_dir(DISCUZ_ROOT.'./source/plugin/wxz_wepay');
 
 	}
 

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version='1.0' encoding="ISO-8859-1" ?> 
 <!-- was: <?xml version="1.0" encoding="ISO-8859-1"?> -->
 <root>
     <item id="Title"><![CDATA[Discuz! Plugin]]></item>
@@ -14,8 +14,8 @@
             <item id="description"><![CDATA[互联网已经进入视频时代，文字和图片已经太Low了，本插件可以让您网站集成视频点播、直播、视频交易购买、下载视频功能。]]></item>
             <item id="datatables"><![CDATA[]]></item>
             <item id="directory"><![CDATA[wxz_live/]]></item>
-            <item id="copyright"><![CDATA[合肥微小智]]></item>
-            <item id="version"><![CDATA[v1.5.5]]></item>
+            <item id="copyright"><![CDATA[hfwxz-合肥微小智]]></item>
+            <item id="version"><![CDATA[v1.0.0]]></item>
             <item id="__modules">
                 <item id="0">
                     <item id="name"><![CDATA[video]]></item>

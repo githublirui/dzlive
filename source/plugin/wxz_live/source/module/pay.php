@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
 
-include_once DISCUZ_ROOT.'./source/plugin/zhanmishu_wepay/source/function/api_function.php';
+include_once DISCUZ_ROOT.'./source/plugin/wxz_wepay/source/function/api_function.php';
 
 
 if (!$_G['uid']) {
@@ -30,7 +30,7 @@ $out_trade_no = $video->get_rand_trade_no();
 	        'price'=>99,
 	        'return_url'=>'http://xxx.com/success.html',
 	);
-	$url=$_G['siteurl'].'plugin.php?id=zhanmishu_wepay:pay&mod=pay&'.http_build_query($data);
+	$url=$_G['siteurl'].'plugin.php?id=wxz_wepay:pay&mod=pay&'.http_build_query($data);
 
 	showmessage('', $url, array(),array('showid' => '','extrajs' => '<script type="text/javascript">'.'top.location.href="'.$url.'";</script>'.$ucsynlogin,'showdialog' => false));
 

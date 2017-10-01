@@ -96,7 +96,7 @@ if (!$cid || empty($course) || $course['isdel'] == '1' || $course['issell'] =='0
 
 
 
-	//if pay not is  no't support zhanmishu_wepay
+	//if pay not is  no't support wxz_wepay
 	$config = $video->config;
 	$zmsPayExists =  $video->ZmsIsWepayExists();
 
@@ -141,7 +141,7 @@ if (!$cid || empty($course) || $course['isdel'] == '1' || $course['issell'] =='0
 		}
 		exit;
 	}
-	$url=$_G['siteurl'].'plugin.php?id=zhanmishu_wepay:pay&mod=pay&'.http_build_query($data);
+	$url=$_G['siteurl'].'plugin.php?id=wxz_wepay:pay&mod=pay&'.http_build_query($data);
 
 	if (defined('IN_MOBILE')) {
 		zms_go_header($url);

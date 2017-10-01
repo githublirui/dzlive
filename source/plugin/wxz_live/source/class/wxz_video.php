@@ -10,9 +10,9 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 } 
 
-// C::import('zhanmishu_course','plugin/wxz_live/source/class');
+// C::import('wxz_course','plugin/wxz_live/source/class');
 
-class wxz_live extends zhanmishu_course{
+class wxz_live extends wxz_course{
 
 	public function get_type_video($start = 0, $limit = 0, $sort = '',$type = '',$field=array()){
 		return C::t("#wxz_live#wxz_live")->get_type_video($start, $limit, $sort,$type,$field);
@@ -72,12 +72,12 @@ class wxz_live extends zhanmishu_course{
 		if (!$this->ZmsIsWepayExists()) {
 			return false;
 		}
-		if (!function_exists('zhanmishu_wepay_check_api')) {
-			include_once DISCUZ_ROOT.'./source/plugin/zhanmishu_wepay/source/function/api_function.php';
+		if (!function_exists('wxz_wepay_check_api')) {
+			include_once DISCUZ_ROOT.'./source/plugin/wxz_wepay/source/function/api_function.php';
 		}
 
 		$o = $this->get_order_by_out_trade_no($out_trade_no);
-		$rs = zhanmishu_wepay_check_api($out_trade_no,$o['total_fee']);
+		$rs = wxz_wepay_check_api($out_trade_no,$o['total_fee']);
 		if ($rs['code'] == '1' && $o['oid']) {
 			$this->selledsuccess($o['oid']);
 		}

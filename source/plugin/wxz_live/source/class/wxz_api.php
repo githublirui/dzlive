@@ -10,7 +10,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-class zhanmishu_api{
+class wxz_api{
 	public function getuserbyuid($uid, $fetch_archive = 0,$isprofile=false){
 		global $_G;
 		$uid = $uid ? $uid : $_G['uid'];
@@ -36,7 +36,7 @@ class zhanmishu_api{
  *本资源来源于网络收集,仅供个人学习交流，请勿用于商业用途，并于下载24小时后删除!
  *如果侵犯了您的权益,请及时告知我们,我们即刻删除!
  */
-class wxz_live_api extends zhanmishu_api
+class wxz_live_api extends wxz_api
 {
 	
 	

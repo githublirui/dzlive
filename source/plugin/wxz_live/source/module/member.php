@@ -12,9 +12,9 @@ if(!defined('IN_DISCUZ')) {
 }
 
 
-$zhanmishu_api = new zhanmishu_api();
+$wxz_api = new wxz_api();
 
-$member = $zhanmishu_api->getuserbyuid();
+$member = $wxz_api->getuserbyuid();
 
 if ($_GET['dtype']) {
 	$outapi = array(

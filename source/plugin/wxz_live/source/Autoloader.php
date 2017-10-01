@@ -46,9 +46,9 @@ class Zms_video_Autoloader{
 if (version_compare(phpversion(),'5.3.0','>=')) {
     spl_autoload_register('Zms_video_Autoloader::autoload',false,true);
 }else{
-    Zms_video_Autoloader::autoload("zhanmishu_course");
+    Zms_video_Autoloader::autoload("wxz_course");
     Zms_video_Autoloader::autoload("wxz_live");
-    Zms_video_Autoloader::autoload("zhanmishu_api");
+    Zms_video_Autoloader::autoload("wxz_api");
     Zms_video_Autoloader::autoload("Qiniu_Auth");
     Zms_video_Autoloader::autoload("Qiniu_Config");
     // Zms_video_Autoloader::autoload("Qiniu_Etag");
