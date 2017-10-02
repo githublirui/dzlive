@@ -1,9 +1,0 @@
-{if $_GET['type'] == 'index'}
-    {template wxz_live:inc_video_index}
-{elseif in_array($course['video'][$vid]['video_urltype'],array('5','6','7','8','9')) }
-    {template wxz_live:inc_live}
-{elseif $videoconfig['videopage'] == 'video'}
-    {template wxz_live:inc_video}
-{elseif $videoconfig['videopage'] == 'edu'}
-    {template wxz_live:edu_video}
-{/if}
