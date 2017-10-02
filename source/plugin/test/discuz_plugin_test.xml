@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2.5]]></item>
+	<item id="Time"><![CDATA[2012-05-28 17:50]]></item>
+	<item id="From"><![CDATA[ÇÇ°ÍÂÛÌ³ (http://www.monkeye.cn/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[0]]></item>
+			<item id="adminid"><![CDATA[0]]></item>
+			<item id="name"><![CDATA[test]]></item>
+			<item id="identifier"><![CDATA[test]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[test/]]></item>
+			<item id="copyright"><![CDATA[]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[test]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+			<item id="version"><![CDATA[]]></item>
+		</item>
+		<item id="language">
+			<item id="systemlang">
+				<item id="spacecp">
+					<item id="logs_credit_update_ASS"><![CDATA[ASS]]></item>
+				</item>
+				<item id="template">
+					<item id="confirms"><![CDATA[È·¶¨?]]></item>
+				</item>
+				<item id="home/template">
+					<item id="doing_update_personal_signature"><![CDATA[Í¬²½µ½¸öÈËÇ©Ãû?]]></item>
+				</item>
+				<item id="home/edtior">
+					<item id="editor_fontsize"><![CDATA[×ÖºÅ?]]></item>
+				</item>
+				<item id="forum/modaction">
+					<item id="STK"><![CDATA[ÖÃ¶¥1]]></item>
+				</item>
+			</item>
+			<item id="scriptlang">
+				<item id="mycron"><![CDATA[ÎÒµÄ¼Æ»®ÈÎÎñ]]></item>
+				<item id="text_name"><![CDATA[ÃÅ»§/ÂÛÌ³/Èº×é/¿Õ¼ä ¸ñ×Ó¹ã¸æ(²å¼þ)]]></item>
+				<item id="text_desc"><![CDATA[Õ¹ÏÖ·½Ê½: Ò³ÄÚÎÄ×Ö¹ã¸æÒÔ±í¸ñµÄÐÎÊ½£¬ÏÔÊ¾ÓÚÂÛÌ³¡¢Èº×éÒ³ÃæµÄÖÐÉÏ·½£¬Í¨³£Ê¹ÓÃÎÄ×ÖµÄÐÎÊ½£¬Ò²¿ÉÊ¹ÓÃÐ¡Í¼Æ¬ºÍ Flash¡£µ±Ç°Ò³ÃæÓÐ¶à¸öÎÄ×Ö¹ã¸æÊ±£¬ÏµÍ³»áÒÔ±í¸ñµÄÐÎÊ½°´ÕÕÉè¶¨µÄÏÔÊ¾Ë³ÐòÈ«²¿Õ¹ÏÖ£¬Í¬Ê±ÄÜ¹»¶Ô±í¸ñÁÐÊýÔÚ 3¡«5 µÄ·¶Î§ÄÚ¶¯Ì¬ÅÅ²¼£¬ÒÔ×Ô¶¯ÊµÏÖ×î¼ÑµÄ¹ã¸æÅÅÁÐÐ§¹û¡£<br />¼ÛÖµ·ÖÎö: ÓÉÓÚ´ËÀà¹ã¸æÍ¨³£ÒÔÎÄ×ÖÐÎÊ½Õ¹ÏÖ£¬µ«ÆäËùÔÚµÄ½Ï¿¿ÉÏµÄÒ³ÃæÎ»ÖÃ£¬Ê¹µÃ´ËÀà¹ã¸æ³ÉÎªÁË·ÃÎÊÕß±Ø¶ÁµÄÄÚÈÝÖ®Ò»¡£Í¬Ò»Ò³Ãæ¿ÉÒÔ³ÊÏÖ¶à´ïÊ®¼¸ÌõÎÄ×Ö¹ã¸æµÄÌØÐÔ£¬Ò²¾ö¶¨ÁËËüÊÇÒ»ÖÖÆ½Ãñ»¯µ«ÐÔ¼Û±È½Ï¸ßµÄÍÆ¹ã·½Ê½£¬Í¬Ê±»¹¿ÉÓÃÓÚÂÛÌ³×ÔÉíµÄÐû´«ºÍ¹«¸æÖ®ÓÃ¡£]]></item>
+				<item id="text_index"><![CDATA[Ê×Ò³]]></item>
+				<item id="text_fids"><![CDATA[Í¶·Å°æ¿é]]></item>
+				<item id="text_fids_comment"><![CDATA[ÉèÖÃ¹ã¸æÍ¶·ÅµÄÂÛÌ³°æ¿é£¬µ±¹ã¸æÍ¶·Å·¶Î§ÖÐ°üº¬¡°ÂÛÌ³¡±Ê±ÓÐÐ§]]></item>
+				<item id="text_groups"><![CDATA[Í¶·ÅÈº×é·ÖÀà]]></item>
+				<item id="text_groups_comment"><![CDATA[ÉèÖÃ¹ã¸æÍ¶·ÅµÄÈº×é·ÖÀà£¬µ±¹ã¸æÍ¶·Å·¶Î§ÖÐ°üº¬¡°Èº×é¡±Ê±ÓÐÐ§]]></item>
+				<item id="text_category"><![CDATA[Í¶·ÅÆµµÀ·ÖÀà]]></item>
+				<item id="text_category_comment"><![CDATA[ÉèÖÃ¹ã¸æÍ¶·ÅµÄÆµµÀ·ÖÀà]]></item>
+				<item id="bump_name"><![CDATA[ÌáÉý¿¨(²å¼þ)]]></item>
+				<item id="bump_forum"><![CDATA[ÔÊÐíÊ¹ÓÃ±¾µÀ¾ßµÄ°æ¿é]]></item>
+				<item id="bump_desc"><![CDATA[¿ÉÒÔÌáÉýÄ³¸öÖ÷Ìâ]]></item>
+				<item id="bump_info"><![CDATA[ÌáÉýÖ¸¶¨µÄÖ÷Ìâ£¬ÇëÊäÈëÖ÷ÌâµÄ ID]]></item>
+				<item id="bump_info_nonexistence"><![CDATA[ÇëÖ¸¶¨ÒªÌáÉýµÄÖ÷Ìâ]]></item>
+				<item id="bump_succeed"><![CDATA[Äú²Ù×÷µÄÖ÷ÌâÒÑÌáÉý]]></item>
+				<item id="bump_info_noperm"><![CDATA[¶Ô²»Æð£¬Ö÷ÌâËùÔÚ°æ¿é²»ÔÊÐíÊ¹ÓÃ±¾µÀ¾ß]]></item>
+				<item id="bump_notification"><![CDATA[ÄúµÄÖ÷Ìâ {subject} ±» {actor} Ê¹ÓÃÁË{magicname}£¬<a href="forum.php?mod=viewthread&tid={tid}">¿ìÈ¥¿´¿´°É£¡</a>]]></item>
+				<item id="profile_name"><![CDATA[ÍêÉÆÓÃ»§×ÊÁÏÈÎÎñ(²å¼þ)]]></item>
+				<item id="profile_desc"><![CDATA[ÍêÉÆÖ¸¶¨µÄÓÃ»§×ÊÁÏ»ñµÃÏàÓ¦µÄ½±Àø]]></item>
+				<item id="profile_view"><![CDATA[<strong>Äú»¹ÓÐÒÔÏÂ¸öÈË×ÊÁÏÏîÐèÒª²¹³äÍêÕû£º</strong><br>
+		<span style="color:red;">{profiles}</span><br><br>
+		<strong>Çë°´ÕÕÒÔÏÂµÄËµÃ÷À´Íê³É±¾ÈÎÎñ£º</strong>
+		<ul>
+		<li><a href="home.php?mod=spacecp&ac=profile" target="_blank" class="xi2">µã»÷ÕâÀï´ò¿ª¸öÈË×ÊÁÏÉèÖÃÒ³Ãæ</a></li>
+		<li>ÔÚÐÂ´ò¿ªµÄÉèÖÃÒ³ÃæÖÐ£¬½«ÉÏÊö¸öÈË×ÊÁÏ²¹³äÍêÕû</li>
+		</ul>]]></item>
+				<item id="captcha_name"><![CDATA[Captcha ÑéÖ¤Âë(²å¼þ)]]></item>
+				<item id="captcha_desc"><![CDATA[]]></item>
+				<item id="calc_name"><![CDATA[100 ÒÔÄÚ¼Ó¼õ·¨(²å¼þ)]]></item>
+				<item id="calc_desc"><![CDATA[Ëæ»úÏÔÊ¾ 100 ÒÔÄÚ¼Ó¼õ·¨µÄÑéÖ¤ÎÊ´ð]]></item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X3]]></item>
+	</item>
+</root>

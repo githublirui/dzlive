@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="{CHARSET}">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="app-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/sui/css/sm.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/sui/css/sm-extend.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/weui/weui.css"/>
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/css/main2.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/css/ionicons.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/iconfont/iconfont.css">
+    <title>{lang zhanmishu_video:course_list}</title>
+</head>
+<body>
+<div class="page-group">
+    <div class="page" id="page_home">
+             <header class="bar bar-nav">
+              <a href="$videoBaseUrl"  class="external" class="icon icon-left pull-left"></a>
+              <a class="icon icon-refresh pull-right external" ></a>
+              <h1 class="title">{$catinfo['cat_name']}</h1>
+            </header>
+
+        <div class="content" style="margin-bottom: 55px;">
+
+
+            <!-- Slider ad -->
+            <div class="swiper-container x_swiper_ad">
+
+                <div class="swiper-wrapper">
+                    {loop $swiper $value}
+                    <div class="swiper-slide"><a  class="external" title="{$value['name']}" href="{$value['url']}"><img src="{$value['image']}" width="100%" height="100%" alt="{$value['name']}"></a></div>
+                    {/loop}
+                   
+                </div>
+
+                <!-- 如果需要分页器 -->
+                <!--<div class="swiper-pagination" id="x_swiper_ad_pagination" style="bottom: 0.01rem;"></div>-->
+            </div>
+
+
+            <!--  视频列表 -->
+            <div class="x-dy-list" dy-mode="flat" style="margin-top: 20px;margin-bottom: 10px;">
+                <div class="x-dy-list-body">
+                    {loop $list $value}
+                    <div class="x-dy-list-item up-line-long fantastic-type">
+                        <div class="fantastic">
+                            <div class="type0"></div>
+                            <!--<div class="type2"></div>-->
+                            <!--<div class="type3"></div>-->
+                        </div>
+                        <div class="x-dy-list-thumb">
+                            <div class="show-pic"
+                                 style="opacity: 1; transition: opacity 0.5s ease-in; background-image: url($value['course_img']);">
+                                <img class="play-icon" src="source/plugin/zhanmishu_video/template/touch/static/img/video-icon-60-60.png">
+                            </div>
+                        </div>
+                        <a class="x-dy-list-content external"
+                           href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"
+                           data-role="show-info" data-tap="1">
+                            <div class="x-dy-list-title"><span class="show-name limit">{$value['course_name']}</span>
+                            </div>
+                            <div class="x-dy-list-brief">
+                                <div class="film-star">
+                                    <div class="show-star-mod">
+                                        <!-- <div class="show-star-ranking">
+                                            <div class="show-star-ranking-light" style="width:90%;"></div>
+                                        </div> -->
+<!--                                         <div class="show-star-remark">1.1 （2232人）</div>
+ -->                                    </div>
+                                </div>
+                            </div>
+                            <div class="x-dy-list-brief">{$value['course_intro']}</div>
+                            {eval $user = getuserbyuid($value['uid']);}
+                            <div class="x-dy-list-brief">{lang zhanmishu_video:author_at}{$user['username']}</div>
+                        </a>
+                        <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"
+                           class="right-btn-red external" data-tap="1">{lang zhanmishu_video:learn}</a>
+                    </div>
+                    <div class="x-dy-list-item up-line-short">
+                        <div class="x-dy-list-thumb">
+                            <div class="fn-wd51">&nbsp;</div>
+                        </div>
+                        <div class="x-dy-list-content">
+                            {if $value['course_price'] > 0} 
+                            <div class="x-dy-list-brief"><span class="x-dy-ft-orange">{eval echo $value['course_price'] / 100 ;}{lang zhanmishu_video:moneyunit}</span> <span
+                                    class="gap">|</span>{lang zhanmishu_video:discount_tips}
+                            </div>
+                            {else}
+                            <div class="x-dy-list-brief"><span class="x-dy-ft-green">{lang zhanmishu_video:free}</span> <span
+                                    class="gap">|</span> {lang zhanmishu_video:free_tips}
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                    {/loop}
+                </div>
+            </div>
+        </div>
+
+             {template zhanmishu_video:nav}
+
+    </div>
+</div>
+
+</body>
+<!--初始化-->
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/zepto.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/sm-{CHARSET}.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/sm-extend.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/js/index.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/js/controller/course/course_detail.js"></script>
+
+
+</html>

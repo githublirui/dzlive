@@ -1,0 +1,218 @@
+{template zhanmishu_video:video_header}
+<link rel="stylesheet" type="text/css" href="source/plugin/zhanmishu_video/template/css/common/training.css">
+<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/others/style.css?_t=2016209"/>
+<div id="wrap">
+    <!-- CONTENT -->
+    <div id="content wp">
+
+        <div class="course_intro">
+	<div id="pt" class="bm cl">
+		<div class="z">
+			<a href="./" class="nvhm" title="{lang homepage}"></a><em>»</em><a href="forum.php">$_G['setting']['bbname']</a> <em>›</em><a href="plugin.php?id=zhanmishu_video:video&cat_id={$course['cat_id']}">{$course['cat']['cat_name']}</a> <em>›</em> <a >{$course['course_name']}</a>
+		</div>
+	</div>
+
+	<div class="course_intro_content">
+		<div class="course_intro_img"><img src="{$course['course_img']}" alt="{$course['course_name']}"></div>
+		<div class="course_intro_right">
+			<h2>{$course['course_name']}</h2>
+			<div class="nums">{lang zhanmishu_video:buynums}  {$course['learns']} {lang zhanmishu_video:score} 100%</div>
+			<div class="intro"><p>{$course['course_intro']}</p></div>
+			<div class="price">
+                {if $course['course_price'] > 0}
+                <em class="pricenum" style="padding:10px;">
+                    {if $videoconfig['selltype'] == '1'}
+                       {lang zhanmishu_video:moneyunit_code} {eval echo sprintf("%.2f", $course['course_price']/100);}{lang zhanmishu_video:moneyunit}
+                    {elseif $videoconfig['selltype'] == '2'}
+                        {eval $group = $video->course_group_toarray($course['course_group']);}
+                            {if count($group) > 1}
+                            <select name="" id="">
+                            {loop $group $v}
+                                <option value="">[{$groupicons[$v]['grouptitle']}]{lang zhanmishu_video:thisshare}&nbsp;&nbsp;<a href="{$videoconfig['vipbuyurl']}">{lang zhanmishu_video:buy_now}[{$groupicons[$v]['grouptitle']}]</a></option>
+                            {/loop}
+                            </select>
+                            {else}
+                                {loop $group $v}
+                                    <span style="color: {eval echo $groupicons[$v]['color'] ? $groupicons[$v]['color'] : '#e85308' ;};">[{$groupicons[$v]['grouptitle']}]</span>{lang zhanmishu_video:thisshare}&nbsp;
+                                {/loop}
+                            {/if}
+                    {/if}
+                </em>
+                {else}
+                    <em class="free">{lang zhanmishu_video:free}</em>
+
+                {/if}
+            </div>
+			<div class="zmsbtn">
+                 {if $course['ispay'] || $course['course_price'] <= 0}
+                 <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$_GET['cid']}&type=learn">{lang zhanmishu_video:studynow}</a>
+                 {else}
+                    {if $videoconfig['selltype'] == '1'}
+				        <a class="redbot" href="plugin.php?id=zhanmishu_video:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang zhanmishu_video:buy_now}</span></a>
+                    {elseif $videoconfig['selltype'] == '2'}
+                         <a class="redbot" href="{$videoconfig['vipbuyurl']}"><span>{lang zhanmishu_video:buy_now}</span></a>
+                    {/if}
+                 {/if}
+				<a href="{$videoconfig['serviceurl']}" class="chat_seller">{lang zhanmishu_video:chat_seller}</a>
+			</div>
+		</div>
+	</div>
+        </div>
+
+
+
+        <div class="container" style="margin-bottom: 40px;">
+            <div class="row course_listings">
+                <div class="clearfix">
+
+                    <div class="column">
+                        <div class="box tutor clearfix">
+                            <a href="javascript:;">
+                                <div class="clearfix">
+                                    <div class="">
+                                        <div class="profile">{eval echo avatar($course['uid']);}</div>
+                                    </div>
+                                    <div>
+                                        <div class="info">
+                                            <h4 class="title">
+                                                {$course['username']}
+                                            </h4>
+
+                                            <div class="name h3 light">{$course['group']}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- NAV TABS -->
+                        <div class="box description clearfix">
+                            <ul id="ulCourseSideNavTabs" class="nav nav-tabs nav-justified clearfix">
+                                <li class="course_description active"><a data-tabname="description">{lang zhanmishu_video:course_intro}</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="divTabContent-description" class="tab-pane active">
+                                    {$course['course_intro']}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="course_detail_left_container" class="column clearfix">
+                        <h4 class="page-header h4 light clearfix">
+                            {lang zhanmishu_video:course_list}
+					<span class="social_share">
+
+					</span>
+                        </h4>
+
+                        {loop $course['video'] $value}
+                        <div class="item subscribers clearfix">
+                            <div class="inner">
+							<span class="table_column main clearfix">
+                                    <em class="table_cell position"></em>
+                                    <a{if $course['coursetype'] !=='str'} href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$cid}&vid={$value['vid']}" {/if}><h3 class="table_cell title">$value['video_name']</h3></a>
+                                </a>
+							</span>
+							<span class="table_column main_link">
+								<div class="table_cell free">&nbsp;</div>
+							</span>{if $course['coursetype'] !=='str'}
+							<span class="table_column">
+								<div class="table_cell duration">
+                                    {if $course['course_price'] && $course['video'][$value['vid']]['isfree'] == '1'}
+                                    <span style="color: #5fb41b;">{lang zhanmishu_video:freelearn}</span>
+                                    {else}
+                                    {eval echo gmdate('H:i:s',$value['video_length']);}
+                                    {/if}
+                                </div>
+							</span>{/if}
+                            </div>
+                        </div>
+                        {/loop}
+
+                        <div class="recommended">
+                            <div class="page-header h4 light">{lang zhanmishu_video:other_course_at}</div>
+                            <div class="software_subcategory_listings">
+                               
+                                {loop $course['recommend'] $value}
+                                <div class="course_boxes is_course thumbnail">
+                                    <div class=" course_thumbs_container">
+                                        <div class="course_thumbs">
+
+                                            <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"><img class="scale" src="{$value['course_img']}" alt="{$value['course_name']}"></a>
+
+                                            <div class="course_thumb_info">
+                                                <div class="course_info_software">
+                                                    <div class="training-course-tile-sofware-each"><img
+                                                            src="{$value['course_img']}"
+                                                            width="18px" height="18px" align="absmiddle" alt="Software">
+                                                    </div>
+                                                </div>
+                                                <div class="course_info_duration h5 terCLR">{$value['length']}</div>
+                                            </div>
+
+
+                                            <!-- Overlay -->
+                                            <div class="course_overlay">
+
+                                                <div class="overlay_inner clearfix">
+                                                    <div class="clearfix">
+                                                        <div class="button play">
+                                                            <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"
+                                                               title="Preview Tutorial">
+                                                                <div class="graphic_sprite training icon_playbtn"></div>
+                                                            </a>
+                                                        </div>
+
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="course_info">
+                                        <h3 class="course_info_title h5"><a
+                                                href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}">{$value['course_name']}</a></h3>
+                                        <ul class="clearfix">
+                                            <li>
+                                                <div class="graphic_sprite training icon_eye_sm"
+                                                     title="Course watched"></div>
+                                                <span class="course_info_views_h"></span>
+                                                 {$value['views']} view
+                                            </li>
+                                            <li>
+                                                <div class="graphic_sprite training icon_bookmark_sm"
+                                                     title="Course bookmarked"></div>
+                                               {$value['learns']} {lang zhanmishu_video:learn_num}
+                                            </li>
+
+                                        </ul>
+                                        <div class="course_info_releasedate_h">1423807200</div>
+                                        <div class="course_info_order_h">1</div>
+                                        <div class="course_info_categoryids_h"><span class="course_info_categoryid">5,383,41,369</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/loop}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- edit above this line -->
+
+    </div>
+{eval $main='data-main="source/plugin/zhanmishu_video/template/js/main"';}
+<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+<script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/lib/jwplayer.js"></script>
+<div style="clear: both;"></div>
+</div>
+{template common/footer}

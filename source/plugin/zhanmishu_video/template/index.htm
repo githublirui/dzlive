@@ -1,0 +1,447 @@
+{template zhanmishu_video:video_header}
+<link rel="stylesheet" href="source/plugin/zhanmishu_video/template/css/course.css?aa" type="text/css">
+
+{if $mod == 'index' && !$_GET['cat_id']}
+    {if $videoconfig['isbannerfull'] > 0}
+    </div>
+    {/if}
+<style>
+.unslider{overflow:auto;margin:0;position: relative;width: 100%;}
+.unslider-wrap{position:relative}
+.unslider-wrap.unslider-carousel>li{float:left}
+.unslider-vertical>ul{height:100%}
+.unslider-vertical li{float:none;width:100%}
+.unslider-fade{position:relative}
+.unslider-fade .unslider-wrap li{position:absolute;left:0;top:0;right:0;z-index:8}
+.unslider-fade .unslider-wrap li.unslider-active{z-index:10}
+.unslider li,
+.unslider ol,
+.unslider ul{list-style:none;margin:0;padding:0;border:none;}
+.unslider-arrow{position:absolute;left:5%;z-index:2;cursor:pointer;top:40%;background: url(source/plugin/zhanmishu_video/template/img/arrowsleft.png) no-repeat;width: 30px;height: 80px;}
+.unslider-arrow.next{left:auto;right:5%;background: url(source/plugin/zhanmishu_video/template/img/arrowsright.png) no-repeat;}
+.unslider-nav {position: absolute;bottom: 20px;left: 48%}
+.unslider-nav ol{list-style:none;text-align:center;}
+.unslider-nav ol li{display:inline-block;width:6px;height:6px;margin:0 4px;background:transparent;border-radius:5px;overflow:hidden;text-indent:-999em;border:2px solid #fff;cursor:pointer;}
+.unslider-nav ol li.unslider-active{background:#fff;cursor:default;}
+.imgback{background-repeat:no-repeat;background-position: center;height: 400px;width: 100%;}
+.index-recommond { width: 100%;height: 130px;margin-top: 10px;}
+.index-recommond .recommon-box {width: 32%;height: 130px;float: left;}
+.index-recommond .recommon-box-center{margin: 0 2%;}
+.ie6 .index-recommond .recommon-box-center{margin: 0 1%;}
+.index-recommond .recommon-box img{width: 100%;height: 100%;}
+
+#zmsvideobox{width: 100%;height: 520px;margin:20px 0;}
+#zmsvideobox #zmsvideo{width: 83.6%;height: 100%;float: left;position: relative;}
+#zmsvideobox #zmsvideo #my_video{width: 100%;height: 520px !important;}
+#zmsvideobox #videolist{width: 15.6%;height: 100%;float: right;}
+#zmsvideobox #videolist ul{width: 100%;height: 100%;}
+#zmsvideobox #videolist ul li{width: 100%;height: 80px;margin-bottom:4px;}
+#zmsvideobox #videolist ul li img{width: 100%;height: 80px;}
+#zmsvideobox #videolist ul li{border: 2px solid #fff;}
+#zmsvideobox #videolist ul li.vhover{border: 2px solid #FF7E00;position: relative;}
+#zmsvideobox #videolist ul li.vhover i.arrow {display: block;position: absolute;top: 50%;left: -14px;width: 0;height: 0;margin-top: -6px;content: '';border: 6px solid transparent;border-color: transparent #FF7E00 transparent transparent;z-index: 999}
+#zmsvideobox .hid {display: none;}
+#zmsvideobox .inroom {width: 18%;height: 8%;border: 1px solid #f61;border-radius: 28px;display: block;z-index: 9999;top: 46%;left: 41%;position: absolute;font-size: 18px;text-align: center;line-height: 42px;text-decoration: none;    opacity: .7;font-weight: 700px;background:#111;color: #f61;}
+#zmsvideobox .inroomon { background: #f61;color: #fff;display: block;}
+</style>
+
+<script src="source/plugin/zhanmishu_video/template/js/slider/unslider-min.js"></script>
+
+    {if $videoconfig['isswiper'] > 0}
+    <div class="banner">
+        <ul>
+            <li>
+                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_01.jpg);"></div>
+            </li>
+            <li style="float: left;">
+                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_05.jpg);"></div>
+            </li>
+            <li style="float: left;">
+                <div class="imgback" style="background-image: url(source/plugin/zhanmishu_video/template/img/index1_06.jpg);"></div>
+            </li>
+       </ul>
+    </div>
+    {/if}
+
+{if $videoconfig['isvideobox'] > 0}
+    <div id="zmsvideobox">
+        <div class="wp" id="wp">
+            <div id="zmsvideo">
+                <div class="videoplayer">
+                    <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/41514501.mp4"></span>
+
+                    <div id="my_video">
+                    </div>
+                </div>
+                <a href="javascript:;" id="inroom" class="hid">{lang zhanmishu_video:inlearnroom}</a>
+            </div>
+            <div id="videolist">
+                <ul> 
+                    <li class="vhover">
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/154628nyro70qq0u4fr2he.jpg" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/41514501.mp4"><input type="hidden" name="url" value="1">
+                    </li>
+                    <li>
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/231911acicxmmicpmfxkyf.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/34402245.mp4"><input type="hidden" name="url" value="2">
+                    </li>
+                    <li>
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/130553gbwwbrwbcr9d290x.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/50000952121.mp4"><input type="hidden" name="url" value="3">
+                    </li>
+                    <li>
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/190438hl40vvllle3l0v7e.png" alt=""></a><input type="hidden" name="liveurl" value="3"><input type="hidden" name="url" value="4">
+                    </li>
+                    <li>
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/130553gbwwbrwbcr9d290x.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/50000952121.mp4"><input type="hidden" name="url" value="5">
+                    </li>
+                    <li>
+                        <i class="arrow"></i>
+                        <a href="javascript:;"><img src="https://www.playzhan.com/data/attachment/common/cf/162325bqgfhezqfen59iip.png" alt=""></a><input type="hidden" name="liveurl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/36816083.mp4"><input type="hidden" name="url" value="http://psc4d.com/plugin.php?id=zhanmishu_video:video&mod=video&cid=77&type=learn">
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+{/if}
+
+    {if $videoconfig['isbannerfull'] > 0}
+    <div class="wp" id="wp">
+    {/if}
+
+    {if $videoconfig['isrecommend'] > 0}
+        <div class="index-recommond">
+            <div class="recommon-box"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=133" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2Gu78XSJjpuFjy0FdXXXmoFXa-121630866.jpg" alt=""></a></div>
+            <div class="recommon-box recommon-box-center"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=169"target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB2ctvfX9FmpuFjSZFrXXayOXXa-121630866.jpg" alt=""></a></div>
+            <div class="recommon-box"><a href="plugin.php?id=zhanmishu_video:video&mod=video&cid=64" target="_blank"><img src="https://img.alicdn.com/imgextra/i2/121630866/TB27ygfem4mpuFjSZFOXXaUqpXa-121630866.jpg" alt=""></a></div>
+        </div>
+    {/if}
+
+{/if}
+
+
+
+
+<script type="text/javascript">
+    function zmschange_Video(f){
+        if (!ZmsValidate(f)) {
+            var videourl = [
+                '<embed width="100%" height="100%" allownetworking="all" allowscriptaccess="always" src="https://static.hdslb.com/live-static/swf/LivePlayerEx_1.swf?room_id=3530945&cid=3530945&state=LIVE" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash">',
+                '<embed src="http://yuntv.letv.com/bcloud.swf" allowFullScreen="true" quality="high" align="middle" allowScriptAccess="always" width="100%" height="100%" flashvars="uu=0bba0e7840&vu=aa328ce433&pu=17e3d015fd&auto_play=0&gpcflag=1&width=640&height=480&lang=zh_CN" type="application/x-shockwave-flash"></embed>" </div>',
+                '<div id="player28F4BC6C627FB898B97F470C416A9264" style="position: relative;width: 100%;height:100%;margin-right:auto;margin-left:auto"><embed name="cloudPlayer14864932403201" src="http://yuntv.letv.com/bcloud.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%" bgcolor="#000000" allowscriptaccess="always" wmode="Opaque" align="middle" quality="high" allowfullscreen="true" version="10" flashvars="uu=0bba0e7840&amp;vu=519c6efe5a&amp;pu=17e3d015fd&amp;auto_play=0&amp;gpcflag=1&amp;width=100%&amp;height=200&amp;lang=zh_CN&amp;panoType=1&amp;" title="Adobe Flash Player"></div>',
+                '<embed src="http://yuntv.letv.com/bcloud.swf" allowFullScreen="true" quality="high" align="middle" allowScriptAccess="always" width="100%" height="100%" flashvars="uu=0bba0e7840&vu=8057384223&pu=17e3d015fd&auto_play=0&gpcflag=1&width=640&height=480&lang=zh_CN" type="application/x-shockwave-flash"></embed>" </div>',
+                '<div id="player28F4BC6C627FB898B97F470C416A9264" style="position: relative;width: 100%;height:100%;margin-right:auto;margin-left:auto"><embed name="cloudPlayer14864932403201" src="http://yuntv.letv.com/bcloud.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%" bgcolor="#000000" allowscriptaccess="always" wmode="Opaque" align="middle" quality="high" allowfullscreen="true" version="10" flashvars="uu=0bba0e7840&amp;vu=c542f0ee1d&amp;pu=17e3d015fd&amp;auto_play=0&amp;gpcflag=1&amp;width=100%&amp;height=200&amp;lang=zh_CN&amp;panoType=1&amp;" title="Adobe Flash Player"></div>',
+                '<div id="player28F4BC6C627FB898B97F470C416A9264" style="position: relative;width: 100%;height:100%;margin-right:auto;margin-left:auto"><embed name="cloudPlayer14864932403201" src="http://yuntv.letv.com/bcloud.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%" bgcolor="#000000" allowscriptaccess="always" wmode="Opaque" align="middle" quality="high" allowfullscreen="true" version="10" flashvars="uu=0bba0e7840&amp;vu=950d51216d&amp;pu=17e3d015fd&amp;auto_play=0&amp;gpcflag=1&amp;width=100%&amp;height=200&amp;lang=zh_CN&amp;panoType=1&amp;" title="Adobe Flash Player"></div>',
+
+
+
+            ];
+            jQuery("#my_video").html(videourl[f]);
+        }else{
+            i = jQuery('[id="zmsvideoimgurl"]').val();
+            if (f == undefined || f.length  < 1) {
+                f = i;
+            }
+
+            var zmsie;
+            if(navigator.userAgent.indexOf("MSIE")>0){
+              if(navigator.userAgent.indexOf("MSIE 6.0")>0){   
+                zmsie = 6;
+              }   
+              if(navigator.userAgent.indexOf("MSIE 7.0")>0){  
+                zmsie = 7;
+              }   
+              if(navigator.userAgent.indexOf("MSIE 9.0")>0 && !window.innerWidth){//这里是重点，你懂的
+                zmsie = 8;
+              }   
+              if(navigator.userAgent.indexOf("MSIE 9.0")>0){  
+                zmsie = 9;
+              }   
+            } 
+            var jw_height;
+            try {
+                if(typeof getWindowSize === "function") {
+                   jw_height = getWindowSize() - 30;
+                } else {
+                    jw_height = '100%';
+                }
+            } catch(e) {}
+            if (zmsie >= 6 && zmsie < 9) {
+                var flashvars={
+                    f:f,
+                    c:0,
+                    p:1,
+                    b:1,
+                    i:i,
+                    h:'4',
+                    q:'start'
+                    };
+                    var video=[f];
+                CKobject.embed('source/plugin/zhanmishu_video/template/touch/ckplayer/ckplayer.swf','my_video','ckplayer_my_video','100%',jw_height,false,flashvars,video);
+            }else{
+                jwplayer.key="aYB2Ya1BAkZIWfRiC6kkx/dlNzydIi1TAey8iA==";
+
+                jwplayer("my_video").setup({
+                    "file": f,
+                    "width":'100%',
+                    "height":jw_height,
+                    "autostart":"true",
+                    "startparam": "start",
+                    "autochange":"true",
+                    "showset":"false",
+                });
+            }
+        }
+    }
+    function ZmsValidate(form) { 
+        var v = new RegExp(); 
+        v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\.[A-Za-z0-9-_%&\?\/.=]+$"); 
+        if (!v.test(form)) { 
+            return false; 
+        }
+        return true;
+    } 
+</script>
+
+<script type="text/javascript">
+{if $videoconfig['isvideobox'] > 0}
+
+    jQuery(function(){
+        jQuery("#videolist > ul > li").mouseover(function(){          
+          if (jQuery(this).attr('class') !== 'vhover') {
+            jQuery(this).addClass('vhover');
+            jQuery(this).mouseout(function(){
+                jQuery(this).removeClass('vhover');
+            });
+          }
+        });
+        jQuery("#videolist > ul > li").click(function(){
+            jQuery("#videolist > ul > li").removeClass('vhover');
+            jQuery(this).addClass('vhover');
+            jQuery(this).unbind('mouseout');
+            var vn = jQuery(this).find("input[name=liveurl]").val();
+                zmschange_Video(vn)
+                
+        });
+        jQuery("#zmsvideo").mouseover(function(){
+            jQuery("#inroom").addClass("inroom");
+            jQuery(this).mouseout(function(){
+                jQuery("#inroom").removeClass("inroom");
+            });
+        });
+        jQuery("#inroom").mouseover(function(){
+            jQuery("#inroom").addClass("inroomon");
+            jQuery(this).mouseout(function(){
+                    jQuery("#inroom").removeClass("inroomon");
+            });
+        });
+        jQuery("#inroom").click(function(){
+            var url = jQuery(".vhover").find("input[name=url]").val();
+            if (!isNaN(url) && url) {
+                self.location.href='plugin.php?id=zhanmishu_video:video&mod=video&cid='+url;
+            }else {
+                self.location.href=url;
+            }
+        });
+
+        //jQuery(".banner > ul > li").css("display",'block');
+
+
+    });  
+    {/if}
+    var slidey = jQuery('.banner').unslider({
+        arrows: true,
+        fluid: true,
+        dots: true
+    }); 
+    data = slidey.data('unslider');
+    
+</script>
+<script type="text/javascript" src="source/plugin/zhanmishu_video/template/js/lib/jwplayer.js"></script>
+{eval $main='data-main="source/plugin/zhanmishu_video/template/js/main"';}
+<script {$main} src="source/plugin/zhanmishu_video/template/js/lib/require/require.min.js"></script>
+<div id="main" class="zmsvideolistmain">
+
+    <div class="container">
+        <div class="course-content">
+            <div class="course-nav-box">
+                <a name="groupselect"></a>
+                <div class="course-nav-row clearfix">
+                    <span class="hd l">{lang zhanmishu_video:forword}</span>
+
+                    <div class="bd">
+                        <ul class="">
+                            <li class="course-nav-item {if !$_GET['cat_id']}on{/if}">
+                                <a href="{$caturl}&cat_id=$catpid">{lang zhanmishu_video:all}</a>
+                            </li>
+                            {loop $cat $key $value}
+                            <li class="course-nav-item{if $value['cat_id'] == $_GET['cat_id'] || ($catpid > 0 && $catpid ==$value['cat_id'])} on{/if}">
+                                <a href="{$caturl}&cat_id={$value['cat_id']}" data-ct="fe">$value['cat_name']</a>
+                            </li>
+                            {/loop}
+                        </ul>
+                    </div>
+                </div>
+                {if !empty($catson['son']) && $_GET['cat_id']}
+                <div class="course-nav-row clearfix">
+                    <span class="hd l"></span>
+
+                    <div class="bd">
+                        <ul class="">
+                            <li class="course-nav-item">
+                                <a >{lang zhanmishu_video:cat}</a>
+                            </li>
+                            {loop $catson['son']  $value}
+                            <li class="course-nav-item{if $value['cat_id'] == $_GET['cat_id']} on{/if}">
+                                <a href="{$caturl}&cat_id={$value['cat_id']}" data-id="44" data-ct="fe">$value['cat_name']</a>
+                            </li>
+                            {/loop}
+                        </ul>
+                    </div>
+                </div>
+                {/if} 
+                <div class="course-nav-row clearfix">
+                    <span class="hd l">{lang zhanmishu_video:diff_at}</span>
+
+                    <div class="bd">
+                        <ul class="">
+                            <li class="course-nav-item {if !$_GET['diff']}on{/if}">
+                                <a href="$durl">{lang zhanmishu_video:all}</a>
+                            </li>
+                            {loop $zhanmishu_videoconf['diff'] $key $value}
+                            <li class="course-nav-item {if $key == $_GET['diff']} on{/if}">
+                                <a href="{$durl}&diff={$key}">$value</a>
+                            </li>
+                            {/loop}
+                             
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="course-nav-row clearfix">
+                    <span class="hd l">{lang zhanmishu_video:vipgroup_at}</span>
+
+                    <div class="bd">
+                        <ul class="">
+                            <li class="course-nav-item {if !$_GET['groupselect']}on{/if}">
+                                <a href="$gurl">{lang zhanmishu_video:all}</a>
+                            </li>
+                            {loop $videoconfig['groupselect'] $key $value}
+                            <li class="course-nav-item  {if $value == $_GET['groupselect']} on{/if}">
+                                <a href="{$gurl}&groupselect={$value}">{$groupicons[$value]['grouptitle']}</a>
+                            </li>
+                            {/loop}
+  
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+            <div class="course-tool-bar clearfix">
+                <div class="tool-left l">
+                    <a href="{$ourl}" class="sort-item{if !$_GET['order']} active{/if}">{lang zhanmishu_video:recommend}</a>
+                    <a href="{$ourl}&order=new" class="sort-item{if $_GET['order'] =='new'} active{/if}">{lang zhanmishu_video:new_est}</a>
+                    <a href="{$ourl}&order=hot" class="sort-item{if $_GET['order'] =='hot'} active{/if}">{lang zhanmishu_video:hot_est}</a>
+                </div>
+                <div class="l">
+                    <span class="tool-item" style="display: none;">
+                        <a class="follow-learn tool-chk" href="">{lang zhanmishu_video:learn_from_me}</a>
+                    </span>
+                </div>
+                {if $videoconfig['selltype'] == '2'}
+                <div class="tool-right r">
+                   <!--  <span class="tool-item total-num">
+                        {lang zhanmishu_video:gong}<b>553</b>{lang zhanmishu_video:courses}
+                    </span> -->
+                    {loop $videoconfig['groupselect'] $key $value}
+                            <span class="tool-item total-num" {if $value == $_GET['groupselect']} on{/if}">
+                                <a href="{$gurl}&groupselect={$value}#groupselect"  style="padding:6px;color: #fff;line-height:28px;background-color:{eval echo $groupicons[$value]['color']?$groupicons[$value]['color']:'green';};">{$groupicons[$value]['grouptitle']}</a>
+                               
+                            </span>
+                    {/loop}
+                </div>
+                {/if}
+            </div>
+            <div class="course-list">
+                <div class="js-course-lists">
+                    <ul>
+                        {loop $list $key $value}
+
+
+                        <li class="course-one" style="{if $videoconfig['clumnnums'] == '3'}width: 27%;{elseif $videoconfig['clumnnums'] == '4'}width:21.25%{/if}">
+                           
+                                <div class="course-list-img">
+                                     <a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"><img width="240" height="135" alt="{$value['course_name']}"
+                                        src="{$value['course_img']}"></a>
+                                    <span class="playericon"></span>
+                                </div>
+                                <h5>
+                                   
+                                    {if $videoconfig['selltype'] == '2'}
+                                        {eval $group = $video->course_group_toarray($value['course_group']);}
+                                        {if !$value['course_price']}
+                                            <span class="l viptags" style="background-color:#5fb41b;">{lang zhanmishu_video:free}</span>
+                                         {elseif count($group) > 1}
+                                         <select name="" id=""  class="l viptags"  style="background-color:#5fb41b;">
+                                            {loop $group $v}
+                                             <option value="">{$groupicons[$v]['grouptitle']}</option>
+                                            {/loop} 
+                                             
+                                         </select>
+
+                                         {else}
+                                        
+                                           
+                                            {loop $group $v}
+                                                <span class="l viptags" style="background-color:{eval echo $groupicons[$v]['color']?$groupicons[$v]['color']:'green';}">
+                                                {$groupicons[$v]['grouptitle']}
+                                                </span>
+                                            {/loop}
+                                           
+                                        {/if}
+                                        &nbsp;&nbsp;
+                                    {/if}
+                                   
+                                   <a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"><span>{$value['course_name']}</span></a>
+                                </h5>
+                                <div class="tips l_tips">
+                                    
+                                    {if $videoconfig['selltype'] == '1'}
+                                         {if !$value['course_price']}
+                                            <span class="l viptags" style="background-color:#5fb41b;">{lang zhanmishu_video:free}</span>
+                                        {else}
+                                         <span class="l l_price">
+                                        
+                                         {lang zhanmishu_video:moneyunit_code}{eval echo $value['course_price']/100;}</span>
+                                        {/if}
+                                    {elseif $videoconfig['selltype'] == '2'}
+                                        <span class="l">
+                                        {$value['views']}
+                                        {lang zhanmishu_video:views}</span>
+                                    {/if}
+                                    
+                                    <span class="l ml20 l_float_right">
+                                     {$value['learns']}
+                                    {lang zhanmishu_video:learns}</span>
+                                </div>
+                                <div class="l_description text-ellipsis"><a target="_blank" href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}">{$value['course_intro']}</a></div>
+                            <span class="time-label">
+                                   {$value['course_length']} | {$zhanmishu_videoconf['diff'][$value['diff']]}
+                            </span>
+                            
+                        </li>
+                        
+                        {/if}
+
+                    </ul>
+                </div>
+                $multi
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{template common/footer}

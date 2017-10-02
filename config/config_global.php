@@ -100,8 +100,8 @@ $_config['remote']['appkey'] = '62cf0b3c3e6a4c9468e7216839721d8e';
 $_config['remote']['cron'] = '0';
 
 // ---------------------------  CONFIG INPUT  --------------------------- //
-$_config['input']['compatible'] = 1;
-
+$_config['input']['compatible'] = 1;//插件开发模式
+$_config['plugindeveloper'] = 1;//插件开发模式
 
 // -------------------  THE END  -------------------- //
 

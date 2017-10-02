@@ -1,0 +1,5 @@
+{if in_array($course['video'][$vid]['video_urltype'],array('5','6','7','8','9')) }
+{template zhanmishu_video:inc_live}
+{else}
+{template zhanmishu_video:inc_video}
+{/if}

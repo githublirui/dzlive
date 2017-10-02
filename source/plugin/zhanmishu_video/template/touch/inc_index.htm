@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="app-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/sui/css/sm.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/sui/css/sm-extend.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/weui/weui.css"/>
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/css/main2.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/css/ionicons.css">
+    <link rel="stylesheet" href="source/plugin/zhanmishu_video/template/touch/static/lib/iconfont/iconfont.css">
+    <title>{lang zhanmishu_video:online_course}</title>
+</head>
+<body>
+<div class="page-group">
+    <div class="page" id="page_home">
+        <div class="content" style="margin-bottom: 55px;">
+
+            {if !empty($swiper)}
+            <!-- Slider ad -->
+            <div class="swiper-container x_swiper_ad">
+
+                <div class="swiper-wrapper">
+                    {loop $swiper $value}
+                    <div class="swiper-slide"><a  class="external" title="{$value['name']}" href="{$value['url']}"><img src="{$value['image']}" width="100%" height="100%" alt="{$value['name']}"></a></div>
+                    {/loop}
+                   
+                </div>
+
+                <!-- 如果需要分页器 -->
+                <!--<div class="swiper-pagination" id="x_swiper_ad_pagination" style="bottom: 0.01rem;"></div>-->
+            </div>
+            {/if}
+
+            <div class="swiper-container x_swiper_nav">
+                <div class="swiper-wrapper">
+                    {loop $cate $value}
+                        <div class="swiper-slide">
+                            <div class="ks_navmenu">
+                                <div class="ks_nav">
+                                    <ul class="clearfix">
+                                        {loop $value $v}
+                                        <li>
+                                            <a  class="external" title="{$v['cat_name']}" href="{$caturl}&cat_id={$v['cat_id']}">
+                                                <em><img src="{eval echo $v['cat_icon'] ? $v['cat_icon'] : 'source/plugin/zhanmishu_video/template/touch/static/img/noicon.png';}"></em>
+                                                <span>{$v['cat_name']}</span>
+                                            </a>
+                                        </li>
+                                        {/loop}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {/loop}
+                </div>
+                <div class="swiper-pagination" id="x_swiper_nav_pagination" style="bottom: 0.01rem;"></div>
+            </div>
+
+            {if !empty($best)}
+    
+            <div class="x_section-header">
+                <h3><i class="icon"></i>{lang zhanmishu_video:best_course}</h3>
+            </div>
+            {loop $best $value}
+            <div class="x_wanfaList">
+                <div class="pro" data-type="1" data-protype="3" data-depcityid="324" data-lineid="24871" data-routever="1" data-istczx="1">
+                    <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}" class="external">
+                        <div class="pic">
+                            <img alt="{$value['course_name']}" width="100%" height="100%" src="{$value['image']}">
+                            {if $value['cat_id']}
+                            <span class="travelType travelType1">{$value['cat_name']}</span>
+                            {/if}
+                            <div class="price">{lang zhanmishu_video:moneyunit_code}<em>{eval echo $value['course_price']/100;}</em> </div>
+                            <div class="pic-btm">
+                                <div class="pic-btm-txt">
+                                    <span class="depcity">{lang zhanmishu_video:author_at} {$value['username']} </span>
+<!--                                     <span class="satisfition">98%满意</span>
+ -->                                </div>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h3 class="mainTitle">{$value['course_name']}</h3>
+
+                            <p class="subTitle">{$value['course_intro']}</p>
+
+                            <div class="marks">
+                                <!--<span class="tag-tc">视频专线</span><span class="tag-huiwan">会玩中国</span><span class="tag-redpocket">红包立减</span><span class="tag-zhuti">亲子游</span>-->
+                                <span class="tag-tc">{lang zhanmishu_video:discount_time}</span>
+                                <span class="tag-redpocket">{lang zhanmishu_video:aditor_recomment}</span>
+                                <span class="tag-huiwan">{lang zhanmishu_video:best_course}</span>
+
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {/loop}
+            {/if}
+
+            <!--  视频列表 -->
+            <div class="x-dy-list" dy-mode="flat" style="margin-top: 20px;margin-bottom: 10px;">
+                <div class="x-dy-list-body">
+                    {loop $list $value}
+                    <div class="x-dy-list-item up-line-long fantastic-type">
+                        <div class="fantastic">
+                            <div class="type0"></div>
+                            <!--<div class="type2"></div>-->
+                            <!--<div class="type3"></div>-->
+                        </div>
+                        <div class="x-dy-list-thumb">
+                            <div class="show-pic" style="opacity: 1; transition: opacity 0.5s ease-in; background-image: url($value['course_img']);">
+                                <img class="play-icon" src="source/plugin/zhanmishu_video/template/touch/static/img/video-icon-60-60.png">
+                            </div>
+                        </div>
+                        <a class="x-dy-list-content external"
+                           href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"
+                           data-role="show-info" data-tap="1">
+                            <div class="x-dy-list-title"><span class="show-name limit">{$value['course_name']}</span>
+                            </div>
+                            <div class="x-dy-list-brief">
+                                <div class="film-star">
+                                    <div class="show-star-mod">
+                                        <!-- <div class="show-star-ranking">
+                                            <div class="show-star-ranking-light" style="width:90%;"></div>
+                                        </div> -->
+<!--                                         <div class="show-star-remark">1.1 （2232人）</div>
+ -->                                    </div>
+                                </div>
+                            </div>
+                            <div class="x-dy-list-brief">{$value['course_intro']}</div>
+                            {eval $user = getuserbyuid($value['uid']);}
+                            <div class="x-dy-list-brief">{lang zhanmishu_video:author_at}{$user['username']}</div>
+                        </a>
+                        <a href="plugin.php?id=zhanmishu_video:video&mod=video&cid={$value['cid']}"
+                           class="right-btn-red external" data-tap="1">{lang zhanmishu_video:learn}</a>
+                    </div>
+                    <div class="x-dy-list-item up-line-short">
+                        <div class="x-dy-list-thumb">
+                            <div class="fn-wd51">&nbsp;</div>
+                        </div>
+                        <div class="x-dy-list-content">
+                            {if $value['course_price'] > 0} 
+                            <div class="x-dy-list-brief"><span class="x-dy-ft-orange">{eval echo $value['course_price'] / 100 ;}{lang zhanmishu_video:moneyunit}</span> <span
+                                    class="gap">|</span>{lang zhanmishu_video:discount_tips}
+                            </div>
+                            {else}
+                            <div class="x-dy-list-brief"><span class="x-dy-ft-green">{lang zhanmishu_video:free}</span> <span
+                                    class="gap">|</span> {lang zhanmishu_video:free_tips}
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                    {/loop}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 工具栏 -->
+            {template zhanmishu_video:nav}
+
+    </div>
+</div>
+
+</body>
+<!--初始化-->
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/zepto.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/sm-{CHARSET}.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/sui/js/sm-extend.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/lib/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/js/index.js"></script>
+<script src="source/plugin/zhanmishu_video/template/touch/static/js/controller/course/course_detail.js"></script>
+
+<script>
+    $(function () {
+        var _swiperConfig = {
+            ad_config  : {
+                initialSlide : 0,                    //设定初始化时slide的索引。
+                autoplay     : 3000,                     //可选选项，自动滑动
+                loop         : true,
+                autoHeight   : true,                   //高度随内容变化
+                freeMode     : false,
+//                pagination: '#x_swiper_ad_pagination'    // 如果需要分页器
+            },
+            nav_config : {
+                initialSlide : 0,                    //设定初始化时slide的索引。
+                autoHeight   : true,                   //高度随内容变化
+                freeMode     : false,
+                pagination   : '#x_swiper_ad_pagination'    // 如果需要分页器
+            }
+        };
+
+
+        var mySwiper_ad = new Swiper('.x_swiper_ad', _swiperConfig.ad_config);
+        var mySwiper_nav = new Swiper('.x_swiper_nav', _swiperConfig.nav_config);
+
+
+//        $(".x_swiper_ad").swiper(_swiperConfig.ad_config);
+//        $(".x_swiper_nav").swiper(_swiperConfig.nav_config);
+
+    })
+</script>
+
+</html>
