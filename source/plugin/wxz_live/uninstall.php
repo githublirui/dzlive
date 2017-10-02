@@ -28,18 +28,18 @@ $path = DISCUZ_ROOT.'data/sysdata/cache_wxz_live.php';
 $imgdir = DISCUZ_ROOT.'data/attachment/wxz_live';
 @unlink($path);
 //fix 删除上传历史记录的图片
-zmsfolder_del($imgdir);
+wxzfolder_del($imgdir);
 $finish = TRUE;
 
 
-function zmsfolder_del($path){
+function wxzfolder_del($path){
     if(is_dir($path)){
         $file_list= scandir($path);
         foreach ($file_list as $file)
         {
             if( $file!='.' && $file!='..')
             {
-                zmsfolder_del($path.'/'.$file);
+                wxzfolder_del($path.'/'.$file);
             }
         }
         @rmdir($path);  //这种方法不用判断文件夹是否为空,  因为不管开始时文件夹是否为空,到达这里的时候,都是空的     

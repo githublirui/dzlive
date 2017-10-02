@@ -20,7 +20,7 @@ $formurl = 'plugins&operation=config&identifier=wxz_live&pmod=touchadmin';
 
 $_GET['act'] = $_GET['act'] ? $_GET['act'] : 'swiper';
 
-zms_showtitle(lang('plugin/wxz_live', 'touchadmin'),array(
+wxz_showtitle(lang('plugin/wxz_live', 'touchadmin'),array(
 	array(lang('plugin/wxz_live', 'swiper'),$formurl.'&act=swiper',$_GET['act'] =='swiper'?'1':'0'),
 	// array(lang('plugin/wxz_live', '推荐管理'),$formurl.'&act=recommend',$status = $input['act'] =='recommend'?'1':'0'),
 	array(lang('plugin/wxz_live', 'best_recommend'),$formurl.'&act=best',$_GET['act'] =='best'?'1':'0')

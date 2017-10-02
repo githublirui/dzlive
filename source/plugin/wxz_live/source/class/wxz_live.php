@@ -631,7 +631,7 @@ class wxz_live extends wxz_course{
 			return false;
 		}
 		if ($v['video_urltype'] == '9') {
-			$v['video_url'] = zms_videostrtoarray_tomobile($v['video_url']);
+			$v['video_url'] = wxz_livestrtoarray_tomobile($v['video_url']);
 
 			if ($this->get_device_type() == 'ios' ||$this->get_device_type() == 'android' || $this->get_device_type() == 'safari') {
 				return $v['video_url']['1'];

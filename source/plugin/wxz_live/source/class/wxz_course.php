@@ -23,10 +23,10 @@ class wxz_course{
 	public function __construct($config=array(),$code='',$verify='',$cookiehead = '')
 	{
 		if (empty($config)) {
-			if (!function_exists('zms_video_getconfig')) {
+			if (!function_exists('wxz_live_getconfig')) {
 				include DISCUZ_ROOT.'./source/plugin/wxz_live/source/function/common_function.php';
 			}
-			$config = zms_video_getconfig();
+			$config = wxz_live_getconfig();
 		}
 		$this->config = $config;
 

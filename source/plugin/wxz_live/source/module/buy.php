@@ -98,9 +98,9 @@ if (!$cid || empty($course) || $course['isdel'] == '1' || $course['issell'] =='0
 
 	//if pay not is  no't support wxz_wepay
 	$config = $video->config;
-	$zmsPayExists =  $video->ZmsIsWepayExists();
+	$wxzPayExists =  $video->ZmsIsWepayExists();
 
-	if (($config['paytype'] == '1' || !$zmsPayExists) && $config['paytype_extcredits']) {
+	if (($config['paytype'] == '1' || !$wxzPayExists) && $config['paytype_extcredits']) {
 		$moneyNum = $config['moneyper'] * $o['course_price'] / 100;
 		if ($_GET['act'] == 'do') {
 			if ($_GET['total_fee'] !== $o['course_price']) {
@@ -130,7 +130,7 @@ if (!$cid || empty($course) || $course['isdel'] == '1' || $course['issell'] =='0
 			$js = '<script type="text/javascript">showDialog(\''.lang('plugin/wxz_live','pay_success').'\',\'confirm\',\'\',function(){top.location.href="'.$return_url.'";},0,function(){location.reload();});</script>';
 	
 			if (defined('IN_MOBILE')) {
-				zms_go_header($return_url);
+				wxz_go_header($return_url);
 			}
 			showmessage(lang('plugin/wxz_live','buytips'), '', array(), array('msgtype' => 3,'showmsg'=>false,'extrajs'=>$js));
 			
@@ -144,7 +144,7 @@ if (!$cid || empty($course) || $course['isdel'] == '1' || $course['issell'] =='0
 	$url=$_G['siteurl'].'plugin.php?id=wxz_wepay:pay&mod=pay&'.http_build_query($data);
 
 	if (defined('IN_MOBILE')) {
-		zms_go_header($url);
+		wxz_go_header($url);
 		exit;
 	}
 	$js = '<script type="text/javascript">top.location.href="'.$url.'";</script>';

@@ -12,10 +12,10 @@ body{background:#1a1a1a;}
 #course_detail_left_container{width:80%;float:left;font-size:18px;}
 #course_detail_left_container .subscribers{margin-right:20px;}
 .hero_bkgd.course{padding:0;margin-bottom:0;margin-right:370px;}
-.hero_bkgd.course .zmscourse{margin-right:370px;}
-.hero_bkgd.course .zmscoursename{height: 30px;line-height: 30px;font-size: 16px;color: #fff;}
-.hero_bkgd.course .zmscoursename a{color: #fff;}
-.hero_bkgd.course .zmscourse_info{width:360px;height:100%;padding:0;margin-right:0;position:fixed;right:0;top:0;}
+.hero_bkgd.course .wxzcourse{margin-right:370px;}
+.hero_bkgd.course .wxzcoursename{height: 30px;line-height: 30px;font-size: 16px;color: #fff;}
+.hero_bkgd.course .wxzcoursename a{color: #fff;}
+.hero_bkgd.course .wxzcourse_info{width:360px;height:100%;padding:0;margin-right:0;position:fixed;right:0;top:0;}
 .hero_bkgd.course .course_info {background: #1a1a1a;}
 .hero_bkgd.course .course_info .panel_group{padding:20px;max-height: 60%;}
 .course.hero_bkgd .panel_group .collapse.panel_collapse{display:block;height:100%;}
@@ -39,4 +39,4 @@ body{background:#1a1a1a;}
 #livesaytextarea{height: 60px;}
 .btn-default {width: 100px;height: 28px;padding:0;float: right;}
 .speech_item {padding:0 5px;display: block;min-height: 44px;}
-#livechatzms{position: fixed;bottom: 0;width: 314px;}
+#livechatwxz{position: fixed;bottom: 0;width: 314px;}

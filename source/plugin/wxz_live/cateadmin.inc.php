@@ -77,7 +77,7 @@ if (submitcheck('cateedit')) {
 	$cate->update_catecache();
 	cpmsg(lang('plugin/wxz_live', 'update_cate_success'),dreferer(),'success');
 }else if (submitcheck('sb_editcat') && $_GET['cat_id']) {
-	$images = zms_uploadimg('wxz_live/',false);
+	$images = wxz_uploadimg('wxz_live/',false);
 	$catadd = array();
 
 	$catadd['cat_icon'] = $images['cat_icon'] ? $images['cat_icon'] : $input['cat_icon'];

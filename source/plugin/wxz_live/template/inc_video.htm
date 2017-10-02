@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="row clearfix">
                     <div id="course_video_container" class="">
-                        <div class="zmsvideoplayer" style="width: 100%; height: 464px;">
+                        <div class="wxzvideoplayer" style="width: 100%; height: 464px;">
                             {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] == '0' || empty($course['video']))}
                             <div class="nolook">
                                 <div class="nolooktip">
@@ -24,7 +24,7 @@
                                         $videoconfig['downurltips']
                                    {/if}
                                     <div class="bottonke">
-                                    <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
+                                    <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('wxzvideobuy', this.href){else}showWindow('wxzvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                 {elseif $course['video'][$vid]['video_urltype'] == '4' || $course['video'][$vid]['video_urltype'] == '5'}
                                     {eval echo $course['video'][$vid]['video_url'];}
                                 {else}
-                                    <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+                                    <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="$course['video'][$vid]['video_url']"></span>
                                      <div id="my_video"></div>
                                 {/if}
 
@@ -57,7 +57,7 @@
                     </div>
                     
                     <!-- Course Info -->
-                    <div class="col-sm-4 col-md-3 zmscourse_info">
+                    <div class="col-sm-4 col-md-3 wxzcourse_info">
                         <div class="course_info clearfix">
                             <div class="panel_group" id="courseInfoAccordion">
                                 <div class="panel panel_default">
@@ -116,7 +116,7 @@
                             </div>
 
                         </div>
-                        <div class="zmsbtn">
+                        <div class="wxzbtn">
                             <div class="item">
                                 <div class="btn_default primary_orange h3 light"><a
                                         href="plugin.php?id=wxz_live:video&mod=order">{lang wxz_live:myorder}</a></div>

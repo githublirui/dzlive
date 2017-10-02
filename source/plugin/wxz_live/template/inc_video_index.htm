@@ -43,12 +43,12 @@
 
                 {/if}
             </div>
-			<div class="zmsbtn">
+			<div class="wxzbtn">
                  {if $course['ispay'] || $course['course_price'] <= 0}
                  <a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}&type=learn">{lang wxz_live:studynow}</a>
                  {else}
                     {if $videoconfig['selltype'] == '1'}
-				        <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
+				        <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('wxzvideobuy', this.href){else}showWindow('wxzvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
                     {elseif $videoconfig['selltype'] == '2'}
                          <a class="redbot" href="{$videoconfig['vipbuyurl']}"><span>{lang wxz_live:buy_now}</span></a>
                     {/if}

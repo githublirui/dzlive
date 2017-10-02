@@ -30,19 +30,19 @@
 .ie6 .index-recommond .recommon-box-center{margin: 0 1%;}
 .index-recommond .recommon-box img{width: 100%;height: 100%;}
 
-#zmsvideobox{width: 100%;height: 520px;margin:20px 0;}
-#zmsvideobox #zmsvideo{width: 83.6%;height: 100%;float: left;position: relative;}
-#zmsvideobox #zmsvideo #my_video{width: 100%;height: 520px !important;}
-#zmsvideobox #videolist{width: 15.6%;height: 100%;float: right;}
-#zmsvideobox #videolist ul{width: 100%;height: 100%;}
-#zmsvideobox #videolist ul li{width: 100%;height: 80px;margin-bottom:4px;}
-#zmsvideobox #videolist ul li img{width: 100%;height: 80px;}
-#zmsvideobox #videolist ul li{border: 2px solid #fff;}
-#zmsvideobox #videolist ul li.vhover{border: 2px solid #FF7E00;position: relative;}
-#zmsvideobox #videolist ul li.vhover i.arrow {display: block;position: absolute;top: 50%;left: -14px;width: 0;height: 0;margin-top: -6px;content: '';border: 6px solid transparent;border-color: transparent #FF7E00 transparent transparent;z-index: 999}
-#zmsvideobox .hid {display: none;}
-#zmsvideobox .inroom {width: 18%;height: 8%;border: 1px solid #f61;border-radius: 28px;display: block;z-index: 9999;top: 46%;left: 41%;position: absolute;font-size: 18px;text-align: center;line-height: 42px;text-decoration: none;    opacity: .7;font-weight: 700px;background:#111;color: #f61;}
-#zmsvideobox .inroomon { background: #f61;color: #fff;display: block;}
+#wxzvideobox{width: 100%;height: 520px;margin:20px 0;}
+#wxzvideobox #wxzvideo{width: 83.6%;height: 100%;float: left;position: relative;}
+#wxzvideobox #wxzvideo #my_video{width: 100%;height: 520px !important;}
+#wxzvideobox #videolist{width: 15.6%;height: 100%;float: right;}
+#wxzvideobox #videolist ul{width: 100%;height: 100%;}
+#wxzvideobox #videolist ul li{width: 100%;height: 80px;margin-bottom:4px;}
+#wxzvideobox #videolist ul li img{width: 100%;height: 80px;}
+#wxzvideobox #videolist ul li{border: 2px solid #fff;}
+#wxzvideobox #videolist ul li.vhover{border: 2px solid #FF7E00;position: relative;}
+#wxzvideobox #videolist ul li.vhover i.arrow {display: block;position: absolute;top: 50%;left: -14px;width: 0;height: 0;margin-top: -6px;content: '';border: 6px solid transparent;border-color: transparent #FF7E00 transparent transparent;z-index: 999}
+#wxzvideobox .hid {display: none;}
+#wxzvideobox .inroom {width: 18%;height: 8%;border: 1px solid #f61;border-radius: 28px;display: block;z-index: 9999;top: 46%;left: 41%;position: absolute;font-size: 18px;text-align: center;line-height: 42px;text-decoration: none;    opacity: .7;font-weight: 700px;background:#111;color: #f61;}
+#wxzvideobox .inroomon { background: #f61;color: #fff;display: block;}
 </style>
 
 <script src="source/plugin/wxz_live/template/js/slider/unslider-min.js"></script>
@@ -64,11 +64,11 @@
     {/if}
 
 {if $videoconfig['isvideobox'] > 0}
-    <div id="zmsvideobox">
+    <div id="wxzvideobox">
         <div class="wp" id="wp">
-            <div id="zmsvideo">
+            <div id="wxzvideo">
                 <div class="videoplayer">
-                    <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/41514501.mp4"></span>
+                    <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="http://cloud.video.taobao.com/play/u/271081347/p/1/e/6/t/1/41514501.mp4"></span>
 
                     <div id="my_video">
                     </div>
@@ -126,7 +126,7 @@
 
 
 <script type="text/javascript">
-    function zmschange_Video(f){
+    function wxzchange_Video(f){
         if (!ZmsValidate(f)) {
             var videourl = [
                 '<embed width="100%" height="100%" allownetworking="all" allowscriptaccess="always" src="https://static.hdslb.com/live-static/swf/LivePlayerEx_1.swf?room_id=3530945&cid=3530945&state=LIVE" quality="high" bgcolor="#000" wmode="window" allowfullscreen="true" allowFullScreenInteractive="true" type="application/x-shockwave-flash">',
@@ -141,24 +141,24 @@
             ];
             jQuery("#my_video").html(videourl[f]);
         }else{
-            i = jQuery('[id="zmsvideoimgurl"]').val();
+            i = jQuery('[id="wxzvideoimgurl"]').val();
             if (f == undefined || f.length  < 1) {
                 f = i;
             }
 
-            var zmsie;
+            var wxzie;
             if(navigator.userAgent.indexOf("MSIE")>0){
               if(navigator.userAgent.indexOf("MSIE 6.0")>0){   
-                zmsie = 6;
+                wxzie = 6;
               }   
               if(navigator.userAgent.indexOf("MSIE 7.0")>0){  
-                zmsie = 7;
+                wxzie = 7;
               }   
               if(navigator.userAgent.indexOf("MSIE 9.0")>0 && !window.innerWidth){//这里是重点，你懂的
-                zmsie = 8;
+                wxzie = 8;
               }   
               if(navigator.userAgent.indexOf("MSIE 9.0")>0){  
-                zmsie = 9;
+                wxzie = 9;
               }   
             } 
             var jw_height;
@@ -169,7 +169,7 @@
                     jw_height = '100%';
                 }
             } catch(e) {}
-            if (zmsie >= 6 && zmsie < 9) {
+            if (wxzie >= 6 && wxzie < 9) {
                 var flashvars={
                     f:f,
                     c:0,
@@ -223,10 +223,10 @@
             jQuery(this).addClass('vhover');
             jQuery(this).unbind('mouseout');
             var vn = jQuery(this).find("input[name=liveurl]").val();
-                zmschange_Video(vn)
+                wxzchange_Video(vn)
                 
         });
-        jQuery("#zmsvideo").mouseover(function(){
+        jQuery("#wxzvideo").mouseover(function(){
             jQuery("#inroom").addClass("inroom");
             jQuery(this).mouseout(function(){
                 jQuery("#inroom").removeClass("inroom");
@@ -263,7 +263,7 @@
 <script type="text/javascript" src="source/plugin/wxz_live/template/js/lib/jwplayer.js"></script>
 {eval $main='data-main="source/plugin/wxz_live/template/js/main"';}
 <script {$main} src="source/plugin/wxz_live/template/js/lib/require/require.min.js"></script>
-<div id="main" class="zmsvideolistmain">
+<div id="main" class="wxzvideolistmain">
 
     <div class="container">
         <div class="course-content">

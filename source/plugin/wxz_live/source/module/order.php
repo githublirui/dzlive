@@ -45,7 +45,7 @@ if ($act =='list') {
 		if (submitcheck('ordersignsubmit')) {
 			$input = daddslashes($input);
 
-			$images = zms_uploadimg('wxz_live/sign/');
+			$images = wxz_uploadimg('wxz_live/sign/');
 			if (!empty($images)) {
 				if ($images['verifyimg1']) {
 					$orderk= '1';
@@ -175,7 +175,7 @@ if ($_GET['dtype']) {
 	);
 	$outapi['data']['orders'] = $orders;
 
-	$outapi = zms_diconv($outapi,CHARSET,'utf-8');
+	$outapi = wxz_diconv($outapi,CHARSET,'utf-8');
 	echo json_encode($outapi);
 	exit;
 }

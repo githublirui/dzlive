@@ -16,19 +16,19 @@ function remove_nopromissword($str){
 	return preg_replace($check,"",$str);
 }
 
-function zms_video_getconfig(){
+function wxz_live_getconfig(){
 	global $_G;
 	loadcache('plugin');
 	$config = $_G['cache']['plugin']['wxz_live'];
 	$config['realname'] = $config['realname'] ? $config['realname'] : 'realname';
 	$config['idcard'] = $config['idcard'] ? $config['idcard'] : 'idcard';
-	$config['vipgroup'] = zms_video_vipgroups($config['vipgroup']);
+	$config['vipgroup'] = wxz_live_vipgroups($config['vipgroup']);
 	$config['groupselect'] = unserialize($config['groupselect']);
 	return $config;
 }
 
 
-function zms_go_header($url)  {  
+function wxz_go_header($url)  {  
 	echo '<html><head><meta http-equiv="Content-Language" content="zh-CN"><meta http-equiv="refresh"  
 	content="0;url='.$url.'"><title>loading ... </title></head><body><div style="display:none"></div><script>window.location="'.$url.'";</script></body></html>';  
 	exit();  
@@ -60,7 +60,7 @@ function PutMovie($file) {
     }
     fclose($fp);
 }
-function zms_showtitle($name,$array=array()){
+function wxz_showtitle($name,$array=array()){
 	if (empty($array)) {
 		return '';
 	}
@@ -75,7 +75,7 @@ function zms_showtitle($name,$array=array()){
 }
 
 
-function zms_uploadimg($savedir='wxz_live/',$thumb=false,$width='220',$height='220',$iskeybili='1'){ 
+function wxz_uploadimg($savedir='wxz_live/',$thumb=false,$width='220',$height='220',$iskeybili='1'){ 
 
 	//上传图片
 	$images = array();
@@ -107,7 +107,7 @@ function zms_uploadimg($savedir='wxz_live/',$thumb=false,$width='220',$height='2
 	return $images;
 }
 
-function zms_videostrtoarray_tomobile($str){
+function wxz_livestrtoarray_tomobile($str){
 	$str = str_replace(array("\r\n", "\r", "\n"), array('$#','$#','$#'), $str);
 	$arr = explode('$#', $str);
 
@@ -115,8 +115,8 @@ function zms_videostrtoarray_tomobile($str){
 	return $arr;
 }
 
-function zms_video_vipgroups($str){
-	$arr = zms_videostrtoarray_tomobile($str);
+function wxz_live_vipgroups($str){
+	$arr = wxz_livestrtoarray_tomobile($str);
 	if (empty($arr)) {
 		return false;
 	}
@@ -129,7 +129,7 @@ function zms_video_vipgroups($str){
 	return $return;
 }
 
-function zms_rewriteoutput($type, $returntype, $host) {
+function wxz_rewriteoutput($type, $returntype, $host) {
 	global $_G;
 	$fextra = '';
 	if($type == 'forum_forumdisplay') {
@@ -154,12 +154,12 @@ function zms_rewriteoutput($type, $returntype, $host) {
 	}
 }
 
-function zms_diconv($str,$in_charset,$out_charset){
+function wxz_diconv($str,$in_charset,$out_charset){
 	if (is_string($str)) {
 		return diconv($str,$in_charset,$out_charset);
 	}else if (is_array($str)) {
 		foreach ($str as $key => $value) {
-			$str[$key] = zms_diconv($value,$in_charset,$out_charset);
+			$str[$key] = wxz_diconv($value,$in_charset,$out_charset);
 		}
 
 		return $str;

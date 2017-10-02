@@ -7,15 +7,15 @@
     <div id="content wp">
 
         <div class="hero_bkgd course">
-            <div class="zmscoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}">{lang wxz_live:learning}{$course['course_name']}</a></h2>
+            <div class="wxzcoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}">{lang wxz_live:learning}{$course['course_name']}</a></h2>
             </div>
-            <div class="zmscourse">
+            <div class="wxzcourse">
                 <div class="clearfix video_box">
                   {if {$course['fileurl']}}
                     <a href="{if $course['ispay'] || $course['course_price'] == '0'}{$course['fileurl']}{else}javascript::alert('{lang wxz_live:buy_now}');{/if}" target="_blank" class="course_downfiles">{lang wxz_live:filesdownload}</a>
                   {/if}
                     <div id="course_video_container">
-                        <div class="zmsvideoplayer">
+                        <div class="wxzvideoplayer">
                             {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] == '0' || empty($course['video']))}
                             <div class="nolook">
                                 <div class="nolooktip">
@@ -26,7 +26,7 @@
                                    {/if}
                                     <div class="bottonke">
                                       {if $videoconfig['selltype'] == '1'}
-                                       <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
+                                       <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('wxzvideobuy', this.href){else}showWindow('wxzvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
                                        {elseif $videoconfig['selltype'] == '2'}
                                           <a class="redbot" href="{$videoconfig['vipbuyurl']}"><span>{lang wxz_live:buy_now}</span></a>
                                        {/if}
@@ -51,7 +51,7 @@
                                     {eval echo $course['video'][$vid]['video_url'];}
                                 {else}
                                      <div id="my_video"></div>
-                                     <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+                                     <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="$course['video'][$vid]['video_url']"></span>
 
                                 {/if}
 
@@ -62,18 +62,18 @@
                         <div id="transcript-container" style="display:none;position:absolute;top:0;right:0"></div>
                     </div>
                     <!-- Course Info -->
-                    <div class="zmscourse_info">
+                    <div class="wxzcourse_info">
                         <div class="teacherinfo">
                             <a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}"><h2>{$course['course_name']}</h2></a>
                             <span>{lang wxz_live:teacher_at}<a href="">{$course['username']}</a></span>
                         </div>
                         <div class="courselist">
                             <div class="courselist_title">
-                                <div class="zmstable ccshow" id="zmstable_1"><a href="javascript:;" onclick="switchTab('zmstable','1','2','ccshow');">{lang wxz_live:video_list}</a></div>
-                                <div class="zmstable" id="zmstable_2"><a href="javascript:;" onclick="switchTab('zmstable','2','2','ccshow');">{lang wxz_live:video_reply}</a></div>
+                                <div class="wxztable ccshow" id="wxztable_1"><a href="javascript:;" onclick="switchTab('wxztable','1','2','ccshow');">{lang wxz_live:video_list}</a></div>
+                                <div class="wxztable" id="wxztable_2"><a href="javascript:;" onclick="switchTab('wxztable','2','2','ccshow');">{lang wxz_live:video_reply}</a></div>
                             </div>
 
-                            <div class="course_list"  id="zmstable_c_1">
+                            <div class="course_list"  id="wxztable_c_1">
                                 <ul>
                                     {eval $i=0;}
                                     {loop $course['video'] $value}
@@ -83,7 +83,7 @@
                                 </ul>
 
                             </div>
-                            <div class="comments" style="display: none;"   id="zmstable_c_2">
+                            <div class="comments" style="display: none;"   id="wxztable_c_2">
                                 <ul>
                                    <p style="font-size: 14px;color: #ccc;padding:10px;">{lang wxz_live:livingon}</p>
                                 </ul>
@@ -102,16 +102,16 @@
 //获取页面的宽和高
 jQuery(function(){
   jQuery('.arrow-hide').click(function(){
-     if (jQuery(".zmscourse").css('margin-right') == '10px') {
-         jQuery(".zmscourse_info").removeClass("hidden_courseinfo");
+     if (jQuery(".wxzcourse").css('margin-right') == '10px') {
+         jQuery(".wxzcourse_info").removeClass("hidden_courseinfo");
          jQuery(".arrow").removeClass("arrow-show");
          jQuery(".arrow").addClass("arrow-hide");
-         jQuery(".zmscourse").css("margin-right","370px");
+         jQuery(".wxzcourse").css("margin-right","370px");
      }else{
-         jQuery(".zmscourse_info").addClass("hidden_courseinfo");
+         jQuery(".wxzcourse_info").addClass("hidden_courseinfo");
          jQuery(".arrow").removeClass("arrow-hide");
          jQuery(".arrow").addClass("arrow-show");
-         jQuery(".zmscourse").css("margin-right","10px");
+         jQuery(".wxzcourse").css("margin-right","10px");
      }
   });
   autoSetHeight();
@@ -123,10 +123,10 @@ window.onresize = function(){
 
 function autoSetHeight(){
     var height =  getWindowSize();
-    jQuery('.zmscourse_info').height(height - 30);
+    jQuery('.wxzcourse_info').height(height - 30);
     jQuery('embed').height(height - 30);
-    jQuery('.zmscourse').height(height - 30);
-    jQuery('.zmsvideoplayer').height(height - 30);
+    jQuery('.wxzcourse').height(height - 30);
+    jQuery('.wxzvideoplayer').height(height - 30);
     jQuery('.jwplayer').height(height - 30);
 }
 function getWindowSize(){

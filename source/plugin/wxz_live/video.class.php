@@ -24,7 +24,7 @@ class plugin_wxz_live_home extends plugin_wxz_live{
 			// $video = new wxz_live();
 			// if ($video->check_verify_issubmit() && $_GET['referer'] && $_GET['return_url']) {
 			// 	$rurl = $_GET['referer'] && $_GET['return_url'] ? $_GET['referer'].'&isverifysubmit=yes&return_url='.$_GET['return_url'] : '';
-			// 	$this->_zms_showsuccess(lang('plugin/wxz_live','verifytips_submitsuccess'),$rurl);
+			// 	$this->_wxz_showsuccess(lang('plugin/wxz_live','verifytips_submitsuccess'),$rurl);
 			// }
 	}
 

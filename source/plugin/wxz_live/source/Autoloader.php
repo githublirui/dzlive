@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 include_once DISCUZ_ROOT.'./source/plugin/wxz_live/conf/conf.php';
 
-class Zms_video_Autoloader{
+class Wxz_live_Autoloader{
   
   /*
  *合肥微小智www.hfwxz.com
@@ -44,18 +44,18 @@ class Zms_video_Autoloader{
 }
 
 if (version_compare(phpversion(),'5.3.0','>=')) {
-    spl_autoload_register('Zms_video_Autoloader::autoload',false,true);
+    spl_autoload_register('Wxz_live_Autoloader::autoload',false,true);
 }else{
-    Zms_video_Autoloader::autoload("wxz_course");
-    Zms_video_Autoloader::autoload("wxz_live");
-    Zms_video_Autoloader::autoload("wxz_api");
-    Zms_video_Autoloader::autoload("Qiniu_Auth");
-    Zms_video_Autoloader::autoload("Qiniu_Config");
-    // Zms_video_Autoloader::autoload("Qiniu_Etag");
-    // Zms_video_Autoloader::autoload("Qiniu_Zone");
-    Zms_video_Autoloader::autoload("Qiniu_common_function");
+    Wxz_live_Autoloader::autoload("wxz_course");
+    Wxz_live_Autoloader::autoload("wxz_live");
+    Wxz_live_Autoloader::autoload("wxz_api");
+    Wxz_live_Autoloader::autoload("Qiniu_Auth");
+    Wxz_live_Autoloader::autoload("Qiniu_Config");
+    // Wxz_live_Autoloader::autoload("Qiniu_Etag");
+    // Wxz_live_Autoloader::autoload("Qiniu_Zone");
+    Wxz_live_Autoloader::autoload("Qiniu_common_function");
     if (class_exists('SoapClient',false)) {
-      Zms_video_Autoloader::autoload("soapclient2");
+      Wxz_live_Autoloader::autoload("soapclient2");
     }
 }
 

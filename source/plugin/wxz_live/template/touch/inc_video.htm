@@ -22,8 +22,8 @@
 
     <title>{$course['course_name']}</title>
     <style>
-        .zmsvideobox{height: 320px;margin-bottom: 2.2rem;}
-        .zmsvideobox #zmsvideo  {position: fixed;z-index: 9999;width: 100%;top:  2.2rem;}
+        .wxzvideobox{height: 320px;margin-bottom: 2.2rem;}
+        .wxzvideobox #wxzvideo  {position: fixed;z-index: 9999;width: 100%;top:  2.2rem;}
     </style>
 
 
@@ -42,7 +42,7 @@
                   <a class="icon icon-refresh pull-right external flushpage"></a>
                   <h1 class="title" style="padding: 0 50px;overflow: hidden;text-overflow: ellipsis;">{$course['course_name']}</h1>
             </header>
-            <div class="weui_panel x_no_t_margin zmsvideobox">
+            <div class="weui_panel x_no_t_margin wxzvideobox">
                 {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] !== '1' || empty($course['video']))}
                  <div class="card facebook-card">
                      <div class="card-content"><img src="{$course['course_img']}" width="100%"></div>
@@ -51,7 +51,7 @@
                  <div class="card facebook-card ">
                      <div class="card-content"><img src="{$course['course_img']}" width="100%"></div>
                  </div>
-                 <span style="display: none;"> <input type="hidden" id="zmsvideourl" value=""></span>
+                 <span style="display: none;"> <input type="hidden" id="wxzvideourl" value=""></span>
 <script>
     $.alert('{lang wxz_live:chatsafetips}','',function(){
       self.location.href='{$course['video'][$vid]['video_url']}';
@@ -65,13 +65,13 @@
                     {elseif $course['video'][$vid]['video_urltype'] == '4' || $course['video'][$vid]['video_urltype'] == '5'}
                         {eval echo stripcslashes($course['video'][$vid]['video_url']);}
                     {else}
-                        <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+                        <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="$course['video'][$vid]['video_url']"></span>
                          
-                         <div id="zmsvideo"></div> 
+                         <div id="wxzvideo"></div> 
                     {/if}
 
                 {/if}
-                <span style="display: none;"> <input type="hidden" id="zmsvideoimageurl" value="$course['course_img']"></span>
+                <span style="display: none;"> <input type="hidden" id="wxzvideoimageurl" value="$course['course_img']"></span>
 
             </div>
             <div class="weui_panel x_no_t_margin" style="margin-bottom: 5px;">

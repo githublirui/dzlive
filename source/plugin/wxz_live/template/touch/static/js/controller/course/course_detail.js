@@ -3,15 +3,15 @@ function v1_page_course_detail_controller() {
         window.location.reload(true);
     });
 
-    var f = document.getElementById('zmsvideourl').value;
-    i = $('[id="zmsvideoimgurl"]').val();
+    var f = document.getElementById('wxzvideourl').value;
+    i = $('[id="wxzvideoimgurl"]').val();
     if (f == undefined || f.length  < 1) {
         f = i;
     }
 
     // jwplayer.key="aYB2Ya1BAkZIWfRiC6kkx/dlNzydIi1TAey8iA==";
 
-    // jwplayer("zmsvideo").setup({
+    // jwplayer("wxzvideo").setup({
     //     "file": f,
     //     "width":'100%',
     //     "height":'300',
@@ -32,7 +32,7 @@ function v1_page_course_detail_controller() {
             var video=[f];
 
         
-        CKobject.embed('ckplayer/ckplayer.swf','zmsvideo','ckplayer_zmsvideo','100%','300',false,flashvars,video);
+        CKobject.embed('ckplayer/ckplayer.swf','wxzvideo','ckplayer_wxzvideo','100%','300',false,flashvars,video);
 
 
     }

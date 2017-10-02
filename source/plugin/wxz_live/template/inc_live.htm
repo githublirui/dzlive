@@ -12,11 +12,11 @@
     <div id="content wp">
 
         <div class="hero_bkgd course">
-            <div class="zmscoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}">{lang wxz_live:liveing}{$course['course_name']}</a></h2>
-            <div class="zmscourse">
+            <div class="wxzcoursename"><h2>&nbsp;&nbsp;<i class="ion-chevron-left"></i><a href="plugin.php?id=wxz_live:video&mod=video&cid={$_GET['cid']}">{lang wxz_live:liveing}{$course['course_name']}</a></h2>
+            <div class="wxzcourse">
                 <div class="clearfix">
                     <div id="course_video_container">
-                        <div class="zmsvideoplayer" style="width: 100%; height: 100%;">
+                        <div class="wxzvideoplayer" style="width: 100%; height: 100%;">
                             {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] == '0' || empty($course['video']))}
                             <div class="nolook">
                                 <div class="nolooktip">
@@ -26,7 +26,7 @@
                                         $videoconfig['downurltips']
                                    {/if}
                                     <div class="bottonke">
-                                    <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('zmsvideobuy', this.href){else}showWindow('zmsvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
+                                    <a class="redbot" href="plugin.php?id=wxz_live:video&amp;mod=buy&amp;cid={$course['cid']}&amp;formhash={FORMHASH}" onclick="{if $_G['uid']}showWindow('wxzvideobuy', this.href){else}showWindow('wxzvideobuy', this.href){/if}"><span>{lang wxz_live:buy_now}</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                     {eval echo $course['video'][$vid]['video_url'];}
                                 {else}
                                      <div id="my_video"></div>
-                                     <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+                                     <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="$course['video'][$vid]['video_url']"></span>
 
                                 {/if}
 
@@ -60,7 +60,7 @@
                     </div>
                     
                     <!-- Course Info -->
-                    <div class="zmscourse_info">
+                    <div class="wxzcourse_info">
                         <div class="course_info clearfix">
                             <div class="panel_group" id="courseInfoAccordion">
                                   <div class="row clearfix">
@@ -69,7 +69,7 @@
                                          <div class="thumbnail">
                                              <div class="caption" id="dialog"></div>
                                          </div>
-                                         <form id="livechatzms" onsubmit="onSubmit(); return false;">
+                                         <form id="livechatwxz" onsubmit="onSubmit(); return false;">
                                               <select style="margin-bottom:8px;display: none;" id="client_list" style="display: none;">
                                                   <option value="all">{lang wxz_live:allperson}</option>
                                               </select>
@@ -103,9 +103,9 @@ window.onresize = function(){
 
 function autoSetHeight(){
     var height =  getWindowSize();
-    jQuery('.zmscourse').height(height-30);
+    jQuery('.wxzcourse').height(height-30);
     jQuery('#my_video').height(height-30);
-    jQuery('.zmsvideoplayer').height(height-30);
+    jQuery('.wxzvideoplayer').height(height-30);
 
 }
 function getWindowSize(){

@@ -90,7 +90,7 @@ if ($_GET['dtype'] && ($course['ispay'] == '1' || $course['course_price'] == '0'
 	$outapi['data']['course'] = $course;
 	$outapi['data']['groupicons'] = $groupicons;
 
-	$outapi = zms_diconv($outapi,CHARSET,'utf-8');
+	$outapi = wxz_diconv($outapi,CHARSET,'utf-8');
 	echo json_encode($outapi);
 	exit;
 }

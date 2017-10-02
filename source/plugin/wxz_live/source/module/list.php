@@ -100,7 +100,7 @@ if ($_GET['dtype']) {
 	$outapi['data']['list'] = $list;
 	$outapi['data']['catinfo'] = $catinfo;
 	$outapi['data']['groupicons'] = $groupicons;
-	$outapi = zms_diconv($outapi,CHARSET,'utf-8');
+	$outapi = wxz_diconv($outapi,CHARSET,'utf-8');
 	echo json_encode($outapi);
 	exit;
 }

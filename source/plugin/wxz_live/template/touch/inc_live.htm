@@ -37,10 +37,10 @@
 #livesaytextarea{height: 30px;padding:5px;padding-left: 1rem;padding-right: 1rem;}
 .btn-default {width: 100px;height: 28px;padding:0;float: right;}
 .speech_item {padding:0 5px;display: block;min-height: 44px;}
-#livechatzms{position: fixed;bottom: 0;background: #fff;margin-right: 0.5rem;width: 80%;}
-.zmsvideobox{height: 320px;}
-.zmsvideobox #zmsvideo  {position: fixed;z-index: 9999;width: 100%;}
-.zmschatbuttn {position: fixed;bottom: 0.2rem;right: 0.5rem;}
+#livechatwxz{position: fixed;bottom: 0;background: #fff;margin-right: 0.5rem;width: 80%;}
+.wxzvideobox{height: 320px;}
+.wxzvideobox #wxzvideo  {position: fixed;z-index: 9999;width: 100%;}
+.wxzchatbuttn {position: fixed;bottom: 0.2rem;right: 0.5rem;}
  </style>
 
 
@@ -55,7 +55,7 @@
         </header>
         <div class="content">
 
-            <div class="weui_panel x_no_t_margin zmsvideobox">
+            <div class="weui_panel x_no_t_margin wxzvideobox">
                 {if !$course['ispay'] && $course['course_price'] > 0 && ($course['video'][$vid]['isfree'] !== '1' || empty($course['video']))}
                  <div class="card facebook-card">
                      <div class="card-content"><img src="{$course['course_img']}" width="100%"></div>
@@ -71,13 +71,13 @@
                     {elseif $course['video'][$vid]['video_urltype'] == '4' || $course['video'][$vid]['video_urltype'] == '5'}
                         {eval echo stripcslashes($course['video'][$vid]['video_url']);}
                     {else}
-                        <span style="display: none;"> <input type="hidden" id="zmsvideourl" value="$course['video'][$vid]['video_url']"></span>
+                        <span style="display: none;"> <input type="hidden" id="wxzvideourl" value="$course['video'][$vid]['video_url']"></span>
                          
-                         <div id="zmsvideo"></div>
+                         <div id="wxzvideo"></div>
                     {/if}
 
                 {/if}
-                <span style="display: none;"> <input type="hidden" id="zmsvideoimageurl" value="$course['course_img']"></span>
+                <span style="display: none;"> <input type="hidden" id="wxzvideoimageurl" value="$course['course_img']"></span>
 
             </div>
             <div class="weui_panel x_no_t_margin" style="margin-bottom: 5px;">
@@ -188,13 +188,13 @@
                                          <div class="thumbnail" id="thumbnail">
                                              <div class="caption" id="dialog"></div>
                                          </div>
-                                         <form id="livechatzms" onsubmit="onSubmit(); return false;">
+                                         <form id="livechatwxz" onsubmit="onSubmit(); return false;">
                                               <select style="margin-bottom:8px;display: none;" id="client_list" style="display: none;">
                                                   <option value="all">{lang wxz_live:allperson}</option>
                                               </select>
                                               <textarea class="textarea" id="livesaytextarea"></textarea>
                                               <div class="say-btn" style="display: none;"><input onclick="onSubmit(); return false;" type="button" class="btn btn-default" value="{lang wxz_live:chatsubmit}" /></div>
-      <div class="col-20 pull-right zmschatbuttn"><a href="#" class="button button-fill button-success" onclick="onSubmit();return false;">{lang wxz_live:chatsubmit}</a></div>
+      <div class="col-20 pull-right wxzchatbuttn"><a href="#" class="button button-fill button-success" onclick="onSubmit();return false;">{lang wxz_live:chatsubmit}</a></div>
                                          </form>
                                       </div>
                                   </div>

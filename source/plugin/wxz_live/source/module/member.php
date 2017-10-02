@@ -24,7 +24,7 @@ if ($_GET['dtype']) {
 	);
 	$outapi['data']['member'] = $member;
 
-	$outapi = zms_diconv($outapi,CHARSET,'utf-8');
+	$outapi = wxz_diconv($outapi,CHARSET,'utf-8');
 	echo json_encode($outapi);
 	exit;
 }

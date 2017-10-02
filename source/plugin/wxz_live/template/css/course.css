@@ -672,7 +672,7 @@ a.btn-green:visited{color:#fff}
 .tool-chk{display:inline-block;*display:inline;*zoom:1;height:18px;line-height:18px;padding-left:24px;background:url(/static/img/course/v2/dot_checkbox.png) no-repeat -7px -6px}
 .tool-chk.checked{background-position:-7px -37px}
 .ml20{margin-left:20px}
-.zmsvideolistmain {min-width: 960px;}
+.wxzvideolistmain {min-width: 960px;}
 .course-list li{background:#fff;background:#f7faf9\0/;*background:#f7faf9;border-bottom:2px solid #f7faf9\0/;*border-bottom:2px solid #f7faf9;border-radius:0 0 1px 1px;float:left;margin:0 0 8px 40px;height:250px;padding:20px 20px 0;position:relative;-moz-transition:box-shadow 0.3s;-webkit-transition:box-shadow 0.3s;-o-transition:box-shadow 0.3s;transition:box-shadow 0.3s}
 .course-list li .course-list-img{width:240px;height:135px;overflow:hidden;position:relative;*display:inline;*zoom:1}
 .course-list li .course-list-img img{display:block;width:100%;transition:1s;-moz-transition:1s;-webkit-transition:1s;-o-transition:1s}
