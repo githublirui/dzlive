@@ -6,49 +6,39 @@
     <table class="tb tb2 "> 
         <tbody>
             <tr>
-                <td colspan="2" class="td27" s="1">分类名称:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform"> <input name="name" value="{$info['name']}" type="text" class="txt" size="10" /></td>
-                <td class="vtop tips2" s="1">必填</td>
-            </tr> 
-            <tr>
-                <td colspan="2" class="td27" s="1">分类说明:</td>
-            </tr>
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform">
-                    <textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="desc" cols="50" class="tarea">{$info['desc']}</textarea>
-                </td>
-                <td class="vtop tips2" s="1">请填写分类说明</td>
-            </tr> 
-            <tr>
-                <td colspan="2" class="td27" s="1">分类图标:</td>
+                <td colspan="2" class="td27" s="1">图片:</td>
             </tr>
             <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
                 <td class="vtop rowform">
-                    <input id="fileY4_0" style="{if $info['icon']}display:none{/if}" name="icon" value="" type="file" class="txt uploadbtn marginbot" size="10">
-                    <input id="fileY4_1" style="{if !$info['icon']}display:none{/if}" name="icon" value="{$info['icon']}" type="text" class="txt marginbot" size="10">
+                    <input id="fileY4_0" style="{if $info['img']}display:none{/if}" name="img" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY4_1" style="{if !$info['img']}display:none{/if}" name="img" value="{$info['img']}" type="text" class="txt marginbot" size="10">
                     <br>
-                    <a id="fileY4_0a" style="{if !$info['icon']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
+                    <a id="fileY4_0a" style="{if !$info['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
                             this.style.fontWeight = 'bold';
-                            $('fileY4_1').name = 'TMPicon';
-                            $('fileY4_0').name = 'icon';
+                            $('fileY4_1').name = 'TMPimg';
+                            $('fileY4_0').name = 'img';
                             $('fileY4_0').style.display = '';
                             $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
-                    <a id="fileY4_1a" style="{if $info['icon']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
+                    <a id="fileY4_1a" style="{if $info['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
                             this.style.fontWeight = 'bold';
-                            $('fileY4_0').name = 'TMPicon';
-                            $('fileY4_1').name = 'icon';
+                            $('fileY4_0').name = 'TMPimg';
+                            $('fileY4_1').name = 'img';
                             $('fileY4_1').style.display = '';
                             $('fileY4_0').style.display = 'none'">输入 URL
                     </a>
                 </td>
                 <td class="vtop tips2" s="1">
-                    {if $info['icon']}
-                        <img src="{$info['icon']}" style="width:96px;height:96px;">
+                    {if $info['img']}
+                    <img src="{$info['img']}" style="width:96px;height:96px;">
                     {/if}
-                    分类图标(推荐尺寸300 * 300)
                 </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">链接:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="link" value="{$info['link']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">例: http://www.baidu.com</td>
             </tr>
             <tr>
                 <td colspan="2" class="td27" s="1">排序:</td>
@@ -73,7 +63,7 @@
             <tr>
                 <td colspan="15">
                     <div class="fixsel">
-                        <input type="submit" class="btn" id="submit_course_addsubmit" name="add" title="按 Enter 键可随时提交您的修改" value="提交" />
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
                     </div></td>
             </tr>
         </tbody>

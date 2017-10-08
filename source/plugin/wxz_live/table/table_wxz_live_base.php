@@ -57,6 +57,7 @@ class table_wxz_live_base extends discuz_table {
         if ($limit) {
             $sql .= " limit {$limit}";
         }
+
         $query = DB::query($sql);
 
         while ($value = DB::fetch($query)) {
@@ -73,6 +74,25 @@ class table_wxz_live_base extends discuz_table {
      */
     public function updateById($id, $data) {
         return DB::update($this->_table, $data, "id={$id}");
+    }
+
+    /**
+     * 通过id删除
+     * @param type $id
+     */
+    public function delById($id) {
+        if (!$id) {
+            return;
+        }
+
+        if (is_array($id)) {
+            $condition = "id in(" . implode(',', $id) . ")";
+            $ret = DB::delete($this->_table, $condition);
+        } else {
+            $condition = "id={$id}";
+            $ret = DB::delete($this->_table, $condition);
+        }
+        return $ret;
     }
 
 }

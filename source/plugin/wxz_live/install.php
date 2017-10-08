@@ -58,6 +58,28 @@ CREATE TABLE `pre_wxz_live_user` (
   KEY `openid` (`openid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_setting` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(50) NOT NULL COMMENT '页面类型',
+  `title` VARCHAR(250) NOT NULL COMMENT '标题',
+  `desc` VARCHAR(2000) NOT NULL COMMENT '描述',
+  `img` VARCHAR(255) NOT NULL COMMENT '图片',
+  `link` VARCHAR(255) NOT NULL COMMENT '链接地址',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;    
+
+CREATE TABLE `pre_wxz_live_banner` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `is_show` tinyint(1) DEFAULT NULL,
+  `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 EOF;
 

@@ -32,7 +32,11 @@ class Controller_live extends Controller_base {
             $this->ajaxError('参数错误');
         }
 
-        $ret = C::t("#wxz_live#{$table}")->delete([$id]);
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $tableObj = new table_wxz_live_base(array('table' => $table, 'pk' => 'id'));
+
+        $ret = $tableObj->delById($id);
         if ($ret) {
             $this->ajaxSucceed();
         } else {

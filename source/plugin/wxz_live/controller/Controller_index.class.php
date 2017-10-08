@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 
+ * 前台页面
+ */
 class Controller_index extends Controller_base {
 
     /**

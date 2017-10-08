@@ -1,0 +1,91 @@
+{template wxz_live:nav}
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="668fb0bf" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 "> 
+        <tbody>
+            <tr class="noborder">
+                <td class="td27">
+                    首页链接
+                </td>
+                <td class="vtop tips2" s="1">{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=index</td>
+            </tr> 
+            <tr>
+                <td colspan="2" class="td27" s="1">首页标题</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="title" value="{$infos[1]['title']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">请输入首页标题</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">风格:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $infos[1]['link']==1 || !$infos[1]['link']}checked{/if}"><input class="radio" type="radio" name="style" value="1" {if $infos[1]['link']==1 || !$infos[1]['link']}checked="checked"{/if} />&nbsp;风格1</li>
+                        <li class="{if $infos[1]['link']==2}checked{/if}"><input class="radio" type="radio" name="style" value="2" {if $infos[1]['link']==2}checked="checked"{/if} />&nbsp;风格2</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <th colspan="15" class="partition">分享设置</th>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">分类图标:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY4_0" style="{if $infos[2]['img']}display:none{/if}" name="share_img" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY4_1" style="{if !$infos[2]['img']}display:none{/if}" name="share_img" value="{$infos[2]['img']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY4_0a" style="{if !$infos[2]['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_1').name = 'TMPicon';
+                            $('fileY4_0').name = 'share_img';
+                            $('fileY4_0').style.display = '';
+                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY4_1a" style="{if $infos[2]['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_0').name = 'TMPicon';
+                            $('fileY4_1').name = 'share_img';
+                            $('fileY4_1').style.display = '';
+                            $('fileY4_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $infos[2]['img']}
+                    <img src="{$infos[2]['img']}">
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">分享标题:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="share_title" value="{$infos[2]['title']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">分享描述:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="share_desc" cols="50" class="tarea">{$infos[2]['desc']}</textarea>
+                </td>
+                <td class="vtop tips2" s="1">请填写分类说明</td>
+            </tr> 
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                    </div></td>
+            </tr>
+        </tbody>
+    </table> 
+</form> 

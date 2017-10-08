@@ -31,10 +31,10 @@ class Controller_category extends Controller_base {
         $query['ordersc'] = $_GET['ordersc'] ? $_GET['ordersc'] : 'desc';
         $page = (int) $_GET['page'];
         $page = $page <= 0 ? 1 : $page;
-   
+
         if (submitcheck('ordersubmit')) {
             foreach ($_GET['ids'] as $k => $id) {
-                $ret = C::t('#wxz_live#wxz_live_category')->updateById($id, array('sort_order' => $_GET['sort_orderS'][$k]));
+                $ret = C::t('#wxz_live#wxz_live_category')->updateById($id, array('sort_order' => $_GET['sort_orders'][$k]));
             }
         }
         $condition = "1=1";
@@ -47,7 +47,7 @@ class Controller_category extends Controller_base {
         }
 
         if ($query['endTime']) {
-            $condition .= " AND `create_at` <= '{$query['startTime']} 23:59:59'";
+            $condition .= " AND `create_at` <= '{$query['endTime']} 23:59:59'";
         }
 
         $totalCount = C::t('#wxz_live#wxz_live_category')->count($condition);
@@ -57,9 +57,9 @@ class Controller_category extends Controller_base {
         $order = $query['orderby'] . ' ' . $query['ordersc'];
         $maxPage = ceil($totalCount / $query['perpage']);
         $page = $maxPage > 0 && $page >= $maxPage ? $maxPage : $page;
-      
+
         $currentLimit = $query['perpage'] * ($page - 1);
-     
+
         $limit = $currentLimit . ',' . $query['perpage'];
 
         $list = C::t('#wxz_live#wxz_live_category')->getAll($condition, '*', $order, $limit);
@@ -81,7 +81,7 @@ class Controller_category extends Controller_base {
 
         if (submitcheck('add')) {
             if (!$_GET['name']) {
-                cpmsg('分类名称不能为空', $this->noRootUrl . "&act=add", 'error');
+                cpmsg('分类名称不能为空', $this->noRootUrl . "&act=add&id={$id}", 'error');
             }
 
             $images = wxz_uploadimg();
