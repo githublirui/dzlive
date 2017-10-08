@@ -1,0 +1,10 @@
+<div class="itemtitle" style='padding-top: 5px;'>
+    <h3>{$this->title}</h3>
+    <ul class="tab1">
+        {loop $this->navs $key $nav}
+        <li {if $nav['act']==$this->curAct}class="current"{/if}>
+            <a href="{$this->baseUrl}&amp;act={$nav['act']}"><span>{$nav['name']}</span></a>
+        </li>
+        {/loop}
+    </ul>
+</div>

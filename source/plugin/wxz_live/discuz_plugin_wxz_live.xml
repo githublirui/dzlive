@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
-	<item id="Version"><![CDATA[]]></item>
-	<item id="Time"><![CDATA[2017-10-02 18:56]]></item>
-	<item id="From"><![CDATA[ ()]]></item>
+	<item id="Version"><![CDATA[X3.4]]></item>
+	<item id="Time"><![CDATA[2017-10-04 11:02]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://dzlive.local/)]]></item>
 	<item id="Data">
 		<item id="plugin">
 			<item id="available"><![CDATA[0]]></item>
@@ -16,61 +16,40 @@
 			<item id="copyright"><![CDATA[wxz-合肥微小智]]></item>
 			<item id="version"><![CDATA[1.0.0]]></item>
 			<item id="__modules">
-				<item id="general">
+				<item id="0">
+					<item id="name"><![CDATA[live]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[直播间管理]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[category]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[分类管理]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
 					<item id="name"><![CDATA[common]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="menu"><![CDATA[]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[常用功能]]></item>
 					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[11]]></item>
-					<item id="adminid"><![CDATA[1]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="special">
-					<item id="name"><![CDATA[special]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[12]]></item>
-					<item id="adminid"><![CDATA[1]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="mobile">
-					<item id="name"><![CDATA[mobile]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[28]]></item>
-					<item id="adminid"><![CDATA[1]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="nav_nav">
-					<item id="name"><![CDATA[nav]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[1]]></item>
+					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="nav_wxz_live">
-					<item id="name"><![CDATA[wxz_live]]></item>
 					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[1]]></item>
-					<item id="adminid"><![CDATA[0]]></item>
 					<item id="navtitle"><![CDATA[]]></item>
 					<item id="navicon"><![CDATA[]]></item>
 					<item id="navsubname"><![CDATA[]]></item>
@@ -78,12 +57,15 @@
 				</item>
 			</item>
 		</item>
-		<item id="version"><![CDATA[X2,X2.5,X3,X3.1,X3.2,X3.3,L1.0,F1.0]]></item>
+		<item id="version"><![CDATA[X3.4]]></item>
 		<item id="language">
 			<item id="templatelang">
 				<item id="live"><![CDATA[直播]]></item>
 				<item id="wxz_live"><![CDATA[微小智直播]]></item>
 			</item>
 		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="upgradefile"><![CDATA[upgrade.php]]></item>
 	</item>
 </root>

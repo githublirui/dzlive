@@ -1,0 +1,119 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<form method="get" autocomplete="off" action="admin.php">
+    <table class="tb tb2 fixpadding">
+        <tr>
+            <th class="partition">搜索</th>
+        </tr>
+    </table>
+    <div class="block style4">
+        <table cellspacing="3" cellpadding="3">
+            <tbody>
+                <tr>
+                    <th>分类名：</th><td><input type="text" name="name" value="{$query['name']}"></td>
+                    <th>提交时间：</th>
+                    <td colspan="3">
+                        <input type="text" name="startTime" value="{$query['startTime']}" size="10" onclick="showcalendar(event, this)"> ~
+                        <input type="text" name="endTime" value="{$query['endTime']}" size="10" onclick="showcalendar(event, this)">
+                    </td>
+                    <th>结果排序：</th>
+                    <td colspan="3">
+                        <select name="orderby">
+                            <option {if $query['orderby']=='sort_order'}selected="selected"{/if} value="sort_order">正常排序</option>	
+                            <option {if $query['orderby']=='create_at'}selected="selected"{/if} value="create_at">添加时间</option>	
+                        </select>
+                        <select name="ordersc">
+                            <option {if $query['ordersc']=='sort_order'}selected="desc"{/if} value="desc">递减</option>
+                            <option {if $query['ordersc']=='sort_order'}selected="asc"{/if} value="asc">递增</option>
+                        </select>
+                        <select name="perpage">
+                            <option {if $query['perpage']==10}selected="desc"{/if} value="10">每页显示10个</option>
+                            <option {if $query['perpage']==20}selected="desc"{/if} value="20">每页显示20个</option>
+                            <option {if $query['perpage']==50}selected="desc"{/if} value="50">每页显示50个</option>
+                            <option {if $query['perpage']==100}selected="desc"{/if} value="100">每页显示100个</option>
+                        </select>
+                        <input type="hidden" name="action" value="plugins">
+                        <input type="hidden" name="operation" value="config">
+                        <input type="hidden" name="identifier" value="{$_GET['identifier']}">
+                        <input type="hidden" name="pmod" value="{$_GET['pmod']}">
+                        <input type="submit" name="searchsubmit" value="搜索" class="btn">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform">
+    <input type="hidden" name="formhash" value="668fb0bf" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="refusal" />
+    <script>disallowfloat = 'newthread';</script>
+    <input type="hidden" name="verifysubmit" value="trun" /> 
+    <table class="tb tb2 fixpadding"> 
+        <tbody>
+            <tr>
+                <th colspan="15" class="partition">结果列表</th>
+            </tr>
+            <tr class="header hover">
+                <td>排序</td>
+                <td>分类名称</td>
+                <td>是否展示</td>
+                <td>更新时间</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr> 
+
+            {if $list}
+            {loop $list $key $row}
+            <tr>
+                <td>
+                    <input size="5" type="hidden" name="ids[]" value="{$row['id']}" />
+                    <input size="5" type="text" name="sort_orderS[]" value="{$row['sort_order']}" />
+                </td>
+                <td>{$row['name']}</td>
+                <td>{eval echo $row['is_show']==2 ? '是' : '否'}</td>
+                <td>{$row['update_at']}</td>
+                <td>{$row['create_at']}</td>
+                <td>
+                    <a href="{$this->baseUrl}&amp;act=add&amp;id={$row['id']}" class="act">编辑</a>
+                    <a onclick="delTable('wxz_live_category', '{$row['id']}')" href="javascript:;" class="act">删除</a>
+                </td>
+                {/loop}
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="submit" class="btn" id="submit_ordersubmit" name="ordersubmit" title="按 Enter 键可随时提交您的修改" value="提交">
+                </td>
+            </tr>
+            {else}
+            <tr>
+                <td colspan="6"><strong>暂无相关数据</strong></td>
+            </tr>
+            {/if}
+
+        </tbody>
+    </table> 
+    {$pageHtml}
+</form>
+<script>
+    function delTable(tableName, id) {
+        if (confirm('确定删除吗')) {
+            jQuery.ajax({
+                url: "?frame=no&action=plugins&operation=config&do=20&identifier=wxz_live&pmod=live&act=ajaxDelTable&inajax=1",
+                dataType: "json",
+                type: "post",
+                data: {"id": id, "tableName": tableName},
+                success: function (re) {
+                    if (re.status == 0) {
+                        alert(re.info);
+                    } else {
+                        window.location.reload();
+                    }
+                },
+            });
+        }
+    }
+</script>
