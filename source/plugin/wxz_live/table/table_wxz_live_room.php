@@ -6,7 +6,7 @@ if (!defined('IN_DISCUZ')) {
 
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
-class table_wxz_live_room extends discuz_table {
+class table_wxz_live_room extends table_wxz_live_base {
 
     public function __construct() {
         $this->_table = 'wxz_live_room';

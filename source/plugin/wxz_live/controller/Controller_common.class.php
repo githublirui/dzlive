@@ -48,6 +48,19 @@ class Controller_common extends Controller_base {
         include template('wxz_live:common/pages');
     }
 
+    public function qrcode() {
+        ob_end_clean();
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/qrcode/phpqrcode.php";
+
+        $data = $_GET['data'];
+        $data = urldecode($data);
+
+        $errorCorrectionLevel = "L";
+        $matrixPointSize = "4";
+        QRcode::png($data, false, $errorCorrectionLevel, $matrixPointSize);
+    }
+
 }
 
 ?>

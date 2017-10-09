@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room_setting` (
 
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `room_no` int(11) NOT NULL DEFAULT '0' COMMENT '房间号',
+  `room_no` varchar(255) DEFAULT '' COMMENT '房间号',
   `category_id` int(11) NOT NULL DEFAULT '0' COMMENT '分类id',
   `title` varchar(255) DEFAULT '' COMMENT '直播间标题',      
   `start_time` datetime NOT NULL COMMENT '直播开始时间',
@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
   `enable_redpacket` tinyint(1) DEFAULT 1 COMMENT '是否启用红包 1不启用,2启用',
   `copyright` varchar(255) DEFAULT '' COMMENT '显示版权信息',
   `rule` text COMMENT '直播规则',
+  `is_show` tinyint(1) DEFAULT '1' COMMENT '1展示，2不展示',
   `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',    
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

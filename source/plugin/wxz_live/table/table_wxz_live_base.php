@@ -68,6 +68,27 @@ class table_wxz_live_base extends discuz_table {
     }
 
     /**
+     * 通过id获取列表
+     * @param type $id
+     */
+    public function getById($id) {
+        if (!$id) {
+            return;
+        }
+        if (is_array($id)) {
+            $condition = "id in(" . implode(',', $id) . ")";
+            $list = $this->getAll($condition);
+            foreach ($list as $row) {
+                $result[$row['id']] = $row;
+            }
+            return $result;
+        } else {
+            $condition = "id={$id}";
+            return $this->getRow($condition);
+        }
+    }
+
+    /**
      * 
      * @param type $id
      * @param type $data
