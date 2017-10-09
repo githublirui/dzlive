@@ -102,7 +102,7 @@
     function delTable(tableName, id,name) {
         if (confirm('确定删除"'+name+'"吗')) {
             jQuery.ajax({
-                url: "?frame=no&action=plugins&operation=config&do=20&identifier=wxz_live&pmod=live&act=ajaxDelTable&inajax=1",
+                url: "?frame=no&action=plugins&operation=config&do=20&identifier=wxz_live&pmod=common&act=ajaxDelTable&inajax=1",
                 dataType: "json",
                 type: "post",
                 data: {"id": id, "tableName": tableName},

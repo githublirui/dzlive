@@ -13,35 +13,10 @@ class Controller_live extends Controller_base {
             ),
             array(
                 'name' => '添加直播间',
-                'act' => 'add',
+                'act' => 'liveSave',
             ),
         );
         $this->title = "直播间管理";
-    }
-
-    /**
-     * ajax 删除表数据
-     */
-    public function ajaxDelTable() {
-        ob_end_clean();
-
-        $table = $_GET['tableName'];
-        $id = $_GET['id'];
-
-        if (!$table || !$id) {
-            $this->ajaxError('参数错误');
-        }
-
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
-        $tableObj = new table_wxz_live_base(array('table' => $table, 'pk' => 'id'));
-
-        $ret = $tableObj->delById($id);
-        if ($ret) {
-            $this->ajaxSucceed();
-        } else {
-            $this->ajaxError('删除失败');
-        }
     }
 
     /**
@@ -54,12 +29,61 @@ class Controller_live extends Controller_base {
     /**
      * 直播间列表页 
      */
-    public function add() {
-        if (submitcheck('add')) {
-            echo 13333;
-            die;
+    public function liveSave() {
+        global $_G;
+        $id = $_GET['id'];
+
+        if ($id) {
+            $info = C::t('#wxz_live#wxz_live_room')->fetch($id);
         }
-        include template('wxz_live:live/add');
+        
+        //获取所有分类
+        $categorys = C::t('#wxz_live#wxz_live_category')->getShowCategorys();
+  
+        if (submitcheck('save')) {
+            if (!$_GET['name']) {
+                cpmsg('分类名称不能为空', $this->noRootUrl . "&act=add&id={$id}", 'error');
+            }
+
+            $images = wxz_uploadimg();
+
+            if ($id) {
+                //更新直播分类
+                $updateData = array(
+                    'activity_id' => 1,
+                    'name' => $_GET['name'],
+                    'desc' => $_GET['desc'],
+                    'is_show' => $_GET['is_show'],
+                    'sort_order' => $_GET['sort_order'],
+                );
+                $updateData['icon'] = $images['icon'] ? $images['icon'] : $_GET['icon'];
+                $ret = C::t('#wxz_live#wxz_live_category')->update([$id], $updateData);
+                if ($ret) {
+                    cpmsg('更新成功', $this->noRootUrl, 'success');
+                }
+            } else {
+                $roomId = random(10);
+                //添加直播分类
+                $insertData = array(
+                    'activity_id' => 1,
+                    'uid' => $_G['uid'],
+                    'name' => $_GET['name'],
+                    'icon' => $_GET['icon'],
+                    'desc' => $_GET['desc'],
+                    'is_show' => $_GET['is_show'],
+                    'sort_order' => $_GET['sort_order'],
+                    'create_at' => date('Y-m-d H:i:s'),
+                );
+                $insertData['icon'] = $images['icon'] ? $images['icon'] : $_GET['icon'];
+                $ret = C::t('#wxz_live#wxz_live_category')->insert($insertData);
+                if ($ret) {
+                    cpmsg('添加成功', $this->noRootUrl, 'success');
+                }
+            }
+        }
+
+
+        include template('wxz_live:live/liveSave');
     }
 
 }

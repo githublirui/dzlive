@@ -34,6 +34,15 @@ function runController() {
     $controller->$action();
 }
 
+/**
+ * 上传图片
+ * @param type $savedir
+ * @param image $thumb
+ * @param type $width
+ * @param type $height
+ * @param type $iskeybili
+ * @return string
+ */
 function wxz_uploadimg($savedir = 'wxz_live/', $thumb = false, $width = '220', $height = '220', $iskeybili = '1') {
 
     //上传图片

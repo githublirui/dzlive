@@ -1,0 +1,180 @@
+{template wxz_live:nav}
+<style>
+    #hour,#minute {
+        width: 30px;
+    }
+</style>
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.config.js?v=1123333333"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.all.min.js?v=555"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/lang/zh-cn/zh-cn.js?v=3"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="668fb0bf" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 ">
+        <tbody>
+            {if $info}
+            <tr class="noborder">
+                <td class="td27">
+                    直播间地址
+                </td>
+                <td class="vtop tips2" s="1">{$info['url']}</td>
+            </tr> 
+            <tr class="noborder">
+                <td class="td27">
+                    直播间二维码
+                </td>
+                <td class="vtop tips2" s="1">
+                    <img src="{$info['qrcode']}" />
+                </td>
+            </tr>
+            {/if}
+            <tr>
+                <td colspan="2" class="td27" s="1">直播间分类:</td>
+            </tr> 
+            <tr class="noborder">
+                <td class="vtop rowform">
+                    <select name="category_id">
+                        <option value="0">请选择分类</option>
+                        {loop $categorys $key $row}
+                        <option value="{$row['id']}">{$row['name']}</option>
+                        {/loop}
+                    </select>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">直播间标题:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="title" value="{$info['title']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">直播起止时间</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> 
+                    <input name="title" onclick="showcalendar(event, this, 1)" value="{$info['title']}" type="text" class="txt" size="10" /> 
+                    <input name="title" onclick="showcalendar(event, this, 1)" value="{$info['title']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">直播状态</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info.is_show==1 || !$info.is_show}checked{/if} ">
+                            <input class="radio" type="radio" name="live_status" value="1" {if $info.is_show==1 || !$info.is_show}checked="checked"{/if} />&nbsp;即将直播</li>
+                        <li class="{if $info.is_show==2}checked{/if} ">
+                            <input class="radio" type="radio" name="live_status" value="2" {if $info.is_show==2}checked="checked"{/if} />&nbsp;直播中</li>
+                        <li class="{if $info.is_show==2}checked{/if} ">
+                            <input class="radio" type="radio" name="live_status" value="3" {if $info.is_show==3}checked="checked"{/if} />&nbsp;回播</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">直播间倒计时背景色</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faq916e')">
+                <td class="vtop rowform">
+                    <input id="c1_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_bgcolor" onchange="updatecolorpreview('c1')">
+                    <input id="c1" onclick="c1_frame.location = 'static/image/admincp/getcolor.htm?c1|c1_v';
+                            showMenu({'ctrlid': 'c1'})" type="button" class="colorwd" value="" style="background: ">
+                    <span id="c1_menu" style="display: none">
+                        <iframe name="c1_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                        </iframe>
+                    </span>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">直播间倒计时字体颜色</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
+                <td class="vtop rowform" colspan="2">
+                    <input id="c2_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_fontcolor" onchange="updatecolorpreview('c2')">
+                    <input id="c2" onclick="c2_frame.location = 'static/image/admincp/getcolor.htm?c2|c2_v';
+                            showMenu({'ctrlid': 'c2'})" type="button" class="colorwd" value="" style="background: ">
+                    <span id="c2_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
+                        <iframe name="c2_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                        </iframe>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">直播间倒计时秒数颜色</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
+                <td class="vtop rowform">
+                    <input id="c3_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_timecolor" onchange="updatecolorpreview('c3')">
+                    <input id="c3" onclick="c3_frame.location = 'static/image/admincp/getcolor.htm?c3|c3_v';
+                            showMenu({'ctrlid': 'c3'})" type="button" class="colorwd" value="" style="background: ">
+                    <span id="c3_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
+                        <iframe name="c3_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                        </iframe>
+                    </span>
+                </td>
+                <td class="vtop tips2" s="1">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">是否展示在列表页:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info.is_show_list!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show_list!=2}checked="checked"{/if} />&nbsp;是</li>
+                        <li class="{if $info.is_show_list==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show_list==2}checked="checked"{/if} />&nbsp;否</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">规则:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform" style="height:400px;">
+                    <textarea type="text/plain" id="rule" style="width:700px;height:400px;" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="rule" cols="50" class="tarea">{$info['desc']}</textarea>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr> 
+            <tr>
+                <td colspan="2" class="td27" s="1">是否展示:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info.is_show!=1}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show!=1}checked="checked"{/if} />&nbsp;显示</li>
+                        <li class="{if $info.is_show==1}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show==1}checked="checked"{/if} />&nbsp;否</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+</form> 
+<script>
+    var ue = UE.getEditor('rule');
+    ue.ready(function () {
+        ue.setHeight(200);
+    });
+</script>
