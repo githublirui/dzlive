@@ -23,24 +23,99 @@ class Controller_live extends Controller_base {
      * 直播间管理
      */
     public function playerSetting() {
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
         $id = $_GET['id'];
 
         //子导航
         $this->navs = array(
             array(
                 'name' => '播放器设置',
-                'act' => 'playerSetting',
+                'act' => "playerSetting&id={$id}",
             ),
         );
         $this->title = "直播间设置";
 
-        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($id);
+        $tableRoom = C::t('#wxz_live#wxz_live_room');
+        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_player', 'pk' => 'id'));
+
+        $liveInfo = $tableRoom->getById($id);
+        $playerInfo = $tableRoom->getPlayerInfoByRoomId($id);
 
         if (!$liveInfo) {
             cpmsg('直播间不存在', $this->noRootUrl, 'error');
         }
 
+        if (submitcheck('save')) {
+            $saveData['video_type'] = $_GET["video_type"];
+            $saveData['settings'] = $this->_getPlayerSetting();
+            $saveData['player_weight'] = $_GET["player_weight"];
+            $saveData['player_height'] = $_GET["player_height"];
+
+            if ($playerInfo) {
+                $ret = $tablePlayerObj->updateById($playerInfo['id'], $saveData);
+                if ($ret) {
+                    cpmsg('更新成功', $this->noRootUrl, 'success');
+                }
+            } else {
+                $saveData['room_id'] = $id;
+                $saveData['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tablePlayerObj->insert($saveData);
+                if ($ret) {
+                    cpmsg('添加成功', $this->noRootUrl, 'success');
+                }
+            }
+        }
+
         include template('wxz_live:live/playerSetting');
+    }
+
+    /**
+     * 获取播放器设置配置
+     */
+    private function _getPlayerSetting() {
+        $result = array();
+
+        $videoType = $_GET["video_type"];
+
+        $images = wxz_uploadimg();
+
+        $result["pic{$videoType}"] = $images["pic{$videoType}"] ? $images["pic{$videoType}"] : $_GET["pic{$videoType}"];
+        $result["live_type{$videoType}"] = $_GET["live_type{$videoType}"];
+
+        switch ($videoType) {
+            case 1:
+                break;
+            case 2:
+                $result['leshi_id'] = $_GET["leshi_id"];
+                $result['leshi_uu'] = $_GET["leshi_uu"];
+                $result['leshi_vu'] = $_GET["leshi_vu"];
+                $result['leshi_pu'] = $_GET["leshi_pu"];
+                break;
+            case 3:
+                $result["lrtmp{$videoType}"] = $_GET["lrtmp{$videoType}"];
+                $result["lhls{$videoType}"] = $_GET["lhls{$videoType}"];
+                break;
+            case 4:
+                $result["lrtmp{$videoType}"] = $_GET["lrtmp{$videoType}"];
+                $result["lhls{$videoType}"] = $_GET["lhls{$videoType}"];
+                break;
+            case 5:
+                $result['xsdroomid'] = $_GET["xsdroomid"];
+                break;
+            case 6:
+                $result['video_code'] = $_GET["video_code"];
+                break;
+            case 7:
+                $result['xmroomid'] = $_GET["xmroomid"];
+                break;
+            case 8:
+                $result['sid'] = $_GET["sid"];
+                $result['ssid'] = $_GET["tpl"];
+                $result['tpl'] = $_GET["tpl"];
+                break;
+        }
+        return serialize($result);
     }
 
     /**
@@ -108,7 +183,7 @@ class Controller_live extends Controller_base {
     }
 
     /**
-     * 直播间列表页 
+     * 直播间保存页 
      */
     public function liveSave() {
         global $_G;
@@ -134,7 +209,10 @@ class Controller_live extends Controller_base {
                     'title' => $_GET['title'],
                     'start_time' => $_GET['start_time'],
                     'end_time' => $_GET['end_time'],
+                    'live_status' => $_GET['live_status'],
                     'is_show' => $_GET['is_show'],
+                    'islinkurl' => $_GET['islinkurl'],
+                    'linkurl' => $_GET['linkurl'],
                     'sort_order' => $_GET['sort_order'],
                 );
                 $updateData['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
@@ -152,7 +230,10 @@ class Controller_live extends Controller_base {
                     'title' => $_GET['title'],
                     'start_time' => $_GET['start_time'],
                     'end_time' => $_GET['end_time'],
+                    'live_status' => $_GET['live_status'],
                     'is_show' => $_GET['is_show'],
+                    'islinkurl' => $_GET['islinkurl'],
+                    'linkurl' => $_GET['linkurl'],
                     'sort_order' => $_GET['sort_order'],
                     'create_at' => date('Y-m-d H:i:s'),
                 );

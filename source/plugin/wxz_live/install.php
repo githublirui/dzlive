@@ -5,7 +5,21 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $sql = <<<EOF
- 
+
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_player` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `room_id` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
+  `video_type` tinyint(2) DEFAULT NULL,
+  `settings` text,
+  `player_weight` int(10) DEFAULT '1280',
+  `player_height` int(10) DEFAULT '720',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `room_id` (`room_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_room_setting` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `room_id` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
@@ -49,8 +63,11 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
   `enable_redpacket` tinyint(1) DEFAULT 1 COMMENT '是否启用红包 1不启用,2启用',
   `copyright` varchar(255) DEFAULT '' COMMENT '显示版权信息',
   `rule` text COMMENT '直播规则',
+  `linkurl` varchar(255) DEFAULT '' COMMENT '外链url',
+  `islinkurl` tinyint(1) DEFAULT '2' COMMENT '是否外链 1是，2否',
   `is_show` tinyint(1) DEFAULT '1' COMMENT '1展示，2不展示',
   `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',    
+  `view_num` int(11) NOT NULL DEFAULT '0' COMMENT '浏览数',    
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -73,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_category` (
   KEY `activity_id` (`activity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `pre_wxz_live_user` (
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `activity_id` int(11) NOT NULL DEFAULT '0' COMMENT '活动id',
   `nickname` varchar(255) DEFAULT NULL,
@@ -104,11 +121,11 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_setting` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;    
 
-CREATE TABLE `pre_wxz_live_banner` (
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_banner` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `img` varchar(255) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL,
-  `is_show` tinyint(1) DEFAULT NULL,
+  `is_show` tinyint(1) DEFAULT NULL DEFAULT '1' COMMENT '1显示 2不显示',
   `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

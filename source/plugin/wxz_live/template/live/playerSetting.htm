@@ -1,240 +1,324 @@
 {template wxz_live:nav}
-<script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.config.js?v=1123333333"></script>
-<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.all.min.js?v=555"></script>
-<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/lang/zh-cn/zh-cn.js?v=3"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
 <form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
     <input type="hidden" name="formhash" value="668fb0bf" />
     <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
     <input type="hidden" name="anchor" value="" /> 
     <table class="tb tb2 ">
         <tbody>
-            {if $info}
             <tr class="noborder">
                 <td class="td27">
-                    直播间地址
+                    直播间名称  
                 </td>
-                <td class="vtop tips2" s="1">{$info['url']}</td>
-            </tr> 
-            <tr class="noborder">
-                <td class="td27">
-                    直播间二维码
-                </td>
-                <td class="vtop tips2" s="1">
-                    <img src="{$info['qrcode']}" />
-                </td>
-            </tr>
-            {/if}
-            <tr>
-                <td colspan="2" class="td27" s="1">直播间分类:</td>
-            </tr> 
-            <tr class="noborder">
-                <td class="vtop rowform">
-                    <select name="category_id">
-                        <option value="0">请选择分类</option>
-                        {loop $categorys $key $row}
-                        <option value="{$row['id']}" {if $row['id']==$info['category_id']} selected="selected" {/if}>{$row['name']}</option>
-                        {/loop}
-                    </select>
-                </td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="td27" s="1">直播间标题:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform"> <input name="title" value="{$info['title']}" type="text" class="txt" size="10" /></td>
-                <td class="vtop tips2" s="1"></td>
+                <td class="vtop tips2" s="1">{$liveInfo['title']}</td>
             </tr>
 
             <tr>
-                <td colspan="2" class="td27" s="1">直播起止时间</td>
+                <td colspan="2" class="td27" s="1">直播类型:</td>
             </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <ul class="nofloat" onmouseover="altStyle(this);">
+                        <li class="{if $playerInfo['video_type']==1}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="1" {if $playerInfo['video_type']==1}checked="checked"{/if} />&nbsp;图片</li>
+                        <li class="{if $playerInfo['video_type']==2}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="2" {if $playerInfo['video_type']==2}checked="checked"{/if} />&nbsp;乐视</li>
+                        <li class="{if $playerInfo['video_type']==3}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="3" {if $playerInfo['video_type']==3}checked="checked"{/if} />&nbsp;阿里云</li>
+                        <li class="{if $playerInfo['video_type']==4}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="4" {if $playerInfo['video_type']==4}checked="checked"{/if} />&nbsp;M3U8视频格式(如：奥点云、腾讯云、七牛云、青果、萤石等自建服务器)</li>
+                        <li class="{if $playerInfo['video_type']==5}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="5" {if $playerInfo['video_type']==5}checked="checked"{/if} />&nbsp;小水滴</li>
+                        <li class="{if $playerInfo['video_type']==6}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="6" {if $playerInfo['video_type']==6}checked="checked"{/if} />&nbsp;其他播放器代码(如：优酷、土豆、腾讯、爱奇艺等视频网站)</li>
+                        <li class="{if $playerInfo['video_type']==7}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="7" {if $playerInfo['video_type']==7}checked="checked"{/if} />&nbsp;熊猫直播</li>
+                        <li class="{if $playerInfo['video_type']==8}checked{/if} video_type"><input class="radio video_type_radio" type="radio" name="video_type" value="8" {if $playerInfo['video_type']==8}checked="checked"{/if} />&nbsp;YY</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1">选择播放器类型</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">视频分辨率: </td>
+            </tr>
             <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
                 <td class="vtop rowform"> 
-                    <input name="start_time" onclick="showcalendar(event, this, 1)" value="{$info['start_time']}" type="text" class="txt" size="10" /> 
-                    <input name="end_time" onclick="showcalendar(event, this, 1)" value="{$info['end_time']}" type="text" class="txt" size="10" />
+                    <input size="7" type="text" name="player_weight" value="1280"> X
+                    <input size="7" type="text" name="player_height" value="720">
                 </td>
-                <td class="vtop tips2" s="1"></td>
+                <td class="vtop tips2" s="1">默认：1280*720</td>
             </tr>
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">直播状态</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                            <td class="vtop rowform"> 
-                                <ul class="nofloat" onmouseover="altStyle(this);">
-                                <ul onmouseover="altStyle(this);">
-                                    <li class="{if $info.is_show==1 || !$info.is_show}checked{/if} ">
-                                        <input class="radio" type="radio" name="live_status" value="1" {if $info.is_show==1 || !$info.is_show}checked="checked"{/if} />&nbsp;即将直播</li>
-                                    <li class="{if $info.is_show==2}checked{/if} ">
-                                        <input class="radio" type="radio" name="live_status" value="2" {if $info.is_show==2}checked="checked"{/if} />&nbsp;直播中</li>
-                                    <li class="{if $info.is_show==2}checked{/if} ">
-                                        <input class="radio" type="radio" name="live_status" value="3" {if $info.is_show==3}checked="checked"{/if} />&nbsp;回播</li>
-                                </ul>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>-->
 
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时背景色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faq916e')">
-                            <td class="vtop rowform">
-                                <input id="c1_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_bgcolor" onchange="updatecolorpreview('c1')">
-                                <input id="c1" onclick="c1_frame.location = 'static/image/admincp/getcolor.htm?c1|c1_v';
-                                        showMenu({'ctrlid': 'c1'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c1_menu" style="display: none">
-                                    <iframe name="c1_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时字体颜色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
-                            <td class="vtop rowform" colspan="2">
-                                <input id="c2_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_fontcolor" onchange="updatecolorpreview('c2')">
-                                <input id="c2" onclick="c2_frame.location = 'static/image/admincp/getcolor.htm?c2|c2_v';
-                                        showMenu({'ctrlid': 'c2'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c2_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
-                                    <iframe name="c2_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时秒数颜色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
-                            <td class="vtop rowform">
-                                <input id="c3_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_timecolor" onchange="updatecolorpreview('c3')">
-                                <input id="c3" onclick="c3_frame.location = 'static/image/admincp/getcolor.htm?c3|c3_v';
-                                        showMenu({'ctrlid': 'c3'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c3_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
-                                    <iframe name="c3_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                            <td class="vtop tips2" s="1">
-                            </td>
-                        </tr>-->
-
+        <tbody style="{if $playerInfo['video_type']!=1}display:none;{/if}" class="type1 common-type">
             <tr>
-                <td colspan="2" class="td27" s="1">主题图片:</td>
+                <td colspan="2" class="td27" s="1">图片:</td>
             </tr>
             <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
                 <td class="vtop rowform">
-                    <input id="fileY4_0" style="{if $info['theme_pic']}display:none{/if}" name="theme_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
-                    <input id="fileY4_1" style="{if !$info['theme_pic']}display:none{/if}" name="theme_pic" value="{$info['theme_pic']}" type="text" class="txt marginbot" size="10">
+                    <input id="fileY1_0" style="{if $playerInfo['settings']['pic1']}display:none{/if}" name="pic1" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY1_1" style="{if !$playerInfo['settings']['pic1']}display:none{/if}" name="pic1" value="{$playerInfo['settings']['pic1']}" type="text" class="txt marginbot" size="10">
                     <br>
-                    <a id="fileY4_0a" style="{if !$info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
+                    <a id="fileY1_0a" style="{if !$playerInfo['settings']['pic1']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_1a').style.fontWeight = '';
                             this.style.fontWeight = 'bold';
-                            $('fileY4_1').name = 'TMPtheme_pic';
-                            $('fileY4_0').name = 'theme_pic';
-                            $('fileY4_0').style.display = '';
-                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
-                    <a id="fileY4_1a" style="{if $info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
+                            $('fileY1_1').name = 'TMPpic1';
+                            $('fileY1_0').name = 'pic1';
+                            $('fileY1_0').style.display = '';
+                            $('fileY1_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY1_1a" style="{if $playerInfo['settings']['pic1']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_0a').style.fontWeight = '';
                             this.style.fontWeight = 'bold';
-                            $('fileY4_0').name = 'TMPtheme_pic';
-                            $('fileY4_1').name = 'theme_pic';
-                            $('fileY4_1').style.display = '';
-                            $('fileY4_0').style.display = 'none'">输入 URL
+                            $('fileY1_0').name = 'TMPpic1';
+                            $('fileY1_1').name = 'pic1';
+                            $('fileY1_1').style.display = '';
+                            $('fileY1_0').style.display = 'none'">输入 URL
                     </a>
                 </td>
                 <td class="vtop tips2" s="1">
-                    {if $info['theme_pic']}
-                    <img src="{$info['theme_pic']}" style="width:100px;height:100px;">
+                    {if $playerInfo['settings']['pic1']}
+                    <img src="{$playerInfo['settings']['pic1']}" style="width:100px;height:100px;">
                     {/if}
                 </td>
             </tr>
-            <tr>
-                <td colspan="2" class="td27" s="1">封面图片:</td>
-            </tr>
-            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
-                <td class="vtop rowform">
-                    <input id="fileY4_0" style="{if $info['cover_pic']}display:none{/if}" name="cover_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
-                    <input id="fileY4_1" style="{if !$info['cover_pic']}display:none{/if}" name="cover_pic" value="{$info['cover_pic']}" type="text" class="txt marginbot" size="10">
-                    <br>
-                    <a id="fileY4_0a" style="{if !$info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_1').name = 'TMPcover_pic';
-                            $('fileY4_0').name = 'cover_pic';
-                            $('fileY4_0').style.display = '';
-                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
-                    <a id="fileY4_1a" style="{if $info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_0').name = 'TMPcover_pic';
-                            $('fileY4_1').name = 'cover_pic';
-                            $('fileY4_1').style.display = '';
-                            $('fileY4_0').style.display = 'none'">输入 URL
-                    </a>
-                </td>
-                <td class="vtop tips2" s="1">
-                    {if $info['cover_pic']}
-                    <img src="{$info['cover_pic']}" style="width:100px;height:100px;">
-                    {/if}
-                </td>
-            </tr>
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">是否展示在列表页:</td>
-                        </tr>
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                            <td class="vtop rowform"> 
-                                <ul class="nofloat" onmouseover="altStyle(this);">
-                                <ul onmouseover="altStyle(this);">
-                                    <li class="{if $info.is_show_list!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show_list!=2}checked="checked"{/if} />&nbsp;是</li>
-                                    <li class="{if $info.is_show_list==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show_list==2}checked="checked"{/if} />&nbsp;否</li>
-                                </ul>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>-->
+        </tbody>
 
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">规则:</td>
-                        </tr>
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                            <td class="vtop rowform" style="height:400px;">
-                                <textarea type="text/plain" id="rule" style="width:700px;height:400px;" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="rule" cols="50" class="tarea">{$info['desc']}</textarea>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>-->
-
+        <tbody style="{if $playerInfo['video_type']!=2}display:none;{/if}" class="type2 common-type">
             <tr>
-                <td colspan="2" class="td27" s="1">排序:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform"> <input name="sort_order" value="{$info['sort_order']}" type="text" class="txt" size="10" /></td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
-
-            <tr>
-                <td colspan="2" class="td27" s="1">是否展示:</td>
+                <td colspan="2" class="td27" s="1">乐视云视频类型:</td>
             </tr> 
             <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
                 <td class="vtop rowform"> 
                     <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
                     <ul onmouseover="altStyle(this);">
-                        <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=1}checked="checked"{/if} />&nbsp;显示</li>
-                        <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==1}checked="checked"{/if} />&nbsp;不显示</li>
+                        <li class="{if $playerInfo['settings']['live_type2']!=2}checked{/if} live_type"><input class="radio" type="radio" name="live_type2" value="1" {if $playerInfo['settings']['live_type2']!=2}checked="checked"{/if} />&nbsp;直播</li>
+                        <li class="{if $playerInfo['settings']['live_type2']==2}checked{/if} live_type"><input class="radio" type="radio" name="live_type2" value="2" {if $playerInfo['settings']['live_type2']==2}checked="checked"{/if} />&nbsp;点播</li>
                     </ul>
                 </td>
                 <td class="vtop tips2" s="1"></td>
             </tr>
             <tr>
-                <td colspan="15">
-                    <div class="fixsel">
-                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
-                    </div>
+                <td colspan="2" class="td27" s="1">乐视云id:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="leshi_id" value="{$playerInfo['settings']['leshi_id']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">（选择直播时填写）</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">乐视云点播uu:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="leshi_uu" value="{$playerInfo['settings']['leshi_uu']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">乐视云点播uu（选择点播时填写）</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">乐视云点播vu:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="leshi_vu" value="{$playerInfo['settings']['leshi_vu']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">乐视云点播vu（选择点播时填写）</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">乐视云点播pu:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="leshi_pu" value="{$playerInfo['settings']['leshi_pu']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">乐视云点播pu、可以不填写</td>
+            </tr>
+        </tbody>
+
+        <tbody style="{if $playerInfo['video_type']!=3}display:none;{/if}" class="type3 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">阿里云:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $playerInfo['settings']['live_type3']!=2}checked{/if} live_type"><input class="radio" type="radio" name="live_type3" value="1" {if $playerInfo['settings']['live_type3']!=2}checked="checked"{/if} />&nbsp;直播</li>
+                        <li class="{if $playerInfo['settings']['live_type3']==2}checked{/if} live_type"><input class="radio" type="radio" name="live_type3" value="2" {if $playerInfo['settings']['live_type3']==2}checked="checked"{/if} />&nbsp;点播</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">视频封面:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY3_0" style="{if $playerInfo['settings']['pic3']}display:none{/if}" name="pic3" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY3_1" style="{if !$playerInfo['settings']['pic3']}display:none{/if}" name="pic3" value="{$playerInfo['settings']['pic3']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY3_0a" style="{if !$playerInfo['settings']['pic3']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY3_1').name = 'TMPpic3';
+                            $('fileY3_0').name = 'pic3';
+                            $('fileY3_0').style.display = '';
+                            $('fileY3_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY3_1a" style="{if $playerInfo['settings']['pic3']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY3_0').name = 'TMPpic3';
+                            $('fileY3_1').name = 'pic3';
+                            $('fileY3_1').style.display = '';
+                            $('fileY3_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $playerInfo['settings']['pic3']}
+                    <img src="{$playerInfo['settings']['pic3']}" style="width:100px;height:100px;">
+                    {/if}
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">rtmp （电脑端播放用）:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="lrtmp3" value="{$playerInfo['settings']['lrtmp3']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">hls（手机端播放用）:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="lhls3" value="{$playerInfo['settings']['lhls3']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">请填写【.M3U8】结尾的视频流地址</td>
+            </tr>
+        </tbody>
+        
+        <tbody style="{if $playerInfo['video_type']!=4}display:none;{/if}" class="type4 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">奥点云视频类型:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $playerInfo['settings']['live_type4']!=2}checked{/if} live_type"><input class="radio" type="radio" name="live_type4" value="1" {if $playerInfo['settings']['live_type4']!=2}checked="checked"{/if} />&nbsp;直播</li>
+                        <li class="{if $playerInfo['settings']['live_type4']==2}checked{/if} live_type"><input class="radio" type="radio" name="live_type4" value="2" {if $playerInfo['settings']['live_type4']==2}checked="checked"{/if} />&nbsp;点播</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">视频封面:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY4_0" style="{if $playerInfo['settings']['pic4']}display:none{/if}" name="pic4" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY4_1" style="{if !$playerInfo['settings']['pic4']}display:none{/if}" name="pic4" value="{$playerInfo['settings']['pic4']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY4_0a" style="{if !$playerInfo['settings']['pic4']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_1').name = 'TMPpic4';
+                            $('fileY4_0').name = 'pic4';
+                            $('fileY4_0').style.display = '';
+                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY4_1a" style="{if $playerInfo['settings']['pic4']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_0').name = 'TMPpic4';
+                            $('fileY4_1').name = 'pic4';
+                            $('fileY4_1').style.display = '';
+                            $('fileY4_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $playerInfo['settings']['pic4']}
+                    <img src="{$playerInfo['settings']['pic4']}" style="width:100px;height:100px;">
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">rtmp （电脑端播放用）:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="lrtmp4" value="{$playerInfo['settings']['lrtmp4']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">hls（手机端播放用）:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="lhls4" value="{$playerInfo['settings']['lhls4']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">请填写【.M3U8】结尾的视频流地址</td>
+            </tr>
+        </tbody>
+        
+        <tbody style="{if $playerInfo['video_type']!=5}display:none;{/if}" class="type5 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">小水滴底座的sn码:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="xsdroomid" value="{$playerInfo['settings']['xsdroomid']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        </tbody>
+        
+        <tbody style="{if $playerInfo['video_type']!=6}display:none;{/if}" class="type6 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">第三方视频类型:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $playerInfo['settings']['live_type6']!=2}checked{/if} live_type"><input class="radio" type="radio" name="live_type6" value="1" {if $playerInfo['settings']['live_type6']!=2}checked="checked"{/if} />&nbsp;直播</li>
+                        <li class="{if $playerInfo['settings']['live_type6']==2}checked{/if} live_type"><input class="radio" type="radio" name="live_type6" value="2" {if $playerInfo['settings']['live_type6']==2}checked="checked"{/if} />&nbsp;点播</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">播放器代码:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="video_code" cols="50" class="tarea">{$playerInfo['settings']['video_code']}</textarea>
+                </td>
+                <td class="vtop tips2" s="1">播放器代码</td>
+            </tr>
+        </tbody>
+        
+        <tbody style="{if $playerInfo['video_type']!=7}display:none;{/if}" class="type7 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">熊猫直播房间号:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="xmroomid" value="{$playerInfo['settings']['xmroomid']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        </tbody>
+        
+        <tbody style="{if $playerInfo['video_type']!=8}display:none;{/if}" class="type8 common-type">
+            <tr>
+                <td colspan="2" class="td27" s="1">sid:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="sid" value="{$playerInfo['settings']['sid']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">ssid:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="ssid" value="{$playerInfo['settings']['ssid']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">tpl:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="tpl" value="{$playerInfo['settings']['tpl']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        </tbody>
+        
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type='hidden' value='{$id}' name="id" />
+                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                </div>
+            </td>
+        </tr>
         </tbody>
     </table> 
 </form> 
 <script>
-//    var ue = UE.getEditor('rule');
-//    ue.ready(function () {
-//        ue.setHeight(200);
-//    });
+    jQuery(".video_type").on('click', function () {
+        var type = jQuery(this).children().val();
+        jQuery(".common-type").hide();
+        jQuery(".type" + type).show();
+    });
 </script>
