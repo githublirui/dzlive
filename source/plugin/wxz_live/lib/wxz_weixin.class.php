@@ -20,9 +20,9 @@ class wxz_weixin extends WeChatClient {
         if (!$appsecret) {
             $appsecret = $_G['wechat']['setting']['wechat_appsecret'];
         }
-        
+
         parent::__construct($appid, $appsecret);
-        
+
         $this->appid = $appid;
         $this->appsecret = $appsecret;
     }
@@ -114,6 +114,51 @@ class wxz_weixin extends WeChatClient {
         $oauthUrl = $this->getOAuthConnectUri($oauthUrl, $stateKey, 'snsapi_userinfo');
         header('Location: ' . $oauthUrl);
         exit;
+    }
+
+    /**
+     * 发送模板消息
+     * @param type $touser
+     * @param type $template_id
+     * @param type $postdata
+     * @param type $url
+     * @param type $topcolor
+     * @return boolean
+     */
+    public function sendTplNotice($touser, $template_id, $postdata, $url = '', $topcolor = '#FF683F') {
+        if (empty($touser)) {
+            return error(-1, '参数错误,粉丝openid不能为空');
+        }
+        if (empty($template_id)) {
+            return error(-1, '参数错误,模板标示不能为空');
+        }
+        if (empty($postdata) || !is_array($postdata)) {
+            return error(-1, '参数错误,请根据模板规则完善消息内容');
+        }
+        $token = $this->getAccessToken();
+        if (is_error($token)) {
+            return $token;
+        }
+
+        $data = array();
+        $data['touser'] = $touser;
+        $data['template_id'] = trim($template_id);
+        $data['url'] = trim($url);
+        $data['topcolor'] = trim($topcolor);
+        $data['data'] = $postdata;
+        $data = json_encode($data);
+        $post_url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$token}";
+        $response = ihttp_request($post_url, $data);
+        if (is_error($response)) {
+            return error(-1, "访问公众平台接口失败, 错误: {$response['message']}");
+        }
+        $result = @json_decode($response['content'], true);
+        if (empty($result)) {
+            return error(-1, "接口调用失败, 元数据: {$response['meta']}");
+        } elseif (!empty($result['errcode'])) {
+            return error(-1, "访问微信接口错误, 错误代码: {$result['errcode']}, 错误信息: {$result['errmsg']},信息详情：{$this->error_code($result['errcode'])}");
+        }
+        return true;
     }
 
 }
