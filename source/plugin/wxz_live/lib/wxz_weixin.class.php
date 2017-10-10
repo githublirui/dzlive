@@ -9,10 +9,22 @@ include_once DISCUZ_ROOT . "./source/plugin/wechat/wechat.lib.class.php";
 
 class wxz_weixin extends WeChatClient {
 
-    public function __construct($appid, $appsecret = '') {
+    public function __construct($appid = '', $appsecret = '') {
+        global $_G;
+
+        $_G['wechat']['setting'] = unserialize($_G['setting']['mobilewechat']);
+
+        if (!$appid) {
+            $appid = $_G['wechat']['setting']['wechat_appId'];
+        }
+        if (!$appsecret) {
+            $appsecret = $_G['wechat']['setting']['wechat_appsecret'];
+        }
+        
         parent::__construct($appid, $appsecret);
-        $this->_appid = $appid;
-        $this->_appsecret = $appsecret;
+        
+        $this->appid = $appid;
+        $this->appsecret = $appsecret;
     }
 
     /**
@@ -21,8 +33,8 @@ class wxz_weixin extends WeChatClient {
      */
     public function getJsApiTicket() {
         global $_G;
-        $appid = $this->_appid;
-        $appsecret = $this->_appsecret;
+        $appid = $this->appid;
+        $appsecret = $this->appsecret;
 
         $cachename = "wechat_jsticket_" . $appid;
         loadcache($cachename);
@@ -70,12 +82,38 @@ class wxz_weixin extends WeChatClient {
         $string1 = "jsapi_ticket={$jsapiTicket}&noncestr={$nonceStr}&timestamp={$timestamp}&url={$url}";
         $signature = sha1($string1);
         $config = array(
-            "appId" => $this->_appid,
+            "appId" => $this->appid,
             "nonceStr" => $nonceStr,
             "timestamp" => "$timestamp",
             "signature" => $signature,
         );
         return $config;
+    }
+
+    /**
+     * 获取授权用户信息并插入用户表
+     */
+    public function mc_oauth_userinfo() {
+        global $_G;
+        $key = 'wxz_openid_' . $this->appid;
+        $openId = getcookie($key);
+
+        if ($openId) {
+            $userInfo = C::t('#wxz_live#wxz_live_user')->getByOpenId($openId);
+            if ($userInfo) {
+                return $userInfo;
+            }
+        }
+
+        $state = $_SERVER['REQUEST_URI'];
+        $stateKey = substr(md5($state), 0, 8);
+
+        dsetcookie('wxz_forward', $state, 120);
+
+        $oauthUrl = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=wxoauth";
+        $oauthUrl = $this->getOAuthConnectUri($oauthUrl, $stateKey, 'snsapi_userinfo');
+        header('Location: ' . $oauthUrl);
+        exit;
     }
 
 }
