@@ -10,8 +10,17 @@ class Controller_index extends Controller_base {
      * 直播首页 
      */
     public function index() {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
+        $_G['wechat']['setting'] = unserialize($_G['setting']['mobilewechat']);
+     
+        $wxzWeixin = new wxz_weixin($_G['wechat']['setting']['wechat_appId'], $_G['wechat']['setting']['wechat_appsecret']);
+        
+        $jssdkConfig = $wxzWeixin->getJssdkConfig();
+   
+                
         //获取首页banner
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_banner', 'pk' => 'id'));
         $condition = "is_show=1";
@@ -51,12 +60,12 @@ class Controller_index extends Controller_base {
 
         foreach ($list as $key => $value) {
             $tmp[$key . '"'] = $value;
-            if ($value['start_time']!='0000-00-00 00:00:00') {
+            if ($value['start_time'] != '0000-00-00 00:00:00') {
                 $tmp[$key . '"']['start_time'] = strtotime($value['start_time']);
             } else {
                 $tmp[$key . '"']['start_time'] = strtotime($value['create_at']);
             }
-        
+
             $tmp[$key . '"']['end_time'] = strtotime($value['end_time']);
             $tmp[$key . '"']['linkurl'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$value['room_no']}";
         }

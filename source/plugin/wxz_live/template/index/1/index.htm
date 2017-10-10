@@ -90,28 +90,28 @@
             $(function () {
                 wx.config({
                     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                    appId: "{$_W['account']['jssdkconfig']['appId']}",
-                    timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
-                    nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
-                    signature: "{$_W['account']['jssdkconfig']['signature']}",
+                    appId: "{$jssdkConfig['appId']}",
+                    timestamp: "{$jssdkConfig['timestamp']}",
+                    nonceStr: "{$jssdkConfig['nonceStr']}",
+                    signature: "{$jssdkConfig['signature']}",
                     jsApiList: ['getLocation', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'hideMenuItems', 'previewImage'] // 必填，需要使用的JS接口列表，
                 });
                 wx.ready(function () {
                     wx.onMenuShareAppMessage({
-                        title: "{$setting['list_share_title']}",
-                        desc: "{$setting['list_share_desc']}",
-                        link: "{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index',array('share_uid' => $uid,'rid'=>$rid)))}",
-                        imgUrl: "{php echo $_W['attachurl'].$setting['list_share_img']}",
+                        title: "{$indexSettings[2]['title']}",
+                        desc: "{$indexSettings[2]['desc']}",
+                        link: "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=index&share_uid={$uid}",
+                        imgUrl: "{$_G['siteurl']}{$indexSettings[2]['img']}",
                         success: function () {
                         },
                         cancel: function () {
                         }
                     });
                     wx.onMenuShareTimeline({
-                        title: "{$setting['list_share_title']}",
-                        desc: "{$setting['list_share_desc']}",
-                        link: "{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index',array('share_uid' => $uid,'rid'=>$rid)))}",
-                        imgUrl: "{php echo $_W['attachurl'].$setting['list_share_img']}",
+                        title: "{$indexSettings[2]['title']}",
+                        desc: "{$indexSettings[2]['desc']}",
+                        link: "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=index&share_uid={$uid}",
+                        imgUrl: "{$_G['siteurl']}{$indexSettings[2]['img']}",
                         success: function () {
                         },
                         cancel: function () {
@@ -234,7 +234,7 @@
                                     var time = dateline.getFullYear() + '-' + (dateline.getMonth() + 1) + '-' + dateline.getDate() + ' ' + (dateline.getHours() < 10 ? '0' + dateline.getHours() : dateline.getHours()) + ':' + (dateline.getMinutes() < 10 ? '0' + dateline.getMinutes() : dateline.getMinutes()) + ':' + (dateline.getSeconds() < 10 ? '0' + dateline.getSeconds() : dateline.getSeconds());
                                     str += '<li class="con-list-box clearfix" id="topic' + value.id + '">';
                                     if (value.islinkurl == 0) {
-                                        str += '<a href="{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno='+value.room_no+'">';
+                                        str += '<a href="{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno=' + value.room_no + '">';
                                     } else {
                                         str += '<a href="' + value.linkurl + '">';
                                     }
@@ -263,7 +263,7 @@
                                     }
                                     str += '</p></div><h2 class="list-title">' + value.title + '</h2><p class="list-time">' + time + '</p></a><div class="list-bottom clearfix"><p class="list-bottom-pv"><i class="iconfont fonteye">&#xe8c2;</i>&nbsp;' + value.view_num + '次浏览</p>';
                                     if (value.islinkurl == 0) {
-                                        str += '<a href="'+ value.linkurl +'"><p class="list-bottom-btn">进入直播间</p></a>';
+                                        str += '<a href="' + value.linkurl + '"><p class="list-bottom-btn">进入直播间</p></a>';
                                     } else {
                                         str += '<a href="' + value.linkurl + '"><p class="list-bottom-btn">进入直播间</p></a>';
                                     }
