@@ -1,0 +1,165 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 ">
+        <tbody>
+            {template wxz_live:live/liveSettingHead}
+            <tr>
+                <td colspan="2" class="td27" s="1">活动封面标题</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="activity_title" value="{$info['activity_title']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">活动封面标题</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">活动封面:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY1_0" style="{if $info['activity_img']}display:none{/if}" name="activity_img" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY1_1" style="{if !$info['activity_img']}display:none{/if}" name="activity_img" value="{$info['activity_img']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY1_0a" style="{if !$info['activity_img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_1').name = 'TMPactivity_img';
+                            $('fileY1_0').name = 'activity_img';
+                            $('fileY1_0').style.display = '';
+                            $('fileY1_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY1_1a" style="{if $info['activity_img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_0').name = 'TMPactivity_img';
+                            $('fileY1_1').name = 'activity_img';
+                            $('fileY1_1').style.display = '';
+                            $('fileY1_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $info['activity_img']}
+                    <img src="{$info['activity_img']}" style="width:100px;height:100px;">
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">活动封面描述</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="activity_desc" value="{$info['activity_desc']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">活动封面描述</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">关注模式:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <ul class="nofloat" onmouseover="altStyle(this);">
+                        <li class="{if $info['follow_type']==1}checked{/if} follow_type"><input class="radio follow_type_radio" type="radio" name="follow_type" value="1" {if $info['follow_type']==1}checked="checked"{/if} />&nbsp;强制关注</li>
+                        <li class="{if !$info['follow_type'] || $info['follow_type']==2}checked{/if} follow_type"><input class="radio follow_type_radio" type="radio" name="follow_type" value="2" {if !$info['follow_type'] || $info['follow_type']==2}checked="checked"{/if} />&nbsp;普通(用户可点击弹出二维码)</li>
+                        <li class="{if $info['follow_type']==3}checked{/if} follow_type"><input class="radio follow_type_radio" type="radio" name="follow_type" value="3" {if $info['follow_type']==3}checked="checked"{/if} />&nbsp;自动弹出可关闭二维码</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1">选择关注模式</td>
+            </tr>
+
+        <tbody style="{if $info['follow_type']!==3}display:none;{/if}" class="follow_type3 common_follow_type">
+            <tr>
+                <td colspan="2" class="td27" s="1">关注模式三缓存时间</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="follow_cache_day" value="{$info['follow_cache_day']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">单位天，0则表示用户每次进入直播间都弹出二维码，否则表示每N天弹出一次二维码</td>
+            </tr>
+        </tbody>
+
+        <tr>
+            <td colspan="2" class="td27" s="1">引导关注链接</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+            <td class="vtop rowform">
+                <input name="follow_url" value="{$info['follow_url']}" type="text" class="txt" size="10" />
+            </td>
+            <td class="vtop tips2" s="1">引导关注链接</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">引导关注二维码</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+            <td class="vtop rowform">
+                <input id="fileY2_0" style="{if $info['follow_qrcode']}display:none{/if}" name="follow_qrcode" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                <input id="fileY2_1" style="{if !$info['follow_qrcode']}display:none{/if}" name="follow_qrcode" value="{$info['follow_qrcode']}" type="text" class="txt marginbot" size="10">
+                <br>
+                <a id="fileY2_0a" style="{if !$info['follow_qrcode']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY2_1a').style.fontWeight = '';
+                        this.style.fontWeight = 'bold';
+                        $('fileY2_1').name = 'TMPfollow_qrcode';
+                        $('fileY2_0').name = 'follow_qrcode';
+                        $('fileY2_0').style.display = '';
+                        $('fileY2_1').style.display = 'none'">上传文件</a>&nbsp;
+                <a id="fileY2_1a" style="{if $info['follow_qrcode']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY2_0a').style.fontWeight = '';
+                        this.style.fontWeight = 'bold';
+                        $('fileY2_0').name = 'TMPfollow_qrcode';
+                        $('fileY2_1').name = 'follow_qrcode';
+                        $('fileY2_1').style.display = '';
+                        $('fileY2_0').style.display = 'none'">输入 URL
+                </a>
+            </td>
+            <td class="vtop tips2" s="1">
+                {if $info['follow_qrcode']}
+                <img src="{$info['follow_qrcode']}" style="width:100px;height:100px;">
+                {/if}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">游客头像:</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+            <td class="vtop rowform">
+                <input id="fileY3_0" style="{if $info['default_avatar']}display:none{/if}" name="default_avatar" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                <input id="fileY3_1" style="{if !$info['default_avatar']}display:none{/if}" name="default_avatar" value="{$info['default_avatar']}" type="text" class="txt marginbot" size="10">
+                <br>
+                <a id="fileY3_0a" style="{if !$info['default_avatar']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_1a').style.fontWeight = '';
+                        this.style.fontWeight = 'bold';
+                        $('fileY3_1').name = 'TMPdefault_avatar';
+                        $('fileY3_0').name = 'default_avatar';
+                        $('fileY3_0').style.display = '';
+                        $('fileY3_1').style.display = 'none'">上传文件</a>&nbsp;
+                <a id="fileY3_1a" style="{if $info['default_avatar']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_0a').style.fontWeight = '';
+                        this.style.fontWeight = 'bold';
+                        $('fileY3_0').name = 'TMPdefault_avatar';
+                        $('fileY3_1').name = 'default_avatar';
+                        $('fileY3_1').style.display = '';
+                        $('fileY3_0').style.display = 'none'">输入 URL
+                </a>
+            </td>
+            <td class="vtop tips2" s="1">
+                {if $info['default_avatar']}
+                <img src="{$info['default_avatar']}" style="width:100px;height:100px;">
+                {/if}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type='hidden' value='{$id}' name="id" />
+                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table> 
+</form> 
+<script>
+    jQuery(".follow_type").on('click', function () {
+        var type = jQuery(this).children().val();
+        jQuery(".common_follow_type").hide();
+        jQuery(".follow_type" + type).show();
+    });
+</script>

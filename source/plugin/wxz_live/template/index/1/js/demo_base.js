@@ -342,6 +342,9 @@ function onReceiveMessage(data, container, faceMap) {
 				}
 				scrollend();
 				break;
+			case 'into'://进入直播间提示
+				enter(data.body,2000);
+				break;
 			case 'cancelshutup':
 
 				var fromAccount;
