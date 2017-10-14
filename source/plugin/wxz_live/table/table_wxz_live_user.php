@@ -48,12 +48,27 @@ class table_wxz_live_user extends table_wxz_live_base {
     public function authUser($settings) {
         global $_G;
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+        $key = "wxz_live_user_info";
+
+        $userInfo = getcookie($key);
+
+        if ($userInfo) {
+            $userInfo = unserialize($userInfo);
+            if (!$userInfo['headimgurl']) {
+                $userInfo['headimgurl'] = $settings['default_avatar'];
+            }
+            return $userInfo;
+        }
+
         if (strpos($userAgent, 'MicroMessenger') === false) {
             $openid = getip();
+            $openid = '221.216.152.136'; //debug
             if (!$openid) {
-                cpmsg("确认身份失败,无法访问");
+                showmessage("确认身份失败,无法访问");
             }
             $ipInfo = getIpInfo($openid);
+
             $data = array(
                 'openid' => $openid,
                 'province' => mb_substr($ipInfo['data']['region'], 0, -1),
@@ -64,12 +79,19 @@ class table_wxz_live_user extends table_wxz_live_base {
                 'sex' => 0,
             );
             $this->updateUser($data);
-            return $data;
+            $userInfo = $data;
         } else {
             include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
             $wxz_weixin = new wxz_weixin();
-            return $wxz_weixin->mc_oauth_userinfo();
+            $user = $wxz_weixin->mc_oauth_userinfo();
+            if (!$user['headimgurl']) {
+                $user['headimgurl'] = $settings['default_avatar'];
+            }
+            $userInfo = $user;
         }
+
+        dsetcookie($key, serialize($userInfo), 2592000);
+        return $userInfo;
     }
 
 }

@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room_setting` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `roomid` (`roomid`)
+  KEY `room_id` (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '直播间配置表';
 
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (

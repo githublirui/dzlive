@@ -17,6 +17,13 @@ class Controller_base {
         $this->baseUrl = sprintf($this->baseUrl, 'wxz_live', $controller);
         $this->noRootUrl = sprintf($this->noRootUrl, 'wxz_live', $controller);
         $this->curAct = $_GET['act'] ? $_GET['act'] : 'index';
+        $this->curUrl = $this->baseUrl . "&act={$this->curAct}";
+        $this->curNoRootUrlAct = $this->noRootUrl . "&act={$this->curAct}";
+
+        //前端链接
+        $this->fBaseUrl = "/plugin.php?id=wxz_live:index&pmod=%s";
+        $this->fBaseUrl = sprintf($this->fBaseUrl, $controller);
+        $this->fCurUrl = $this->fBaseUrl . "&act={$this->curAct}";
     }
 
     public function init() {

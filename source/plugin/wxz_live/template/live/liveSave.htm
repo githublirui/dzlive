@@ -11,7 +11,7 @@
 <script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.all.min.js?v=555"></script>
 <script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/lang/zh-cn/zh-cn.js?v=3"></script>
 <form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
-    <input type="hidden" name="formhash" value="668fb0bf" />
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
     <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
     <input type="hidden" name="anchor" value="" /> 
     <table class="tb tb2 ">
@@ -61,6 +61,19 @@
                 <td class="vtop rowform"> 
                     <input name="start_time" onclick="showcalendar(event, this, 1)" value="{$info['start_time']}" type="text" class="txt" size="10" /> 
                     <input name="end_time" onclick="showcalendar(event, this, 1)" value="{$info['end_time']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">风格:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info['style']==1 || !$info['style']}checked{/if}"><input class="radio" type="radio" name="style" value="1" {if $info['style']==1 || !$info['style']}checked="checked"{/if} />&nbsp;风格1</li>
+                        <!--<li class="{if $infos[1]['link']==2}checked{/if}"><input class="radio" type="radio" name="style" value="2" {if $infos[1]['link']==2}checked="checked"{/if} />&nbsp;风格2</li>-->
+                    </ul>
                 </td>
                 <td class="vtop tips2" s="1"></td>
             </tr>
@@ -229,42 +242,42 @@
                 </td>
                 <td class="vtop tips2" s="1"></td>
             </tr>
-            <tbody {if $info['islinkurl']!=1} style="display:none" {/if} class="linkurlbody">
-                <tr>
-                    <td colspan="2" class="td27" s="1">外链url:</td>
-                </tr> 
-                <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                    <td class="vtop rowform"> <input name="linkurl" value="{$info['linkurl']}" type="text" class="txt" size="10" /></td>
-                    <td class="vtop tips2" s="1"></td>
-                </tr>
-            </tbody>
+        <tbody {if $info['islinkurl']!=1} style="display:none" {/if} class="linkurlbody">
             <tr>
-                <td colspan="2" class="td27" s="1">是否展示:</td>
+                <td colspan="2" class="td27" s="1">外链url:</td>
             </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                <td class="vtop rowform"> 
-                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
-                    <ul onmouseover="altStyle(this);">
-                        <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=1}checked="checked"{/if} />&nbsp;显示</li>
-                        <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==1}checked="checked"{/if} />&nbsp;不显示</li>
-                    </ul>
-                </td>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="linkurl" value="{$info['linkurl']}" type="text" class="txt" size="10" /></td>
                 <td class="vtop tips2" s="1"></td>
             </tr>
-            <tr>
-                <td colspan="15">
-                    <div class="fixsel">
-                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
-                    </div>
-                </td>
-            </tr>
+        </tbody>
+        <tr>
+            <td colspan="2" class="td27" s="1">是否展示:</td>
+        </tr> 
+        <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+            <td class="vtop rowform"> 
+                <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=1}checked="checked"{/if} />&nbsp;显示</li>
+                    <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==1}checked="checked"{/if} />&nbsp;不显示</li>
+                </ul>
+            </td>
+            <td class="vtop tips2" s="1"></td>
+        </tr>
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                </div>
+            </td>
+        </tr>
         </tbody>
     </table> 
 </form> 
 <script>
     jQuery(".islinkurlli").on('click', function () {
         var islink = jQuery(this).children().val();
-        if(islink==1) {
+        if (islink == 1) {
             jQuery(".linkurlbody").show();
         } else {
             jQuery(".linkurlbody").hide();

@@ -2,18 +2,12 @@
 <script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
 <form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
-    <input type="hidden" name="formhash" value="668fb0bf" />
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
     <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
     <input type="hidden" name="anchor" value="" /> 
     <table class="tb tb2 ">
         <tbody>
-            <tr class="noborder">
-                <td class="td27">
-                    直播间名称  
-                </td>
-                <td class="vtop tips2" s="1">{$liveInfo['title']}</td>
-            </tr>
-
+            {template wxz_live:live/liveSettingHead}
             <tr>
                 <td colspan="2" class="td27" s="1">直播类型:</td>
             </tr> 
@@ -176,7 +170,7 @@
                 <td class="vtop tips2" s="1">请填写【.M3U8】结尾的视频流地址</td>
             </tr>
         </tbody>
-        
+
         <tbody style="{if $playerInfo['video_type']!=4}display:none;{/if}" class="type4 common-type">
             <tr>
                 <td colspan="2" class="td27" s="1">奥点云视频类型:</td>
@@ -234,7 +228,7 @@
                 <td class="vtop tips2" s="1">请填写【.M3U8】结尾的视频流地址</td>
             </tr>
         </tbody>
-        
+
         <tbody style="{if $playerInfo['video_type']!=5}display:none;{/if}" class="type5 common-type">
             <tr>
                 <td colspan="2" class="td27" s="1">小水滴底座的sn码:</td>
@@ -244,7 +238,7 @@
                 <td class="vtop tips2" s="1"></td>
             </tr>
         </tbody>
-        
+
         <tbody style="{if $playerInfo['video_type']!=6}display:none;{/if}" class="type6 common-type">
             <tr>
                 <td colspan="2" class="td27" s="1">第三方视频类型:</td>
@@ -269,7 +263,7 @@
                 <td class="vtop tips2" s="1">播放器代码</td>
             </tr>
         </tbody>
-        
+
         <tbody style="{if $playerInfo['video_type']!=7}display:none;{/if}" class="type7 common-type">
             <tr>
                 <td colspan="2" class="td27" s="1">熊猫直播房间号:</td>
@@ -279,7 +273,7 @@
                 <td class="vtop tips2" s="1"></td>
             </tr>
         </tbody>
-        
+
         <tbody style="{if $playerInfo['video_type']!=8}display:none;{/if}" class="type8 common-type">
             <tr>
                 <td colspan="2" class="td27" s="1">sid:</td>
@@ -303,7 +297,7 @@
                 <td class="vtop tips2" s="1"></td>
             </tr>
         </tbody>
-        
+
         <tr>
             <td colspan="15">
                 <div class="fixsel">

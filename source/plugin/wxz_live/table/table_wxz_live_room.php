@@ -16,6 +16,15 @@ class table_wxz_live_room extends table_wxz_live_base {
     }
 
     /**
+     * 通过直播间ID获取详情
+     * @param type $roomNo
+     */
+    public function getByRoomNo($roomNo) {
+        $condition = "room_no='{$roomNo}'";
+        return $this->getRow($condition);
+    }
+
+    /**
      * 通过直播间ID获取播放器信息
      * @param type $roomId
      */
@@ -32,6 +41,43 @@ class table_wxz_live_room extends table_wxz_live_base {
         }
         $info['settings'] = unserialize($info['settings']);
 
+        return $info;
+    }
+
+    /**
+     * 通过直播间ID获取直播间配置
+     * @param type $roomId
+     */
+    public function getSettingInfoByRoomId($roomId) {
+        if (!$roomId) {
+            return false;
+        }
+        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_room_setting', 'pk' => 'id'));
+
+        $condition = "room_id={$roomId}";
+        $info = $tablePlayerObj->getRow($roomId);
+        if (!$info) {
+            return false;
+        }
+        return $info;
+    }
+
+    /**
+     * 获取直播间配置
+     * @param type $roomId
+     */
+    public function getRoomSetting($roomId) {
+        if (!$roomId) {
+            return false;
+        }
+
+        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_room_setting', 'pk' => 'id'));
+        $condition = "room_id={$roomId}";
+        $info = $tablePlayerObj->getRow($roomId);
+
+        if (!$info) {
+            return false;
+        }
         return $info;
     }
 

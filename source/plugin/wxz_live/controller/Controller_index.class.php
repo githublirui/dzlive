@@ -16,10 +16,6 @@ class Controller_index extends Controller_base {
         $wxzWeixin = new wxz_weixin();
 
         $jssdkConfig = $wxzWeixin->getJssdkConfig();
-//        dsetcookie('test', 'abc',3600);
-//$sesson->set('test', 'afb');
-        var_dump(C::t('#wxz_live#wxz_live_user')->authUser(array('default_avatar' => 123123)));
-        die;
 
         //获取首页banner
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_banner', 'pk' => 'id'));
@@ -138,7 +134,36 @@ class Controller_index extends Controller_base {
      * 直播详情页面
      */
     public function live() {
-        include template('wxz_live:index/live');
+        $roomNo = $_GET['roomno'];
+
+        //获取直播间详情
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getByRoomNo($roomNo);
+        $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
+
+        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
+
+        if (!$liveInfo) {
+            showmessage('直播间不存在');
+        }
+
+        //获取播放器详情
+        $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($liveInfo['id']);
+        $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
+
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
+            include template("wxz_live:index/{$style}/ios_live");
+        } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
+            include template("wxz_live:index/{$style}/live_android");
+        } else {
+            include template("wxz_live:index/{$style}/live_ios");
+        }
+    }
+
+    /**
+     * 聊天室
+     */
+    public function chatInterface() {
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/tis/interface.php";
     }
 
 }
