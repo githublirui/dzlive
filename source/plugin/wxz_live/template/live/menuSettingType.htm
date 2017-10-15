@@ -1,0 +1,34 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="refusal" />
+    <script>disallowfloat = 'newthread';</script>
+    <input type="hidden" name="verifysubmit" value="trun" /> 
+    <table class="tb tb2 fixpadding"> 
+        <tbody>
+            <tr class="header hover">
+                <td>类型</td>
+                <td>操作</td>
+            </tr> 
+
+            {loop $types $key $row}
+            <tr>
+                <td>{$row}</td>
+                <td>
+                    <a href="{$this->baseUrl}&amp;act=menuSetting&amp;rid={$this->rid}&amp;mid={$mid}&amp;type={$key}&amp;do=menuSettingSave" class="act">添加</a>
+                </td>
+                {/loop}
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <input type="submit" class="btn" id="submit_ordersubmit" name="ordersubmit" title="按 Enter 键可随时提交您的修改" value="提交">
+                </td>
+            </tr>
+
+        </tbody>
+    </table> 
+</form>

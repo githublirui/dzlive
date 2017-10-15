@@ -21,21 +21,29 @@ class Controller_live extends Controller_base {
 
     private function setLiveNav() {
         global $_G;
-        
-        $id = $_GET['id'];
+
+        $rid = $_GET['rid'];
+        if (!$rid) {
+            cpmsg('直播间不存在', $this->noRootUrl, 'success');
+        }
+
         //子导航
         $this->navs = array(
             array(
                 'name' => '活动设置',
-                'act' => "activitySetting&id={$id}",
+                'act' => "activitySetting&rid={$rid}",
             ),
             array(
                 'name' => '播放器设置',
-                'act' => "playerSetting&id={$id}",
+                'act' => "playerSetting&rid={$rid}",
+            ),
+            array(
+                'name' => '导航栏管理',
+                'act' => "menuSetting&rid={$rid}",
             ),
             array(
                 'name' => '访问限制',
-                'act' => "viewLimit&id={$id}",
+                'act' => "viewLimit&rid={$rid}",
             ),
         );
         $this->title = "直播间设置";
@@ -43,9 +51,98 @@ class Controller_live extends Controller_base {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
         $this->tableRoom = C::t('#wxz_live#wxz_live_room');
-        $this->id = $_GET['id'];
-        $this->liveInfo = $this->tableRoom->getById($this->id);
+        $this->rid = $rid;
+        $this->liveInfo = $this->tableRoom->getById($this->rid);
         $this->liveInfo['url'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$this->liveInfo['room_no']}";
+    }
+
+    /**
+     * 导航栏管理
+     */
+    public function menuSetting() {
+        $do = $_GET['do'];
+        if ($do) {
+            $this->$do();
+            return;
+        }
+        $this->setLiveNav();
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
+
+        if (submitcheck('ordersubmit')) {
+            foreach ($_GET['ids'] as $k => $id) {
+                $ret = $tableObj->updateById($id, array('sort_order' => $_GET['sort_orders'][$k]));
+            }
+        }
+
+        $tableLiveSettingObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
+
+        $condition = "room_id={$this->rid}";
+        $list = $tableLiveSettingObj->getAll($condition);
+
+        include template('wxz_live:live/menuSettingList');
+    }
+
+    /**
+     * 新增栏目
+     */
+    private function menuSettingSave() {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $mid = $_GET['mid'];
+        $type = $_GET['type'];
+
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
+
+        if ($mid) {
+            $info = $tableObj->getById($mid);
+            $info['settings'] = $info['settings'] ? unserialize($info['settings']) : [];
+            $type = $info['type'];
+        }
+
+        $this->setLiveNav();
+
+        $types = array(
+            1 => 'iframe嵌入',
+            2 => '图文信息介绍',
+            3 => '聊天区',
+            4 => '图文直播',
+            5 => '榜单',
+            6 => '地图',
+        );
+
+        if (!$type) {
+            include template('wxz_live:live/menuSettingType');
+            return;
+        }
+
+        if (submitcheck('save')) {
+            $saveData = array(
+                'type' => $_GET['type'],
+                'is_show' => $_GET['is_show'],
+                'sort_order' => $_GET['sort_order'],
+                'name' => $_GET['name'],
+                'settings' => $_GET['settings'] ? serialize($_GET['settings']) : '',
+            );
+
+            if ($info) {
+                $ret = $tableObj->updateById($info['id'], $saveData);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
+                }
+            } else {
+                $saveData['room_id'] = $this->rid;
+                $saveData['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveData);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
+                }
+            }
+        }
+
+        include template('wxz_live:live/menuSettingSave');
     }
 
     /**
@@ -55,15 +152,15 @@ class Controller_live extends Controller_base {
         global $_G;
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
-        $id = $_GET['id'];
+        $rid = $_GET['rid'];
 
         $this->setLiveNav();
 
         $tableRoom = C::t('#wxz_live#wxz_live_room');
         $tableLiveSettingObj = new table_wxz_live_base(array('table' => 'wxz_live_room_setting', 'pk' => 'id'));
 
-        $liveInfo = $tableRoom->getById($id);
-        $info = $tableRoom->getSettingInfoByRoomId($id);
+        $liveInfo = $tableRoom->getById($rid);
+        $info = $tableRoom->getSettingInfoByRoomId($rid);
 
         if (!$liveInfo) {
             cpmsg('直播间不存在', $this->noRootUrl, 'error');
@@ -87,14 +184,14 @@ class Controller_live extends Controller_base {
             if ($info) {
                 $ret = $tableLiveSettingObj->updateById($info['id'], $saveData);
                 if ($ret) {
-                    cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$_GET['id']}", 'success');
+                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$_GET['id']}", 'success');
                 }
             } else {
-                $saveData['room_id'] = $id;
+                $saveData['room_id'] = $rid;
                 $saveData['create_at'] = date('Y-m-d H:i:s');
                 $ret = $tableLiveSettingObj->insert($saveData);
                 if ($ret) {
-                    cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$_GET['id']}", 'success');
+                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$rid}", 'success');
                 }
             }
         }
@@ -118,12 +215,12 @@ class Controller_live extends Controller_base {
                 'amount' => $_GET["amount{$_GET['limit']}"],
                 'delayed' => $_GET["delayed{$_GET['limit']}"],
             );
-          
+
             $updateData['limit_data'] = serialize($limitData);
-            $ret = $this->tableRoom->updateById($this->id, $updateData);
+            $ret = $this->tableRoom->updateById($this->rid, $updateData);
 
             if ($ret) {
-                cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$this->id}", 'success');
+                cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
             }
         }
         include template('wxz_live:live/viewLimit');
@@ -136,16 +233,14 @@ class Controller_live extends Controller_base {
         global $_G;
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
-        $id = $_GET['id'];
-
         //子导航
         $this->setLiveNav();
 
         $tableRoom = C::t('#wxz_live#wxz_live_room');
         $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_player', 'pk' => 'id'));
 
-        $liveInfo = $tableRoom->getById($id);
-        $playerInfo = $tableRoom->getPlayerInfoByRoomId($id);
+        $liveInfo = $tableRoom->getById($this->rid);
+        $playerInfo = $tableRoom->getPlayerInfoByRoomId($this->rid);
 
         $liveInfo['url'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$liveInfo['room_no']}";
 
@@ -162,14 +257,14 @@ class Controller_live extends Controller_base {
             if ($playerInfo) {
                 $ret = $tablePlayerObj->updateById($playerInfo['id'], $saveData);
                 if ($ret) {
-                    cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$_GET['id']}", 'success');
+                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveData['room_id'] = $id;
+                $saveData['room_id'] = $this->rid;
                 $saveData['create_at'] = date('Y-m-d H:i:s');
                 $ret = $tablePlayerObj->insert($saveData);
                 if ($ret) {
-                    cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$_GET['id']}", 'success');
+                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             }
         }
@@ -230,6 +325,7 @@ class Controller_live extends Controller_base {
      */
     public function index() {
         $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
+        $query['room_no'] = trim($_GET['room_no']);
         $query['category_name'] = trim($_GET['category_name']);
         $query['start_time'] = $_GET['start_time'];
         $query['end_time'] = $_GET['end_time'];
@@ -266,6 +362,10 @@ class Controller_live extends Controller_base {
             $condition .= " AND `end_time` <= '{$query['end_time']} 23:59:59'";
         }
 
+        if ($query['room_no']) {
+            $condition .= " AND room_no='{$query['room_no']}'";
+        }
+        
         $totalCount = $tableObj->count($condition);
 
         $mpurl = $this->baseUrl . "&" . http_build_query($query);

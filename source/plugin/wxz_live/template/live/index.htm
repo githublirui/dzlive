@@ -12,6 +12,7 @@
         <table cellspacing="3" cellpadding="3">
             <tbody>
                 <tr>
+                    <th>房间号：</th><td><input type="text" name="room_no" value="{$query['room_no']}"></td>
                     <th>分类名：</th><td><input type="text" name="category_name" value="{$query['category_name']}"></td>
                     <th>直播时间：</th>
                     <td colspan="3">
@@ -85,7 +86,7 @@
                 <td>{$row['create_at']}</td>
                 <td>
                     <a href="{$this->baseUrl}&amp;act=liveSave&amp;id={$row['id']}" class="act">编辑</a>
-                    <a href="{$this->baseUrl}&amp;act=activitySetting&amp;id={$row['id']}" class="act">直播间设置</a>
+                    <a href="{$this->baseUrl}&amp;act=activitySetting&amp;rid={$row['id']}" class="act">直播间设置</a>
                     <a onclick="delTable('wxz_live_room', '{$row['id']}', '{$row['title']}')" href="javascript:;" class="act">删除</a>
                 </td>
                 {/loop}

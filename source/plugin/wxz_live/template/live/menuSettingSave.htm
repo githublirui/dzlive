@@ -1,0 +1,135 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.config.js?v=1123333333"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/ueditor.all.min.js?v=555"></script>
+<script type="text/javascript" charset="utf-8" src="source/plugin/wxz_live/static/js/ueditor/lang/zh-cn/zh-cn.js?v=3"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 ">
+        <tbody>
+            {template wxz_live:live/liveSettingHead}
+            <tr>
+                <td colspan="2" class="td27" s="1">是否展示:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=2}checked="checked"{/if} />&nbsp;显示</li>
+                        <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==2}checked="checked"{/if} />&nbsp;不显示</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">排序:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="sort_order" value="{$info['sort_order']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">数值越大越靠前</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">菜单名称:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="name" value="{$info['name']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            {if $type==1}
+            <tr>
+                <td colspan="2" class="td27" s="1">链接地址:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="settings[link]" value="{$info['settings']['link']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            {/if}
+
+            {if $type==2}
+            <tr>
+                <td colspan="2" class="td27" s="1">内容详情:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform" style="height:400px;">
+                    <textarea type="text/plain" id="content" style="width:700px;height:400px;" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="settings[content]" cols="50" class="tarea">{$info['settings']['content']}</textarea>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            {/if}
+            {if $type==5}
+            <tr>
+                <td colspan="2" class="td27" s="1">榜单列表:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if in_array(1,$info['settings']['List'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[List][]" value="1" {if in_array(1,$info['settings']['List'])}checked="checked"{/if} />&nbsp;邀请榜
+                        </li>
+                        <li class="{if in_array(2,$info['settings']['List'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[List][]" value="2" {if in_array(2,$info['settings']['List'])}checked="checked"{/if} />&nbsp;打赏榜
+                        </li>
+                        <li class="{if in_array(3,$info['settings']['List'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[List][]" value="3" {if in_array(3,$info['settings']['List'])}checked="checked"{/if} />&nbsp;金额榜
+                        </li>
+                        <li class="{if in_array(4,$info['settings']['List'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[List][]" value="4" {if in_array(4,$info['settings']['List'])}checked="checked"{/if} />&nbsp;助力榜
+                        </li>
+                        <li class="{if in_array(5,$info['settings']['List'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[List][]" value="5" {if in_array(5,$info['settings']['List'])}checked="checked"{/if} />&nbsp;点赞榜
+                        </li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            {/if}
+
+            {if $type==6}
+            <tr>
+                <td colspan="2" class="td27" s="1">地图坐标</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> 
+                    经度:<input name="settings[longitude]" onclick="showcalendar(event, this, 1)" value="{$info['settings']['longitude']}" type="text" class="txt" size="5" /> 
+                    纬度:<input name="settings[latitude]" onclick="showcalendar(event, this, 1)" value="{$info['settings']['latitude']}" type="text" class="txt" size="5" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">坐标拾取器</td>
+            </tr> 
+            <tr style="width:500px;" class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform" colspan="2"> 
+                    <iframe src="http://lbs.qq.com/tool/getpoint/getpoint.html" width='100%' height="740px" frameborder="0"></iframe>
+                </td>
+            </tr>
+            {/if}
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type='hidden' value='{$this->rid}' name="id" />
+                        <input type='hidden' value='{$type}' name="type" />
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+</form>
+<script>
+    jQuery(".follow_type").on('click', function () {
+        var type = jQuery(this).children().val();
+        jQuery(".common_follow_type").hide();
+        jQuery(".follow_type" + type).show();
+    });
+    {if $type == 2}
+    var ue = UE.getEditor('content');
+    ue.ready(function () {
+        ue.setHeight(200);
+    });
+    {/if}
+</script>

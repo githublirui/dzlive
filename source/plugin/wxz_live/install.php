@@ -133,6 +133,75 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_viewer` (
   KEY `room_id` (`room_id`) USING BTREE,
   KEY `uid` (`uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ CREATE TABLE IF NOT EXISTS `pre_wxz_live_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` int(10) DEFAULT '0',
+  `sort_order` int(11) NOT NULL,
+  `is_show` tinyint(1) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `settings` text NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `room_id` (`room_id`) USING BTREE,
+  KEY `is_show` (`is_show`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_comment` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL,
+  `content` text,
+  `is_auth` tinyint(1) DEFAULT '0',
+  `nickname` varchar(255) DEFAULT NULL,
+  `headimgurl` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `rid` int(10) DEFAULT '0',
+  `lid` int(10) DEFAULT '0',
+  `touid` int(10) DEFAULT '0',
+  `tonickname` varchar(255) DEFAULT NULL,
+  `toheadimgurl` varchar(255) DEFAULT NULL,
+  `toid` int(10) DEFAULT '0',
+  `isadmin` tinyint(1) DEFAULT '0',
+  `ispacket` tinyint(1) DEFAULT '0',
+  `amount` int(10) DEFAULT '0',
+  `num` int(10) DEFAULT '0',
+  `type` tinyint(1) DEFAULT '0',
+  `send_num` int(10) DEFAULT '0',
+  `yifa_amount` int(10) DEFAULT '0',
+  `samount` text,
+  `syifa` text,
+  `dsid` int(10) DEFAULT '0',
+  `dsstatus` int(1) DEFAULT '0',
+  `dsamount` int(10) DEFAULT '0',
+  `giftid` int(10) DEFAULT NULL,
+  `giftnum` int(10) DEFAULT NULL,
+  `giftpic` varchar(255) DEFAULT NULL,
+  `giftstatus` tinyint(1) DEFAULT '0',
+  `gid` int(10) DEFAULT '0',
+  `groupid` int(10) DEFAULT '0',
+  `groupamount` int(10) DEFAULT '0',
+  `ispic` tinyint(1) DEFAULT '0',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
+  PRIMARY KEY (`id`),
+  KEY `is_auth` (`is_auth`) USING BTREE,
+  KEY `rid` (`rid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `wxz_live_polling` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `rid` int(10) DEFAULT '0',
+  `type` tinyint(1) DEFAULT '0' COMMENT '1评论2个人禁言3全体禁言4红包5礼物6个人打赏7主播打赏',
+  `comment_id` int(10) DEFAULT '0',
+  `pic_id` int(10) DEFAULT '0',
+  `black_id` int(10) DEFAULT NULL,
+  `live_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `rid` (`rid`) USING BTREE,
+  KEY `type` (`type`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_setting` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,

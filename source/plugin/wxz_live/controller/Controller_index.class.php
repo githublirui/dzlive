@@ -151,7 +151,24 @@ class Controller_index extends Controller_base {
             showmessage('直播间不存在');
         }
 
-        $viewer = $this->intoroom($liveInfo['id'], $user);
+        $shutup = 0; //黑名单
+        $totalzannum = 0; //赞总数
+        //获取所有
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
+
+        $condition = "room_id={$id} AND role=2";
+        $roomadmins = $tablePlayerObj->getAll($condition, 'uid');
+        $roomadmin = json_encode($roomadmins); //直播间管理员
+
+        $pic = array();
+        $pics = json_encode($pic); //获取所有赞图片
+
+        $viewer = $this->intoroom($liveInfo['id'], $user); //浏览
+        //
+        //菜单
+        $menusss = C::t('#wxz_live#wxz_live_room')->getMenus($id);
+        $menusss = array_values($menusss);
 
         //获取播放器详情
         $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($liveInfo['id']);
@@ -190,10 +207,120 @@ class Controller_index extends Controller_base {
     }
 
     /**
+     * @desc
+     * @param
+     * @return
+     */
+    public function limit() {
+        $type = $_GET['type'];
+        $roomId = $_GET['rid'];
+        $password = $_GET['password'];
+
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($roomId);
+        $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
+
+        $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
+
+        $liveInfo['limit_data'] = unserialize($liveInfo['limit_data']);
+
+        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
+
+        if (!$liveInfo) {
+            $result['s'] = -1;
+            $result['msg'] = '直播间不存在';
+            echo json_encode($result);
+            exit;
+        }
+
+        //验证码密码
+        if ($liveInfo['limit'] == 1 || $liveInfo['limit'] == '4') {
+            if ($liveInfo['limit_data']['password'] != $password) {
+                $result['s'] = -1;
+                $result['msg'] = '密码错误';
+                echo json_encode($result);
+                exit;
+            }
+        }
+
+        if ($liveInfo['limit'] == '1') {
+            $data['password'] = $password;
+            $condition = "room_id={$liveInfo['id']} AND uid={$user['id']}";
+            $tableViewerObj->updateData($condition, $data);
+            $result['s'] = 1;
+            $result['msg'] = '密码正确';
+            echo json_encode($result);
+            exit;
+        }
+    }
+
+    /**
      * 聊天室
      */
     public function chatInterface() {
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/tis/interface.php";
+        require_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/tis/interface.php";
+    }
+
+    /**
+     * 添加评论
+     */
+    public function addcomment() {
+        $rid = (int) $_GET['rid'];
+        $toid = (int) $_GET['toid'];
+        //获取直播间详情
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($rid);
+
+        $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->formatRoomData($liveInfo);
+
+        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
+        $uid = $userp['id'];
+
+        $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
+        $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
+
+        $condition = "id={$toid} AND rid={$rid}";
+        $touser = $tableCommentObj->getAll($condition);
+
+        $data = array(
+            'uid' => $uid,
+            'ip' => getip(),
+            'is_auth' => $liveInfo['check_comment'] == 1 ? 2 : 1,
+            'nickname' => $user['nickname'],
+            'headimgurl' => $user['headimgurl'],
+            'rid' => $rid,
+            'content' => $_GPC['content'],
+            'toid' => $_GPC['toid'],
+            'touid' => (int) $touser['uid'],
+            'tonickname' => (string) $touser['nickname'],
+            'toheadimgurl' => (string) $touser['headimgurl'],
+            'create_at' => date('Y-m-d H:i:d'),
+        );
+
+        $id = $tableCommentObj->insert($data, true);
+
+        if ($id) {
+            if ($liveInfo['check_comment'] == '1') {
+                $result = array('s' => '1', 'msg' => '提交成功，审核成功后显示', 'isshow' => 0);
+            } else {
+                $pollingData = array(
+                    'rid' => $rid,
+                    'type' => 1,
+                    'comment_id' => $id,
+                );
+                $pid = $tablePollingObj->insert($pollingData, true);
+
+                $result = array('s' => '1', 'msg' => '提交成功', 'pid' => $pid, 'isshow' => 1);
+            }
+        } else {
+            $result = array('s' => '-2', 'msg' => '提交失败，请联系管理员');
+        }
+
+        echo json_encode($result);
+        exit;
+
+        $result = array('s' => '-2', 'msg' => '您已被禁言！', 'pid' => $pid);
+        echo json_encode($result);
+        exit;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php 
-require IA_ROOT . '/addons/wxz_wzb/tis/conf.php';
-require IA_ROOT . '/addons/wxz_wzb/tis/tis.php';
+require DISCUZ_ROOT . "./source/plugin/wxz_live/lib/tis/conf.php";
+require DISCUZ_ROOT . "./source/plugin/wxz_live/lib/tis/tis.php";
 
 $api = new TisApi($accessId,$accessKey);
 $method = $_REQUEST['method'];

@@ -98,6 +98,16 @@ class table_wxz_live_base extends discuz_table {
     }
 
     /**
+     * 更新表
+     * @param type $condition
+     * @param type $data
+     * @return type
+     */
+    public function updateData($condition, $data) {
+        return DB::update($this->_table, $data, $condition);
+    }
+
+    /**
      * 通过id删除
      * @param type $id
      */

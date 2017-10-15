@@ -89,6 +89,20 @@ class table_wxz_live_room extends table_wxz_live_base {
         return $roomInfo;
     }
 
+    /**
+     * 获取直播间所有菜单
+     * @param type $rid
+     */
+    public function getMenus($rid) {
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
+        $condition = "room_id={$rid} AND is_show=1";
+        $menus = $tableObj->getAll($condition, '*', 'sort_order desc');
+        foreach ($menus as $k => $menu) {
+            $menus[$k]['settings'] = $menus[$k]['settings'] ? unserialize($menus[$k]['settings']) : '';
+        }
+        return $menus;
+    }
+
 }
 
 ?>
