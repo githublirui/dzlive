@@ -77,202 +77,381 @@
                 </td>
                 <td class="vtop tips2" s="1"></td>
             </tr>
-            <tr>
-                <td colspan="2" class="td27" s="1">直播状态</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                <td class="vtop rowform"> 
-                    <ul onmouseover="altStyle(this);">
-                        <li class="{if $info['live_status']==0}checked{/if} ">
-                            <input class="radio" type="radio" name="live_status" value="0" {if $info['live_status']==0}checked="checked"{/if} />&nbsp;按时间计算</li>
-                        <li class="{if $info['live_status']==1}checked{/if} ">
-                            <input class="radio" type="radio" name="live_status" value="1" {if $info['live_status']==1}checked="checked"{/if} />&nbsp;即将直播</li>
-                        <li class="{if $info['live_status']==2}checked{/if} ">
-                            <input class="radio" type="radio" name="live_status" value="2" {if $info['live_status']==2}checked="checked"{/if} />&nbsp;直播中</li>
-                        <li class="{if $info['live_status']==3}checked{/if} ">
-                            <input class="radio" type="radio" name="live_status" value="3" {if $info['live_status']==3}checked="checked"{/if} />&nbsp;回播</li>
-                    </ul>
-                </td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
+        <body {if $info['style'] && $info['style']!=1}style="display:none"{/if}>
+    <tr>
+        <td colspan="2" class="td27" s="1">小功能按钮:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+            <ul onmouseover="altStyle(this);">
+                <li class="{if in_array(1,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="1" {if in_array(1,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;主页
+                </li>
+                <li class="{if in_array(2,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="2" {if in_array(2,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;关注
+                </li>
+                <li class="{if in_array(3,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="3" {if in_array(3,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;邀请卡
+                </li>
+                <li class="{if in_array(4,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="4" {if in_array(4,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;刷新
+                </li>
+                <li class="{if in_array(5,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="5" {if in_array(5,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;点赞
+                </li>
+                <li class="{if in_array(6,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="6" {if in_array(6,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;图片
+                </li>
+                <li class="{if in_array(7,$info['style_extend']['gn'])}checked{/if}">
+                    <input class="checkbox" type="checkbox" name="style_extend[gn][]" value="7" {if in_array(7,$info['style_extend']['gn'])}checked="checked"{/if} />&nbsp;提现
+                </li>
+            </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    </body>
+    <tr>
+        <td colspan="2" class="td27" s="1">直播状态</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <li class="{if $info['live_status']==0}checked{/if} ">
+                    <input class="radio" type="radio" name="live_status" value="0" {if $info['live_status']==0}checked="checked"{/if} />&nbsp;按时间计算</li>
+                <li class="{if $info['live_status']==1}checked{/if} ">
+                    <input class="radio" type="radio" name="live_status" value="1" {if $info['live_status']==1}checked="checked"{/if} />&nbsp;即将直播</li>
+                <li class="{if $info['live_status']==2}checked{/if} ">
+                    <input class="radio" type="radio" name="live_status" value="2" {if $info['live_status']==2}checked="checked"{/if} />&nbsp;直播中</li>
+                <li class="{if $info['live_status']==3}checked{/if} ">
+                    <input class="radio" type="radio" name="live_status" value="3" {if $info['live_status']==3}checked="checked"{/if} />&nbsp;回播</li>
+            </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
 
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时背景色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faq916e')">
-                            <td class="vtop rowform">
-                                <input id="c1_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_bgcolor" onchange="updatecolorpreview('c1')">
-                                <input id="c1" onclick="c1_frame.location = 'static/image/admincp/getcolor.htm?c1|c1_v';
-                                        showMenu({'ctrlid': 'c1'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c1_menu" style="display: none">
-                                    <iframe name="c1_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时字体颜色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
-                            <td class="vtop rowform" colspan="2">
-                                <input id="c2_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_fontcolor" onchange="updatecolorpreview('c2')">
-                                <input id="c2" onclick="c2_frame.location = 'static/image/admincp/getcolor.htm?c2|c2_v';
-                                        showMenu({'ctrlid': 'c2'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c2_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
-                                    <iframe name="c2_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="td27" s="1">直播间倒计时秒数颜色</td>
-                        </tr> 
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
-                            <td class="vtop rowform">
-                                <input id="c3_v" type="text" class="txt" style="float:left; width:210px;" value="" name="countdown_timecolor" onchange="updatecolorpreview('c3')">
-                                <input id="c3" onclick="c3_frame.location = 'static/image/admincp/getcolor.htm?c3|c3_v';
-                                        showMenu({'ctrlid': 'c3'})" type="button" class="colorwd" value="" style="background: ">
-                                <span id="c3_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
-                                    <iframe name="c3_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
-                                    </iframe>
-                                </span>
-                            </td>
-                            <td class="vtop tips2" s="1">
-                            </td>
-                        </tr>-->
-
-            <tr>
-                <td colspan="2" class="td27" s="1">主题图片:</td>
-            </tr>
-            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
-                <td class="vtop rowform">
-                    <input id="fileY4_0" style="{if $info['theme_pic']}display:none{/if}" name="theme_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
-                    <input id="fileY4_1" style="{if !$info['theme_pic']}display:none{/if}" name="theme_pic" value="{$info['theme_pic']}" type="text" class="txt marginbot" size="10">
-                    <br>
-                    <a id="fileY4_0a" style="{if !$info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_1').name = 'TMPtheme_pic';
-                            $('fileY4_0').name = 'theme_pic';
-                            $('fileY4_0').style.display = '';
-                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
-                    <a id="fileY4_1a" style="{if $info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_0').name = 'TMPtheme_pic';
-                            $('fileY4_1').name = 'theme_pic';
-                            $('fileY4_1').style.display = '';
-                            $('fileY4_0').style.display = 'none'">输入 URL
-                    </a>
-                </td>
-                <td class="vtop tips2" s="1">
-                    {if $info['theme_pic']}
-                    <img src="{$info['theme_pic']}" style="width:100px;height:100px;">
-                    {/if}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="td27" s="1">封面图片:</td>
-            </tr>
-            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
-                <td class="vtop rowform">
-                    <input id="fileY4_0" style="{if $info['cover_pic']}display:none{/if}" name="cover_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
-                    <input id="fileY4_1" style="{if !$info['cover_pic']}display:none{/if}" name="cover_pic" value="{$info['cover_pic']}" type="text" class="txt marginbot" size="10">
-                    <br>
-                    <a id="fileY4_0a" style="{if !$info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_1').name = 'TMPcover_pic';
-                            $('fileY4_0').name = 'cover_pic';
-                            $('fileY4_0').style.display = '';
-                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
-                    <a id="fileY4_1a" style="{if $info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
-                            this.style.fontWeight = 'bold';
-                            $('fileY4_0').name = 'TMPcover_pic';
-                            $('fileY4_1').name = 'cover_pic';
-                            $('fileY4_1').style.display = '';
-                            $('fileY4_0').style.display = 'none'">输入 URL
-                    </a>
-                </td>
-                <td class="vtop tips2" s="1">
-                    {if $info['cover_pic']}
-                    <img src="{$info['cover_pic']}" style="width:100px;height:100px;">
-                    {/if}
-                </td>
-            </tr>
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">是否展示在列表页:</td>
-                        </tr>
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                            <td class="vtop rowform"> 
-                                <ul class="nofloat" onmouseover="altStyle(this);">
-                                <ul onmouseover="altStyle(this);">
-                                    <li class="{if $info.is_show_list!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show_list!=2}checked="checked"{/if} />&nbsp;是</li>
-                                    <li class="{if $info.is_show_list==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show_list==2}checked="checked"{/if} />&nbsp;否</li>
-                                </ul>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>-->
-
-            <!--            <tr>
-                            <td colspan="2" class="td27" s="1">规则:</td>
-                        </tr>
-                        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                            <td class="vtop rowform" style="height:400px;">
-                                <textarea type="text/plain" id="rule" style="width:700px;height:400px;" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="rule" cols="50" class="tarea">{$info['desc']}</textarea>
-                            </td>
-                            <td class="vtop tips2" s="1"></td>
-                        </tr>-->
-
-            <tr>
-                <td colspan="2" class="td27" s="1">排序:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform"> <input name="sort_order" value="{$info['sort_order']}" type="text" class="txt" size="10" /></td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="td27" s="1">是否外链:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-                <td class="vtop rowform"> 
-                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
-                    <ul onmouseover="altStyle(this);">
-                        <li class="{if $info['islinkurl']==1}checked{/if} islinkurlli"><input class="radio" type="radio" name="islinkurl" value="1" {if $info['islinkurl']==1}checked="checked"{/if} />&nbsp;是</li>
-                        <li class="{if $info['islinkurl']!=1}checked{/if} islinkurlli"><input class="radio" type="radio" name="islinkurl" value="2" {if $info['islinkurl']!=1}checked="checked"{/if} />&nbsp;否</li>
-                    </ul>
-                </td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
-        <tbody {if $info['islinkurl']!=1} style="display:none" {/if} class="linkurlbody">
-            <tr>
-                <td colspan="2" class="td27" s="1">外链url:</td>
-            </tr> 
-            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
-                <td class="vtop rowform"> <input name="linkurl" value="{$info['linkurl']}" type="text" class="txt" size="10" /></td>
-                <td class="vtop tips2" s="1"></td>
-            </tr>
-        </tbody>
-        <tr>
-            <td colspan="2" class="td27" s="1">是否展示:</td>
-        </tr> 
-        <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
-            <td class="vtop rowform"> 
-                <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+    <tr>
+        <td colspan="2" class="td27" s="1">直播间倒计时背景色</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faq916e')">
+        <td class="vtop rowform">
+            <input id="c1_v" type="text" class="txt" style="float:left; width:210px;" value="{$info['countdown_style']['countdown_bgcolor']}" name="countdown_style[countdown_bgcolor]" onchange="updatecolorpreview('c1')">
+            <input id="c1" onclick="c1_frame.location = 'static/image/admincp/getcolor.htm?c1|c1_v';
+                    showMenu({'ctrlid': 'c1'})" type="button" class="colorwd" value="" style="background: {$info['countdown_style']['countdown_bgcolor']}">
+            <span id="c1_menu" style="display: none">
+                <iframe name="c1_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                </iframe>
+            </span>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">直播间倒计时字体颜色</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
+        <td class="vtop rowform" colspan="2">
+            <input id="c2_v" type="text" class="txt" style="float:left; width:210px;" value="{$info['countdown_style']['countdown_fontcolor']}" name="countdown_style[countdown_fontcolor]" onchange="updatecolorpreview('c2')">
+            <input id="c2" onclick="c2_frame.location = 'static/image/admincp/getcolor.htm?c2|c2_v';
+                    showMenu({'ctrlid': 'c2'})" type="button" class="colorwd" value="" style="background: {$info['countdown_style']['countdown_fontcolor']}">
+            <span id="c2_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
+                <iframe name="c2_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                </iframe>
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">直播间倒计时秒数颜色</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqb344')">
+        <td class="vtop rowform">
+            <input id="c3_v" type="text" class="txt" style="float:left; width:210px;" value="{$info['countdown_style']['countdown_timecolor']}" name="countdown_style[countdown_timecolor]" onchange="updatecolorpreview('c3')">
+            <input id="c3" onclick="c3_frame.location = 'static/image/admincp/getcolor.htm?c3|c3_v';
+                    showMenu({'ctrlid': 'c3'})" type="button" class="colorwd" value="" style="background: {$info['countdown_style']['countdown_timecolor']}">
+            <span id="c3_menu" style="position: absolute; z-index: 301; left: 250.8px; top: 343.6px; display: none;">
+                <iframe name="c3_frame" src="" frameborder="0" width="210" height="148" scrolling="no">
+                </iframe>
+            </span>
+        </td>
+        <td class="vtop tips2" s="1">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">是否在列表页面显示</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+            <ul onmouseover="altStyle(this);">
+                <li class="{if $info['is_show_list']==1}checked{/if} islinkurlli"><input class="radio" type="radio" name="is_show_list" value="1" {if $info['is_show_list']==1}checked="checked"{/if} />&nbsp;是</li>
+                <li class="{if $info['is_show_list']!=1}checked{/if} islinkurlli"><input class="radio" type="radio" name="is_show_list" value="2" {if $info['is_show_list']!=1}checked="checked"{/if} />&nbsp;否</li>
+            </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">主题图片:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+        <td class="vtop rowform">
+            <input id="fileY1_0" style="{if $info['theme_pic']}display:none{/if}" name="theme_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
+            <input id="fileY1_1" style="{if !$info['theme_pic']}display:none{/if}" name="theme_pic" value="{$info['theme_pic']}" type="text" class="txt marginbot" size="10">
+            <br>
+            <a id="fileY1_0a" style="{if !$info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_1a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY1_1').name = 'TMPtheme_pic';
+                    $('fileY1_0').name = 'theme_pic';
+                    $('fileY1_0').style.display = '';
+                    $('fileY1_1').style.display = 'none'">上传文件</a>&nbsp;
+            <a id="fileY1_1a" style="{if $info['theme_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_0a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY1_0').name = 'TMPtheme_pic';
+                    $('fileY1_1').name = 'theme_pic';
+                    $('fileY1_1').style.display = '';
+                    $('fileY1_0').style.display = 'none'">输入 URL
+            </a>
+        </td>
+        <td class="vtop tips2" s="1">
+            {if $info['theme_pic']}
+            <img src="{$info['theme_pic']}" style="width:100px;height:100px;">
+            {/if}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">封面图片:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+        <td class="vtop rowform">
+            <input id="fileY2_0" style="{if $info['cover_pic']}display:none{/if}" name="cover_pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
+            <input id="fileY2_1" style="{if !$info['cover_pic']}display:none{/if}" name="cover_pic" value="{$info['cover_pic']}" type="text" class="txt marginbot" size="10">
+            <br>
+            <a id="fileY2_0a" style="{if !$info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY2_1a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY2_1').name = 'TMPcover_pic';
+                    $('fileY2_0').name = 'cover_pic';
+                    $('fileY2_0').style.display = '';
+                    $('fileY2_1').style.display = 'none'">上传文件</a>&nbsp;
+            <a id="fileY2_1a" style="{if $info['cover_pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY2_0a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY2_0').name = 'TMPcover_pic';
+                    $('fileY2_1').name = 'cover_pic';
+                    $('fileY2_1').style.display = '';
+                    $('fileY2_0').style.display = 'none'">输入 URL
+            </a>
+        </td>
+        <td class="vtop tips2" s="1">
+            {if $info['cover_pic']}
+            <img src="{$info['cover_pic']}" style="width:100px;height:100px;">
+            {/if}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">直播间台标:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform"> <input name="station_caption[logo]" value="{$info['station_caption']['logo']}" type="text" class="txt" size="10" /></td>
+        <td class="vtop tips2" s="1">直播间logo 显示在视频上</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">台标位置:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
                 <ul onmouseover="altStyle(this);">
-                    <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=1}checked="checked"{/if} />&nbsp;显示</li>
-                    <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==1}checked="checked"{/if} />&nbsp;不显示</li>
+                    <li class="{if !$info['station_caption']['position'] || $info['station_caption']['position']==1}checked{/if} "><input class="radio" type="radio" name="station_caption[position]" value="1" {if !$info['station_caption']['position'] || $info['station_caption']['position']==1}checked="checked"{/if} />&nbsp;左上</li>
+                    <li class="{if $info['station_caption']['position']==2}checked{/if} "><input class="radio" type="radio" name="station_caption[position]" value="2" {if $info['station_caption']['position']==2}checked="checked"{/if} />&nbsp;左下</li>
+                    <li class="{if $info['station_caption']['position']==3}checked{/if} "><input class="radio" type="radio" name="station_caption[position]" value="3" {if $info['station_caption']['position']==3}checked="checked"{/if} />&nbsp;右上</li>
+                    <li class="{if $info['station_caption']['position']==4}checked{/if} "><input class="radio" type="radio" name="station_caption[position]" value="4" {if $info['station_caption']['position']==4}checked="checked"{/if} />&nbsp;右下</li>
                 </ul>
-            </td>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">图文直播-直播员:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform"> <input name="publisher" value="{$info['publisher']}" type="text" class="txt" size="10" /></td>
+        <td class="vtop tips2" s="1">图文直播-直播员</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">图文直播-直播员头像:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+        <td class="vtop rowform">
+            <input id="fileY3_0" style="{if $info['publisher_avatar']}display:none{/if}" name="publisher_avatar" value="" type="file" class="txt uploadbtn marginbot" size="10">
+            <input id="fileY3_1" style="{if !$info['publisher_avatar']}display:none{/if}" name="publisher_avatar" value="{$info['publisher_avatar']}" type="text" class="txt marginbot" size="10">
+            <br>
+            <a id="fileY3_0a" style="{if !$info['publisher_avatar']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_1a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY3_1').name = 'TMPpublisher_avatar';
+                    $('fileY3_0').name = 'publisher_avatar';
+                    $('fileY3_0').style.display = '';
+                    $('fileY3_1').style.display = 'none'">上传文件</a>&nbsp;
+            <a id="fileY3_1a" style="{if $info['publisher_avatar']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY3_0a').style.fontWeight = '';
+                    this.style.fontWeight = 'bold';
+                    $('fileY3_0').name = 'TMPpublisher_avatar';
+                    $('fileY3_1').name = 'publisher_avatar';
+                    $('fileY3_1').style.display = '';
+                    $('fileY3_0').style.display = 'none'">输入 URL
+            </a>
+        </td>
+        <td class="vtop tips2" s="1">
+            {if $info['publisher_avatar']}
+            <img src="{$info['publisher_avatar']}" style="width:100px;height:100px;">
+            {/if}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">直播人数设置:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform"> <input name="online_user_config[base_num]" value="{$info['online_user_config']['base_num']}" type="text" class="txt" size="10" /></td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">人数浮动:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform"> <input name="online_user_config[float_num]" value="{$info['online_user_config']['float_num']}" type="text" class="txt" size="10" /></td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">浮动类型:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if !$info['online_user_config']['float_type'] || $info['online_user_config']['float_type']==1}checked{/if} "><input class="radio" type="radio" name="online_user_config[float_type]" value="1" {if !$info['online_user_config']['float_type'] || $info['online_user_config']['float_type']==1}checked="checked"{/if} />&nbsp;时增时减</li>
+                    <li class="{if $info['online_user_config']['float_type']==2}checked{/if} "><input class="radio" type="radio" name="online_user_config[float_type]" value="2" {if $info['online_user_config']['float_type']==2}checked="checked"{/if} />&nbsp;只增</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">人数显示:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if !$info['online_user_config']['istruenum'] || $info['online_user_config']['istruenum']==1}checked{/if} "><input class="radio" type="radio" name="online_user_config[istruenum]" value="1" {if !$info['online_user_config']['istruenum'] || $info['online_user_config']['istruenum']==1}checked="checked"{/if} />&nbsp;真实人数</li>
+                    <li class="{if $info['online_user_config']['istruenum']==2}checked{/if} "><input class="radio" type="radio" name="online_user_config[istruenum]" value="2" {if $info['online_user_config']['istruenum']==2}checked="checked"{/if} />&nbsp;虚拟人数</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1">真实人数：（直播间真实观众数，一个微信号算一个）；虚拟人数：（直播间人数设置 + 浮动类型 +人数浮动 +１）</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">人数显示位置:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if !$info['online_user_config']['position'] || $info['online_user_config']['position']==1}checked{/if} "><input class="radio" type="radio" name="online_user_config[position]" value="1" {if !$info['online_user_config']['position'] || $info['online_user_config']['position']==1}checked="checked"{/if} />&nbsp;左上</li>
+                    <li class="{if $info['online_user_config']['position']==2}checked{/if} "><input class="radio" type="radio" name="online_user_config[position]" value="2" {if $info['online_user_config']['position']==2}checked="checked"{/if} />&nbsp;左下</li>
+                    <li class="{if $info['online_user_config']['position']==3}checked{/if} "><input class="radio" type="radio" name="online_user_config[position]" value="3" {if $info['online_user_config']['position']==3}checked="checked"{/if} />&nbsp;右上</li>
+                    <li class="{if $info['online_user_config']['position']==4}checked{/if} "><input class="radio" type="radio" name="online_user_config[position]" value="4" {if $info['online_user_config']['position']==4}checked="checked"{/if} />&nbsp;右下</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="td27" s="1">评论是否需要审核:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if !$info['check_comment'] || $info['check_comment']==1}checked{/if} "><input class="radio" type="radio" name="check_comment" value="1" {if !$info['check_comment'] || $info['check_comment']==1}checked="checked"{/if} />&nbsp;需要审核</li>
+                    <li class="{if $info['check_comment']==2}checked{/if} "><input class="radio" type="radio" name="check_comment" value="2" {if $info['check_comment']==2}checked="checked"{/if} />&nbsp;不需要审核</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">是否启用红包:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if !$info['enable_redpacket'] || $info['enable_redpacket']==1}checked{/if} "><input class="radio" type="radio" name="enable_redpacket" value="1" {if !$info['enable_redpacket'] || $info['enable_redpacket']==1}checked="checked"{/if} />&nbsp;启用</li>
+                    <li class="{if $info['enable_redpacket']==2}checked{/if} "><input class="radio" type="radio" name="enable_redpacket" value="2" {if $info['enable_redpacket']==2}checked="checked"{/if} />&nbsp;关闭</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">是否显示版权:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <ul onmouseover="altStyle(this);">
+                <ul onmouseover="altStyle(this);">
+                    <li class="{if $info['is_show_copyright']==1}checked{/if} copyrightli"><input class="radio" type="radio" name="is_show_copyright" value="1" {if $info['is_show_copyright']==1}checked="checked"{/if} />&nbsp;是</li>
+                    <li class="{if $info['is_show_copyright']!=1}checked{/if} copyrightli"><input class="radio" type="radio" name="is_show_copyright" value="2" {if $info['is_show_copyright']!=1}checked="checked"{/if} />&nbsp;否</li>
+                </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tbody {if $info['is_show_copyright']!=1} style="display:none" {/if} class="copyrightbody">
+        <tr>
+            <td colspan="2" class="td27" s="1">版权说明:</td>
+        </tr> 
+        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+            <td class="vtop rowform"> <input name="copyright" value="{$info['copyright']}" type="text" class="txt" size="10" /></td>
             <td class="vtop tips2" s="1"></td>
         </tr>
+    </tbody>
+    <tr>
+        <td colspan="2" class="td27" s="1">规则:</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform" style="height:400px;">
+            <textarea type="text/plain" id="rule" style="width:700px;height:400px;" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="rule" cols="50" class="tarea">{$info['rule']}</textarea>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">排序:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+        <td class="vtop rowform"> <input name="sort_order" value="{$info['sort_order']}" type="text" class="txt" size="10" /></td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="td27" s="1">是否外链:</td>
+    </tr> 
+    <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+        <td class="vtop rowform"> 
+            <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+            <ul onmouseover="altStyle(this);">
+                <li class="{if $info['islinkurl']==1}checked{/if} islinkurlli"><input class="radio" type="radio" name="islinkurl" value="1" {if $info['islinkurl']==1}checked="checked"{/if} />&nbsp;是</li>
+                <li class="{if $info['islinkurl']!=1}checked{/if} islinkurlli"><input class="radio" type="radio" name="islinkurl" value="2" {if $info['islinkurl']!=1}checked="checked"{/if} />&nbsp;否</li>
+            </ul>
+        </td>
+        <td class="vtop tips2" s="1"></td>
+    </tr>
+    <tbody {if $info['islinkurl']!=1} style="display:none" {/if} class="linkurlbody">
         <tr>
-            <td colspan="15">
-                <div class="fixsel">
-                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
-                </div>
-            </td>
+            <td colspan="2" class="td27" s="1">外链url:</td>
+        </tr> 
+        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+            <td class="vtop rowform"> <input name="linkurl" value="{$info['linkurl']}" type="text" class="txt" size="10" /></td>
+            <td class="vtop tips2" s="1"></td>
         </tr>
-        </tbody>
-    </table> 
+    </tbody>
+    <tr>
+        <td colspan="15">
+            <div class="fixsel">
+                <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table> 
 </form> 
 <script>
     jQuery(".islinkurlli").on('click', function () {
@@ -283,8 +462,16 @@
             jQuery(".linkurlbody").hide();
         }
     });
-//    var ue = UE.getEditor('rule');
-//    ue.ready(function () {
-//        ue.setHeight(200);
-//    });
+    jQuery(".copyrightli").on('click', function () {
+        var is_show_copyright = jQuery(this).children().val();
+        if (is_show_copyright == 1) {
+            jQuery(".copyrightbody").show();
+        } else {
+            jQuery(".copyrightbody").hide();
+        }
+    });
+    var ue = UE.getEditor('rule');
+    ue.ready(function () {
+        ue.setHeight(200);
+    });
 </script>

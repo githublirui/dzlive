@@ -140,11 +140,18 @@ class Controller_index extends Controller_base {
         $liveInfo = C::t('#wxz_live#wxz_live_room')->getByRoomNo($roomNo);
         $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
 
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->formatRoomData($liveInfo);
+
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
+
+        $id = $liveInfo['id'];
+        $uid = $user['id'];
 
         if (!$liveInfo) {
             showmessage('直播间不存在');
         }
+
+        $viewer = $this->intoroom($liveInfo['id'], $user);
 
         //获取播放器详情
         $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($liveInfo['id']);
@@ -157,6 +164,29 @@ class Controller_index extends Controller_base {
         } else {
             include template("wxz_live:index/{$style}/live_ios");
         }
+    }
+
+    /**
+     * 进入房间
+     * @param type $roomId
+     * @param type $user
+     */
+    public function intoroom($roomId, $user) {
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
+
+        $condition = "room_id={$roomId} AND uid={$user['id']}";
+        $viewer = $tablePlayerObj->getRow($condition);
+
+        if (!$viewer) {
+            $data['room_id'] = $roomId;
+            $data['uid'] = $user['id'];
+            $data['create_at'] = date('Y-m-d H:i:s');
+            $data['id'] = $tablePlayerObj->insert($data, true);
+            $viewer = $data;
+        }
+        return $viewer;
     }
 
     /**

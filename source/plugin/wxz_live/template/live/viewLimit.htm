@@ -1,0 +1,99 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 ">
+        <tbody>
+            {template wxz_live:live/liveSettingHead}
+            <tr>
+                <td colspan="2" class="td27" s="1">开关设置:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <ul class="nofloat" onmouseover="altStyle(this);">
+                        <li class="{if !$this->liveInfo['limit'] || $this->liveInfo['limit']==0}checked{/if} limit"><input class="radio limit_radio" type="radio" name="limit" value="0" {if !$this->liveInfo['limit'] || $this->liveInfo['limit']==0}checked="checked"{/if} />&nbsp;关闭限制</li>
+                        <li class="{if $this->liveInfo['limit']==1}checked{/if} limit"><input class="radio limit_radio" type="radio" name="limit" value="1" {if $this->liveInfo['limit']==1}checked="checked"{/if} />&nbsp;访问密码</li>
+                        <li class="{if $this->liveInfo['limit']==2}checked{/if} limit"><input class="radio limit_radio" type="radio" name="limit" value="2" {if $this->liveInfo['limit']==2}checked="checked"{/if} />&nbsp;付费观看</li>
+                        <li class="{if $this->liveInfo['limit']==3}checked{/if} limit"><input class="radio limit_radio" type="radio" name="limit" value="3" {if $this->liveInfo['limit']==3}checked="checked"{/if} />&nbsp;延时付费观看</li>
+                        <li class="{if $this->liveInfo['limit']==4}checked{/if} limit"><input class="radio limit_radio" type="radio" name="limit" value="4" {if $this->liveInfo['limit']==4}checked="checked"{/if} />&nbsp;密码+付费</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1" style="color:red;">开启付费功能直播间将只能在微信端打开 风格二暂时只支持密码和付费限制，延迟付费和密码+付费暂不支持，请等待</td>
+            </tr>
+
+        <tbody style="{if $this->liveInfo['limit']!=1}display:none;{/if}" class="limit1 common-limit">
+            <tr>
+                <td colspan="2" class="td27" s="1">访问密码:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="password1" value="{$this->liveInfo['limit_data']['password']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        </tbody>
+
+        <tbody style="{if $this->liveInfo['limit']!=2}display:none;{/if}" class="limit2 common-limit">
+            <tr>
+                <td colspan="2" class="td27" s="1">金额:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="amount2" value="{$this->liveInfo['limit_data']['amount']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">按分计算</td>
+            </tr>
+        </tbody>
+
+        <tbody style="{if $this->liveInfo['limit']!=3}display:none;{/if}" class="limit3 common-limit">
+            <tr>
+                <td colspan="2" class="td27" s="1">延时时间:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="delayed3" value="{$this->liveInfo['limit_data']['delayed']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">金额:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="amount3" value="{$this->liveInfo['limit_data']['amount']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">按分计算</td>
+            </tr>
+        </tbody>
+
+        <tbody style="{if $this->liveInfo['limit']!=4}display:none;{/if}" class="limit4 common-limit">
+            <tr>
+                <td colspan="2" class="td27" s="1">访问密码:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="password4" value="{$this->liveInfo['limit_data']['password']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">金额:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> <input name="amount4" value="{$this->liveInfo['limit_data']['amount']}" type="text" class="txt" size="10" /></td>
+                <td class="vtop tips2" s="1">按分计算</td>
+            </tr>
+        </tbody>
+
+        </tbody>
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type='hidden' value='{$this->id}' name="id" />
+                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table> 
+</form> 
+<script>
+    jQuery(".limit").on('click', function () {
+        var type = jQuery(this).children().val();
+        jQuery(".common-limit").hide();
+        jQuery(".limit" + type).show();
+    });
+</script>

@@ -98,7 +98,7 @@
 
     <body >
         {eval $ditu = 0;}
-        {eval $gn = iunserializer($item['gn'])}
+        {eval $styleExtend = iunserializer($liveInfo['style_extend']);$gn=$styleExtend['gn'];}
         <style>
             .nav-btn1, .nav-btn2, .nav-btn3, .nav-btn4 , .nav-btn5 , .nav-btn7 {
                 float: left;
@@ -134,17 +134,19 @@
             }
         </style>
 
-        {if $item['limit'] == 1 && $item['password'] != $viewer['password']}
+        {if $liveInfo['limit'] == 1 && $liveInfo['limit_data']['password'] != $viewer['password']}
 
-        <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;"><div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;     display: block;
-                                                                                       left: 50%;
-                                                                                       margin:-200px 0 0 -120px;
-                                                                                       position: fixed;
-                                                                                       top: 50%;
+        <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;">
+            <div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;     display: block;
+                 left: 50%;
+                 margin:-200px 0 0 -120px;
+                 position: fixed;
+                 top: 50%;
 
-                                                                                       z-index: 235;"><span class = "focus-on-click" style="display:none;">+</span><img src="source/plugin/wxz_live/template/index/1/image/suo.jpg"><p>直播间限制观看需输入密码</p>
-                <p><input type="text" id="password" placeholder="请填入观看密码" /></p><p><button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$item['limit']})">确定</button></p></div></div>
-        {elseif  ($item['limit'] == 2 && $paylog['status']!=1) || ($item['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0)}
+                 z-index: 235;">
+                <span class = "focus-on-click" style="display:none;">+</span><img src="source/plugin/wxz_live/template/index/1/image/suo.jpg"><p>直播间限制观看需输入密码</p>
+                <p><input type="text" id="password" placeholder="请填入观看密码" /></p><p><button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$liveInfo['limit']})">确定</button></p></div></div>
+        {elseif  ($liveInfo['limit'] == 2 && $paylog['status']!=1) || ($liveInfo['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0)}
         <script>
                     $(function(){
                     var height = $(window).height() / 2;
@@ -157,24 +159,24 @@
                                                                                        margin:-200px 0 0 -120px;
                                                                                        position: fixed;
                                                                                        top: 50%;
-                                                                                       z-index: 235;"><span class = "focus-on-click" style="display:none;">+</span><img src="source/plugin/wxz_live/template/index/1/image/money.jpg"><p>直播间限制观看需支付<font color=red>{eval echo ($item['amount']/100)}</font>元</p><p><button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$item['limit']})">确定</button></p></div></div>
+                                                                                       z-index: 235;"><span class = "focus-on-click" style="display:none;">+</span><img src="source/plugin/wxz_live/template/index/1/image/money.jpg"><p>直播间限制观看需支付<font color=red>{eval echo ($liveInfo['amount']/100)}</font>元</p><p><button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$liveInfo['limit']})">确定</button></p></div></div>
         {/if}
-        {if $uid<0 && $setting['gz_must']==1}
-        <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;"><div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;"><span class = "focus-on-click" style="display:none;">+</span><img src="{eval echo tomedia($setting['attention_code'])}"><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p></div></div>
+        {if $uid<0 && $liveSettingInfo['follow_type']==1}
+        <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;"><div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;"><span class = "focus-on-click" style="display:none;">+</span><img src="{eval echo ($liveSettingInfo['follow_qrcode'])}"><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p></div></div>
         {/if}
-        <input type="hidden" id="pid" value="{$pid['id']}">
+        <input type="hidden" id="pid" value="{$pid['rid']}">
         <div class="main">
-            {if $item['theme']}
+            {if $liveInfo['theme']}
             <div class="swiper-container advertising swiper-container-horizontal">
                 <div class="swiper-wrapper" style="height:auto;">
                     <div class="swiper-slide swiper-slide-duplicate swiper-slide-next" style="height:auto;">
-                        <img src="{eval echo tomedia($item['theme'])}">
+                        <img src="{eval echo ($liveInfo['theme'])}">
                     </div>
                     <div class="swiper-slide swiper-slide-prev" style="height:auto;">
-                        <img src="{eval echo tomedia($item['theme'])}">					
+                        <img src="{eval echo ($liveInfo['theme'])}">					
                     </div>				    
                     <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" style="height:auto;">
-                        <img src="{eval echo tomedia($item['theme'])}">						
+                        <img src="{eval echo ($liveInfo['theme'])}">						
                     </div>
                 </div>
                 <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
@@ -184,15 +186,15 @@
                 <div class="fixedfile">
                     <div class="all-vide">
                         <section class="block_video" id="play" style="height: 210px;">
-                            {if ($uid=='-1') || ($item['limit'] == 1 && $item['password'] != $viewer['password']) || ($item['limit'] == 2 && $paylog['status']!=1) || ($item['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0) || ($item['limit']==4 && ($item['password'] != $viewer['password'] || $paylog['status']!=1))}
+                            {if ($uid=='-1') || ($liveInfo['limit'] == 1 && $liveInfo['password'] != $viewer['password']) || ($liveInfo['limit'] == 2 && $paylog['status']!=1) || ($liveInfo['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0) || ($liveInfo['limit']==4 && ($liveInfo['password'] != $viewer['password'] || $paylog['status']!=1))}
                             {if $list['type']=='6'}
-                            <img src="{eval echo tomedia($list['settings']['limg'])}" style="width:100%;height:210px">
+                            <img src="{eval echo ($list['settings']['limg'])}" style="width:100%;height:210px">
                             {elseif $list['type']=='3'}
 
                             {elseif $list['type']=='7'}
                             {$list['settings']['images']}
                             {else}
-                            <img src="{eval echo tomedia($list['settings']['img'])}" style="width:100%;height:210px">
+                            <img src="{eval echo ($list['settings']['img'])}" style="width:100%;height:210px">
 
                             {/if}
                             {else}
@@ -227,7 +229,7 @@
                         </section>
                         <i class="max-start"></i>
 
-                        <p class="header-an">{$item['title']}</p>
+                        <p class="header-an">{$liveInfo['title']}</p>
                         <div class="schedule">
                             <p class="iconfont sche-start"></p>
                             <p class="sche-nowtime">00:00</p>
@@ -238,7 +240,7 @@
                             <p class="sche-alltime">00:00</p>
                         </div>
                         <div class="watermark" id="watermark">
-                            {if $item['snposition']==1}
+                            {if $liveInfo['snposition']==1}
                             <style>
                                 #livesn{
                                     bottom: 0.9rem;
@@ -247,7 +249,7 @@
                                     line-height: 18px;
                                 }
                             </style>
-                            {elseif $item['snposition']==2}
+                            {elseif $liveInfo['snposition']==2}
                             <style>
                                 #livesn{
                                     top: 0.9rem;
@@ -256,7 +258,7 @@
                                     line-height: 18px;
                                 }
                             </style>
-                            {elseif $item['snposition']==3}
+                            {elseif $liveInfo['snposition']==3}
                             <style>
                                 #livesn{
                                     bottom:0.9rem;
@@ -276,14 +278,14 @@
                             </style>
                             {/if}
 
-                            {if $item['livenum']==1}
+                            {if $liveInfo['livenum']==1}
                             <style>
                                 #liveflnum{
                                     bottom: 0.2rem;
                                     left: 0.3rem;
                                 }
                             </style>
-                            {elseif $item['livenum']==2}
+                            {elseif $liveInfo['livenum']==2}
                             <style>
                                 #liveflnum{
                                     top: 0.2rem;
@@ -292,7 +294,7 @@
                                     line-height: 18px;
                                 }
                             </style>
-                            {elseif $item['livenum']==3}
+                            {elseif $liveInfo['livenum']==3}
                             <style>
                                 #liveflnum{
                                     bottom: 0.2rem;
@@ -313,14 +315,14 @@
                             {/if}
 
 
-                            <p id="livesn">{$item['logo']}</p>
+                            <p id="livesn">{$liveInfo['logo']}</p>
                             <div class="fl vp" id="liveflnum">
                                 <i class="iconfont"></i>
                                 <span id="browsenum">
-                                    {if $item['istruenum']==1}
-                                    {$item['real_num']}
+                                    {if $liveInfo['istruenum']==1}
+                                    {$liveInfo['real_num']}
                                     {else}
-                                    {$item['total_num']}
+                                    {$liveInfo['total_num']}
                                     {/if}</span>
                             </div>
 
@@ -458,7 +460,7 @@
                             {elseif $comment['type']=='reward'}
                             <p class="red-tishi">{$comment['content']}</p>
                             {elseif $comment['type']=='grouppacket'}
-                            <li class="redbao"><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name" username="{$comment['nickname']}">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo date('Y-m-d H:i:s',$comment['dateline'])}</span></div><div class="char_message red_message"><div class="red-red" value="{$comment['id']}"><img src="http://hefei.hfwxz.com/addons/wxz_wzb/template/mobile/2/image/hongbao.png" height="45px"><div class="red-cent"><p class="red-title">恭喜发财！</p><p>领取红包</p></div></div><div class="send"></div><div class="red_name"><span class="red_name1">直播间</span><span class="red_name2">红包</span></div></div></div></li>
+                            <li class="redbao"><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name" username="{$comment['nickname']}">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo date('Y-m-d H:i:s',$comment['dateline'])}</span></div><div class="char_message red_message"><div class="red-red" value="{$comment['rid']}"><img src="http://hefei.hfwxz.com/addons/wxz_wzb/template/mobile/2/image/hongbao.png" height="45px"><div class="red-cent"><p class="red-title">恭喜发财！</p><p>领取红包</p></div></div><div class="send"></div><div class="red_name"><span class="red_name1">直播间</span><span class="red_name2">红包</span></div></div></div></li>
                             {/if}
                             {/loop}
                             {/if}
@@ -468,7 +470,7 @@
                         <div class="footer">
                             <div class="allgift">
                                 <ul class="gift-list">
-                                    {if ($item['reward']==1 && strpos($user_agent, 'MicroMessenger') !== false)}
+                                    {if ($liveInfo['reward']==1 && strpos($user_agent, 'MicroMessenger') !== false)}
                                     <li class='giftReward' id="giftReward">
                                         <p><img src="source/plugin/wxz_live/template/index/1/image/hongbao1.png"></p>
                                         <p>群发红包</p>
@@ -481,7 +483,7 @@
                                     </li>
                                     {/if}
                                     {loop $gift $value}
-                                    <li data-id="{$value['id']}"  class='giftlist'>
+                                    <li data-id="{$value['rid']}"  class='giftlist'>
                                         <p><img src="{$value['pic']}"></p>
                                         <p>{$value['name']}</p>
                                         <p><span class="moneynum">{eval echo $value['amount']/100}</span>元</p>
@@ -519,7 +521,7 @@
 
                             </ul>
                             <ul class="showfunction">
-                                {if in_array('主页',$gn)}<li class="index-list">
+                                {if in_array('1',$gn)}<li class="index-list">
                                     <a href="{eval echo $this->createMobileUrl('index')}">
                                         <p>
                                             <i class="iconfont"></i>
@@ -527,17 +529,17 @@
                                         <p>首页</p>
                                     </a>
                                 </li>{/if}
-                                {if in_array('图片',$gn)}<li>
+                                {if in_array('6',$gn)}<li>
                                     <p>
                                         <i class="iconfont"></i>
                                     </p>
                                     <p>图片</p>
                                     <form name="form1" id="upform1">
-                                        <input type="file" class="input-files" id="up" onchange="upimage('{eval echo $this->createMobileUrl('headupload',array('rid' => $rid))}');">
+                                        <input type="file" class="input-files" id="up" onchange="upimage('{eval echo $this->createMobileUrl('headupload',array('rid' => $id))}');">
                                     </form>
                                 </li>{/if}
-                                {if in_array('提现',$gn)}<li>
-                                    <a href="{eval echo $this->createMobileUrl('withdraw',array('rid' => $rid))}">
+                                {if in_array('7',$gn)}<li>
+                                    <a href="{eval echo $this->createMobileUrl('withdraw',array('rid' => $id))}">
                                         <p>
                                             <i class="iconfont"></i>
                                         </p>
@@ -608,7 +610,7 @@
                                 </div>
                         </div> -->
                         <!--关注公众号-->
-                        {if $item['copyrightshow']==1}
+                        {if $liveInfo['copyrightshow']==1}
                         <div class="" style="
                              height: 20px;
                              position: relative;
@@ -616,9 +618,9 @@
                              text-align: center;
                              line-height: 20px;
                              color: #aaaaaa;
-                             ">{$item['copyright']}</div>{/if}
+                             ">{$liveInfo['copyright']}</div>{/if}
 
-                        <div class="focus-on layui-m-anim-scale qrcode"><img src="{eval echo tomedia($setting['attention_code'])}"><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p></div>
+                        <div class="focus-on layui-m-anim-scale qrcode"><img src="{eval echo ($liveSettingInfo['attention_code'])}"><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p></div>
                         <!--收藏-->
                         <div class="collection">
                             <img src="source/plugin/wxz_live/template/index/1/image/collection.png">
@@ -698,7 +700,7 @@
                         </div>
                     </div>
                     <!--打赏红包-->
-                    {eval $settings = iunserializer($dashangsetting['settings'])}
+                    {eval $liveSettingInfos = iunserializer($dashangsetting['settings'])}
                     <section class="redenvelope width640 layui-m-anim-scale">
                         <div class="mask"></div>
                         <div class="redcenters width640">
@@ -709,47 +711,47 @@
                                 <!--红包信息-->
                                 <div class="RedPack_Info">
                                     <div class="packimgs">
-                                        <img src="{eval echo tomedia($dashangsetting['logo'])}">
+                                        <img src="{eval echo ($dashangsetting['logo'])}">
                                     </div>
                                     <p class="FromWho text_flow"></p>
                                     <p class="qm text_flow">{$dashangsetting['content']}</p>
                                 </div>
                             </div>
                             <ul class="c-money">
-                                <li data-money="{$settings['one']}">
+                                <li data-money="{$liveSettingInfos['one']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark1']}</p>
-                                        <p>（{eval echo ($settings['one']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark1']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['one']/100)}元）</p>
                                     </a>
                                 </li>
-                                <li data-money="{$settings['two']}">
+                                <li data-money="{$liveSettingInfos['two']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark2']}</p>
-                                        <p>（{eval echo ($settings['two']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark2']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['two']/100)}元）</p>
                                     </a>
                                 </li>
-                                <li data-money="{$settings['three']}">
+                                <li data-money="{$liveSettingInfos['three']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark3']}</p>
-                                        <p>（{eval echo ($settings['three']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark3']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['three']/100)}元）</p>
                                     </a>
                                 </li>
-                                <li data-money="{$settings['four']}">
+                                <li data-money="{$liveSettingInfos['four']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark4']}</p>
-                                        <p>（{eval echo ($settings['four']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark4']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['four']/100)}元）</p>
                                     </a>
                                 </li>
-                                <li data-money="{$settings['five']}">
+                                <li data-money="{$liveSettingInfos['five']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark5']}</p>
-                                        <p>（{eval echo ($settings['five']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark5']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['five']/100)}元）</p>
                                     </a>
                                 </li>
-                                <li data-money="{$settings['six']}">
+                                <li data-money="{$liveSettingInfos['six']}">
                                     <a href="javascript:;">
-                                        <p>{$settings['remark6']}</p>
-                                        <p>（{eval echo ($settings['six']/100)}元）</p>
+                                        <p>{$liveSettingInfos['remark6']}</p>
+                                        <p>（{eval echo ($liveSettingInfos['six']/100)}元）</p>
                                     </a>
                                 </li>
                             </ul>
@@ -771,34 +773,34 @@
                     <!--右侧-->
 
                     <ul class="cont-right {$value['type']}" {if $value['type']=='3'} style="display:block;" {else} style="display:none;" {/if}>
-                        {if in_array('主页',$gn)}<a href="{eval echo $this->createMobileUrl('index')}"><li><i class="iconfont">&#xe63d;</i></li></a>{/if}
-                        {if in_array('关注',$gn)}<li class="focus-onto"><i class="iconfont"></i></li>{/if}
+                        {if in_array('1',$gn)}<a href="{eval echo $this->createMobileUrl('index')}"><li><i class="iconfont">&#xe63d;</i></li></a>{/if}
+                        {if in_array('2',$gn)}<li class="focus-onto"><i class="iconfont"></i></li>{/if}
                         <!-- <a ><li><i class="iconfont icon-ding"></i></li></a> -->
-                        {if in_array('邀请卡',$gn)}<a href="{eval echo $this->createMobileUrl('invitation',array('rid'=>$rid))}"><li><i class="iconfont"></i></li></a>{/if}
-                        {if in_array('刷新',$gn)}<a href="javascript:;" onclick="window.location.reload();"><li><i class="iconfont"></i></li></a>{/if}
+                        {if in_array('3',$gn)}<a href="{eval echo $this->createMobileUrl('invitation',array('rid'=>$id))}"><li><i class="iconfont"></i></li></a>{/if}
+                        {if in_array('4',$gn)}<a href="javascript:;" onclick="window.location.reload();"><li><i class="iconfont"></i></li></a>{/if}
                         <!-- <li class="functions"><i class="iconfont">&#xe628;</i></li> -->
-                        {if in_array('点赞',$gn)}<div class="zan-box">
+                        {if in_array('5',$gn)}<div class="zan-box">
                             <a class="zan-click" href="javascript:void(0);" style="display:block;"><li class="zan"><i class="iconfont"></i><em class="zan-num">{$totalzannum}</em></li></a>
                             <div class="love"></div>
                         </div>{/if}
                     </ul>
                     <!-- <p class="history" onclick="history();">查看历史消息^</p> -->
                     {elseif $value['type']=='2'}
-                    {eval $settings = iunserializer($value['settings'])}
+                    {eval $liveSettingInfos = iunserializer($value['settings'])}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
                         <div class="allconts">
-                            {$settings['content']}
+                            {$liveSettingInfos['content']}
                         </div>
-                        {if $item['copyrightshow']==1}<div class="pl-nomore line-top" style="
-                                                           height: 20px;
-                                                           text-align: center;
-                                                           line-height: 20px;
-                                                           color: #aaaaaa;
-                                                           ">{$item['copyright']}</div>{/if}
+                        {if $liveInfo['copyrightshow']==1}<div class="pl-nomore line-top" style="
+                                                               height: 20px;
+                                                               text-align: center;
+                                                               line-height: 20px;
+                                                               color: #aaaaaa;
+                                                               ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='6'}
                     {eval $ditu = 1;}
-                    {eval $settings = iunserializer($value['settings'])}
+                    {eval $liveSettingInfos = iunserializer($value['settings'])}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
                         <div class="allconts">
 
@@ -819,7 +821,7 @@
                             <script>
                                     var init = function() {
 
-                                    var center = new qq.maps.LatLng({$settings['longitude']}, {$settings['latitude']});
+                                    var center = new qq.maps.LatLng({$liveSettingInfos['longitude']}, {$liveSettingInfos['latitude']});
                                             var map = new qq.maps.Map(document.getElementById('container'), {
                                             center: center,
                                                     zoom: 13
@@ -835,21 +837,21 @@
                             <div id="container"></div>
 
                         </div>
-                        {if $item['copyrightshow']==1}<div class="pl-nomore line-top" style="
-                                                           height: 20px;
-                                                           text-align: center;
-                                                           line-height: 20px;
-                                                           color: #aaaaaa;
-                                                           ">{$item['copyright']}</div>{/if}
+                        {if $liveInfo['copyrightshow']==1}<div class="pl-nomore line-top" style="
+                                                               height: 20px;
+                                                               text-align: center;
+                                                               line-height: 20px;
+                                                               color: #aaaaaa;
+                                                               ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='5'}
-                    {eval $settings = iunserializer($value['settings'])}
+                    {eval $liveSettingInfos = iunserializer($value['settings'])}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh hidediv3">
                         <div class="allconts rankpm">
                             <div class="nav-box clearfix">
-                                {eval $i=1;$j=count($settings['list']);}
+                                {eval $i=1;$j=count($liveSettingInfos['list']);}
 
-                                {loop $settings['list'] $kk $vv}
+                                {loop $liveSettingInfos['list'] $kk $vv}
                                 {if $i==1}{eval $rankid = $kk;}{/if}
                                 <p class="nav-btn{eval echo $kk} {if $i==$j} nav-btn7 {/if}{if $i==1} nav-select {else} nav-unselect {/if}" onclick="rank({$kk}, {$j});">{$vv}</p>
                                 {eval $i++;}
@@ -857,8 +859,8 @@
 
                             </div>
                             <div class="totip">
-                                {eval $i=1;$j=count($settings['list']);}
-                                {loop $settings['list'] $kk $vv}
+                                {eval $i=1;$j=count($liveSettingInfos['list']);}
+                                {loop $liveSettingInfos['list'] $kk $vv}
                                 <ul id="rank{$kk}" {if $i!=1}style="display: none"{/if} class="rankcontent"></ul>
                                 {eval $i++;}
                                 {/loop}
@@ -866,28 +868,28 @@
 
                             </div>
                         </div>
-                        {if $item['copyrightshow']==1}<div class="pl-nomore line-top" style="
-                                                           height: 20px;
-                                                           text-align: center;
-                                                           line-height: 20px;
-                                                           color: #aaaaaa;
-                                                           ">{$item['copyright']}</div>{/if}
+                        {if $liveInfo['copyrightshow']==1}<div class="pl-nomore line-top" style="
+                                                               height: 20px;
+                                                               text-align: center;
+                                                               line-height: 20px;
+                                                               color: #aaaaaa;
+                                                               ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='7'}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
                         <div class="goods-box allconts">
                         </div>
-                        {if $item['copyrightshow']==1}<div class="pl-nomore line-top" style="
-                                                           height: 20px;
-                                                           text-align: center;
-                                                           line-height: 20px;
-                                                           color: #aaaaaa;
-                                                           ">{$item['copyright']}</div>{/if}
+                        {if $liveInfo['copyrightshow']==1}<div class="pl-nomore line-top" style="
+                                                               height: 20px;
+                                                               text-align: center;
+                                                               line-height: 20px;
+                                                               color: #aaaaaa;
+                                                               ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='1'}
-                    {eval $settings = iunserializer($value['settings'])}
+                    {eval $liveSettingInfos = iunserializer($value['settings'])}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
-                        <iframe src="{$settings['iframe']}" frameborder="no" marginheight="0" marginwidth="0" width="100%" height="100%" allowTransparency="true" style="overflow-y:auto"></iframe>
+                        <iframe src="{$liveSettingInfos['iframe']}" frameborder="no" marginheight="0" marginwidth="0" width="100%" height="100%" allowTransparency="true" style="overflow-y:auto"></iframe>
                     </div>
                     {elseif $value['type']=='4'}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
@@ -898,7 +900,7 @@
                                     <div class="item">
                                         <!--左侧图标-->
                                         <div class="leftpng">
-                                            <img src="{eval echo tomedia($valu['images'])}" width="100%"/>
+                                            <img src="{eval echo ($valu['images'])}" width="100%"/>
                                         </div>
                                         <div class="title">
                                             <strong><span>{if $valu['publisher']}{$valu['publisher']}{else}主持人{/if}</span></strong>
@@ -910,7 +912,7 @@
                                             {eval $pic = json_decode($valu['pic'])}
                                             {loop $pic $key $val}
                                             <div align="center">
-                                                <img src='{eval echo tomedia($val)}'>
+                                                <img src='{eval echo ($val)}'>
                                             </div><br />
                                             {/loop}
                                             {/if}
@@ -920,12 +922,12 @@
                                     {/loop}
 
                                 </div>
-                                {if $item['copyrightshow']==1}<div class="pl-nomore line-top" style="
-                                                                   height: 20px;
-                                                                   text-align: center;
-                                                                   line-height: 20px;
-                                                                   color: #aaaaaa;
-                                                                   ">{$item['copyright']}</div>{/if}
+                                {if $liveInfo['copyrightshow']==1}<div class="pl-nomore line-top" style="
+                                                                       height: 20px;
+                                                                       text-align: center;
+                                                                       line-height: 20px;
+                                                                       color: #aaaaaa;
+                                                                       ">{$liveInfo['copyright']}</div>{/if}
 
                             </div></div>
                     </div>
@@ -1264,7 +1266,7 @@
 
 
         <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/demo_base.js"></script>
-        {if $item['theme']}
+        {if $liveInfo['theme']}
         <script type="text/javascript">
                                             // 广告轮播
                                             var mySwiper = new Swiper ('.swiper-container', {
@@ -1277,16 +1279,16 @@
 
         <script>
                     $(function() {
-                    {if ($setting['gz_must'] == 2)}
-                    if (getCookie('qrshow' + loginInfo.rid) != 2)
+                    {if ($liveSettingInfo['follow_type'] == 2)}
+                    if (getCookie('qrshow' + loginInfo.id) != 2)
                     {
                     if ("{$_W['fans']['follow']}" != 1)
                     {
 
                     $('.grap').show();
-                            $('.qrcode').html('<span class = "focus-on-click">+</span><img src="{eval echo tomedia($setting['attention_code'])}"/><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p>');
+                            $('.qrcode').html('<span class = "focus-on-click">+</span><img src="{eval echo ($liveSettingInfo['attention_code'])}"/><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p>');
                             $('.qrcode').show();
-                            setCookie('qrshow' + loginInfo.rid, 2, {if $setting['days']}{$setting['days']}{ else} 0 {/if});
+                            setCookie('qrshow' + loginInfo.id, 2, {if $liveSettingInfo['days']}{$liveSettingInfo['days']}{ else} 0 {/if});
 
                             }
 
@@ -1340,12 +1342,12 @@
                             });
                                     wx.ready(function(){
                                     wx.onMenuShareAppMessage({
-                                    title: "{$setting['share_title']}",
-                                            desc: "{$setting['share_desc']}",
-                                            link: "{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$rid)))}",
-                                            imgUrl: "{eval echo $_W['attachurl'].$setting['share_img']}",
+                                    title: "{$liveSettingInfo['share_title']}",
+                                            desc: "{$liveSettingInfo['share_desc']}",
+                                            link: "{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$id)))}",
+                                            imgUrl: "{eval echo $_W['attachurl'].$liveSettingInfo['share_img']}",
                                             success: function () {
-                                            $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$rid)))}", function(data) {
+                                            $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$id)))}", function(data) {
 
                                             }, 'json');
                                             },
@@ -1353,12 +1355,12 @@
                                             }
                                     });
                                             wx.onMenuShareTimeline({
-                                            title: "{$setting['share_title']}",
-                                                    desc: "{$setting['share_desc']}",
-                                                    link:"{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$rid)))}",
-                                                    imgUrl: "{eval echo $_W['attachurl'].$setting['share_img']}",
+                                            title: "{$liveSettingInfo['share_title']}",
+                                                    desc: "{$liveSettingInfo['share_desc']}",
+                                                    link:"{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$id)))}",
+                                                    imgUrl: "{eval echo $_W['attachurl'].$liveSettingInfo['share_img']}",
                                                     success: function () {
-                                                    $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$rid)))}", function(data) {
+                                                    $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$id)))}", function(data) {
 
                                                     }, 'json');
                                                     },
@@ -1402,7 +1404,7 @@
                             var founder = {
                             uid:"{$dashangsetting['uid']}",
                                     nickname:"{$dashangsetting['nickname']}",
-                                    headurl:"{eval echo tomedia($dashangsetting['logo'])}"
+                                    headurl:"{eval echo ($dashangsetting['logo'])}"
                             }
 
 
@@ -1547,7 +1549,7 @@
                                     return false;
                             }
                             //alert($('.text-input').val());
-                            onSendMsg("{eval echo $this->createMobileurl('addcomment',array('rid'=>$rid))}");
+                            onSendMsg("{eval echo $this->createMobileurl('addcomment',array('rid'=>$id))}");
                             }
                             //失去焦点
                             }).on('blur', '.text-input', function(event) {
@@ -1571,7 +1573,7 @@
                             event.preventDefault();
                                     var $this = $(this);
                                     var item = $this.index();
-                                    var idName = $this.attr('id');
+                                    var idName = $this.attr('rid');
                                     $this.addClass("select").siblings().removeClass("select");
                                     if (idName == 'giftReward') {
                             $(".sendredbagwin").show();
@@ -1687,7 +1689,7 @@
                                     ispost = true;
                                     $.ajax({
                                     type: "POST",
-                                            url: "{eval echo $this->createMobileUrl('setpacket',array('rid' => $rid))}",
+                                            url: "{eval echo $this->createMobileUrl('setpacket',array('rid' => $id))}",
                                             data: dbjson,
                                             dataType: 'json',
                                             success: function(result) {
@@ -1751,7 +1753,7 @@
                                     var username = $(this).attr("username");
                                     $.ajax({
                                     type: "POST",
-                                            url: "{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}",
+                                            url: "{eval echo $this->createMobileUrl('getshut',array('rid' => $id))}",
                                             dataType: 'json',
                                             success: function(result) {
                                             var ShuttedUinList = result.msg;
@@ -1759,10 +1761,10 @@
                                                     console.log(user);
                                                     console.log(ShuttedUinList.indexOf('"' + user + '"'));
                                                     if (ShuttedUinList.indexOf('"' + user + '"') > 0){
-                                            $('#shutup').attr('onclick', 'cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","' + user + '","' + username + '")');
+                                            $('#shutup').attr('onclick', 'cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>2))}","' + user + '","' + username + '")');
                                                     $('#shutup').html('取消禁言');
                                             } else{
-                                            $('#shutup').attr('onclick', 'shutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>1))}","' + user + '","' + username + '")');
+                                            $('#shutup').attr('onclick', 'shutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>1))}","' + user + '","' + username + '")');
                                                     $('#shutup').html('禁言');
                                             }
                                             },
@@ -1798,7 +1800,7 @@
                             }).on('click', '.focus-onto', function(event) {
                             $(".grap").toggle().css("z-index", "5");
                                     $(".focus-on").toggle();
-                                    $('.qrcode').html('<span class = "focus-on-click">+</span><img src="{eval echo tomedia($setting['attention_code'])}"/><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p>');
+                                    $('.qrcode').html('<span class = "focus-on-click">+</span><img src="{eval echo ($liveSettingInfo['attention_code'])}"/><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p>');
                                     $('.qrcode').show();
                                     //公众号关注关闭
                             }).on('click', '.focus-on-click', function(){
@@ -1858,7 +1860,7 @@
                             }
                             if (red.redid > 0) {
                             $.ajax({
-                            url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $rid))}",
+                            url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $id))}",
                                     type: 'POST',
                                     dataType: 'json',
                                     data: {sendid: red.redid},
@@ -2016,7 +2018,7 @@
                                     $('.redlist').find('.alllist').children('h5').html(red.rednum + '个红包,共' + (red.redMoney / 100) + '元');
                                     if (red.redid > 0) {
                             $.ajax({
-                            url: "{eval echo $this->createMobileUrl('getpacket',array('rid' => $rid))}",
+                            url: "{eval echo $this->createMobileUrl('getpacket',array('rid' => $id))}",
                                     type: 'POST',
                                     dataType: 'json',
                                     data: {sendid: red.redid},
@@ -2096,7 +2098,7 @@
                                     // $('.redlist').find('.RedPack_Info').children('p').eq(2).html();
                                     $('.redlist').find('.alllist').children('h5').html(red.rednum + '个红包,共' + (red.redMoney / 100) + '元');
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $rid))}",
+                                    url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $id))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {sendid: red.redid},
@@ -2136,7 +2138,7 @@
                                             tid: tid || 0
                                     };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
+                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $id))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: rewardjson1,
@@ -2186,7 +2188,7 @@
                                     tid: tid || 0
                             };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
+                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $id))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: rewardjson2,
@@ -2228,7 +2230,7 @@
                                             tid: tid || 0
                                     };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $rid))}",
+                                    url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $id))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: giftjson,
@@ -2268,13 +2270,13 @@
                                     //支付
                                             function callPay(json, data, otherdata) {
 
-                                            if (typeof WeixinJSBridge == "undefined") {
+                                            if (typeof WeixinJSBidge == "undefined") {
 
                                             if (document.addEventListener) {
-                                            document.addEventListener('WeixinJSBridgeReady', jsApiCall(json, otherdata), false);
+                                            document.addEventListener('WeixinJSBidgeReady', jsApiCall(json, otherdata), false);
                                             } else if (document.attachEvent) {
-                                            document.attachEvent('WeixinJSBridgeReady', jsApiCall(json, otherdata));
-                                                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall(json, otherdata));
+                                            document.attachEvent('WeixinJSBidgeReady', jsApiCall(json, otherdata));
+                                                    document.attachEvent('onWeixinJSBidgeReady', jsApiCall(json, otherdata));
                                             }
                                             } else {
 
@@ -2285,7 +2287,7 @@
                                     function jsApiCall(obj, data, otherdata) {
                                     if (obj.status == 1) {
                                     console.log(data);
-                                            WeixinJSBridge.invoke(
+                                            WeixinJSBidge.invoke(
                                                     'getBrandWCPayRequest', {
                                                     "appId": "" + obj.appId + "",
                                                             "timeStamp": "" + obj.timeStamp + "",
@@ -2304,10 +2306,10 @@
                                                             loginInfo.type = data.type;
                                                             if (data.type == 'grouppacket'){
                                                     $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $rid))}",
+                                                    url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $id))}",
                                                             type: 'POST',
                                                             dataType: 'json',
-                                                            data: {'id':data.id},
+                                                            data: {'rid':data.id},
                                                             success:function(r){
                                                             if (r.s == 1) {
                                                             loginInfo.id = r.id;
@@ -2317,10 +2319,10 @@
                                                     });
                                                     } else if (data.type == 'gift'){
                                                     $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $rid))}",
+                                                    url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $id))}",
                                                             type: 'POST',
                                                             dataType: 'json',
-                                                            data: {'id':data.id},
+                                                            data: {'rid':data.id},
                                                             success:function(r){
                                                             if (r.s == 1) {
                                                             loginInfo.id = r.id;
@@ -2557,7 +2559,7 @@
                                             if (roomadmin.indexOf('"' + '{$user["id"]}' + '"') > 0)
                                     {
                                     isadmin = 1;
-                                            $('.showfunction').append('<li><a href="{eval echo $this->createMobileUrl("pictv",array("rid"=>$rid))}"><p><i class="iconfont"></i></p><p>图文直播</p></a></li><li class="functions"><p><i class="iconfont">&#xe61e;</i></p><p>禁言管理</p></li><li onclick="showshutup();"><p><i class="iconfont">&#xe632;</i></p><p>禁言列表</p></li>');
+                                            $('.showfunction').append('<li><a href="{eval echo $this->createMobileUrl("pictv",array("id"=>$id))}"><p><i class="iconfont"></i></p><p>图文直播</p></a></li><li class="functions"><p><i class="iconfont">&#xe61e;</i></p><p>禁言管理</p></li><li onclick="showshutup();"><p><i class="iconfont">&#xe632;</i></p><p>禁言列表</p></li>');
                                             $('#send_msg_text').removeAttr('readonly');
                                             $('#send_msg_text').attr('placeholder', '和大伙说点什么吧');
                                     }
@@ -2568,8 +2570,8 @@
                                             'identifierNick': '{$user["nickname"]}', //当前用户昵称，选填
                                             'headurl': '{$user["headimgurl"]}', //当前用户默认头像，选填
                                             'isadmin':isadmin,
-                                            'rid':'{$rid}',
-                                            'allshutup':'{$item["isallshutup"]}',
+                                            'rid':'{$id}',
+                                            'allshutup':'{$liveInfo["isallshutup"]}',
                                             'disimg':'0',
                                             'pop':0,
                                             'shutup':{$shutup},
@@ -2591,7 +2593,7 @@
 
                                             var h = contentH - viewH;
                                             if (scrollTop == 0) {
-                                    $.post("{eval echo $this->createMobileurl('commentpage',array('rid'=>$rid))}", {page:page}, function(data) {
+                                    $.post("{eval echo $this->createMobileurl('commentpage',array('rid'=>$id))}", {page:page}, function(data) {
 
                                     if (data.s == 1){
                                     var str = '';
@@ -2663,7 +2665,7 @@
                                                             var str = '';
                                                                     console.log(result.list.length);
                                                                     for (var i = 0; i < result.list.length; i++){
-                                                            str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
+                                                            str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
                                                             }
                                                             $('.shutuplist').append(str);
                                                             },
@@ -2678,7 +2680,7 @@
                                             }
                                     function showshutup()
                                     {
-                                    shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}");
+                                    shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $id))}");
                                             $('.Banned').show();
                                             $(".function-all").slideUp('fast');
                                             $(".showfunction").slideUp('fast');
@@ -2687,7 +2689,7 @@
                                     function allshutup(type)
                                     {
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $rid))}",
+                                    url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $id))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {allshutup:type},
@@ -2751,14 +2753,14 @@
                                     $.ajax({
                                     type:'post',
                                             data:{'password':pass, 'type':type},
-                                            url:"{eval echo $this->createMobileurl('limit',array('rid'=>$rid))}",
+                                            url:"{eval echo $this->createMobileurl('limit',array('rid'=>$id))}",
                                             dataType:"json",
                                             //async:false,
                                             success: function(json){
                                             if (json.s == '1'){
                                             if (type != 1){
                                             var e = json.msg;
-                                                    WeixinJSBridge.invoke(
+                                                    WeixinJSBidge.invoke(
                                                             'getBrandWCPayRequest', {
                                                             "appId":e.appId,
                                                                     "timeStamp": "" + e.timeStamp,
@@ -2808,7 +2810,7 @@
                                             $('#send_msg_text').attr('placeholder', '您已被禁言');
                                     }
 
-                                    if ("{$item['isallshutup']}" == 1){
+                                    if ("{$liveInfo['isallshutup']}" == 1){
                                     $("#allcheck").prop("checked", true);
                                             if (loginInfo.isadmin != 1){
                                     $('#send_msg_text').attr('readonly', 'true');
@@ -2824,7 +2826,7 @@
                                     $(".cont-right ").show();
                                     }
                                     //switch开关
-                                    if ("{$item['isallshutup']}" == 1) {
+                                    if ("{$liveInfo['isallshutup']}" == 1) {
                                     $(".bannerdbtn").children('em').removeClass('btn-movel').addClass('btn-mover').parent().css({backgroundColor: '#31ac82'});
                                     } else{
                                     $(".bannerdbtn").children('em').removeClass('btn-mover').addClass('btn-movel').parent().css({backgroundColor: '#ccc'});
@@ -2843,14 +2845,14 @@
         <script>
                                     $(function(){
                                     initEmotionUL();
-                                            //setInterval("showMsg('{eval echo $this->createMobileurl('getmsg',array('rid'=>$rid))}')", 5000);
-                                            setInterval("showPic('{eval echo $this->createMobileurl('getpictv',array('rid'=>$rid))}')", 6000);
+                                            //setInterval("showMsg('{eval echo $this->createMobileurl('getmsg',array('rid'=>$id))}')", 5000);
+                                            setInterval("showPic('{eval echo $this->createMobileurl('getpictv',array('rid'=>$id))}')", 6000);
                                     });</script>
         <script type="text/javascript">
                                             var body = $(".main").width();
                                             var vedio = body * 0.56;
                                             $(".block_video").height(vedio);
-                                            var image = "{eval echo tomedia($list['settings']['img'])}"; //封面图片
+                                            var image = "{eval echo ($list['settings']['img'])}"; //封面图片
                                             var a = 0;
                                             var se;
                                             var u = navigator.userAgent;
@@ -2931,7 +2933,7 @@
                                             $('.goods-box').html('');
                                             var nowtime = 0;
                                             $.ajax({
-                                            url: "{eval echo $this->createMobileurl('store',array('rid'=>$rid))}",
+                                            url: "{eval echo $this->createMobileurl('store',array('rid'=>$id))}",
                                                     type: 'POST',
                                                     dataType: 'json',
                                                     data: {tid:'2201'},
@@ -3063,7 +3065,7 @@
 
                                     $('#rank' + num).html('');
                                             $.ajax({
-                                            url: "{eval echo $this->createMobileurl('rank',array('rid'=>$rid))}",
+                                            url: "{eval echo $this->createMobileurl('rank',array('rid'=>$id))}",
                                                     type: 'POST',
                                                     dataType: 'json',
                                                     data: {type:num},
@@ -3146,7 +3148,7 @@
                                                     adveWidth: w, //封面图宽度
                                                     adveHeight: h, //封面图高度
                                                     nowtime:{eval echo time(); },
-                                                    startime:"{$item['start_at']}",
+                                                    startime:"{$liveInfo['start_at']}",
                                                     //adveReAddr: ''//封面图点击链接
 
                                             });
@@ -3244,7 +3246,7 @@
                                             var index = Math.floor((Math.random() * picArr.length));
                                                     $.ajax({
                                                     type: 'POST',
-                                                            url: "{eval echo $this->createMobileurl('setzan',array('rid'=>$rid))}",
+                                                            url: "{eval echo $this->createMobileurl('setzan',array('rid'=>$id))}",
                                                             dataType: 'json',
                                                             async: false,
                                                             success: function(data) {

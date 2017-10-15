@@ -81,6 +81,14 @@ class table_wxz_live_room extends table_wxz_live_base {
         return $info;
     }
 
+    /**
+     * 格式化直播间数据
+     */
+    public function formatRoomData($roomInfo) {
+        $roomInfo['limit_data'] = $roomInfo['limit_data'] ? unserialize($roomInfo['limit_data']) : array();
+        return $roomInfo;
+    }
+
 }
 
 ?>

@@ -21,7 +21,7 @@ class Controller_base {
         $this->curNoRootUrlAct = $this->noRootUrl . "&act={$this->curAct}";
 
         //前端链接
-        $this->fBaseUrl = "/plugin.php?id=wxz_live:index&pmod=%s";
+        $this->fBaseUrl = "plugin.php?id=wxz_live:index&pmod=%s";
         $this->fBaseUrl = sprintf($this->fBaseUrl, $controller);
         $this->fCurUrl = $this->fBaseUrl . "&act={$this->curAct}";
     }
@@ -31,8 +31,38 @@ class Controller_base {
     }
 
     /**
+     * 构造前台链接
+     * @param type $act
+     * @param type $param
+     */
+    public function createMobileUrl($act, $param, $hasHost = false) {
+        global $_G;
+        $param = http_build_query($param);
+        $url = $this->fBaseUrl . "&act={$act}&" . $param;
+
+        if ($hasHost) {
+            $url = $_G['siteurl'] . $url;
+        }
+        return $url;
+    }
+
+    /**
+     * 构造后台链接
+     * @param type $act
+     * @param type $param
+     */
+    public function createWebUrl($act, $param, $hasHost = false) {
+        global $_G;
+        $param = http_build_query($param);
+        $url = $this->baseUrl . "&act={$act}&" . $param;
+        if ($hasHost) {
+            $url = $_G['siteurl'] . $url;
+        }
+        return $url;
+    }
+
+    /**
      * Ajax方式返回数据到客户端
-     * @author masy <masy@51talk.com>
      * @param mixed $data 要返回的数据
      * @param String $info 提示信息
      * @param boolean $status 返回状态

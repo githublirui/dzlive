@@ -50,9 +50,11 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
   `end_time` datetime NOT NULL COMMENT '直播结束时间',
   `live_status` tinyint(1) DEFAULT 1 COMMENT '直播状态 1. 即将直播 2.直播中 3. 回播',
   `countdown_style` varchar(255) DEFAULT '' COMMENT '直播间倒计时颜色',      
-  `is_show_list` tinyint(1) DEFAULT 1 COMMENT '是否在列表页显示 1.是 2.否',
   `style` tinyint(1) DEFAULT 1 COMMENT '风格',
-  `station_caption` varchar(500) DEFAULT '' COMMENT '台标，风格2使用',        
+  `limit` tinyint(1) DEFAULT 1 COMMENT '直播访问限制',
+  `limit_data` varchar(255) DEFAULT '' COMMENT '直播访问限制配置',
+  `style_extend` varchar(255) DEFAULT '' COMMENT '风格额外数据',        
+  `station_caption` varchar(255) DEFAULT '' COMMENT '台标，风格2使用',        
   `theme_pic` varchar(255) DEFAULT '' COMMENT '直播间主题图片',      
   `cover_pic` varchar(255) DEFAULT '' COMMENT '封面图片',        
   `is_show_follow_btn` tinyint(1) DEFAULT 1 COMMENT '关注按钮', 
@@ -61,12 +63,16 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
   `online_user_config` varchar(255) DEFAULT '' COMMENT '在线人数设置',  
   `check_comment` tinyint(1) DEFAULT 1 COMMENT '评论是否需要审核 1.需要审核 2.不需要审核',
   `enable_redpacket` tinyint(1) DEFAULT 1 COMMENT '是否启用红包 1不启用,2启用',
+  `is_show_copyright` tinyint(1) DEFAULT 1 COMMENT '是否显示版权', 
   `copyright` varchar(255) DEFAULT '' COMMENT '显示版权信息',
   `rule` text COMMENT '直播规则',
   `linkurl` varchar(255) DEFAULT '' COMMENT '外链url',
   `islinkurl` tinyint(1) DEFAULT '2' COMMENT '是否外链 1是，2否',
   `is_show` tinyint(1) DEFAULT '1' COMMENT '1展示，2不展示',
-  `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',    
+  `is_show_list` tinyint(1) DEFAULT 1 COMMENT '是否在列表页显示 1.是 2.否',
+  `sort_order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  `base_num int(11) NOT NULL DEFAULT '0' COMMENT '基础人数',
+  `total_num` int(11) NOT NULL DEFAULT '0' COMMENT '总人数',
   `view_num` int(11) NOT NULL DEFAULT '0' COMMENT '浏览数',    
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -108,7 +114,26 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_user` (
   KEY `sub_openid` (`sub_openid`) USING BTREE,
   KEY `openid` (`openid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+        
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_viewer` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) DEFAULT NULL,
+  `room_id` int(10) DEFAULT NULL,
+  `share` tinyint(1) DEFAULT '0',
+  `amount` int(10) DEFAULT '0',
+  `ispay` tinyint(1) DEFAULT '0',
+  `rlog` varchar(255) DEFAULT NULL,
+  `deposit` int(10) DEFAULT '0',
+  `password` varchar(255) DEFAULT NULL,
+  `isshutup` tinyint(1) DEFAULT '0',
+  `role` tinyint(1) DEFAULT '0' COMMENT '0普通1主播2管理员',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `room_id` (`room_id`) USING BTREE,
+  KEY `uid` (`uid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_setting` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(50) NOT NULL COMMENT '页面类型',

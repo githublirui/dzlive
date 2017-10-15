@@ -12,7 +12,7 @@ if (!defined('IN_DISCUZ')) {
 
 /**
  * 
- * 直播间分类管理
+ * 前台首页
  */
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/function/global.func.php";
 runController();

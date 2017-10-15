@@ -20,6 +20,8 @@ class Controller_live extends Controller_base {
     }
 
     private function setLiveNav() {
+        global $_G;
+        
         $id = $_GET['id'];
         //子导航
         $this->navs = array(
@@ -31,8 +33,19 @@ class Controller_live extends Controller_base {
                 'name' => '播放器设置',
                 'act' => "playerSetting&id={$id}",
             ),
+            array(
+                'name' => '访问限制',
+                'act' => "viewLimit&id={$id}",
+            ),
         );
         $this->title = "直播间设置";
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $this->tableRoom = C::t('#wxz_live#wxz_live_room');
+        $this->id = $_GET['id'];
+        $this->liveInfo = $this->tableRoom->getById($this->id);
+        $this->liveInfo['url'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$this->liveInfo['room_no']}";
     }
 
     /**
@@ -51,8 +64,6 @@ class Controller_live extends Controller_base {
 
         $liveInfo = $tableRoom->getById($id);
         $info = $tableRoom->getSettingInfoByRoomId($id);
-
-        $liveInfo['url'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$liveInfo['room_no']}";
 
         if (!$liveInfo) {
             cpmsg('直播间不存在', $this->noRootUrl, 'error');
@@ -89,6 +100,33 @@ class Controller_live extends Controller_base {
         }
 
         include template('wxz_live:live/activitySetting');
+    }
+
+    /**
+     *
+     * 访问限制 
+     */
+    public function viewLimit() {
+        $this->setLiveNav();
+
+        $this->liveInfo['limit_data'] = $this->liveInfo['limit_data'] ? unserialize($this->liveInfo['limit_data']) : [];
+
+        if (submitcheck('save')) {
+            $updateData['limit'] = $_GET['limit'];
+            $limitData = array(
+                'password' => $_GET["password{$_GET['limit']}"],
+                'amount' => $_GET["amount{$_GET['limit']}"],
+                'delayed' => $_GET["delayed{$_GET['limit']}"],
+            );
+          
+            $updateData['limit_data'] = serialize($limitData);
+            $ret = $this->tableRoom->updateById($this->id, $updateData);
+
+            if ($ret) {
+                cpmsg('设置成功', $this->curNoRootUrlAct . "&id={$this->id}", 'success');
+            }
+        }
+        include template('wxz_live:live/viewLimit');
     }
 
     /**
@@ -263,6 +301,10 @@ class Controller_live extends Controller_base {
             $info['url'] = "{$_G['siteurl']}plugin.php?id=wxz_live:index&pmod=index&act=live&roomno={$info['room_no']}";
             $encodeUrl = urlencode($info['url']);
             $info['qrcode'] = "?frame=no&action=plugins&operation=config&identifier=wxz_live&pmod=common&act=qrcode&data={$encodeUrl}";
+            $info['style_extend'] = $info['style_extend'] ? unserialize($info['style_extend']) : [];
+            $info['countdown_style'] = $info['countdown_style'] ? unserialize($info['countdown_style']) : [];
+            $info['station_caption'] = $info['station_caption'] ? unserialize($info['station_caption']) : [];
+            $info['online_user_config'] = $info['online_user_config'] ? unserialize($info['online_user_config']) : [];
         }
 
         //获取所有分类
@@ -270,57 +312,52 @@ class Controller_live extends Controller_base {
 
         if (submitcheck('save')) {
             $images = wxz_uploadimg();
-
+            $saveData = array(
+                'category_id' => $_GET['category_id'],
+                'title' => $_GET['title'],
+                'style' => $_GET['style'],
+                'check_comment' => $_GET['check_comment'],
+                'enable_redpacket' => $_GET['enable_redpacket'],
+                'style_extend' => $_GET['style_extend'] ? serialize($_GET['style_extend']) : '',
+                'countdown_style' => $_GET['countdown_style'] ? serialize($_GET['countdown_style']) : '',
+                'station_caption' => $_GET['station_caption'] ? serialize($_GET['station_caption']) : '',
+                'online_user_config' => $_GET['online_user_config'] ? serialize($_GET['online_user_config']) : '',
+                'start_time' => $_GET['start_time'],
+                'end_time' => $_GET['end_time'],
+                'live_status' => $_GET['live_status'],
+                'is_show' => $_GET['is_show'],
+                'is_show_list' => $_GET['is_show_list'],
+                'is_show_copyright' => $_GET['is_show_copyright'],
+                'copyright' => $_GET['copyright'],
+                'rule' => $_GET['rule'],
+                'islinkurl' => $_GET['islinkurl'],
+                'linkurl' => $_GET['linkurl'],
+                'publisher' => $_GET['publisher'],
+                'sort_order' => $_GET['sort_order'],
+            );
+            $saveData['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
+            $saveData['cover_pic'] = $images['cover_pic'] ? $images['cover_pic'] : $_GET['cover_pic'];
+            $saveData['publisher_avatar'] = $images['publisher_avatar'] ? $images['publisher_avatar'] : $_GET['publisher_avatar'];
             if ($id) {
                 //更新直播分类
-                $updateData = array(
-                    'category_id' => $_GET['category_id'],
-                    'title' => $_GET['title'],
-                    'style' => $_GET['style'],
-                    'start_time' => $_GET['start_time'],
-                    'end_time' => $_GET['end_time'],
-                    'live_status' => $_GET['live_status'],
-                    'is_show' => $_GET['is_show'],
-                    'islinkurl' => $_GET['islinkurl'],
-                    'linkurl' => $_GET['linkurl'],
-                    'sort_order' => $_GET['sort_order'],
-                );
-                $updateData['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
-                $updateData['cover_pic'] = $images['cover_pic'] ? $images['cover_pic'] : $_GET['cover_pic'];
-                $ret = $tableObj->update([$id], $updateData);
-
+                $ret = $tableObj->update([$id], $saveData);
                 if ($ret) {
                     cpmsg('更新成功', $this->noRootUrl, 'success');
                 }
             } else {
                 $roomNo = random(10); //房间号
                 //添加直播分类
-                $insertData = array(
-                    'room_no' => $roomNo,
-                    'category_id' => $_GET['category_id'],
-                    'title' => $_GET['title'],
-                    'style' => $_GET['style'],
-                    'start_time' => $_GET['start_time'],
-                    'end_time' => $_GET['end_time'],
-                    'live_status' => $_GET['live_status'],
-                    'is_show' => $_GET['is_show'],
-                    'islinkurl' => $_GET['islinkurl'],
-                    'linkurl' => $_GET['linkurl'],
-                    'sort_order' => $_GET['sort_order'],
-                    'create_at' => date('Y-m-d H:i:s'),
-                );
-                $insertData['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
-                $insertData['cover_pic'] = $images['cover_pic'] ? $images['cover_pic'] : $_GET['cover_pic'];
-                $ret = $tableObj->insert($insertData);
+                $saveData['room_no'] = $roomNo;
+                $saveData['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveData);
                 if ($ret) {
                     cpmsg('添加成功', $this->noRootUrl, 'success');
                 }
             }
         }
-
-
         include template('wxz_live:live/liveSave');
     }
 
 }
+
 ?>

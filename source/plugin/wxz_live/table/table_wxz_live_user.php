@@ -28,12 +28,14 @@ class table_wxz_live_user extends table_wxz_live_base {
 
         if ($info) {
             $ret = $this->updateById($info['id'], $data);
+            $data['id'] = $info['id'];
         } else {
             $data['create_at'] = date('Y-m-d H:i:s');
             $ret = $this->insert($data, true);
+            $data['id'] = $ret;
         }
 
-        return $ret;
+        return $data;
     }
 
     public function getByOpenId($openid) {
@@ -78,8 +80,7 @@ class table_wxz_live_user extends table_wxz_live_base {
                 'nickname' => empty($ipInfo['data']['region']) ? '网友' : $ipInfo['data']['region'] . '网友',
                 'sex' => 0,
             );
-            $this->updateUser($data);
-            $userInfo = $data;
+            $userInfo = $this->updateUser($data);
         } else {
             include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
             $wxz_weixin = new wxz_weixin();
