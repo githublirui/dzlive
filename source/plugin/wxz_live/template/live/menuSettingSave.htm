@@ -67,20 +67,20 @@
                 <td class="vtop rowform"> 
                     <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
                     <ul onmouseover="altStyle(this);">
-                        <li class="{if in_array(1,$info['settings']['List'])}checked{/if}">
-                            <input class="checkbox" type="checkbox" name="settings[List][]" value="1" {if in_array(1,$info['settings']['List'])}checked="checked"{/if} />&nbsp;邀请榜
+                        <li class="{if in_array(1,$info['settings']['list'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[list][1]" value="邀请榜" {if in_array('邀请榜',$info['settings']['list'])}checked="checked"{/if} />&nbsp;邀请榜
                         </li>
-                        <li class="{if in_array(2,$info['settings']['List'])}checked{/if}">
-                            <input class="checkbox" type="checkbox" name="settings[List][]" value="2" {if in_array(2,$info['settings']['List'])}checked="checked"{/if} />&nbsp;打赏榜
+                        <li class="{if in_array(2,$info['settings']['list'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[list][2]" value="打赏榜" {if in_array('打赏榜',$info['settings']['list'])}checked="checked"{/if} />&nbsp;打赏榜
                         </li>
-                        <li class="{if in_array(3,$info['settings']['List'])}checked{/if}">
-                            <input class="checkbox" type="checkbox" name="settings[List][]" value="3" {if in_array(3,$info['settings']['List'])}checked="checked"{/if} />&nbsp;金额榜
+                        <li class="{if in_array(3,$info['settings']['list'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[list][3]" value="金额榜" {if in_array('金额榜',$info['settings']['list'])}checked="checked"{/if} />&nbsp;金额榜
                         </li>
-                        <li class="{if in_array(4,$info['settings']['List'])}checked{/if}">
-                            <input class="checkbox" type="checkbox" name="settings[List][]" value="4" {if in_array(4,$info['settings']['List'])}checked="checked"{/if} />&nbsp;助力榜
+                        <li class="{if in_array(4,$info['settings']['list'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[list][4]" value="助力榜" {if in_array('助力榜',$info['settings']['list'])}checked="checked"{/if} />&nbsp;助力榜
                         </li>
-                        <li class="{if in_array(5,$info['settings']['List'])}checked{/if}">
-                            <input class="checkbox" type="checkbox" name="settings[List][]" value="5" {if in_array(5,$info['settings']['List'])}checked="checked"{/if} />&nbsp;点赞榜
+                        <li class="{if in_array(5,$info['settings']['list'])}checked{/if}">
+                            <input class="checkbox" type="checkbox" name="settings[list][5]" value="点赞榜" {if in_array('点赞榜',$info['settings']['list'])}checked="checked"{/if} />&nbsp;点赞榜
                         </li>
                     </ul>
                 </td>

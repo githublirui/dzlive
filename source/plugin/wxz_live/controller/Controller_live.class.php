@@ -61,10 +61,21 @@ class Controller_live extends Controller_base {
      */
     public function menuSetting() {
         $do = $_GET['do'];
+
+        $this->types = array(
+            1 => 'iframe嵌入',
+            2 => '图文信息介绍',
+            3 => '聊天区',
+            4 => '图文直播',
+            5 => '榜单',
+            6 => '地图',
+        );
+
         if ($do) {
             $this->$do();
             return;
         }
+
         $this->setLiveNav();
 
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
@@ -103,15 +114,6 @@ class Controller_live extends Controller_base {
         }
 
         $this->setLiveNav();
-
-        $types = array(
-            1 => 'iframe嵌入',
-            2 => '图文信息介绍',
-            3 => '聊天区',
-            4 => '图文直播',
-            5 => '榜单',
-            6 => '地图',
-        );
 
         if (!$type) {
             include template('wxz_live:live/menuSettingType');
@@ -365,7 +367,7 @@ class Controller_live extends Controller_base {
         if ($query['room_no']) {
             $condition .= " AND room_no='{$query['room_no']}'";
         }
-        
+
         $totalCount = $tableObj->count($condition);
 
         $mpurl = $this->baseUrl . "&" . http_build_query($query);

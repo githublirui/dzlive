@@ -79,7 +79,7 @@ class Controller_index extends Controller_base {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
         $wxzWeixin = new wxz_weixin();
 
-        $code = $_GPC['code'];
+        $code = $_GET['code'];
 
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$wxzWeixin->appid}&secret={$wxzWeixin->appsecret}&code={$code}&grant_type=authorization_code";
         $resp = ihttp_get($url);
@@ -144,7 +144,7 @@ class Controller_index extends Controller_base {
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
 
-        $id = $liveInfo['id'];
+        $rid = $liveInfo['id'];
         $uid = $user['id'];
 
         if (!$liveInfo) {
@@ -155,25 +155,32 @@ class Controller_index extends Controller_base {
         $totalzannum = 0; //赞总数
         //获取所有
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-        $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
-
-        $condition = "room_id={$id} AND role=2";
-        $roomadmins = $tablePlayerObj->getAll($condition, 'uid');
-        $roomadmin = json_encode($roomadmins); //直播间管理员
+        $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
+        $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
+        
+        //直播间管理员
+        $condition = "room_id={$rid} AND role=2";
+        $roomadmins = $tableViewerObj->getAll($condition, 'uid');
+        $roomadmin = json_encode($roomadmins); 
 
         $pic = array();
         $pics = json_encode($pic); //获取所有赞图片
 
-        $viewer = $this->intoroom($liveInfo['id'], $user); //浏览
+        $viewer = $this->intoroom($rid, $user); //浏览
         //
         //菜单
-        $menusss = C::t('#wxz_live#wxz_live_room')->getMenus($id);
+        $menusss = C::t('#wxz_live#wxz_live_room')->getMenus($rid);
         $menusss = array_values($menusss);
 
         //获取播放器详情
-        $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($liveInfo['id']);
+        $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($rid);
         $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
-
+        
+        //评论列表
+        $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
+        $pid = $tablePollingObj->getAll("rid={$rid}", 'id', 'id desc', 1);
+        $pid = $pid ? end($pid) : array();
+        
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
             include template("wxz_live:index/{$style}/ios_live");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
@@ -288,8 +295,8 @@ class Controller_index extends Controller_base {
             'nickname' => $user['nickname'],
             'headimgurl' => $user['headimgurl'],
             'rid' => $rid,
-            'content' => $_GPC['content'],
-            'toid' => $_GPC['toid'],
+            'content' => $_GET['content'],
+            'toid' => $_GET['toid'],
             'touid' => (int) $touser['uid'],
             'tonickname' => (string) $touser['nickname'],
             'toheadimgurl' => (string) $touser['headimgurl'],

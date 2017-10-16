@@ -447,9 +447,9 @@
                                 {/if}
                                 {if $comment['type']=='comment'}
                                 {if $comment['ispic']==1}
-                            <li><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo date('Y-m-d H:i:s',$comment['dateline'])}</span></div><div class="char_message"><img src="{$comment['content']}" style="CURSOR: hand" id="215" bigimgurl="{$comment['content']}" onclick="imageClick(this)"><div class="send"></div></div></div></li>
+                            <li><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo $comment['create_at']}</span></div><div class="char_message"><img src="{$comment['content']}" style="CURSOR: hand" id="215" bigimgurl="{$comment['content']}" onclick="imageClick(this)"><div class="send"></div></div></div></li>
                             {else}
-                            <li><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo date('Y-m-d H:i:s',$comment['dateline'])}</span></div><div class="char_message">{$comment['content']}<div class="send"></div></div></div></li>
+                            <li><div class="chat_left"><div class="head_portrait"><img src="{$comment['headimgurl']}"></div><i class="iconfont" value="user_{$comment['uid']}"></i></div><div class="chat_right"><div class="char_name">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}<span style="display:block;color:gray;font-size:12px;">{eval echo $comment['create_at']}</span></div><div class="char_message">{$comment['content']}<div class="send"></div></div></div></li>
 
                             {/if}
                             {elseif $comment['type']=='gift'}
@@ -845,7 +845,7 @@
                                                                ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='5'}
-                    {eval $liveSettingInfos = iunserializer($value['settings'])}
+                    {eval $liveSettingInfos = iunserializer($value['settings']);}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh hidediv3">
                         <div class="allconts rankpm">
                             <div class="nav-box clearfix">
@@ -889,7 +889,7 @@
                     {elseif $value['type']=='1'}
                     {eval $liveSettingInfos = iunserializer($value['settings'])}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
-                        <iframe src="{$liveSettingInfos['iframe']}" frameborder="no" marginheight="0" marginwidth="0" width="100%" height="100%" allowTransparency="true" style="overflow-y:auto"></iframe>
+                        <iframe src="{$liveSettingInfos['link']}" frameborder="no" marginheight="0" marginwidth="0" width="100%" height="100%" allowTransparency="true" style="overflow-y:auto"></iframe>
                     </div>
                     {elseif $value['type']=='4'}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
@@ -1265,7 +1265,7 @@
         {/if}
 
 
-        <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/demo_base.js"></script>
+        <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/demo_base.js?t=123154"></script>
         {if $liveInfo['theme']}
         <script type="text/javascript">
                                             // 广告轮播
@@ -1549,7 +1549,7 @@
                                     return false;
                             }
                             //alert($('.text-input').val());
-                            onSendMsg("{eval echo $this->createMobileurl('addcomment',array('rid'=>$id))}");
+                            onSendMsg("{eval echo $this->createMobileurl('addcomment',array('rid'=>$rid))}");
                             }
                             //失去焦点
                             }).on('blur', '.text-input', function(event) {

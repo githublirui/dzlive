@@ -21,6 +21,7 @@
         <tbody>
             <tr class="header hover">
                 <td>排序</td>
+                <td>类型</td>
                 <td>名称</td>
                 <td>显示</td>
                 <td>更新时间</td>
@@ -35,6 +36,7 @@
                     <input size="5" type="hidden" name="ids[]" value="{$row['id']}" />
                     <input size="5" type="text" name="sort_orders[]" value="{$row['sort_order']}" />
                 </td>
+                <td>{$this->types[$row['type']]}</td>
                 <td>{$row['name']}</td>
                 <td>{eval echo $row['is_show']==1 ? '是' : '否'}</td>
                 <td>{$row['update_at']}</td>

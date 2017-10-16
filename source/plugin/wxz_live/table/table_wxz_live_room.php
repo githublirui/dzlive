@@ -103,6 +103,49 @@ class table_wxz_live_room extends table_wxz_live_base {
         return $menus;
     }
 
+    /**
+     * 获取直播间评论列表
+     * @param type $rid
+     */
+    public function getComments($rid) {
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/emo.php";
+        
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
+        
+        $condition = "rid = {$rid} and is_auth=1";
+        $field = "id,uid,nickname,headimgurl,create_at,content,ispacket,tonickname,touid,dsid,giftid,giftnum,giftpic,ispic";
+        $Comments = $tableObj->getAll($condition, $field, 'id desc', '0,15');
+        krsort($Comments);
+        $Comments = array_values($Comments);
+        foreach ($Comments as $key => $v) {
+
+            if ($v['giftid'] > 0) {
+                $content = $v['nickname'] . '送出了<img src="' . $v['giftpic'] . '" width="45px" style="position: absolute;top: -15px;"><span style="margin-left:50px">x' . $v['giftnum'] . '</span>';
+                $Comments[$key]['content'] = $content;
+                $Comments[$key]['type'] = 'gift';
+            } elseif ($v['dsid'] > 0) {
+                if ($v['touid'] == 0) {
+                    $content = $v['nickname'] . '给主播打赏了1个<span>红包</span>';
+                } else {
+                    $content = $v['nickname'] . '给' . $v['tonickname'] . '打赏了1个<span>红包</span>';
+                }
+                $Comments[$key]['content'] = $content;
+                $Comments[$key]['type'] = 'reward';
+            } elseif ($v['ispacket'] == 1) {
+                $Comments[$key]['type'] = 'grouppacket';
+            } else {
+                foreach ($emoIndex as $k => $va) {
+
+                    if (strpos($v['content'], $k) !== false) {
+                        $Comments[$key]['content'] = str_replace($k, "<img class='emojia' src='" . $emo[$va]['1'] . "'/>", $v['content']);
+                    }
+                }
+                $Comments[$key]['type'] = 'comment';
+            }
+        }
+        return $Comments;
+    }
+
 }
 
 ?>
