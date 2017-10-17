@@ -187,19 +187,19 @@
                     <div class="all-vide">
                         <section class="block_video" id="play" style="height: 210px;">
                             {if ($uid=='-1') || ($liveInfo['limit'] == 1 && $liveInfo['password'] != $viewer['password']) || ($liveInfo['limit'] == 2 && $paylog['status']!=1) || ($liveInfo['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0) || ($liveInfo['limit']==4 && ($liveInfo['password'] != $viewer['password'] || $paylog['status']!=1))}
-                            {if $list['type']=='6'}
-                            <img src="{eval echo ($list['settings']['limg'])}" style="width:100%;height:210px">
-                            {elseif $list['type']=='3'}
+                            {if $playerInfo['type']=='3'}
+                            <img src="{eval echo ($playerInfo['settings']['pic3'])}" style="width:100%;height:210px">
+                            {elseif $playerInfo['type']=='6'}
 
-                            {elseif $list['type']=='7'}
-                            {$list['settings']['images']}
+                            {elseif $playerInfo['type']=='1'}
+                            {$playerInfo['settings']['pic1']}
                             {else}
-                            <img src="{eval echo ($list['settings']['img'])}" style="width:100%;height:210px">
+                            <img src="{eval echo ($playerInfo['settings']['img4'])}" style="width:100%;height:210px">
 
                             {/if}
                             {else}
 
-                            {if $list['type']=='6'}
+                            {if $playerInfo['type']=='3'}
                             {if (strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)}
 
                             <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/1.9.9/skins/default/index.css" />
@@ -209,7 +209,7 @@
                                                                                                    // 初始化播放器
                                                                                                    var player = new prismplayer({
                                                                                                    id: "play", // 容器id
-                                                                                                           source: "{$list['settings']['lrtmp']}", // 视频地址
+                                                                                                           source: "{$playerInfo['settings']['lrtmp']}", // 视频地址
                                                                                                            autoplay: false, //自动播放：否
                                                                                                            width: "100%", // 播放器宽度
                                                                                                            height: "210px"      // 播放器高度
@@ -218,10 +218,10 @@
 
                             {/if}
 
-                            {elseif $list['type']=='3'}
-                            {$list['settings']['daima']}
-                            {elseif $list['type']=='7'}
-                            {$list['settings']['images']}
+                            {elseif $playerInfo['type']=='6'}
+                            {$playerInfo['settings']['video_code']}
+                            {elseif $playerInfo['type']=='1'}
+                            {$playerInfo['settings']['pic1']}
                             {else}
 
                             {/if}
@@ -319,7 +319,7 @@
                             <div class="fl vp" id="liveflnum">
                                 <i class="iconfont"></i>
                                 <span id="browsenum">
-                                    {if $liveInfo['istruenum']==1}
+                                    {if $liveInfo['online_user_config']['istruenum']==1}
                                     {$liveInfo['real_num']}
                                     {else}
                                     {$liveInfo['total_num']}
@@ -1259,7 +1259,7 @@
 
 
         <!--<script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/dropload/dropload1.js"></script>-->
-        {if ($list['type']==6 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
+        {if ($playerInfo['type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
         {else}
         <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/ady.js?v=1"></script>
         {/if}
@@ -1294,18 +1294,18 @@
 
                             }
                             {/if}
-                            {if $list['type'] == '6'}
-                            var liveurl = "{$list['settings']['lrtmp']}";
-                                    var livehttp = "{$list['settings']['lhls']}";
-                            {elseif $list['type'] == '3'}
+                            {if $playerInfo['type'] == '3'}
+                            var liveurl = "{$playerInfo['settings']['lrtmp']}";
+                                    var livehttp = "{$playerInfo['settings']['lhls']}";
+                            {elseif $playerInfo['type'] == '6'}
                             var liveurl = "";
                                     var livehttp = "";
-                            {elseif $list['type'] == '7'}
+                            {elseif $playerInfo['type'] == '1'}
                             var liveurl = "";
                                     var livehttp = "";
                             { else}
-                            var liveurl = "{$list['settings']['rtmp']}";
-                                    var livehttp = "{$list['settings']['hls']}";
+                            var liveurl = "{$playerInfo['settings']['rtmp']}";
+                                    var livehttp = "{$playerInfo['settings']['hls']}";
                             {/if}
 
                                     var linum = $(".TAstate li").length;
@@ -2852,7 +2852,7 @@
                                             var body = $(".main").width();
                                             var vedio = body * 0.56;
                                             $(".block_video").height(vedio);
-                                            var image = "{eval echo ($list['settings']['img'])}"; //封面图片
+                                            var image = "{eval echo ($playerInfo['settings']['img4'])}"; //封面图片
                                             var a = 0;
                                             var se;
                                             var u = navigator.userAgent;
@@ -3125,12 +3125,12 @@
                                             video_status = 0;
                                             var w = "100%"; //视频宽度
                                             var h = vedio; //视频高度
-                                    {if $list['type'] == '6'}
-                                    var rtmpUrl = "{$list['settings']['lrtmp']}";
-                                            var url = "{$list['settings']['lhls']}";
+                                    {if $playerInfo['type'] == '3'}
+                                    var rtmpUrl = "{$playerInfo['settings']['lrtmp']}";
+                                            var url = "{$playerInfo['settings']['lhls']}";
                                     {else}
-                                    var rtmpUrl = "{$list['settings']['rtmp']}";
-                                            var url = "{$list['settings']['hls']}";
+                                    var rtmpUrl = "{$playerInfo['settings']['rtmp']}";
+                                            var url = "{$playerInfo['settings']['hls']}";
                                     {/if}
                                             loginInfo.isend = 1;
                                             var objectPlayer = new aodianPlayer({
@@ -3312,7 +3312,7 @@
                                             };
                                             }
         </script>
-        {if ($list['type']==6 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
+        {if ($playerInfo['type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
         {else}
         <script type="text/javascript" charset="UTF-8" src="source/plugin/wxz_live/template/index/1/js/htmlplay.js"></script>
         {/if}

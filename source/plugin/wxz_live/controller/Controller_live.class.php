@@ -460,6 +460,55 @@ class Controller_live extends Controller_base {
         include template('wxz_live:live/liveSave');
     }
 
+    /**
+     * 直播间观众列表 
+     */
+    public function liveUser() {
+        $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
+        $query['name'] = trim($_GET['name']);
+        $query['startTime'] = $_GET['startTime'];
+        $query['endTime'] = $_GET['endTime'];
+        $query['orderby'] = $_GET['orderby'] ? $_GET['orderby'] : 'sort_order';
+        $query['ordersc'] = $_GET['ordersc'] ? $_GET['ordersc'] : 'desc';
+        $page = (int) $_GET['page'];
+        $page = $page <= 0 ? 1 : $page;
+
+        if (submitcheck('ordersubmit')) {
+            foreach ($_GET['ids'] as $k => $id) {
+                $ret = C::t('#wxz_live#wxz_live_category')->updateById($id, array('sort_order' => $_GET['sort_orders'][$k]));
+            }
+        }
+        $condition = "1=1";
+        if ($query['name']) {
+            $condition .= " AND `name` like '%{$query['name']}%'";
+        }
+
+        if ($query['startTime']) {
+            $condition .= " AND `create_at` >= '{$query['startTime']}'";
+        }
+
+        if ($query['endTime']) {
+            $condition .= " AND `create_at` <= '{$query['endTime']} 23:59:59'";
+        }
+
+        $totalCount = C::t('#wxz_live#wxz_live_category')->count($condition);
+
+        $mpurl = $this->baseUrl . "&" . http_build_query($query);
+
+        $order = $query['orderby'] . ' ' . $query['ordersc'];
+        $maxPage = ceil($totalCount / $query['perpage']);
+        $page = $maxPage > 0 && $page >= $maxPage ? $maxPage : $page;
+
+        $currentLimit = $query['perpage'] * ($page - 1);
+
+        $limit = $currentLimit . ',' . $query['perpage'];
+
+        $list = C::t('#wxz_live#wxz_live_category')->getAll($condition, '*', $order, $limit);
+        $pageHtml = helper_page::multi($totalCount, $query['perpage'], $page, $mpurl);
+
+        include template('wxz_live:live/liveUser');
+    }
+
 }
 
 ?>

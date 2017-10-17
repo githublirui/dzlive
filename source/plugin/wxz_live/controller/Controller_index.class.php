@@ -135,7 +135,8 @@ class Controller_index extends Controller_base {
      */
     public function live() {
         $roomNo = $_GET['roomno'];
-
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        
         //获取直播间详情
         $liveInfo = C::t('#wxz_live#wxz_live_room')->getByRoomNo($roomNo);
         $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
@@ -157,11 +158,11 @@ class Controller_index extends Controller_base {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
-        
+
         //直播间管理员
         $condition = "room_id={$rid} AND role=2";
         $roomadmins = $tableViewerObj->getAll($condition, 'uid');
-        $roomadmin = json_encode($roomadmins); 
+        $roomadmin = json_encode($roomadmins);
 
         $pic = array();
         $pics = json_encode($pic); //获取所有赞图片
@@ -174,20 +175,68 @@ class Controller_index extends Controller_base {
 
         //获取播放器详情
         $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($rid);
+        $playerInfo = $this->_formatPlayer($playerInfo);
+      
+        //格式化播放器
+        if (!$playerInfo['player_height'] || !$playerInfo['player_weight']) {
+            $playerInfo['player_height'] = '720';
+            $playerInfo['player_weight'] = '1280';
+        }
+
         $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
-        
+
+
         //评论列表
         $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
         $pid = $tablePollingObj->getAll("rid={$rid}", 'id', 'id desc', 1);
         $pid = $pid ? end($pid) : array();
-        
+
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
-            include template("wxz_live:index/{$style}/ios_live");
+             include template("wxz_live:index/{$style}/live_ios");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
-            include template("wxz_live:index/{$style}/live_android");
+//            include template("wxz_live:index/{$style}/live_android");
+            include template("wxz_live:index/{$style}/live_ios");
         } else {
             include template("wxz_live:index/{$style}/live_ios");
         }
+    }
+
+    /**
+     * 格式化播放器
+     * @param type $playerInfo
+     */
+    private function _formatPlayer($playerInfo) {
+        if (!$playerInfo['player_height'] || !$playerInfo['player_weight']) {
+            $playerInfo['player_height'] = '720';
+            $playerInfo['player_weight'] = '1280';
+        }
+        if ($playerInfo['type'] == 5) {
+            $response = ihttp_request('http://shuidi.huajiao.com/pc/view.html?sn=' . $playerInfo['settings']['xsdroomid']);
+            $url = 'https://live3.jia.360.cn/public/getInfoAndPlayV2?sn=' . $playerInfo['settings']['xsdroomid'];
+
+            $response = ihttp_request($url);
+            $roominfo = json_decode($response['content']);
+            if (!$roominfo->playInfo->hls) {
+                $playerInfo['settings']['hls'] = '';
+                $playerInfo['settings']['rtmp'] = '';
+                $playerInfo['settings']['img'] = $roominfo->publicInfo->thumbnail;
+            } else {
+                $playerInfo['settings']['hls'] = $roominfo->playInfo->hls;
+                $playerInfo['settings']['rtmp'] = $roominfo->playInfo->rtmp;
+                $playerInfo['settings']['img'] = $roominfo->publicInfo->thumbnail;
+            }
+        }
+        if ($list['type'] == 8) {
+            $loginurl = 'http://interface.yy.com/hls/get/0/' . $playerInfo['settings']['sid'] . '/' . $playerInfo['settings']['ssid'] . '?appid=0&excid=1200&type=m3u8&isHttps=0&callback=jsonp2';
+            $response = ihttp_request($loginurl, array(), array(
+                'CURLOPT_REFERER' => 'http://wap.yy.com/mobileweb/' . $playerInfo['settings']['sid'] . '/' . $playerInfo['settings']['ssid'] . '?tempId=' . $playerInfo['settings']['tpl'] . ''
+            ));
+            $result = json_decode(substr($response['content'], 7, -1), true);
+            if ($result['code'] == 0) {
+                $playerInfo['settings']['hls'] = $result['hls'];
+            }
+        }
+        return $playerInfo;
     }
 
     /**

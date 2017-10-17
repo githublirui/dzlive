@@ -86,6 +86,7 @@ class table_wxz_live_room extends table_wxz_live_base {
      */
     public function formatRoomData($roomInfo) {
         $roomInfo['limit_data'] = $roomInfo['limit_data'] ? unserialize($roomInfo['limit_data']) : array();
+        $roomInfo['online_user_config'] = $roomInfo['online_user_config'] ? unserialize($roomInfo['online_user_config']) : array();
         return $roomInfo;
     }
 

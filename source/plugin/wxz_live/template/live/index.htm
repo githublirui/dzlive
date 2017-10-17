@@ -87,6 +87,7 @@
                 <td>
                     <a href="{$this->baseUrl}&amp;act=liveSave&amp;id={$row['id']}" class="act">编辑</a>
                     <a href="{$this->baseUrl}&amp;act=activitySetting&amp;rid={$row['id']}" class="act">直播间设置</a>
+                    <a href="{$this->baseUrl}&amp;act=liveUser&amp;rid={$row['id']}" class="act">用户列表</a>
                     <a onclick="delTable('wxz_live_room', '{$row['id']}', '{$row['title']}')" href="javascript:;" class="act">删除</a>
                 </td>
                 {/loop}
