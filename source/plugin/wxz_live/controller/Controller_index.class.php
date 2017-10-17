@@ -136,7 +136,7 @@ class Controller_index extends Controller_base {
     public function live() {
         $roomNo = $_GET['roomno'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
-        
+
         //获取直播间详情
         $liveInfo = C::t('#wxz_live#wxz_live_room')->getByRoomNo($roomNo);
         $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
@@ -144,7 +144,8 @@ class Controller_index extends Controller_base {
         $liveInfo = C::t('#wxz_live#wxz_live_room')->formatRoomData($liveInfo);
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
-
+        $user = C::t('#wxz_live#wxz_live_user')->getById($user['id']);
+        
         $rid = $liveInfo['id'];
         $uid = $user['id'];
 
@@ -176,7 +177,7 @@ class Controller_index extends Controller_base {
         //获取播放器详情
         $playerInfo = C::t('#wxz_live#wxz_live_room')->getPlayerInfoByRoomId($rid);
         $playerInfo = $this->_formatPlayer($playerInfo);
-      
+
         //格式化播放器
         if (!$playerInfo['player_height'] || !$playerInfo['player_weight']) {
             $playerInfo['player_height'] = '720';
@@ -185,6 +186,16 @@ class Controller_index extends Controller_base {
 
         $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
 
+        //会员观看限制
+        if ($liveInfo['limit'] == 5) {
+            if ($user['is_vip'] != 2) {
+                $vipLimit = 1;
+            }
+            if ($user['is_vip'] == 2 && strtotime($user['vip_end']) < time()) {
+                $vipLimit = 1; //非会员禁止观看
+                $vipValidLimit = 1; //过期
+            }
+        }
 
         //评论列表
         $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
@@ -192,7 +203,7 @@ class Controller_index extends Controller_base {
         $pid = $pid ? end($pid) : array();
 
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
-             include template("wxz_live:index/{$style}/live_ios");
+            include template("wxz_live:index/{$style}/live_ios");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
 //            include template("wxz_live:index/{$style}/live_android");
             include template("wxz_live:index/{$style}/live_ios");

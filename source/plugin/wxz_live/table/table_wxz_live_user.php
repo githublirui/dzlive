@@ -47,7 +47,7 @@ class table_wxz_live_user extends table_wxz_live_base {
      * 用户授权插入用户
      * @param type $param
      */
-    public function authUser($settings) {
+    public function authUser($settings, $fromCache = true) {
         global $_G;
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -55,7 +55,7 @@ class table_wxz_live_user extends table_wxz_live_base {
 
         $userInfo = getcookie($key);
 
-        if ($userInfo) {
+        if ($userInfo && $fromCache) {
             $userInfo = unserialize($userInfo);
             if (!$userInfo['headimgurl']) {
                 $userInfo['headimgurl'] = $settings['default_avatar'];
@@ -66,6 +66,7 @@ class table_wxz_live_user extends table_wxz_live_base {
         if (strpos($userAgent, 'MicroMessenger') === false) {
             $openid = getip();
             $openid = '221.216.152.136'; //debug
+            $openid = '185.186.147.191'; //debug
             if (!$openid) {
                 showmessage("确认身份失败,无法访问");
             }
@@ -76,7 +77,6 @@ class table_wxz_live_user extends table_wxz_live_base {
                 'province' => mb_substr($ipInfo['data']['region'], 0, -1),
                 'ip' => $openid,
                 'city' => mb_substr($ipInfo['data']['city'], 0, -1),
-                'headimgurl' => $settings['default_avatar'],
                 'nickname' => empty($ipInfo['data']['region']) ? '网友' : $ipInfo['data']['region'] . '网友',
                 'sex' => 0,
             );
@@ -85,13 +85,13 @@ class table_wxz_live_user extends table_wxz_live_base {
             include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
             $wxz_weixin = new wxz_weixin();
             $user = $wxz_weixin->mc_oauth_userinfo();
-            if (!$user['headimgurl']) {
-                $user['headimgurl'] = $settings['default_avatar'];
-            }
             $userInfo = $user;
         }
 
         dsetcookie($key, serialize($userInfo), 2592000);
+        if (!$userInfo['headimgurl']) {
+            $userInfo['headimgurl'] = $settings['default_avatar'];
+        }
         return $userInfo;
     }
 

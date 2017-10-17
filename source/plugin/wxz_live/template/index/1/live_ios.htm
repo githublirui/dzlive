@@ -160,6 +160,17 @@
                                                                                        position: fixed;
                                                                                        top: 50%;
                                                                                        z-index: 235;"><span class = "focus-on-click" style="display:none;">+</span><img src="source/plugin/wxz_live/template/index/1/image/money.jpg"><p>直播间限制观看需支付<font color=red>{eval echo ($liveInfo['amount']/100)}</font>元</p><p><button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$liveInfo['limit']})">确定</button></p></div></div>
+        
+        {elseif $vipLimit}
+                <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;"><div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;    display: block;
+                                                                                       left: 50%;
+                                                                                       margin:-200px 0 0 -120px;
+                                                                                       position: fixed;
+                                                                                       top: 50%;
+                                                                                       z-index: 235;"><span class = "focus-on-click" style="display:none;">+</span><img style="height:auto;" src="source/plugin/wxz_live/template/index/1/image/suo.jpg"><p>直播间只有会员才能观看
+                            {if $vipValidLimit }<span style="color:red;">会员已过期</span>{/if}
+                    </div>
+                </div>
         {/if}
         {if $uid<0 && $liveSettingInfo['follow_type']==1}
         <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;"><div class="focus-on layui-m-anim-scale qrcode-qz" style="display:block;"><span class = "focus-on-click" style="display:none;">+</span><img src="{eval echo ($liveSettingInfo['follow_qrcode'])}"><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p></div></div>
@@ -792,11 +803,11 @@
                             {$liveSettingInfos['content']}
                         </div>
                         {if $liveInfo['is_show_copyright']==1}<div class="pl-nomore line-top" style="
-                                                               height: 20px;
-                                                               text-align: center;
-                                                               line-height: 20px;
-                                                               color: #aaaaaa;
-                                                               ">{$liveInfo['copyright']}</div>{/if}
+                                                                   height: 20px;
+                                                                   text-align: center;
+                                                                   line-height: 20px;
+                                                                   color: #aaaaaa;
+                                                                   ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='6'}
                     {eval $ditu = 1;}
@@ -838,11 +849,11 @@
 
                         </div>
                         {if $liveInfo['is_show_copyright']==1}<div class="pl-nomore line-top" style="
-                                                               height: 20px;
-                                                               text-align: center;
-                                                               line-height: 20px;
-                                                               color: #aaaaaa;
-                                                               ">{$liveInfo['copyright']}</div>{/if}
+                                                                   height: 20px;
+                                                                   text-align: center;
+                                                                   line-height: 20px;
+                                                                   color: #aaaaaa;
+                                                                   ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='5'}
                     {eval $liveSettingInfos = iunserializer($value['settings']);}
@@ -869,22 +880,22 @@
                             </div>
                         </div>
                         {if $liveInfo['is_show_copyright']==1}<div class="pl-nomore line-top" style="
-                                                               height: 20px;
-                                                               text-align: center;
-                                                               line-height: 20px;
-                                                               color: #aaaaaa;
-                                                               ">{$liveInfo['copyright']}</div>{/if}
+                                                                   height: 20px;
+                                                                   text-align: center;
+                                                                   line-height: 20px;
+                                                                   color: #aaaaaa;
+                                                                   ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='7'}
                     <div class="showthisd {if $key !=0} hidediv {/if} minh">
                         <div class="goods-box allconts">
                         </div>
                         {if $liveInfo['is_show_copyright']==1}<div class="pl-nomore line-top" style="
-                                                               height: 20px;
-                                                               text-align: center;
-                                                               line-height: 20px;
-                                                               color: #aaaaaa;
-                                                               ">{$liveInfo['copyright']}</div>{/if}
+                                                                   height: 20px;
+                                                                   text-align: center;
+                                                                   line-height: 20px;
+                                                                   color: #aaaaaa;
+                                                                   ">{$liveInfo['copyright']}</div>{/if}
                     </div>	
                     {elseif $value['type']=='1'}
                     {eval $liveSettingInfos = iunserializer($value['settings'])}
@@ -923,11 +934,11 @@
 
                                 </div>
                                 {if $liveInfo['is_show_copyright']==1}<div class="pl-nomore line-top" style="
-                                                                       height: 20px;
-                                                                       text-align: center;
-                                                                       line-height: 20px;
-                                                                       color: #aaaaaa;
-                                                                       ">{$liveInfo['copyright']}</div>{/if}
+                                                                           height: 20px;
+                                                                           text-align: center;
+                                                                           line-height: 20px;
+                                                                           color: #aaaaaa;
+                                                                           ">{$liveInfo['copyright']}</div>{/if}
 
                             </div></div>
                     </div>
@@ -3128,7 +3139,7 @@
                                     {if $playerInfo['type'] == '3'}
                                     var rtmpUrl = "{$playerInfo['settings']['lrtmp']}";
                                             var url = "{$playerInfo['settings']['lhls']}";
-                                    {else}
+                                    { else}
                                     var rtmpUrl = "{$playerInfo['settings']['rtmp']}";
                                             var url = "{$playerInfo['settings']['hls']}";
                                     {/if}

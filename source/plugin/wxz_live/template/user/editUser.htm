@@ -1,0 +1,58 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 "> 
+        <tbody>
+            <tr>
+                <td class="vtop td24 lineheight">用户昵称:</td>
+                <td class="lineheight smallfont"> {$info['nickname']}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">是否是会员:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info['is_vip']!=1}checked{/if} is_vip_li"><input class="radio" type="radio" name="is_vip" value="1" {if $info['is_vip']!=2}checked="checked"{/if} />&nbsp;非会员</li>
+                        <li class="{if $info['is_vip']==2}checked{/if} is_vip_li"><input class="radio" type="radio" name="is_vip" value="2" {if $info['is_vip']==2}checked="checked"{/if} />&nbsp;会员</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        <tbody {if $info['is_vip']!=2}style='display:none'{/if} class="vip_time">
+            <tr>
+                <td colspan="2" class="td27" s="1">会员有效期</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform"> 
+                    <input name="vip_start" onclick="showcalendar(event, this, 1)" value="{$info['vip_start']}" type="text" class="txt" size="10" /> 
+                    <input name="vip_end" onclick="showcalendar(event, this, 1)" value="{$info['vip_end']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+        </tbody>
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                </div></td>
+        </tr>
+        </tbody>
+    </table> 
+</form> 
+<script>
+    jQuery(".is_vip_li").on('click', function () {
+        var is_vip = jQuery(this).children().val();
+        if (is_vip == 2) {
+            jQuery(".vip_time").show();
+        } else {
+            jQuery(".vip_time").hide();
+        }
+    });
+</script>
