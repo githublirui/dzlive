@@ -84,14 +84,14 @@ class Controller_index extends Controller_base {
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$wxzWeixin->appid}&secret={$wxzWeixin->appsecret}&code={$code}&grant_type=authorization_code";
         $resp = ihttp_get($url);
         if (is_error($resp)) {
-            cpmsg('系统错误, 详情: ' . $resp['message']);
+            showmessage('系统错误, 详情: ' . $resp['message']);
         }
         $auth = @json_decode($resp['content'], true);
         if (is_array($auth) && !empty($auth['openid'])) {
             $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$auth['access_token']}&openid={$auth['openid']}&lang=zh_CN";
             $resp = ihttp_get($url);
             if (is_error($resp)) {
-                cpmsg('系统错误2');
+                showmessage('系统错误2');
             }
             $info = @json_decode($resp['content'], true);
             if (is_array($info) && !empty($info['openid'])) {
@@ -105,7 +105,7 @@ class Controller_index extends Controller_base {
                 $user['ip'] = getip();
 
                 if (!empty($user['headimgurl'])) {
-                    $user['headimgurl'] = rtrim($user['avatar'], '0');
+                    $user['headimgurl'] = rtrim($user['headimgurl'], '0');
                     $user['headimgurl'] .= '132';
                 }
 
@@ -119,7 +119,7 @@ class Controller_index extends Controller_base {
                 exit();
             }
         }
-        cpmsg('系统错误, 详情: 未获取到access token');
+        showmessage('系统错误, 详情: 未获取到access token');
     }
 
     /**
@@ -145,7 +145,10 @@ class Controller_index extends Controller_base {
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
         $user = C::t('#wxz_live#wxz_live_user')->getById($user['id']);
-        
+        if (!$user) {
+            $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo, false);
+        }
+
         $rid = $liveInfo['id'];
         $uid = $user['id'];
 
@@ -201,7 +204,12 @@ class Controller_index extends Controller_base {
         $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
         $pid = $tablePollingObj->getAll("rid={$rid}", 'id', 'id desc', 1);
         $pid = $pid ? end($pid) : array();
-
+        
+        //分享参数
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
+        $wxzWeixin = new wxz_weixin();
+        $jssdkConfig = $wxzWeixin->getJssdkConfig();
+        
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
             include template("wxz_live:index/{$style}/live_ios");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {

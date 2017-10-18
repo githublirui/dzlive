@@ -1299,7 +1299,7 @@
                     $('.grap').show();
                             $('.qrcode').html('<span class = "focus-on-click">+</span><img src="{eval echo ($liveSettingInfo['follow_qrcode'])}"/><p>长按二维码关注公众号</p><p>"关注后可掌握直播最新动态哦"</p>');
                             $('.qrcode').show();
-                            setCookie('qrshow' + loginInfo.id, 2, {if $liveSettingInfo['days']}{$liveSettingInfo['days']}{ else} 0 {/if});
+                            setCookie('qrshow' + loginInfo.id, 2, {if $liveSettingInfo['days']}{$liveSettingInfo['days']}{else} 0 {/if});
 
                             }
 
@@ -1314,7 +1314,7 @@
                             {elseif $playerInfo['type'] == '1'}
                             var liveurl = "";
                                     var livehttp = "";
-                            { else}
+                            {else}
                             var liveurl = "{$playerInfo['settings']['rtmp']}";
                                     var livehttp = "{$playerInfo['settings']['hls']}";
                             {/if}
@@ -1345,10 +1345,10 @@
                             }
                             wx.config({
                             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                                    appId: "{$_W['account']['jssdkconfig']['appId']}",
-                                    timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
-                                    nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
-                                    signature: "{$_W['account']['jssdkconfig']['signature']}",
+                                    appId: "{$jssdkConfig['appId']}",
+                                    timestamp: "{$jssdkConfig['timestamp']}",
+                                    nonceStr: "{$jssdkConfig['nonceStr']}",
+                                    signature: "{$jssdkConfig['signature']}",
                                     jsApiList: ['getLocation', 'onMenuShareAppMessage', 'onMenuShareTimeline', "onMenuShareQQ", 'hideMenuItems', 'previewImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                             });
                                     wx.ready(function(){
@@ -2507,6 +2507,7 @@
                                             var rankflag = true;
                                             //tab切换
                                             $(".TAstate").find("li").each(function(index) {
+                                                
                                     $(this).click(function() {
                                     $(this).addClass("currentli").siblings().removeClass("currentli");
                                             $(".showthisd").eq($(this).index()).show().siblings(".showthisd").hide();
@@ -3139,7 +3140,7 @@
                                     {if $playerInfo['type'] == '3'}
                                     var rtmpUrl = "{$playerInfo['settings']['lrtmp']}";
                                             var url = "{$playerInfo['settings']['lhls']}";
-                                    { else}
+                                    {else}
                                     var rtmpUrl = "{$playerInfo['settings']['rtmp']}";
                                             var url = "{$playerInfo['settings']['hls']}";
                                     {/if}
