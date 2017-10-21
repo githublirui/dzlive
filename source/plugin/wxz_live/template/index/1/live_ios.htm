@@ -546,11 +546,11 @@
                                     </p>
                                     <p>图片</p>
                                     <form name="form1" id="upform1">
-                                        <input type="file" class="input-files" id="up" onchange="upimage('{eval echo $this->createMobileUrl('headupload',array('rid' => $id))}');">
+                                        <input type="file" class="input-files" id="up" onchange="upimage('{eval echo $this->createMobileUrl('headupload',array('rid' => $rid))}');">
                                     </form>
                                 </li>{/if}
                                 {if in_array('7',$gn)}<li>
-                                    <a href="{eval echo $this->createMobileUrl('withdraw',array('rid' => $id))}">
+                                    <a href="{eval echo $this->createMobileUrl('withdraw',array('rid' => $rid))}">
                                         <p>
                                             <i class="iconfont"></i>
                                         </p>
@@ -787,7 +787,7 @@
                         {if in_array('1',$gn)}<a href="{eval echo $this->createMobileUrl('index')}"><li><i class="iconfont">&#xe63d;</i></li></a>{/if}
                         {if in_array('2',$gn)}<li class="focus-onto"><i class="iconfont"></i></li>{/if}
                         <!-- <a ><li><i class="iconfont icon-ding"></i></li></a> -->
-                        {if in_array('3',$gn)}<a href="{eval echo $this->createMobileUrl('invitation',array('rid'=>$id))}"><li><i class="iconfont"></i></li></a>{/if}
+                        {if in_array('3',$gn)}<a href="{eval echo $this->createMobileUrl('invitation',array('rid'=>$rid))}"><li><i class="iconfont"></i></li></a>{/if}
                         {if in_array('4',$gn)}<a href="javascript:;" onclick="window.location.reload();"><li><i class="iconfont"></i></li></a>{/if}
                         <!-- <li class="functions"><i class="iconfont">&#xe628;</i></li> -->
                         {if in_array('5',$gn)}<div class="zan-box">
@@ -1276,7 +1276,7 @@
         {/if}
 
 
-        <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/demo_base.js?t=123154"></script>
+        <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/demo_base.js?t=11333154"></script>
         {if $liveInfo['theme']}
         <script type="text/javascript">
                                             // 广告轮播
@@ -1355,10 +1355,10 @@
                                     wx.onMenuShareAppMessage({
                                     title: "{$liveSettingInfo['share_title']}",
                                             desc: "{$liveSettingInfo['share_desc']}",
-                                            link: "{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$id)))}",
+                                            link: "{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$rid)))}",
                                             imgUrl: "{eval echo $_W['attachurl'].$liveSettingInfo['share_img']}",
                                             success: function () {
-                                            $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$id)))}", function(data) {
+                                            $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$rid)))}", function(data) {
 
                                             }, 'json');
                                             },
@@ -1368,10 +1368,10 @@
                                             wx.onMenuShareTimeline({
                                             title: "{$liveSettingInfo['share_title']}",
                                                     desc: "{$liveSettingInfo['share_desc']}",
-                                                    link:"{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$id)))}",
+                                                    link:"{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('index2',array('share_uid' => $uid,'rid'=>$rid)))}",
                                                     imgUrl: "{eval echo $_W['attachurl'].$liveSettingInfo['share_img']}",
                                                     success: function () {
-                                                    $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$id)))}", function(data) {
+                                                    $.post("{eval echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('mobileshare',array('rid'=>$rid)))}", function(data) {
 
                                                     }, 'json');
                                                     },
@@ -1700,7 +1700,7 @@
                                     ispost = true;
                                     $.ajax({
                                     type: "POST",
-                                            url: "{eval echo $this->createMobileUrl('setpacket',array('rid' => $id))}",
+                                            url: "{eval echo $this->createMobileUrl('setpacket',array('rid' => $rid))}",
                                             data: dbjson,
                                             dataType: 'json',
                                             success: function(result) {
@@ -1764,7 +1764,7 @@
                                     var username = $(this).attr("username");
                                     $.ajax({
                                     type: "POST",
-                                            url: "{eval echo $this->createMobileUrl('getshut',array('rid' => $id))}",
+                                            url: "{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}",
                                             dataType: 'json',
                                             success: function(result) {
                                             var ShuttedUinList = result.msg;
@@ -1772,10 +1772,10 @@
                                                     console.log(user);
                                                     console.log(ShuttedUinList.indexOf('"' + user + '"'));
                                                     if (ShuttedUinList.indexOf('"' + user + '"') > 0){
-                                            $('#shutup').attr('onclick', 'cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>2))}","' + user + '","' + username + '")');
+                                            $('#shutup').attr('onclick', 'cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","' + user + '","' + username + '")');
                                                     $('#shutup').html('取消禁言');
                                             } else{
-                                            $('#shutup').attr('onclick', 'shutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>1))}","' + user + '","' + username + '")');
+                                            $('#shutup').attr('onclick', 'shutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>1))}","' + user + '","' + username + '")');
                                                     $('#shutup').html('禁言');
                                             }
                                             },
@@ -1871,7 +1871,7 @@
                             }
                             if (red.redid > 0) {
                             $.ajax({
-                            url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $id))}",
+                            url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $rid))}",
                                     type: 'POST',
                                     dataType: 'json',
                                     data: {sendid: red.redid},
@@ -2029,7 +2029,7 @@
                                     $('.redlist').find('.alllist').children('h5').html(red.rednum + '个红包,共' + (red.redMoney / 100) + '元');
                                     if (red.redid > 0) {
                             $.ajax({
-                            url: "{eval echo $this->createMobileUrl('getpacket',array('rid' => $id))}",
+                            url: "{eval echo $this->createMobileUrl('getpacket',array('rid' => $rid))}",
                                     type: 'POST',
                                     dataType: 'json',
                                     data: {sendid: red.redid},
@@ -2109,7 +2109,7 @@
                                     // $('.redlist').find('.RedPack_Info').children('p').eq(2).html();
                                     $('.redlist').find('.alllist').children('h5').html(red.rednum + '个红包,共' + (red.redMoney / 100) + '元');
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $id))}",
+                                    url: "{eval echo $this->createMobileUrl('checkpacket',array('rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {sendid: red.redid},
@@ -2149,7 +2149,7 @@
                                             tid: tid || 0
                                     };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $id))}",
+                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: rewardjson1,
@@ -2199,7 +2199,7 @@
                                     tid: tid || 0
                             };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $id))}",
+                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: rewardjson2,
@@ -2241,7 +2241,7 @@
                                             tid: tid || 0
                                     };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $id))}",
+                                    url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: giftjson,
@@ -2317,7 +2317,7 @@
                                                             loginInfo.type = data.type;
                                                             if (data.type == 'grouppacket'){
                                                     $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $id))}",
+                                                    url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $rid))}",
                                                             type: 'POST',
                                                             dataType: 'json',
                                                             data: {'rid':data.id},
@@ -2330,7 +2330,7 @@
                                                     });
                                                     } else if (data.type == 'gift'){
                                                     $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $id))}",
+                                                    url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $rid))}",
                                                             type: 'POST',
                                                             dataType: 'json',
                                                             data: {'rid':data.id},
@@ -2571,7 +2571,7 @@
                                             if (roomadmin.indexOf('"' + '{$user["id"]}' + '"') > 0)
                                     {
                                     isadmin = 1;
-                                            $('.showfunction').append('<li><a href="{eval echo $this->createMobileUrl("pictv",array("id"=>$id))}"><p><i class="iconfont"></i></p><p>图文直播</p></a></li><li class="functions"><p><i class="iconfont">&#xe61e;</i></p><p>禁言管理</p></li><li onclick="showshutup();"><p><i class="iconfont">&#xe632;</i></p><p>禁言列表</p></li>');
+                                            $('.showfunction').append('<li><a href="{eval echo $this->createMobileUrl("pictv",array("id"=>$rid))}"><p><i class="iconfont"></i></p><p>图文直播</p></a></li><li class="functions"><p><i class="iconfont">&#xe61e;</i></p><p>禁言管理</p></li><li onclick="showshutup();"><p><i class="iconfont">&#xe632;</i></p><p>禁言列表</p></li>');
                                             $('#send_msg_text').removeAttr('readonly');
                                             $('#send_msg_text').attr('placeholder', '和大伙说点什么吧');
                                     }
@@ -2582,7 +2582,7 @@
                                             'identifierNick': '{$user["nickname"]}', //当前用户昵称，选填
                                             'headurl': '{$user["headimgurl"]}', //当前用户默认头像，选填
                                             'isadmin':isadmin,
-                                            'rid':'{$id}',
+                                            'rid':'{$rid}',
                                             'allshutup':'{$liveInfo["isallshutup"]}',
                                             'disimg':'0',
                                             'pop':0,
@@ -2592,7 +2592,7 @@
                                             'zanN':{$totalzannum}
                                     };
                                             function imageClick(obj) {
-
+                                                
                                             }
 
                                     var page = 1;
@@ -2605,7 +2605,7 @@
 
                                             var h = contentH - viewH;
                                             if (scrollTop == 0) {
-                                    $.post("{eval echo $this->createMobileurl('commentpage',array('rid'=>$id))}", {page:page}, function(data) {
+                                    $.post("{eval echo $this->createMobileurl('commentpage',array('rid'=>$rid))}", {page:page}, function(data) {
 
                                     if (data.s == 1){
                                     var str = '';
@@ -2677,7 +2677,7 @@
                                                             var str = '';
                                                                     console.log(result.list.length);
                                                                     for (var i = 0; i < result.list.length; i++){
-                                                            str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $id,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
+                                                            str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
                                                             }
                                                             $('.shutuplist').append(str);
                                                             },
@@ -2692,7 +2692,7 @@
                                             }
                                     function showshutup()
                                     {
-                                    shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $id))}");
+                                    shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}");
                                             $('.Banned').show();
                                             $(".function-all").slideUp('fast');
                                             $(".showfunction").slideUp('fast');
@@ -2701,7 +2701,7 @@
                                     function allshutup(type)
                                     {
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $id))}",
+                                    url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {allshutup:type},
@@ -2765,7 +2765,7 @@
                                     $.ajax({
                                     type:'post',
                                             data:{'password':pass, 'type':type},
-                                            url:"{eval echo $this->createMobileurl('limit',array('rid'=>$id))}",
+                                            url:"{eval echo $this->createMobileurl('limit',array('rid'=>$rid))}",
                                             dataType:"json",
                                             //async:false,
                                             success: function(json){
@@ -2857,8 +2857,8 @@
         <script>
                                     $(function(){
                                     initEmotionUL();
-                                            //setInterval("showMsg('{eval echo $this->createMobileurl('getmsg',array('rid'=>$id))}')", 5000);
-                                            setInterval("showPic('{eval echo $this->createMobileurl('getpictv',array('rid'=>$id))}')", 6000);
+                                            //setInterval("showMsg('{eval echo $this->createMobileurl('getmsg',array('rid'=>$rid))}')", 5000);
+//                                            setInterval("showPic('{eval echo $this->createMobileurl('getpictv',array('rid'=>$rid))}')", 6000);
                                     });</script>
                 <script type="text/javascript">
                                             var body = $(".main").width();
@@ -2945,7 +2945,7 @@
                                             $('.goods-box').html('');
                                             var nowtime = 0;
                                             $.ajax({
-                                            url: "{eval echo $this->createMobileurl('store',array('rid'=>$id))}",
+                                            url: "{eval echo $this->createMobileurl('store',array('rid'=>$rid))}",
                                                     type: 'POST',
                                                     dataType: 'json',
                                                     data: {tid:'2201'},
@@ -3077,7 +3077,7 @@
 
                                     $('#rank' + num).html('');
                                             $.ajax({
-                                            url: "{eval echo $this->createMobileurl('rank',array('rid'=>$id))}",
+                                            url: "{eval echo $this->createMobileurl('rank',array('rid'=>$rid))}",
                                                     type: 'POST',
                                                     dataType: 'json',
                                                     data: {type:num},
@@ -3258,7 +3258,7 @@
                                             var index = Math.floor((Math.random() * picArr.length));
                                                     $.ajax({
                                                     type: 'POST',
-                                                            url: "{eval echo $this->createMobileurl('setzan',array('rid'=>$id))}",
+                                                            url: "{eval echo $this->createMobileurl('setzan',array('rid'=>$rid))}",
                                                             dataType: 'json',
                                                             async: false,
                                                             success: function(data) {

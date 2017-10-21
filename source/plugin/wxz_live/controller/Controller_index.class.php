@@ -416,6 +416,107 @@ class Controller_index extends Controller_base {
         exit;
     }
 
+    /**
+     * 聊天室图片上传
+     */
+    public function headupload() {
+        $rid = intval($_GET['rid']);
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
+        $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
+        $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
+
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($rid);
+        $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
+        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
+        $uid = $user['id'];
+      
+        if (!$user) {
+            $result = array('s' => '-1', 'msg' => '授权出错！');
+            echo json_encode($result);
+            exit;
+        }
+
+        $condition = "room_id={$rid} and uid={$uid}";
+        $viewer = $tableViewerObj->getRow($condition);
+
+        if ($viewer['isshutup'] == 1) {
+            $pollingData = array(
+                'rid' => $rid,
+                'type' => 2
+            );
+            $pid = $tablePollingObj->insert($pollingData, true);
+            $result = array('s' => '-2', 'msg' => '您已被禁言！', 'pid' => $pid);
+
+            echo json_encode($result);
+            exit;
+        }
+
+        $condition = "id='{$_GET['toid']}' AND rid={$rid}";
+        $touser = $tableCommentObj->getRow($condition);
+
+        $images = wxz_uploadimg();
+     
+        if (is_error($images)) {
+            $result['error']['message'] = $images['message'];
+            die(json_encode($result));
+        }
+
+        if (!($images['upload'])) {
+            $result['error']['message'] = '上传失败，请重试！';
+            die(json_encode($result));
+        }
+
+
+        $data = array(
+            'uid' => $uid,
+            'ip' => getip(),
+            'is_auth' => $liveInfo['is_auth'] == 1 ? 2 : 1,
+            'nickname' => $user['nickname'],
+            'headimgurl' => $user['headimgurl'],
+            'rid' => $rid,
+            'content' => $images['upload'],
+            'toid' => $_GET['toid'],
+            'touid' => $touser['uid'],
+            'tonickname' => $touser['nickname'],
+            'toheadimgurl' => $touser['headimgurl'],
+            'ispic' => 1,
+            'create_at' => date('Y-m-d H:i:d'),
+        );
+
+
+        $id = $tableCommentObj->insert($data, true);
+
+        if ($id) {
+            if ($liveInfo['is_auth'] == '1') {
+                $result = array('s' => '1', 'msg' => '提交成功，审核成功后显示');
+            } else {
+
+                $pollingData = array(
+                    'rid' => $rid,
+                    'type' => 1,
+                    'comment_id' => $id,
+                );
+                $pid = $tablePollingObj->insert($pollingData, true);
+                $result = array('s' => '1', 'msg' => '提交成功', 'pid' => $pid, 'content' => $images['upload']);
+            }
+        } else {
+            $result = array('s' => '-2', 'msg' => '提交失败，请联系管理员');
+        }
+
+        $info = array(
+            'name' => $images['upload'],
+            'filename' => $images['upload'],
+            'attachment' => $images['upload'],
+            'url' => $images['upload'],
+            'is_image' => 1,
+        );
+
+        die(json_encode($info));
+    }
+
 }
 
 ?>

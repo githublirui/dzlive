@@ -60,6 +60,7 @@
             </tr>
             <tr class="header hover">
                 <td>排序</td>
+                <td>房间号</td>
                 <td>直播间分类</td>
                 <td>直播间标题</td>
                 <td>开始时间</td>
@@ -77,6 +78,7 @@
                     <input size="5" type="hidden" name="ids[]" value="{$row['id']}" />
                     <input size="5" type="text" name="sort_orders[]" value="{$row['sort_order']}" />
                 </td>
+                <td>{$row['room_no']}</td>
                 <td>{$row['category']['name']}</td>
                 <td>{$row['title']}</td>
                 <td>{$row['start_time']}</td>

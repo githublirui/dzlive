@@ -64,9 +64,19 @@ function wxz_uploadimg($savedir = 'wxz_live/', $thumb = false, $width = '220', $
         if ($_FILES[$upfile_name]['error'] == 0) {
             require_once('source/class/discuz/discuz_upload.php');
             $upload = new discuz_upload();
-            if ($r1 = $upload->init($_FILES[$upfile_name], 'common') && $r2 = $upload->save(1)) {
-                $pic = $_G['setting']['attachurl'] . 'common/' . $upload->attach['attachment'];
+            $r1 = $upload->init($_FILES[$upfile_name], 'common');
+
+            if (!$upload->attach['isimage']) {
+                return error(-1, '只能上传图片格式');
             }
+
+            if ($r1) {
+                $r2 = $upload->save(1);
+                if ($r2) {
+                    $pic = $_G['setting']['attachurl'] . 'common/' . $upload->attach['attachment'];
+                }
+            }
+
 
             if ($thumb) {
                 //缩略图

@@ -1121,6 +1121,10 @@ function upimage(url)
 			if(ajax.readyState==4)
 			{
 				var r = eval('('+this.responseText+')'); 
+                                if(r && r.hasOwnProperty('error')) {
+                                    showtipsbox(r.error.message);
+                                    return false;
+                                }
 				loginInfo.id=r.id;
 				loginInfo.type='comment';
 				loginInfo.ispic = 1;

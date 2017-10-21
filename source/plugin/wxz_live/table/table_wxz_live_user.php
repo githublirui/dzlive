@@ -47,7 +47,7 @@ class table_wxz_live_user extends table_wxz_live_base {
      * 用户授权插入用户
      * @param type $param
      */
-    public function authUser($settings, $fromCache = true) {
+    public function authUser($settings = '', $fromCache = true) {
         global $_G;
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
