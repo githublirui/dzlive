@@ -2860,7 +2860,7 @@
                                             //setInterval("showMsg('{eval echo $this->createMobileurl('getmsg',array('rid'=>$id))}')", 5000);
                                             setInterval("showPic('{eval echo $this->createMobileurl('getpictv',array('rid'=>$id))}')", 6000);
                                     });</script>
-        <script type="text/javascript">
+                <script type="text/javascript">
                                             var body = $(".main").width();
                                             var vedio = body * 0.56;
                                             $(".block_video").height(vedio);
@@ -3160,7 +3160,7 @@
                                                     adveWidth: w, //封面图宽度
                                                     adveHeight: h, //封面图高度
                                                     nowtime:{eval echo time(); },
-                                                    startime:"{$liveInfo['start_at']}",
+                                                    startime:"{eval echo strtotime($liveInfo['start_time']);}",
                                                     //adveReAddr: ''//封面图点击链接
 
                                             });

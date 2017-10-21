@@ -204,12 +204,12 @@ class Controller_index extends Controller_base {
         $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
         $pid = $tablePollingObj->getAll("rid={$rid}", 'id', 'id desc', 1);
         $pid = $pid ? end($pid) : array();
-        
+
         //分享参数
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
         $wxzWeixin = new wxz_weixin();
         $jssdkConfig = $wxzWeixin->getJssdkConfig();
-        
+
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
             include template("wxz_live:index/{$style}/live_ios");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
@@ -245,7 +245,7 @@ class Controller_index extends Controller_base {
                 $playerInfo['settings']['img'] = $roominfo->publicInfo->thumbnail;
             }
         }
-        if ($list['type'] == 8) {
+        if ($playerInfo['type'] == 8) {
             $loginurl = 'http://interface.yy.com/hls/get/0/' . $playerInfo['settings']['sid'] . '/' . $playerInfo['settings']['ssid'] . '?appid=0&excid=1200&type=m3u8&isHttps=0&callback=jsonp2';
             $response = ihttp_request($loginurl, array(), array(
                 'CURLOPT_REFERER' => 'http://wap.yy.com/mobileweb/' . $playerInfo['settings']['sid'] . '/' . $playerInfo['settings']['ssid'] . '?tempId=' . $playerInfo['settings']['tpl'] . ''
@@ -253,6 +253,24 @@ class Controller_index extends Controller_base {
             $result = json_decode(substr($response['content'], 7, -1), true);
             if ($result['code'] == 0) {
                 $playerInfo['settings']['hls'] = $result['hls'];
+            }
+        }
+        if ($playerInfo['type'] == 7) {
+            $url = 'https://room.api.m.panda.tv/index.php?method=room.shareapi&roomid=' . $playerInfo['settings']['xmroomid'];
+            $response = ihttp_request($url);
+            $roominfo = json_decode($response['content']);
+
+            if ($roominfo->data->videoinfo) {
+                $url = 'https://api.m.panda.tv/stream/room/pull/get?roomid=' . $roominfo->data->roominfo->id . '&roomkey=' . $roominfo->data->videoinfo->room_key . '&definition_option=1&hardware=1';
+                $roomid = $roominfo->data->roominfo->id;
+                $response = ihttp_request($url);
+                $key = json_decode($response['content']);
+                $address = str_replace('http', 'https', $roominfo->data->videoinfo->address);
+                $list['settings']['hls'] = $address . "?sign=" . $key->data->$roomid->sign . "&ts=" . $key->data->$roomid->ts;
+                //$list['settings']['hls'] = 'http://hls-live-qn.xingyan.panda.tv/panda-xingyan/ceca414154bbc59f807fd2232008f732.m3u8';
+                //$list['settings']['hls'] = 'https://pl-hls28.live.panda.tv/live_panda/6defc95c31023f0ce061f525626468fe.m3u8?sign=08fcf435b5e03c7fcd8494cb1da3d5e9&ts=59e71d70&rid=-52751807';
+            } else {
+                $playerInfo['settings']['hls'] = $roominfo->data->videoinfo->address;
             }
         }
         return $playerInfo;
