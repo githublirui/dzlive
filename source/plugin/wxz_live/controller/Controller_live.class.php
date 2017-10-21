@@ -289,6 +289,7 @@ class Controller_live extends Controller_base {
 
         switch ($videoType) {
             case 1:
+                $result['images'] = "<img src='" . $result["pic{$videoType}"] . "' width='100%' height='100%'>";
                 break;
             case 2:
                 $result['leshi_id'] = $_GET["leshi_id"];
@@ -311,6 +312,13 @@ class Controller_live extends Controller_base {
                 $result['video_code'] = $_GET["video_code"];
                 break;
             case 7:
+                $url = 'https://room.api.m.panda.tv/index.php?method=room.shareapi&roomid=' . $_GET['xmroomid'];
+                $response = ihttp_request($url);
+                $roominfo = json_decode($response['content']);
+                if (!$roominfo->data->videoinfo) {
+                    cpmsg('房间不存在或未直播', $this->curNoRootUrlAct . "&rid={$this->rid}", 'error');
+                }
+                $result['hls'] = $roominfo->data->videoinfo->address;
                 $result['xmroomid'] = $_GET["xmroomid"];
                 break;
             case 8:

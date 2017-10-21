@@ -65,8 +65,8 @@ class table_wxz_live_user extends table_wxz_live_base {
 
         if (strpos($userAgent, 'MicroMessenger') === false) {
             $openid = getip();
-            $openid = '221.216.152.136'; //debug
-            $openid = '185.186.147.191'; //debug
+//            $openid = '221.216.152.136'; //debug
+//            $openid = '185.186.147.191'; //debug
             if (!$openid) {
                 showmessage("确认身份失败,无法访问");
             }
@@ -77,7 +77,8 @@ class table_wxz_live_user extends table_wxz_live_base {
                 'province' => mb_substr($ipInfo['data']['region'], 0, -1),
                 'ip' => $openid,
                 'city' => mb_substr($ipInfo['data']['city'], 0, -1),
-                'nickname' => empty($ipInfo['data']['region']) ? '网友' : $ipInfo['data']['region'] . '网友',
+//                'nickname' => empty($ipInfo['data']['region']) ? '网友' : $ipInfo['data']['region'] . '网友',
+                'nickname' => '匿名网友',
                 'sex' => 0,
             );
             $userInfo = $this->updateUser($data);

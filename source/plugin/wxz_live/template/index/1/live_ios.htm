@@ -198,11 +198,11 @@
                     <div class="all-vide">
                         <section class="block_video" id="play" style="height: 210px;">
                             {if ($uid=='-1') || ($liveInfo['limit'] == 1 && $liveInfo['password'] != $viewer['password']) || ($liveInfo['limit'] == 2 && $paylog['status']!=1) || ($liveInfo['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0) || ($liveInfo['limit']==4 && ($liveInfo['password'] != $viewer['password'] || $paylog['status']!=1))}
-                            {if $playerInfo['type']=='3'}
+                            {if $playerInfo['video_type']=='3'}
                             <img src="{eval echo ($playerInfo['settings']['pic3'])}" style="width:100%;height:210px">
-                            {elseif $playerInfo['type']=='6'}
+                            {elseif $playerInfo['video_type'] == '6'}
 
-                            {elseif $playerInfo['type']=='1'}
+                            {elseif $playerInfo['video_type']=='1'}
                             {$playerInfo['settings']['pic1']}
                             {else}
                             <img src="{eval echo ($playerInfo['settings']['img4'])}" style="width:100%;height:210px">
@@ -210,7 +210,7 @@
                             {/if}
                             {else}
 
-                            {if $playerInfo['type']=='3'}
+                            {if $playerInfo['video_type']=='3'}
                             {if (strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)}
 
                             <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/1.9.9/skins/default/index.css" />
@@ -220,7 +220,7 @@
                                                                                                    // 初始化播放器
                                                                                                    var player = new prismplayer({
                                                                                                    id: "play", // 容器id
-                                                                                                           source: "{$playerInfo['settings']['lrtmp']}", // 视频地址
+                                                                                                           source: "{$playerInfo['settings']['lrtmp3']}", // 视频地址
                                                                                                            autoplay: false, //自动播放：否
                                                                                                            width: "100%", // 播放器宽度
                                                                                                            height: "210px"      // 播放器高度
@@ -229,10 +229,10 @@
 
                             {/if}
 
-                            {elseif $playerInfo['type']=='6'}
+                            {elseif $playerInfo['video_type'] == '6'}
                             {$playerInfo['settings']['video_code']}
-                            {elseif $playerInfo['type']=='1'}
-                            {$playerInfo['settings']['pic1']}
+                            {elseif $playerInfo['video_type']=='1'}
+                            {$playerInfo['settings']['images']}
                             {else}
 
                             {/if}
@@ -1270,7 +1270,7 @@
 
 
         <!--<script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/dropload/dropload1.js"></script>-->
-        {if ($playerInfo['type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
+        {if ($playerInfo['video_type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
         {else}
         <script type="text/javascript" src="source/plugin/wxz_live/template/index/1/js/ady.js?v=1"></script>
         {/if}
@@ -1305,18 +1305,18 @@
 
                             }
                             {/if}
-                            {if $playerInfo['type'] == '3'}
-                            var liveurl = "{$playerInfo['settings']['lrtmp']}";
-                                    var livehttp = "{$playerInfo['settings']['lhls']}";
-                            {elseif $playerInfo['type'] == '6'}
+                            {if $playerInfo['video_type'] == '3'}
+                            var liveurl = "{$playerInfo['settings']['lrtmp3']}";
+                                    var livehttp = "{$playerInfo['settings']['lhls3']}";
+                            {elseif $playerInfo['video_type'] == '6'}
                             var liveurl = "";
                                     var livehttp = "";
-                            {elseif $playerInfo['type'] == '1'}
+                            {elseif $playerInfo['video_type'] == '1'}
                             var liveurl = "";
                                     var livehttp = "";
                             {else}
-                            var liveurl = "{$playerInfo['settings']['rtmp']}";
-                                    var livehttp = "{$playerInfo['settings']['hls']}";
+                            var liveurl = "{$playerInfo['settings']['lrtmp4']}";
+                                    var livehttp = "{$playerInfo['settings']['lhls4']}";
                             {/if}
 
                                     var linum = $(".TAstate li").length;
@@ -2864,7 +2864,7 @@
                                             var body = $(".main").width();
                                             var vedio = body * 0.56;
                                             $(".block_video").height(vedio);
-                                            var image = "{eval echo ($playerInfo['settings']['img4'])}"; //封面图片
+                                            var image = "{eval echo ($playerInfo['settings']['pic4'])}"; //封面图片
                                             var a = 0;
                                             var se;
                                             var u = navigator.userAgent;
@@ -3137,12 +3137,12 @@
                                             video_status = 0;
                                             var w = "100%"; //视频宽度
                                             var h = vedio; //视频高度
-                                    {if $playerInfo['type'] == '3'}
-                                    var rtmpUrl = "{$playerInfo['settings']['lrtmp']}";
-                                            var url = "{$playerInfo['settings']['lhls']}";
+                                    {if $playerInfo['video_type'] == '3'}
+                                    var rtmpUrl = "{$playerInfo['settings']['lrtmp3']}";
+                                            var url = "{$playerInfo['settings']['lhls3']}";
                                     {else}
-                                    var rtmpUrl = "{$playerInfo['settings']['rtmp']}";
-                                            var url = "{$playerInfo['settings']['hls']}";
+                                    var rtmpUrl = "{$playerInfo['settings']['lrtmp4']}";
+                                            var url = "{$playerInfo['settings']['lhls4']}";
                                     {/if}
                                             loginInfo.isend = 1;
                                             var objectPlayer = new aodianPlayer({
@@ -3324,7 +3324,7 @@
                                             };
                                             }
         </script>
-        {if ($playerInfo['type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
+        {if ($playerInfo['video_type']==3 && ((strpos($user_agent, 'MicroMessenger') === false) || (strpos($user_agent, 'Windows') !== false)))}
         {else}
         <script type="text/javascript" charset="UTF-8" src="source/plugin/wxz_live/template/index/1/js/htmlplay.js"></script>
         {/if}
