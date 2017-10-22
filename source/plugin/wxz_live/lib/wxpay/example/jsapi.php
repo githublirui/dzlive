@@ -1,7 +1,7 @@
 <?php 
 ini_set('date.timezone','Asia/Shanghai');
 //error_reporting(E_ERROR);
-require_once "../lib/WxPay.Api.php";
+require_once DISCUZ_ROOT . "source/plugin/wxz_live/lib/wxpay/lib/WxPay.Api.php";
 require_once "WxPay.JsApiPay.php";
 require_once 'log.php';
 
@@ -25,7 +25,7 @@ $openId = $tools->GetOpenid();
 $input = new WxPayUnifiedOrder();
 $input->SetBody("test");
 $input->SetAttach("test");
-$input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
+$input->SetOut_trade_no(WxPayConfig::$mchid.date("YmdHis"));
 $input->SetTotal_fee("1");
 $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));

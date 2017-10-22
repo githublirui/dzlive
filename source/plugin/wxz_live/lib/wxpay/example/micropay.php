@@ -5,7 +5,7 @@
     <title>微信支付样例-查退款单</title>
 </head>
 <?php
-require_once "../lib/WxPay.Api.php";
+require_once DISCUZ_ROOT . "source/plugin/wxz_live/lib/wxpay/lib/WxPay.Api.php";
 require_once "WxPay.MicroPay.php";
 require_once 'log.php';
 
@@ -27,7 +27,7 @@ if(isset($_REQUEST["auth_code"]) && $_REQUEST["auth_code"] != ""){
 	$input->SetAuth_code($auth_code);
 	$input->SetBody("刷卡测试样例-支付");
 	$input->SetTotal_fee("1");
-	$input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
+	$input->SetOut_trade_no(WxPayConfig::$mchid.date("YmdHis"));
 	
 	$microPay = new MicroPay();
 	printf_info($microPay->pay($input));

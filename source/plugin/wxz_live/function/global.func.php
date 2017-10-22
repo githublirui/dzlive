@@ -1,10 +1,11 @@
 <?php
 
+global $_G;
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/function/wqglobal.func.php";
 
-if (getip() == '127.0.0.1') {
+if ($_G['setting']['debug']) {
     ini_set('display_errors', 1);
-    error_reporting(E_ERROR);
+    error_reporting(E_ALL ^ E_NOTICE);
 }
 
 /**

@@ -7,7 +7,7 @@
 <?php
 ini_set('date.timezone','Asia/Shanghai');
 error_reporting(E_ERROR);
-require_once "../lib/WxPay.Api.php";
+require_once DISCUZ_ROOT . "source/plugin/wxz_live/lib/wxpay/lib/WxPay.Api.php";
 require_once 'log.php';
 
 //初始化日志
@@ -29,8 +29,8 @@ if(isset($_REQUEST["transaction_id"]) && $_REQUEST["transaction_id"] != ""){
 	$input->SetTransaction_id($transaction_id);
 	$input->SetTotal_fee($total_fee);
 	$input->SetRefund_fee($refund_fee);
-    $input->SetOut_refund_no(WxPayConfig::MCHID.date("YmdHis"));
-    $input->SetOp_user_id(WxPayConfig::MCHID);
+    $input->SetOut_refund_no(WxPayConfig::$mchid.date("YmdHis"));
+    $input->SetOp_user_id(WxPayConfig::$mchid);
 	printf_info(WxPayApi::refund($input));
 	exit();
 }
@@ -46,8 +46,8 @@ if(isset($_REQUEST["out_trade_no"]) && $_REQUEST["out_trade_no"] != ""){
 	$input->SetOut_trade_no($out_trade_no);
 	$input->SetTotal_fee($total_fee);
 	$input->SetRefund_fee($refund_fee);
-    $input->SetOut_refund_no(WxPayConfig::MCHID.date("YmdHis"));
-    $input->SetOp_user_id(WxPayConfig::MCHID);
+    $input->SetOut_refund_no(WxPayConfig::$mchid.date("YmdHis"));
+    $input->SetOp_user_id(WxPayConfig::$mchid);
 	printf_info(WxPayApi::refund($input));
 	exit();
 }

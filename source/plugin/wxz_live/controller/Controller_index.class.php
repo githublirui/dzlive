@@ -525,7 +525,7 @@ class Controller_index extends Controller_base {
         global $_G;
         $tableOrder = C::t('#wxz_live#wxz_live_order');
 
-        $user = C::t('#wxz_live#wxz_live_user')->authUser();
+        $user = C::t('#wxz_live#wxz_live_user')->authUser(array(), false);
         $orderTypes = table_wxz_live_order::$orderTypes;
         $orderTypeValues = array_keys($orderTypes);
 
@@ -571,13 +571,14 @@ class Controller_index extends Controller_base {
 
         //①、获取用户openid
         $tools = new JsApiPay();
-        $openId = $tools->GetOpenid();
+//        $openId = $tools->GetOpenid();
+        $openId = $user['openid'];
 
         //②、统一下单
         $input = new WxPayUnifiedOrder();
         $input->SetBody("test1");
         $input->SetAttach("test2");
-        $input->SetOut_trade_no(WxPayConfig::MCHID . date("YmdHis"));
+        $input->SetOut_trade_no(WxPayConfig::$mchid . date("YmdHis"));
         $input->SetTotal_fee($payMoney);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
