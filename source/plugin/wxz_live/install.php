@@ -1,7 +1,7 @@
 <?php
 
-if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
 }
 
 $sql = <<<EOF
@@ -228,6 +228,26 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_banner` (
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+        
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(50) NOT NULL DEFAULT '0' COMMENT '订单编号',
+  `uid` int(11) NOT NULL DEFAULT '0' COMMENT '1.用户id',
+  `order_type` int(11) NOT NULL DEFAULT '1' COMMENT '订单类型',
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '订单状态1待处理,2成功，3失败',
+  `money` int(11) NOT NULL DEFAULT '0' COMMENT '订单金额分计算',
+  `pay_money` int(11) NOT NULL DEFAULT '0' COMMENT '实际支付金额',
+  `fail_reason` varchar(255) NOT NULL DEFAULT '' COMMENT '失败原因',
+  `trade_no` varchar(50) NOT NULL COMMENT '微信流水号',
+  `success_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `order_no` (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 EOF;
 

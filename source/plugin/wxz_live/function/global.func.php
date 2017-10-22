@@ -96,4 +96,11 @@ function wxz_uploadimg($savedir = 'wxz_live/', $thumb = false, $width = '220', $
     return $images;
 }
 
+//打印输出数组信息
+function printf_info($data) {
+    foreach ($data as $key => $value) {
+        echo "<font color='#00ff55;'>$key</font> : $value <br/>";
+    }
+}
+
 ?>
