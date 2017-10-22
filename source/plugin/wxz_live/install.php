@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_setting` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(50) NOT NULL COMMENT '页面类型',
   `title` VARCHAR(250) NOT NULL COMMENT '标题',
-  `desc` VARCHAR(2000) NOT NULL COMMENT '描述',
+  `desc` text COMMENT '描述',
   `img` VARCHAR(255) NOT NULL COMMENT '图片',
   `link` VARCHAR(255) NOT NULL COMMENT '链接地址',
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

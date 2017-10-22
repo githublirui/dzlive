@@ -15,6 +15,7 @@ class table_wxz_live_setting extends table_wxz_live_base {
     public static $types = array(
         1 => '首页标题和风格数据',
         2 => '首页分享数据',
+        3 => '红包参数',
     );
 
     public function __construct() {

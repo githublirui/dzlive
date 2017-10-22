@@ -1,0 +1,144 @@
+{template wxz_live:nav}
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 "> 
+        <tbody>
+            <tr>
+                <td colspan="2" class="td27" s="1">红包活动名称</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="actname" value="{$info['actname']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">发送红包时显示的活动名称,不能超过10个汉字！</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">公众号名称</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="sname" value="{$info['sname']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">发送红包时显示的公众号名称，不填使用默认的公众号,不能超过25个汉字！</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">发送祝福语</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="wishing" value="{$info['wishing']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1">发送红包时显示的祝福语,不能超过100个汉字！</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td27" s="1">AppID</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="appid" value="{$info['appid']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">AppSecret</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="secret" value="{$info['secret']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">商户号</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="mchid" value="{$info['mchid']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">商户支付密钥</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="password" value="{$info['password']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">商户logo:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY1_0" style="{if $info['img']}display:none{/if}" name="img" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY1_1" style="{if !$info['img']}display:none{/if}" name="img" value="{$info['img']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY1_0a" style="{if !$info['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_1').name = 'TMPicon';
+                            $('fileY1_0').name = 'img';
+                            $('fileY1_0').style.display = '';
+                            $('fileY1_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY1_1a" style="{if $info['img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_0').name = 'TMPicon';
+                            $('fileY1_1').name = 'img';
+                            $('fileY1_1').style.display = '';
+                            $('fileY1_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $info['img']}
+                    <img src="{$info['img']}">
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">服务器IP</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <input name="ip" value="{$info['ip']}" type="text" class="txt" size="10" />
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">商户支付证书:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <textarea rows="6" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="apiclient_cert" cols="50" class="tarea"></textarea>
+                </td>
+                <td class="vtop tips2" s="1">从商户平台上下载支付证书, 解压并取得其中的 apiclient_cert.pem 用记事本打开并复制文件内容, 填至此处</td>
+            </tr> 
+            <tr>
+                <td colspan="2" class="td27" s="1">支付证书私钥</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <textarea rows="6" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="apiclient_key" cols="50" class="tarea"></textarea>
+                </td>
+                <td class="vtop tips2" s="1">从商户平台上下载支付证书, 解压并取得其中的 apiclient_key.pem 用记事本打开并复制文件内容, 填至此处</td>
+            </tr> 
+            <tr>
+                <td colspan="2" class="td27" s="1">支付根证书</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+                <td class="vtop rowform">
+                    <textarea rows="6" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="rootca" cols="50" class="tarea"></textarea>
+                </td>
+                <td class="vtop tips2" s="1">从商户平台上下载支付证书, 解压并取得其中的 rootca.pem 用记事本打开并复制文件内容, 填至此处</td>
+            </tr>
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                    </div></td>
+            </tr>
+        </tbody>
+    </table> 
+</form> 
