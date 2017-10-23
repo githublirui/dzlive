@@ -526,6 +526,7 @@ class Controller_index extends Controller_base {
         $tableOrder = C::t('#wxz_live#wxz_live_order');
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser(array(), false);
+        
         $orderTypes = table_wxz_live_order::$orderTypes;
         $orderTypeValues = array_keys($orderTypes);
 
@@ -587,12 +588,11 @@ class Controller_index extends Controller_base {
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
         $order = WxPayApi::unifiedOrder($input);
-        echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
-        printf_info($order);
+       
         $jsApiParameters = $tools->GetJsApiParameters($order);
-
+     
         //获取共享收货地址js函数参数
-        $editAddress = $tools->GetEditAddressParameters();
+//        $editAddress = $tools->GetEditAddressParameters();
         include template("wxz_live:pay/jsapi");
     }
 
