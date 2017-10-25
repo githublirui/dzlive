@@ -44,6 +44,14 @@ class table_wxz_live_order extends table_wxz_live_base {
         return $this->getRow($orderNo);
     }
 
+    /**
+     * 订单成功处理
+     * @param type $orderInfo
+     */
+    public function doSuccess($orderInfo) {
+        
+    }
+
 }
 
 ?>

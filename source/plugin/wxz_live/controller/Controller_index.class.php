@@ -134,6 +134,8 @@ class Controller_index extends Controller_base {
      * 直播详情页面
      */
     public function live() {
+        global $_G;
+
         $roomNo = $_GET['roomno'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -143,12 +145,7 @@ class Controller_index extends Controller_base {
 
         $liveInfo = C::t('#wxz_live#wxz_live_room')->formatRoomData($liveInfo);
 
-        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
-        $user = C::t('#wxz_live#wxz_live_user')->getById($user['id']);
-
-        if (!$user) {
-            $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo, false);
-        }
+        $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo, false);
 
         $rid = $liveInfo['id'];
         $uid = $user['id'];
@@ -158,11 +155,12 @@ class Controller_index extends Controller_base {
         }
 
         $shutup = 0; //黑名单
-        $totalzannum = 0; //赞总数
         //获取所有
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
+        $tableZanPicObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
+        $tableZanNumObj = new table_wxz_live_base(array('table' => 'wxz_live_zannum', 'pk' => 'id'));
 
         //直播间管理员
         $condition = "room_id={$rid} AND role=2";
@@ -200,6 +198,20 @@ class Controller_index extends Controller_base {
                 $vipValidLimit = 1; //过期
             }
         }
+
+        //点攒总数
+        $condition = "rid={$rid}";
+        $totalzannum = $tableZanNumObj->getRow($condition, 'sum(num) total_num');
+        $totalzannum = $totalzannum && $totalzannum['total_num'] ? $totalzannum['total_num'] : 0;
+
+        //点赞图片
+        $condition = "rid={$rid} AND is_show=1";
+        $zanlist = $tableZanPicObj->getAll($condition);
+        $pic = array();
+        foreach ($zanlist as $key => $v) {
+            $pic[] = $v['pic'];
+        }
+        $pics = json_encode($pic);
 
         //评论列表
         $Comments = C::t('#wxz_live#wxz_live_room')->getComments($rid);
@@ -367,7 +379,7 @@ class Controller_index extends Controller_base {
         $liveInfo = C::t('#wxz_live#wxz_live_room')->formatRoomData($liveInfo);
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo);
-        $uid = $userp['id'];
+        $uid = $user['id'];
 
         $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
@@ -526,7 +538,7 @@ class Controller_index extends Controller_base {
         $tableOrder = C::t('#wxz_live#wxz_live_order');
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser(array(), false);
-        
+
         $orderTypes = table_wxz_live_order::$orderTypes;
         $orderTypeValues = array_keys($orderTypes);
 
@@ -560,7 +572,6 @@ class Controller_index extends Controller_base {
         $orderId = $tableOrder->insert($orderData, true);
 
         //微信jsapipay
-        ini_set('date.timezone', 'Asia/Shanghai');
         $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
         require_once "{$wxpayPath}lib/WxPay.Api.php";
         require_once "{$wxpayPath}example/WxPay.JsApiPay.php";
@@ -574,26 +585,123 @@ class Controller_index extends Controller_base {
         $tools = new JsApiPay();
 //        $openId = $tools->GetOpenid();
         $openId = $user['openid'];
-
+        $notifyUrl = "{$_G['siteurl']}/source/plugin/wxz_live/notify.php";
         //②、统一下单
         $input = new WxPayUnifiedOrder();
         $input->SetBody("test1");
         $input->SetAttach("test2");
-        $input->SetOut_trade_no(WxPayConfig::$mchid . date("YmdHis"));
+        $input->SetOut_trade_no($orderNo);
         $input->SetTotal_fee($payMoney);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($orderTypes[$orderType]);
-        $input->SetNotify_url("{$_G['siteurl']}/source/plugin/wxz_live/notify.php");
+        $input->SetNotify_url($notifyUrl);
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
         $order = WxPayApi::unifiedOrder($input);
-       
+
         $jsApiParameters = $tools->GetJsApiParameters($order);
-     
+
         //获取共享收货地址js函数参数
 //        $editAddress = $tools->GetEditAddressParameters();
         include template("wxz_live:pay/jsapi");
+    }
+
+    /**
+     * 评论分页
+     */
+    public function commentpage() {
+        global $_G;
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
+
+        $rid = intval($_GET['rid']);
+        $pindex = max(0, intval($_GET['page']));
+
+        $psize = 15;
+        $start = ($pindex) * $psize;
+        $condition = " rid = '{$rid}' and is_auth = 1";
+        $order = " id desc";
+        $limit = $start . ',' . $psize;
+        $field = "id,uid,nickname,headimgurl,content,ispacket,tonickname,create_at,touid,dsid,giftid,giftnum,giftpic,ispic";
+
+        $list = $tableCommentObj->getAll($condition, $field, $order, $limit);
+        $list = array_values($list);
+        krsort($list);
+
+        foreach ($list as $key => $v) {
+            if ($v['giftid'] > 0) {
+                $content = $v['nickname'] . '送出了<img src="' . $v['giftpic'] . '" width="45px" style="position: absolute;top: -15px;"><span style="margin-left:50px">x' . $v['giftnum'] . '</span>';
+
+                $list[$key]['content'] = $content;
+                $list[$key]['type'] = 'gift';
+            } elseif ($v['dsid'] > 0) {
+                if ($v['touid'] == 0) {
+                    $content = $v['nickname'] . '给主播打赏了1个<span>红包</span>';
+                } else {
+                    $content = $v['nickname'] . '给' . $v['tonickname'] . '打赏了1个<span>红包</span>';
+                }
+                $list[$key]['content'] = $content;
+                $list[$key]['type'] = 'reward';
+            } elseif ($v['ispacket'] == 1) {
+                $list[$key]['type'] = 'grouppacket';
+            } else {
+                $list[$key]['type'] = 'comment';
+            }
+        }
+        $list = array_values($list);
+        $list = $list ? $list : array();
+        $result = array('s' => '1', 'content' => $list);
+        echo json_encode($result);
+        exit;
+    }
+
+    /**
+     * 用户设置点赞 
+     */
+    public function setzan() {
+        ob_end_clean();
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableZanNumObj = new table_wxz_live_base(array('table' => 'wxz_live_zannum', 'pk' => 'id'));
+
+        $rid = intval($_GET['rid']);
+        $user = C::t('#wxz_live#wxz_live_user')->authUser();
+        $uid = $user['id'];
+
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($rid);
+
+        if (!$liveInfo) {
+            $result = array('s' => '-1', 'msg' => '直播间不存在', 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+        $condition = "rid={$rid} AND uid={$uid}";
+        $zan = $tableZanNumObj->getRow($condition);
+
+        if (!$zan) {
+            $num = 1;
+            $data = array(
+                'uid' => $uid,
+                'rid' => $rid,
+                'num' => $num
+            );
+            $tableZanNumObj->insert($data);
+        } else {
+            $num = $zan['num'] + 1;
+            $tableZanNumObj->updateById($zan['id'], array('num' => $num));
+        }
+
+        $condition = "rid={$rid}";
+        $totalzannum = $tableZanNumObj->getRow($condition, 'sum(num) total_num');
+        $totalzannum = $totalzannum && $totalzannum['total_num'] ? $totalzannum['total_num'] : 0;
+
+        $result['s'] = 1;
+        $result['num'] = $totalzannum;
+        echo json_encode($result);
+        exit;
     }
 
 }

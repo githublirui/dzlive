@@ -1,0 +1,70 @@
+{template wxz_live:nav}
+<script type="text/javascript" src="static/js/calendar.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="source/plugin/wxz_live/static/js/common.js"></script>
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="refusal" />
+    <script>disallowfloat = 'newthread';</script>
+    <input type="hidden" name="verifysubmit" value="trun" /> 
+    <table class="tb tb2 fixpadding">
+        <tbody>
+            <tr>
+                <th class="partition">
+                    <a href="{$this->baseUrl}&amp;act=menuSetting&amp;do=zanpicSave&rid={$this->rid}">新增图片</a>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <table class="tb tb2 fixpadding"> 
+        <tbody>
+            <tr class="header hover">
+                <td>图片</td>
+                <td>显示</td>
+                <td>更新时间</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr> 
+
+            {if $list}
+            {loop $list $key $row}
+            <tr>
+                <td><img style="height:50px;height:50px;" src="{$row['pic']}" /></td>
+                <td>{eval echo $row['is_show']==1 ? '是' : '否'}</td>
+                <td>{$row['update_at']}</td>
+                <td>{$row['create_at']}</td>
+                <td>
+                    <a href="{$this->baseUrl}&amp;act=zanpic&amp;rid={$row['rid']}&amp;pid={$row['id']}&amp;do=zanpicSave" class="act">编辑</a>
+                    <a onclick="delTable('wxz_live_zanpic', '{$row['id']}', '{$row['name']}')" href="javascript:;" class="act">删除</a>
+                </td>
+                {/loop}
+            </tr>
+            {else}
+            <tr>
+                <td colspan="6"><strong>暂无相关数据</strong></td>
+            </tr>
+            {/if}
+
+        </tbody>
+    </table> 
+</form>
+<script>
+            function delTable(tableName, id, name) {
+            if (confirm('确定删除吗')) {
+            jQuery.ajax({
+            url: "?frame=no&action=plugins&operation=config&do=20&identifier=wxz_live&pmod=common&act=ajaxDelTable&inajax=1",
+                    dataType: "json",
+                    type: "post",
+                    data: {"id": id, "tableName": tableName},
+                    success: function (re) {
+                    if (re.status == 0) {
+                    showDialog(re.info);
+                    } else {
+                    window.location.reload();
+                    }
+                    },
+            });
+            }
+            }
+</script>

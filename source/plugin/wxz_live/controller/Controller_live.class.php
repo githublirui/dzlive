@@ -45,6 +45,10 @@ class Controller_live extends Controller_base {
                 'name' => '访问限制',
                 'act' => "viewLimit&rid={$rid}",
             ),
+            array(
+                'name' => '点赞图片',
+                'act' => "zanpic&rid={$rid}",
+            ),
         );
         $this->title = "直播间设置";
 
@@ -174,11 +178,14 @@ class Controller_live extends Controller_base {
             $saveData['activity_img'] = $images['activity_img'] ? $images['activity_img'] : $_GET['activity_img'];
             $saveData['follow_qrcode'] = $images['follow_qrcode'] ? $images['follow_qrcode'] : $_GET['follow_qrcode'];
             $saveData['default_avatar'] = $images['default_avatar'] ? $images['default_avatar'] : $_GET['default_avatar'];
+            $saveData['share_img'] = $images['share_img'] ? $images['share_img'] : $_GET['share_img'];
 
             $saveData['activity_title'] = $_GET["activity_title"];
             $saveData['activity_desc'] = $_GET["activity_desc"];
             $saveData['follow_type'] = $_GET["follow_type"];
             $saveData['follow_url'] = $_GET["follow_url"];
+            $saveData['share_title'] = $_GET["share_title"];
+            $saveData['share_desc'] = $_GET["share_desc"];
             if ($saveData['follow_type'] == 3) {
                 $saveData['follow_cache_day'] = $_GET["follow_cache_day"];
             }
@@ -186,7 +193,7 @@ class Controller_live extends Controller_base {
             if ($info) {
                 $ret = $tableLiveSettingObj->updateById($info['id'], $saveData);
                 if ($ret) {
-                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$_GET['id']}", 'success');
+                    cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
                 $saveData['room_id'] = $rid;
@@ -508,6 +515,73 @@ class Controller_live extends Controller_base {
         $pageHtml = helper_page::multi($totalCount, $query['perpage'], $page, $mpurl);
 
         include template('wxz_live:live/liveUser');
+    }
+
+    /**
+     * 点赞图片
+     */
+    public function zanpic() {
+        $do = $_GET['do'];
+        if ($do) {
+            $this->$do();
+            return;
+        }
+        $this->setLiveNav();
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
+
+        $tableLiveSettingObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
+
+        $condition = "rid={$this->rid}";
+        $list = $tableLiveSettingObj->getAll($condition);
+
+        include template('wxz_live:live/zanpicList');
+    }
+
+    /**
+     * 保存点赞图片
+     * @param type $param
+     */
+    private function zanpicSave($param) {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $pid = $_GET['pid'];
+
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
+
+        if ($pid) {
+            $info = $tableObj->getById($pid);
+        }
+
+        $this->setLiveNav();
+
+        if (submitcheck('save')) {
+            $images = wxz_uploadimg();
+
+            $saveData = array(
+                'is_show' => $_GET['is_show'],
+            );
+
+            $saveData['pic'] = $images['pic'] ? $images['pic'] : $_GET['pic'];
+
+            if ($info) {
+                $ret = $tableObj->updateById($info['id'], $saveData);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=zanpic" . "&rid={$this->rid}", 'success');
+                }
+            } else {
+                $saveData['rid'] = $this->rid;
+                $saveData['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveData);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=zanpic" . "&rid={$this->rid}", 'success');
+                }
+            }
+        }
+
+        include template('wxz_live:live/zanpicSave');
     }
 
 }

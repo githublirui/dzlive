@@ -1,0 +1,59 @@
+{template wxz_live:nav}
+<form name="cpform" method="post" autocomplete="off" action="" id="cpform" enctype="multipart/form-data">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" id="formscrolltop" name="scrolltop" value="" />
+    <input type="hidden" name="anchor" value="" /> 
+    <table class="tb tb2 "> 
+        <tbody>
+            {template wxz_live:live/liveSettingHead}
+            <tr>
+                <td colspan="2" class="td27" s="1">是否展示:</td>
+            </tr> 
+            <tr class="noborder" onmouseover="setfaq(this, 'faqf1dd')">
+                <td class="vtop rowform"> 
+                    <!--<ul class="nofloat" onmouseover="altStyle(this);">-->
+                    <ul onmouseover="altStyle(this);">
+                        <li class="{if $info.is_show!=2}checked{/if} "><input class="radio" type="radio" name="is_show" value="1" {if $info.is_show!=2}checked="checked"{/if} />&nbsp;显示</li>
+                        <li class="{if $info.is_show==2}checked{/if} "><input class="radio" type="radio" name="is_show" value="2" {if $info.is_show==2}checked="checked"{/if} />&nbsp;不显示</li>
+                    </ul>
+                </td>
+                <td class="vtop tips2" s="1"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td27" s="1">图片:</td>
+            </tr>
+            <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+                <td class="vtop rowform">
+                    <input id="fileY1_0" style="{if $info['pic']}display:none{/if}" name="pic" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                    <input id="fileY1_1" style="{if !$info['pic']}display:none{/if}" name="pic" value="{$info['pic']}" type="text" class="txt marginbot" size="10">
+                    <br>
+                    <a id="fileY1_0a" style="{if !$info['pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_1').name = 'TMPicon';
+                            $('fileY1_0').name = 'pic';
+                            $('fileY1_0').style.display = '';
+                            $('fileY1_1').style.display = 'none'">上传文件</a>&nbsp;
+                    <a id="fileY1_1a" style="{if $info['pic']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY1_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY1_0').name = 'TMPicon';
+                            $('fileY1_1').name = 'pic';
+                            $('fileY1_1').style.display = '';
+                            $('fileY1_0').style.display = 'none'">输入 URL
+                    </a>
+                </td>
+                <td class="vtop tips2" s="1">
+                    {if $info['pic']}
+                    <img src="{$info['pic']}" style="width:100px;height:100px;">
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="15">
+                    <div class="fixsel">
+                        <input type="submit" class="btn" id="submit_course_addsubmit" name="save" title="按 Enter 键可随时提交您的修改" value="提交" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+</form> 

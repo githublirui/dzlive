@@ -146,6 +146,53 @@
             </td>
         </tr>
         <tr>
+            <th colspan="15" class="partition">分享设置</th>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">分类图标:</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faq2a92')">
+            <td class="vtop rowform">
+                <input id="fileY4_0" style="{if $info['share_img']}display:none{/if}" name="share_img" value="" type="file" class="txt uploadbtn marginbot" size="10">
+                <input id="fileY4_1" style="{if !$info['share_img']}display:none{/if}" name="share_img" value="{$info['share_img']}" type="text" class="txt marginbot" size="10">
+                <br>
+                <a id="fileY4_0a" style="{if !$info['share_img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_1a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_1').name = 'TMPicon';
+                            $('fileY4_0').name = 'share_img';
+                            $('fileY4_0').style.display = '';
+                            $('fileY4_1').style.display = 'none'">上传文件</a>&nbsp;
+                <a id="fileY4_1a" style="{if $info['share_img']}font-weight:bold{/if}" href="javascript:;" onclick="$('fileY4_0a').style.fontWeight = '';
+                            this.style.fontWeight = 'bold';
+                            $('fileY4_0').name = 'TMPicon';
+                            $('fileY4_1').name = 'share_img';
+                            $('fileY4_1').style.display = '';
+                            $('fileY4_0').style.display = 'none'">输入 URL
+                </a>
+            </td>
+            <td class="vtop tips2" s="1">
+                {if $info['share_img']}
+                <img src="{$info['share_img']}">
+                {/if}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">分享标题:</td>
+        </tr> 
+        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+            <td class="vtop rowform"> <input name="share_title" value="{$info['share_title']}" type="text" class="txt" size="10" /></td>
+            <td class="vtop tips2" s="1"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">分享描述:</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faqc6ff')">
+            <td class="vtop rowform">
+                <textarea rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="share_desc" cols="50" class="tarea">{$info['share_desc']}</textarea>
+            </td>
+            <td class="vtop tips2" s="1">请填写分类说明</td>
+        </tr> 
+        <tr>
             <td colspan="15">
                 <div class="fixsel">
                     <input type='hidden' value='{$this->rid}' name="rid" />

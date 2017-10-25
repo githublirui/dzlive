@@ -240,6 +240,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
   `pay_money` int(11) NOT NULL DEFAULT '0' COMMENT '实际支付金额',
   `fail_reason` varchar(255) NOT NULL DEFAULT '' COMMENT '失败原因',
   `trade_no` varchar(50) NOT NULL COMMENT '微信流水号',
+  `ext` varchar(1000) DEFAULT '' COMMENT '订单扩展字段',
   `success_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -248,7 +249,29 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
   KEY `order_no` (`order_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_zanpic` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `pic` varchar(255) DEFAULT NULL,
+    `uniacid` int(10) unsigned NOT NULL DEFAULT '0',
+    `rid` int(10) unsigned NOT NULL DEFAULT '0',
+    `is_show` tinyint(1) DEFAULT NULL DEFAULT '1' COMMENT '1显示 2不显示',
+    `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `rid` (`rid`) USING BTREE,
+    KEY `is_show` (`is_show`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_zannum` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `rid` int(10) unsigned DEFAULT '0',
+    `uid` int(10) unsigned DEFAULT '0',
+    `num` int(10) unsigned DEFAULT '0',
+    PRIMARY KEY (`id`),
+    KEY `rid` (`rid`) USING BTREE,
+    KEY `uid` (`uid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;        
+        
 EOF;
 
 runquery($sql);

@@ -85,6 +85,9 @@ class table_wxz_live_room extends table_wxz_live_base {
      * 格式化直播间数据
      */
     public function formatRoomData($roomInfo) {
+        if (!$roomInfo) {
+            return false;
+        }
         $roomInfo['limit_data'] = $roomInfo['limit_data'] ? unserialize($roomInfo['limit_data']) : array();
         $roomInfo['online_user_config'] = $roomInfo['online_user_config'] ? unserialize($roomInfo['online_user_config']) : array();
         return $roomInfo;
@@ -110,14 +113,15 @@ class table_wxz_live_room extends table_wxz_live_base {
      */
     public function getComments($rid) {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/emo.php";
-        
+
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
-        
+
         $condition = "rid = {$rid} and is_auth=1";
         $field = "id,uid,nickname,headimgurl,create_at,content,ispacket,tonickname,touid,dsid,giftid,giftnum,giftpic,ispic";
-        $Comments = $tableObj->getAll($condition, $field, 'id asc', '0,15');
- 
+        $Comments = $tableObj->getAll($condition, $field, 'id desc', '0,15');
         $Comments = array_values($Comments);
+        krsort($Comments);
+
         foreach ($Comments as $key => $v) {
 
             if ($v['giftid'] > 0) {
@@ -144,6 +148,7 @@ class table_wxz_live_room extends table_wxz_live_base {
                 $Comments[$key]['type'] = 'comment';
             }
         }
+        $Comments = array_values($Comments);
         return $Comments;
     }
 
