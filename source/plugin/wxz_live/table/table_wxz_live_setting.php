@@ -16,6 +16,7 @@ class table_wxz_live_setting extends table_wxz_live_base {
         1 => '首页标题和风格数据',
         2 => '首页分享数据',
         3 => '红包参数',
+        4 => '打赏设置',
     );
 
     public function __construct() {

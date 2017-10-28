@@ -49,6 +49,10 @@ class Controller_live extends Controller_base {
                 'name' => '点赞图片',
                 'act' => "zanpic&rid={$rid}",
             ),
+            array(
+                'name' => '打赏设置',
+                'act' => "reward&rid={$rid}",
+            ),
         );
         $this->title = "直播间设置";
 
@@ -125,7 +129,7 @@ class Controller_live extends Controller_base {
         }
 
         if (submitcheck('save')) {
-            $saveData = array(
+            $saveDataSetting = array(
                 'type' => $_GET['type'],
                 'is_show' => $_GET['is_show'],
                 'sort_order' => $_GET['sort_order'],
@@ -134,14 +138,14 @@ class Controller_live extends Controller_base {
             );
 
             if ($info) {
-                $ret = $tableObj->updateById($info['id'], $saveData);
+                $ret = $tableObj->updateById($info['id'], $saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveData['room_id'] = $this->rid;
-                $saveData['create_at'] = date('Y-m-d H:i:s');
-                $ret = $tableObj->insert($saveData);
+                $saveDataSetting['room_id'] = $this->rid;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
                 }
@@ -175,30 +179,30 @@ class Controller_live extends Controller_base {
         $images = wxz_uploadimg();
 
         if (submitcheck('save')) {
-            $saveData['activity_img'] = $images['activity_img'] ? $images['activity_img'] : $_GET['activity_img'];
-            $saveData['follow_qrcode'] = $images['follow_qrcode'] ? $images['follow_qrcode'] : $_GET['follow_qrcode'];
-            $saveData['default_avatar'] = $images['default_avatar'] ? $images['default_avatar'] : $_GET['default_avatar'];
-            $saveData['share_img'] = $images['share_img'] ? $images['share_img'] : $_GET['share_img'];
+            $saveDataSetting['activity_img'] = $images['activity_img'] ? $images['activity_img'] : $_GET['activity_img'];
+            $saveDataSetting['follow_qrcode'] = $images['follow_qrcode'] ? $images['follow_qrcode'] : $_GET['follow_qrcode'];
+            $saveDataSetting['default_avatar'] = $images['default_avatar'] ? $images['default_avatar'] : $_GET['default_avatar'];
+            $saveDataSetting['share_img'] = $images['share_img'] ? $images['share_img'] : $_GET['share_img'];
 
-            $saveData['activity_title'] = $_GET["activity_title"];
-            $saveData['activity_desc'] = $_GET["activity_desc"];
-            $saveData['follow_type'] = $_GET["follow_type"];
-            $saveData['follow_url'] = $_GET["follow_url"];
-            $saveData['share_title'] = $_GET["share_title"];
-            $saveData['share_desc'] = $_GET["share_desc"];
-            if ($saveData['follow_type'] == 3) {
-                $saveData['follow_cache_day'] = $_GET["follow_cache_day"];
+            $saveDataSetting['activity_title'] = $_GET["activity_title"];
+            $saveDataSetting['activity_desc'] = $_GET["activity_desc"];
+            $saveDataSetting['follow_type'] = $_GET["follow_type"];
+            $saveDataSetting['follow_url'] = $_GET["follow_url"];
+            $saveDataSetting['share_title'] = $_GET["share_title"];
+            $saveDataSetting['share_desc'] = $_GET["share_desc"];
+            if ($saveDataSetting['follow_type'] == 3) {
+                $saveDataSetting['follow_cache_day'] = $_GET["follow_cache_day"];
             }
 
             if ($info) {
-                $ret = $tableLiveSettingObj->updateById($info['id'], $saveData);
+                $ret = $tableLiveSettingObj->updateById($info['id'], $saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveData['room_id'] = $rid;
-                $saveData['create_at'] = date('Y-m-d H:i:s');
-                $ret = $tableLiveSettingObj->insert($saveData);
+                $saveDataSetting['room_id'] = $rid;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableLiveSettingObj->insert($saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$rid}", 'success');
                 }
@@ -258,20 +262,20 @@ class Controller_live extends Controller_base {
         }
 
         if (submitcheck('save')) {
-            $saveData['video_type'] = $_GET["video_type"];
-            $saveData['settings'] = $this->_getPlayerSetting();
-            $saveData['player_weight'] = $_GET["player_weight"];
-            $saveData['player_height'] = $_GET["player_height"];
+            $saveDataSetting['video_type'] = $_GET["video_type"];
+            $saveDataSetting['settings'] = $this->_getPlayerSetting();
+            $saveDataSetting['player_weight'] = $_GET["player_weight"];
+            $saveDataSetting['player_height'] = $_GET["player_height"];
 
             if ($playerInfo) {
-                $ret = $tablePlayerObj->updateById($playerInfo['id'], $saveData);
+                $ret = $tablePlayerObj->updateById($playerInfo['id'], $saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveData['room_id'] = $this->rid;
-                $saveData['create_at'] = date('Y-m-d H:i:s');
-                $ret = $tablePlayerObj->insert($saveData);
+                $saveDataSetting['room_id'] = $this->rid;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tablePlayerObj->insert($saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
@@ -422,7 +426,7 @@ class Controller_live extends Controller_base {
 
         if (submitcheck('save')) {
             $images = wxz_uploadimg();
-            $saveData = array(
+            $saveDataSetting = array(
                 'category_id' => $_GET['category_id'],
                 'title' => $_GET['title'],
                 'style' => $_GET['style'],
@@ -445,21 +449,21 @@ class Controller_live extends Controller_base {
                 'publisher' => $_GET['publisher'],
                 'sort_order' => $_GET['sort_order'],
             );
-            $saveData['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
-            $saveData['cover_pic'] = $images['cover_pic'] ? $images['cover_pic'] : $_GET['cover_pic'];
-            $saveData['publisher_avatar'] = $images['publisher_avatar'] ? $images['publisher_avatar'] : $_GET['publisher_avatar'];
+            $saveDataSetting['theme_pic'] = $images['theme_pic'] ? $images['theme_pic'] : $_GET['theme_pic'];
+            $saveDataSetting['cover_pic'] = $images['cover_pic'] ? $images['cover_pic'] : $_GET['cover_pic'];
+            $saveDataSetting['publisher_avatar'] = $images['publisher_avatar'] ? $images['publisher_avatar'] : $_GET['publisher_avatar'];
             if ($id) {
                 //更新直播分类
-                $ret = $tableObj->update([$id], $saveData);
+                $ret = $tableObj->update([$id], $saveDataSetting);
                 if ($ret) {
                     cpmsg('更新成功', $this->noRootUrl, 'success');
                 }
             } else {
                 $roomNo = random(10); //房间号
                 //添加直播分类
-                $saveData['room_no'] = $roomNo;
-                $saveData['create_at'] = date('Y-m-d H:i:s');
-                $ret = $tableObj->insert($saveData);
+                $saveDataSetting['room_no'] = $roomNo;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveDataSetting);
                 if ($ret) {
                     cpmsg('添加成功', $this->noRootUrl, 'success');
                 }
@@ -560,21 +564,21 @@ class Controller_live extends Controller_base {
         if (submitcheck('save')) {
             $images = wxz_uploadimg();
 
-            $saveData = array(
+            $saveDataSetting = array(
                 'is_show' => $_GET['is_show'],
             );
 
-            $saveData['pic'] = $images['pic'] ? $images['pic'] : $_GET['pic'];
+            $saveDataSetting['pic'] = $images['pic'] ? $images['pic'] : $_GET['pic'];
 
             if ($info) {
-                $ret = $tableObj->updateById($info['id'], $saveData);
+                $ret = $tableObj->updateById($info['id'], $saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->noRootUrl . "&act=zanpic" . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveData['rid'] = $this->rid;
-                $saveData['create_at'] = date('Y-m-d H:i:s');
-                $ret = $tableObj->insert($saveData);
+                $saveDataSetting['rid'] = $this->rid;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveDataSetting);
                 if ($ret) {
                     cpmsg('设置成功', $this->noRootUrl . "&act=zanpic" . "&rid={$this->rid}", 'success');
                 }
@@ -584,6 +588,53 @@ class Controller_live extends Controller_base {
         include template('wxz_live:live/zanpicSave');
     }
 
+    /**
+     * 打赏设置
+     */
+    public function reward() {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $rid = $_GET['rid'];
+
+        $this->setLiveNav();
+        $moneyNum = 6; //显示打赏红包数量
+
+        $tableSetting = C::t('#wxz_live#wxz_live_setting');
+
+        $info = $tableSetting->getByType(4);
+        if ($info) {
+            $info = array_merge($info, unserialize($info['desc']));
+        }
+
+        if (!$this->liveInfo) {
+            cpmsg('直播间不存在', $this->noRootUrl, 'error');
+        }
+
+        $images = wxz_uploadimg();
+
+        if (submitcheck('save')) {
+            $saveData['img'] = $images['img'] ? $images['img'] : $_GET['img'];
+
+            for ($i = 1; $i <= $moneyNum; $i++) {
+                $saveDataSetting["money{$i}"] = $_GET["money{$i}"];
+                $saveDataSetting["remark{$i}"] = $_GET["remark{$i}"];
+            }
+
+            $saveDataSetting['is_show'] = $_GET["is_show"];
+            $saveDataSetting['nickname'] = $_GET["nickname"];
+            $saveDataSetting['content'] = $_GET["content"];
+
+            $saveData['desc'] = serialize($saveDataSetting);
+
+            $ret = $tableSetting->saveTypeData(4, $saveData);
+            cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$rid}", 'success');
+        }
+
+        include template('wxz_live:live/reward');
+    }
+
 }
 
 ?>
+    

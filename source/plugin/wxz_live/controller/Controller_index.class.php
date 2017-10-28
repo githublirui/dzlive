@@ -161,14 +161,12 @@ class Controller_index extends Controller_base {
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
         $tableZanPicObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
         $tableZanNumObj = new table_wxz_live_base(array('table' => 'wxz_live_zannum', 'pk' => 'id'));
+        $tableSetting = C::t('#wxz_live#wxz_live_setting');
 
         //直播间管理员
         $condition = "room_id={$rid} AND role=2";
         $roomadmins = $tableViewerObj->getAll($condition, 'uid');
         $roomadmin = json_encode($roomadmins);
-
-        $pic = array();
-        $pics = json_encode($pic); //获取所有赞图片
 
         $viewer = $this->intoroom($rid, $user); //浏览
         //
@@ -222,6 +220,13 @@ class Controller_index extends Controller_base {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
         $wxzWeixin = new wxz_weixin();
         $jssdkConfig = $wxzWeixin->getJssdkConfig();
+
+        //打赏
+        $moneyNum = 6;
+        $reward = $tableSetting->getByType(4);
+        if ($reward) {
+            $reward = array_merge($reward, unserialize($reward['desc']));
+        }
 
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
             include template("wxz_live:index/{$style}/live_ios");

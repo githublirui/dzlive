@@ -809,11 +809,11 @@
                                         <p>群发红包</p>
                                     </li>
                                     {/if}
-                                    {if $dashangsetting['isshow']== 1 && strpos($user_agent, 'MicroMessenger') !== false}
-                                    <li class='giftDs'  id="giftDs">
-                                        <p><img src="source/plugin/wxz_live/template/index/1/image/dashang.png"></p>
-                                        <p>打赏主播</p>
-                                    </li>
+                                    {if $dashangsetting['is_show']== 1 && strpos($user_agent, 'MicroMessenger') !== false}
+                                        <li class='giftDs'  id="giftDs">
+                                            <p><img src="source/plugin/wxz_live/template/index/1/image/dashang.png"></p>
+                                            <p>打赏主播</p>
+                                        </li>
                                     {/if}
                                     {loop $gift $value}
                                     <li data-id="{$value['rid']}"  class='giftlist'>
@@ -1033,7 +1033,6 @@
                         </div>
                     </div>
                     <!--打赏红包-->
-                    {eval $liveSettingInfos = iunserializer($dashangsetting['settings'])}
                     <section class="redenvelope width640 layui-m-anim-scale">
                         <div class="mask"></div>
                         <div class="redcenters width640">
@@ -1044,49 +1043,23 @@
                                 <!--红包信息-->
                                 <div class="RedPack_Info">
                                     <div class="packimgs">
-                                        <img src="{eval echo ($dashangsetting['logo'])}">
+                                        <img src="{eval echo ($reward['img'])}">
                                     </div>
                                     <p class="FromWho text_flow"></p>
-                                    <p class="qm text_flow">{$dashangsetting['content']}</p>
+                                    <p class="qm text_flow">{$reward['content']}</p>
                                 </div>
                             </div>
                             <ul class="c-money">
-                                <li data-money="{$liveSettingInfos['one']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark1']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['one']/100)}元）</p>
-                                    </a>
-                                </li>
-                                <li data-money="{$liveSettingInfos['two']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark2']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['two']/100)}元）</p>
-                                    </a>
-                                </li>
-                                <li data-money="{$liveSettingInfos['three']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark3']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['three']/100)}元）</p>
-                                    </a>
-                                </li>
-                                <li data-money="{$liveSettingInfos['four']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark4']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['four']/100)}元）</p>
-                                    </a>
-                                </li>
-                                <li data-money="{$liveSettingInfos['five']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark5']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['five']/100)}元）</p>
-                                    </a>
-                                </li>
-                                <li data-money="{$liveSettingInfos['six']}">
-                                    <a href="javascript:;">
-                                        <p>{$liveSettingInfos['remark6']}</p>
-                                        <p>（{eval echo ($liveSettingInfos['six']/100)}元）</p>
-                                    </a>
-                                </li>
+                                {eval for($i=1;$i<=$moneyNum;$i++) {}
+                                    {eval if($reward["money$i"] && $reward["money$i"] >0) {}
+                                        <li data-money="{eval echo $reward["money$i"];}">
+                                            <a href="javascript:;">
+                                                <p>{eval echo $reward["remark$i"];}</p>
+                                                <p>（{eval echo ($reward["money$i"]/100)}元）</p>
+                                            </a>
+                                        </li>
+                                    {eval } }
+                               {eval } }
                             </ul>
                             <p class="other-m">其他金额</p>
                         </div>
@@ -1732,46 +1705,46 @@
                                     $('.grap').hide();
                                     //群红包确认支付
                             }).on("click", "#btnSendRedBag", function() {
-                            calc();
+                                    calc();
                                     var ispost = false;
                                     if (!ispost) {
-                            pd.bagMessage = $("#bagMessage").val() || $("#bagMessage").attr("placeholder");
+                                    pd.bagMessage = $("#bagMessage").val() || $("#bagMessage").attr("placeholder");
                                     var dbjson = {
-                                    topicId: tid || 0, //话题id
-                                            total_fee: pd.bagMoney, //金额
-                                            byUserId: 1015310, //用户id
-                                            rtype: pd.bagType, //红包类型
-                                            focus: 0,
-                                            nums: pd.bagAmount, //红包数量
-                                            note: pd.bagMessage //红包留言
+                                        topicId: tid || 0, //话题id
+                                        total_fee: pd.bagMoney, //金额
+                                        byUserId: 1015310, //用户id
+                                        rtype: pd.bagType, //红包类型
+                                        focus: 0,
+                                        nums: pd.bagAmount, //红包数量
+                                        note: pd.bagMessage //红包留言
                                     };
                                     ispost = true;
                                     $.ajax({
-                                    type: "POST",
+                                            type: "POST",
                                             url: "{eval echo $this->createMobileUrl('setpacket',array('rid' => $rid))}",
                                             data: dbjson,
                                             dataType: 'json',
                                             success: function(result) {
-                                            if (result.s == 1 && result.isweixin == 1) {
-                                            callPay(result.msg, result, dbjson);
-                                            } else if (result.isweixin == 0) {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.tip,
-                                                    tipsTime: 1
-                                            });
-                                            } else {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.msg || result.tip,
-                                                    tipsTime: 1
-                                            });
-                                            }
+                                                if (result.s == 1 && result.isweixin == 1) {
+                                                    callPay(result.msg, result, dbjson);
+                                                } else if (result.isweixin == 0) {
+                                                    $(document).minTipsBox({
+                                                        tipsContent: result.tip,
+                                                        tipsTime: 1
+                                                    });
+                                                } else {
+                                                    $(document).minTipsBox({
+                                                        tipsContent: result.msg || result.tip,
+                                                        tipsTime: 1
+                                                    });
+                                                }
                                             },
                                             error: function() {
-                                            ispost = false;
-                                                    $(document).minTipsBox({
-                                            tipsContent: 'error',
+                                                ispost = false;
+                                                $(document).minTipsBox({
+                                                    tipsContent: 'error',
                                                     tipsTime: 1
-                                            });
+                                                });
                                             }
                                     });
                             }
@@ -2208,193 +2181,186 @@
                                     });
                             });
                                     //其他金额(输入框)
-                                    $('#othermoney').on('input', function(event) {
-                            var money = $(this).val();
-                                    if (/\s+/.test(money)) {
-                            return;
-                            };
-                                    if (money >= 0.01 && money <= 1000) {
-                            $('.font-s').removeAttr('disabled');
-                            } else{
-                            $(".font-s").attr("disabled", "disabled");
-                            }
+                            $('#othermoney').on('input', function(event) {
+                                var money = $(this).val();
+                                if (/\s+/.test(money)) {
+                                    return;
+                                };
+                                if (money >= 0.01 && money <= 1000) {
+                                    $('.font-s').removeAttr('disabled');
+                                } else {
+                                    $(".font-s").attr("disabled", "disabled");
+                                }
                             });
                                     //其他金额确认按钮
-                                    $('.font-s').on('click', function(event) {
-                            var rewardjson2 = {
-                            money: parseFloat($('#othermoney').val()).toFixed(2) || 0.01,
+                            $('.font-s').on('click', function(event) {
+                                var rewardjson2 = {
+                                    money: parseFloat($('#othermoney').val()).toFixed(2) || 0.01,
                                     touid: personal.uid || 0, //打赏人uid/主播uid
                                     type: '2',
                                     tonickname: personal.nickname || '',
                                     toheadurl: personal.headurl || '',
                                     tid: tid || 0
-                            };
+                                };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            data: rewardjson2,
-                                            success:function(result){
-                                            if (result.s == 1 && result.isweixin == 1) {
-
-                                            callPay(result.msg, result);
-                                            } else if (result.isweixin == 0) {
+                                        url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: rewardjson2,
+                                        success:function(result){
+                                        if (result.s == 1 && result.isweixin == 1) {
+                                           callPay(result.msg, result);
+                                        } else if (result.isweixin == 0) {
                                             $(document).minTipsBox({
-                                            tipsContent: result.tip,
-                                                    tipsTime: 1
+                                                 tipsContent: result.tip,
+                                                 tipsTime: 1
                                             });
-                                            } else {
+                                        } else {
                                             $(document).minTipsBox({
-                                            tipsContent: result.msg || result.tip,
-                                                    tipsTime: 1
+                                                tipsContent: result.msg || result.tip,
+                                                tipsTime: 1
                                             });
-                                            }
-                                            },
-                                            error: function() {
-                                            $(document).minTipsBox({
+                                        }
+                                        },
+                                        error: function() {
+                                        $(document).minTipsBox({
                                             tipsContent: 'error',
                                                     tipsTime: 1
                                             });
-                                            }
+                                        }
                                     });
                             });
-                                    //礼物支付
-                                    $('.give').on('click', function(event) {
-                            var i = 0;
+                            //礼物支付
+                            $('.give').on('click', function(event) {
+                                     var i = 0;
                                     $('.gift-list li').each(function(index, el) {
-                            if ($(this).hasClass('select')) {
-                            i++;
-                                    var giftjson = {
-                                    num: parseInt($('.countKuang').val()) || 1,
-                                            item: index,
-                                            id: $("#gift_id").val(),
-                                            touid: founder.uid || 0,
-                                            tid: tid || 0
-                                    };
-                                    $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $rid))}",
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            data: giftjson,
-                                            success:function(result){
-                                            if (result.s == 1 && result.isweixin == 1) {
-
-                                            callPay(result.msg, result);
-                                            } else if (result.isweixin == 0) {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.tip,
-                                                    tipsTime: 1
-                                            });
-                                            } else {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.msg || result.tip,
-                                                    tipsTime: 1
-                                            });
-                                            }
-                                            },
-                                            error: function() {
-                                            $(document).minTipsBox({
-                                            tipsContent: 'error',
-                                                    tipsTime: 1
-                                            });
-                                            }
+                                    if ($(this).hasClass('select')) {
+                                        i++;
+                                        var giftjson = {
+                                        num: parseInt($('.countKuang').val()) || 1,
+                                                item: index,
+                                                id: $("#gift_id").val(),
+                                                touid: founder.uid || 0,
+                                                tid: tid || 0
+                                        };
+                                        $.ajax({
+                                                url: "{eval echo $this->createMobileUrl('setgift',array('rid' => $rid))}",
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                data: giftjson,
+                                                success:function(result){
+                                                if (result.s == 1 && result.isweixin == 1) {
+                                                    callPay(result.msg, result);
+                                                } else if (result.isweixin == 0) {
+                                                    $(document).minTipsBox({
+                                                        tipsContent: result.tip,
+                                                        tipsTime: 1
+                                                    });
+                                                } else {
+                                                    $(document).minTipsBox({
+                                                            tipsContent: result.msg || result.tip,
+                                                            tipsTime: 1
+                                                        });
+                                                    }
+                                                },
+                                                error: function() {
+                                                    $(document).minTipsBox({
+                                                         tipsContent: 'error',
+                                                          tipsTime: 1
+                                                    });
+                                                }
+                                        });
+                                    }
+                                });
+                                 //无选中状态
+                                if (i < 1) {
+                                    $(document).minTipsBox({
+                                        tipsContent: '请选中礼物',
+                                        tipsTime: 1
                                     });
-                            }
-                            });
-                                    //无选中状态
-                                    if (i < 1) {
-                            $(document).minTipsBox({
-                            tipsContent: '请选中礼物',
-                                    tipsTime: 1
-                            });
-                            };
+                                };
                             });
                                     //支付
-                                            function callPay(json, data, otherdata) {
-
-                                            if (typeof WeixinJSBidge == "undefined") {
-
+                                    function callPay(json, data, otherdata) {
+                                        if (typeof WeixinJSBidge == "undefined") {
                                             if (document.addEventListener) {
-                                            document.addEventListener('WeixinJSBidgeReady', jsApiCall(json, otherdata), false);
+                                                document.addEventListener('WeixinJSBidgeReady', jsApiCall(json, otherdata), false);
                                             } else if (document.attachEvent) {
-                                            document.attachEvent('WeixinJSBidgeReady', jsApiCall(json, otherdata));
-                                                    document.attachEvent('onWeixinJSBidgeReady', jsApiCall(json, otherdata));
+                                                document.attachEvent('WeixinJSBidgeReady', jsApiCall(json, otherdata));
+                                                document.attachEvent('onWeixinJSBidgeReady', jsApiCall(json, otherdata));
                                             }
-                                            } else {
-
+                                        } else {
                                             jsApiCall(json, data, otherdata);
-                                            }
-                                            }
+                                        }
+                                    }
                                     //支付
                                     function jsApiCall(obj, data, otherdata) {
-                                    if (obj.status == 1) {
-                                    console.log(data);
-                                            WeixinJSBidge.invoke(
-                                                    'getBrandWCPayRequest', {
-                                                    "appId": "" + obj.appId + "",
-                                                            "timeStamp": "" + obj.timeStamp + "",
-                                                            "nonceStr": "" + obj.nonceStr + "",
-                                                            "package": "" + obj.package + "",
-                                                            "signType": "" + obj.signType + "",
-                                                            "paySign": "" + obj.paySign + "",
-                                                    },
-                                                    function(res) {
-                                                    if (res.err_msg == 'get_brand_wcpay_request:ok') {
-                                                    $('.grap').hide();
-                                                            $(".two-top").hide();
-                                                            $(".redenvelope").hide();
-                                                            $(".zhuang").slideUp('fast');
-                                                            $(".allgift").slideUp('fast');
-                                                            loginInfo.type = data.type;
-                                                            if (data.type == 'grouppacket'){
-                                                    $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $rid))}",
-                                                            type: 'POST',
-                                                            dataType: 'json',
-                                                            data: {'rid':data.id},
-                                                            success:function(r){
-                                                            if (r.s == 1) {
-                                                            loginInfo.id = r.id;
-                                                                    tis.SendMessage(r.content, '', JSON.stringify(loginInfo));
+                                        if (obj.status == 1) {
+                                                console.log(data);
+                                                WeixinJSBidge.invoke(
+                                                        'getBrandWCPayRequest', {
+                                                        "appId": "" + obj.appId + "",
+                                                                "timeStamp": "" + obj.timeStamp + "",
+                                                                "nonceStr": "" + obj.nonceStr + "",
+                                                                "package": "" + obj.package + "",
+                                                                "signType": "" + obj.signType + "",
+                                                                "paySign": "" + obj.paySign + "",
+                                                        },
+                                                        function(res) {
+                                                            if (res.err_msg == 'get_brand_wcpay_request:ok') {
+                                                                $('.grap').hide();
+                                                                $(".two-top").hide();
+                                                                $(".redenvelope").hide();
+                                                                $(".zhuang").slideUp('fast');
+                                                                $(".allgift").slideUp('fast');
+                                                                loginInfo.type = data.type;
+                                                                if (data.type == 'grouppacket'){
+                                                                    $.ajax({
+                                                                            url: "{eval echo $this->createMobileUrl('singlep',array('rid' => $rid))}",
+                                                                            type: 'POST',
+                                                                            dataType: 'json',
+                                                                            data: {'rid':data.id},
+                                                                            success:function(r){
+                                                                                if (r.s == 1) {
+                                                                                     loginInfo.id = r.id;
+                                                                                     tis.SendMessage(r.content, '', JSON.stringify(loginInfo));
+                                                                                }
+                                                                            }
+                                                                    });
+                                                            } else if (data.type == 'gift'){
+                                                                $.ajax({
+                                                                url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $rid))}",
+                                                                        type: 'POST',
+                                                                        dataType: 'json',
+                                                                        data: {'rid':data.id},
+                                                                        success:function(r){
+                                                                        if (r.s == 1) {
+                                                                        loginInfo.id = r.id;
+                                                                                tis.SendMessage(r.content, '', JSON.stringify(loginInfo));
+                                                                        }
+                                                                        }
+                                                                });
+                                                            } else{
+                                                                loginInfo.id = data.id;
+                                                                tis.SendMessage(data.content, '', JSON.stringify(loginInfo));
                                                             }
-                                                            }
-                                                    });
-                                                    } else if (data.type == 'gift'){
-                                                    $.ajax({
-                                                    url: "{eval echo $this->createMobileUrl('singleg',array('rid' => $rid))}",
-                                                            type: 'POST',
-                                                            dataType: 'json',
-                                                            data: {'rid':data.id},
-                                                            success:function(r){
-                                                            if (r.s == 1) {
-                                                            loginInfo.id = r.id;
-                                                                    tis.SendMessage(r.content, '', JSON.stringify(loginInfo));
-                                                            }
-                                                            }
-                                                    });
-                                                    } else{
-                                                    loginInfo.id = data.id;
-                                                            tis.SendMessage(data.content, '', JSON.stringify(loginInfo));
-                                                    }
 
-
-
-                                                    $(document).minTipsBox({
-                                                            tipsContent: "红包发送成功",
-                                                            tipsTime: 1
-                                                    });
-                                                            $(".sendredbagwin").hide();
-                                                    } else if (res.err_msg != "get_brand_wcpay_request:cancel") {
-                                                    //失败调起扫码
-                                                    setTimeout(function() {
-                                                    qrpay(otherdata)
-                                                    }, 500);
-                                                    }
-                                                    }
-                                            );
-                                    } else {
-                                    alert(obj.res);
-                                    }
+                                                            $(document).minTipsBox({
+                                                                    tipsContent: "红包发送成功",
+                                                                    tipsTime: 1
+                                                            });
+                                                                    $(".sendredbagwin").hide();
+                                                            } else if (res.err_msg != "get_brand_wcpay_request:cancel") {
+                                                            //失败调起扫码
+                                                            setTimeout(function() {
+                                                                qrpay(otherdata)
+                                                                }, 500);
+                                                            }
+                                                        }
+                                                );
+                                        } else {
+                                            alert(obj.res);
+                                        }
                                     }
                                     //扫码支付
                                     function qrpay(otherdata) {
@@ -2540,32 +2506,31 @@
                                             $(".TAstate").find("li").each(function(index) {
 
                                     $(this).click(function() {
-                                    $(this).addClass("currentli").siblings().removeClass("currentli");
-                                            $(".showthisd").eq($(this).index()).show().siblings(".showthisd").hide();
-                                            if ($(this).index() > 0) {
-                                    //$('.cont-right').hide();
-                                    $('.gun').hide();
-                                    } else{
-                                    //$('.cont-right').show();
-                                    $('.gun').show();
-                                    }
-                                    if ($(this).attr('data-type') == '3'){
-                                    $('.cont-right').show();
-                                    } else{
-                                    $('.cont-right').hide();
-                                    }
+                                        $(this).addClass("currentli").siblings().removeClass("currentli");
+                                                $(".showthisd").eq($(this).index()).show().siblings(".showthisd").hide();
+                                                if ($(this).index() > 0) {
+                                        //$('.cont-right').hide();
+                                            $('.gun').hide();
+                                        } else{
+                                        //$('.cont-right').show();
+                                            $('.gun').show();
+                                        }
+                                        if ($(this).attr('data-type') == '3'){
+                                            $('.cont-right').show();
+                                        } else{
+                                            $('.cont-right').hide();
+                                        }
 
-                                    if ($(this).attr('data-type') == '5')
-                                    {
-                                    {if $rankid}
-                                    rank({$rankid}, $(".rankpm div p").length);
-                                    {/if}
-                                    }
-                                    if ($(this).attr('data-type') == '7')
-                                    {
-                                    panic();
-                                    }
-                                    })
+                                        if ($(this).attr('data-type') == '5')
+                                        {
+                                        {if $rankid}
+                                        rank({$rankid}, $(".rankpm div p").length);
+                                        {/if}
+                                        }
+                                        if ($(this).attr('data-type') == '7'){
+                                            panic();
+                                        }
+                                        })
                                     });
                                             //进来广告
                                             $(".readcolse").click(function() {
@@ -2698,88 +2663,88 @@
                                             }, 'json');
                                         }
                                     });
-                                            function shutuplist(url) {
-                                            $('.shutuplist').html('');
-                                                    $.ajax({
-                                                    type: "POST",
-                                                            url: url,
-                                                            dataType: 'json',
-                                                            success: function(result) {
-                                                            var str = '';
-                                                                    console.log(result.list.length);
-                                                                    for (var i = 0; i < result.list.length; i++){
-                                                            str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
-                                                            }
-                                                            $('.shutuplist').append(str);
-                                                            },
-                                                            error: function() {
-                                                            ispost = false;
-                                                                    $(document).minTipsBox({
-                                                            tipsContent: 'error',
-                                                                    tipsTime: 1
-                                                            });
-                                                            }
-                                                    });
+                                    function shutuplist(url) {
+                                        $('.shutuplist').html('');
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url,
+                                            dataType: 'json',
+                                            success: function(result) {
+                                            var str = '';
+                                            console.log(result.list.length);
+                                            for (var i = 0; i < result.list.length; i++){
+                                                str += '<li><img src="' + result.list[i].headimgurl + '"/><div><p>' + result.list[i].nickname + '</p></div><span onclick=cancelshutup("{eval echo $this->createMobileUrl('setshut',array('rid' => $rid,'type'=>2))}","user_' + result.list[i].touid + '","' + result.list[i].nickname + '")>移除</span></li>';
                                             }
+                                                $('.shutuplist').append(str);
+                                            },
+                                            error: function() {
+                                                ispost = false;
+                                                 $(document).minTipsBox({
+                                                    tipsContent: 'error',
+                                                    tipsTime: 1
+                                                });
+                                            }
+                                        });
+                                    }
                                     function showshutup()
                                     {
-                                    shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}");
-                                            $('.Banned').show();
-                                            $(".function-all").slideUp('fast');
-                                            $(".showfunction").slideUp('fast');
-                                            hideflag = true;
+                                        shutuplist("{eval echo $this->createMobileUrl('getshut',array('rid' => $rid))}");
+                                        $('.Banned').show();
+                                        $(".function-all").slideUp('fast');
+                                        $(".showfunction").slideUp('fast');
+                                        hideflag = true;
                                     }
                                     function allshutup(type)
                                     {
-                                    $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $rid))}",
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            data: {allshutup:type},
-                                            success:function(result){
-                                            if (type == 1) {
-                                            //sendallshutup();
-                                            loginInfo.type = 'allshutup';
-                                                    loginInfo.allshutup = 1;
-                                                    tis.SendMessage('全员禁言中', '', JSON.stringify(loginInfo));
+                                        $.ajax({
+                                                url: "{eval echo $this->createMobileUrl('setallshut',array('rid' => $rid))}",
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                data: {allshutup:type},
+                                                success:function(result){
+                                                    if (type == 1) {
+                                                    //sendallshutup();
+                                                            loginInfo.type = 'allshutup';
+                                                            loginInfo.allshutup = 1;
+                                                            tis.SendMessage('全员禁言中', '', JSON.stringify(loginInfo));
                                                     if (loginInfo.isadmin != 1)
-                                            {
-                                            $('#send_msg_text').attr('readonly', 'true');
-                                                    $('#send_msg_text').attr('placeholder', '全员禁言中');
-                                            }
+                                                    {
+                                                         $('#send_msg_text').attr('readonly', 'true');
+                                                         $('#send_msg_text').attr('placeholder', '全员禁言中');
+                                                    }
 
-                                            }
-                                            else
-                                            {
-                                            loginInfo.type = 'cancelallshutup';
-                                                    loginInfo.allshutup = 0;
-                                                    tis.SendMessage('全员禁言中', '', JSON.stringify(loginInfo));
-                                                    $('#send_msg_text').removeAttr('readonly');
-                                                    $('#send_msg_text').attr('placeholder', '和大伙说点什么吧');
-                                            }
-                                            }
-                                    });
+                                                    }
+                                                    else
+                                                    {
+                                                            loginInfo.type = 'cancelallshutup';
+                                                            loginInfo.allshutup = 0;
+                                                            tis.SendMessage('全员禁言中', '', JSON.stringify(loginInfo));
+                                                            $('#send_msg_text').removeAttr('readonly');
+                                                            $('#send_msg_text').attr('placeholder', '和大伙说点什么吧');
+                                                    }
+                                                }
+                                        });
                                     }
                                     function disimg(type)
                                     {
 
-                                    $.ajax({
-                                    url: './disimg',
+                                        $.ajax({
+                                            url: './disimg',
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {tid:'2201', disimg:type},
                                             success:function(result){
-                                            if (result.status == 1) {
-                                            senddisimg();
+                                                if (result.status == 1) {
+                                                    senddisimg();
                                                     loginInfo.disimg = 1;
-                                            }
-                                            else
-                                            {
-                                            sendimgcancel();
+                                                }
+                                                else
+                                                {
+                                                    sendimgcancel();
                                                     loginInfo.disimg = 0;
+                                                }
                                             }
-                                            }
-                                    });
+                                        });
                                     }
 
                                     function limit(type){
@@ -2801,41 +2766,41 @@
                                             //async:false,
                                             success: function(json){
                                             if (json.s == '1'){
-                                            if (type != 1){
-                                            var e = json.msg;
+                                                if (type != 1){
+                                                    var e = json.msg;
                                                     WeixinJSBidge.invoke(
                                                             'getBrandWCPayRequest', {
-                                                            "appId":e.appId,
-                                                                    "timeStamp": "" + e.timeStamp,
-                                                                    "nonceStr": e.nonceStr,
-                                                                    "package":e.package,
-                                                                    "signType":e.signType,
-                                                                    "paySign":e.paySign
+                                                                "appId":e.appId,
+                                                                "timeStamp": "" + e.timeStamp,
+                                                                "nonceStr": e.nonceStr,
+                                                                "package":e.package,
+                                                                "signType":e.signType,
+                                                                "paySign":e.paySign
                                                             },
                                                             function(res){
-                                                            if (res.err_msg == "get_brand_wcpay_request:ok") {
-                                                            if (type == 3){
-                                                            $("#limit2").hide();
-                                                            } else{
-                                                            $("#limit" + type).hide();
-                                                            }
-                                                            window.location.reload();
-                                                            } else{
-                                                            if (res.err_msg == "get_brand_wcpay_request:cancel"){
-                                                            var tips = '你取消了支付';
-                                                            } else{
-                                                            var tips = '支付失败';
-                                                            }
-                                                            showtipsbox(tips);
-                                                            }
+                                                                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                                                    if (type == 3){
+                                                                        $("#limit2").hide();
+                                                                    } else{
+                                                                        $("#limit" + type).hide();
+                                                                    }
+                                                                    window.location.reload();
+                                                                } else{
+                                                                if (res.err_msg == "get_brand_wcpay_request:cancel"){
+                                                                    var tips = '你取消了支付';
+                                                                } else{
+                                                                    var tips = '支付失败';
+                                                                }
+                                                                showtipsbox(tips);
+                                                                }
                                                             }
                                                     );
-                                            } else if (type == 1){
-                                            $("#limit" + type).hide();
+                                                } else if (type == 1){
+                                                    $("#limit" + type).hide();
                                                     window.location.reload();
-                                            }
+                                                }
                                             } else{
-                                            showtipsbox(json.msg);
+                                                showtipsbox(json.msg);
                                             }
 
                                             }
@@ -2845,44 +2810,43 @@
         <script>
                                     window.onload = function(){
                                     //$('.chat_title').scrollTop($('.chat_title').get(0).scrollHeight-$('.chat_title').height());
-                                    if ({$ditu} == 1){
-                                    init();
-                                    }
-                                    if ({$shutup}){
-                                    $('#send_msg_text').attr('readonly', 'true');
+                                        if ({$ditu} == 1){
+                                          init();
+                                        }
+                                        if ({$shutup}){
+                                            $('#send_msg_text').attr('readonly', 'true');
                                             $('#send_msg_text').attr('placeholder', '您已被禁言');
-                                    }
+                                        }
 
-                                    if ("{$liveInfo['isallshutup']}" == 1){
-                                    $("#allcheck").prop("checked", true);
+                                        if ("{$liveInfo['isallshutup']}" == 1){
+                                             $("#allcheck").prop("checked", true);
                                             if (loginInfo.isadmin != 1){
-                                    $('#send_msg_text').attr('readonly', 'true');
-                                            $('#send_msg_text').attr('placeholder', '全员禁言中');
-                                    }
-                                    } else{
-                                    $("#allcheck").prop("checked", false);
-                                    }
-                                    if ("{$menusss[0]['type']}" == 7){
-                                    panic();
-                                    }
-                                    if ("{$menusss[0]['type']}" == 3){
-                                    $(".cont-right ").show();
-                                    }
-                                    //switch开关
-                                    if ("{$liveInfo['isallshutup']}" == 1) {
-                                    $(".bannerdbtn").children('em').removeClass('btn-movel').addClass('btn-mover').parent().css({backgroundColor: '#31ac82'});
-                                    } else{
-                                    $(".bannerdbtn").children('em').removeClass('btn-mover').addClass('btn-movel').parent().css({backgroundColor: '#ccc'});
-                                    }
+                                                $('#send_msg_text').attr('readonly', 'true');
+                                                $('#send_msg_text').attr('placeholder', '全员禁言中');
+                                            }
+                                        } else{
+                                            $("#allcheck").prop("checked", false);
+                                        }
+                                        if ("{$menusss[0]['type']}" == 7){
+                                            panic();
+                                        }
+                                        if ("{$menusss[0]['type']}" == 3){
+                                            $(".cont-right ").show();
+                                        }
+                                        //switch开关
+                                        if ("{$liveInfo['isallshutup']}" == 1) {
+                                            $(".bannerdbtn").children('em').removeClass('btn-movel').addClass('btn-mover').parent().css({backgroundColor: '#31ac82'});
+                                        } else{
+                                            $(".bannerdbtn").children('em').removeClass('btn-mover').addClass('btn-movel').parent().css({backgroundColor: '#ccc'});
+                                        }
 
-                                    $(".bannerdbtn").on('click', function(event) {
-                                    if ($(this).children('em').hasClass('btn-mover')) {
-                                    $(this).children('em').removeClass('btn-mover').addClass('btn-movel').parent().css({backgroundColor: '#ccc'});
-                                    }
-                                    else {
-                                    $(this).children('em').removeClass('btn-movel').addClass('btn-mover').parent().css({backgroundColor: '#31ac82'});
-                                    };
-                                    });
+                                        $(".bannerdbtn").on('click', function(event) {
+                                            if ($(this).children('em').hasClass('btn-mover')) {
+                                                $(this).children('em').removeClass('btn-mover').addClass('btn-movel').parent().css({backgroundColor: '#ccc'});
+                                            }else {
+                                                $(this).children('em').removeClass('btn-movel').addClass('btn-mover').parent().css({backgroundColor: '#31ac82'});
+                                            };
+                                        });
                                     }
         </script>
         <script>
@@ -2908,38 +2872,38 @@
                                     window.onresize = function(){
                                     if (loginInfo.pop == 1)
                                     {
-                                    loginInfo.pop = 0;
-                                            return false;
+                                         loginInfo.pop = 0;
+                                         return false;
                                     }
                                     $('.watermark p').css("top", "66px");
                                             $('.watermark .vp').css("top", "56px");
                                             $(".block_video").height(vedio_an);
                                             $('#html5Media2').css("object-position", "0px 52px");
                                             $(".header-an").show();
-                                            if (video_status == 0) {
-                                    var timer1 = setTimeout(function() {
-                                    $(".schedule").hide();
-                                    }, 5000)
-                                            $(".all-vide").on('click', function(event) {
-                                    event.preventDefault();
-                                            if ($(".schedule").css("display") == "none") {
-                                    $(".schedule").show();
-                                            timer1 = setTimeout(function() {
-                                            $(".schedule").hide();
-                                            }, 5000)
-                                    } else {
-                                    $(".schedule").hide();
-                                    }
-                                    $(".schedule").on('click', function(event) {
-                                    event.preventDefault();
-                                            event.stopPropagation();
-                                            clearTimeout(timer1);
+                                    if (video_status == 0) {
+                                        var timer1 = setTimeout(function() {
+                                        $(".schedule").hide();
+                                        }, 5000)
+                                        $(".all-vide").on('click', function(event) {
+                                            event.preventDefault();
+                                        if ($(".schedule").css("display") == "none") {
                                             $(".schedule").show();
                                             timer1 = setTimeout(function() {
                                             $(".schedule").hide();
-                                            }, 6000)
-                                    });
-                                    });
+                                            }, 5000)
+                                        } else {
+                                            $(".schedule").hide();
+                                        }
+                                        $(".schedule").on('click', function(event) {
+                                            event.preventDefault();
+                                                    event.stopPropagation();
+                                                    clearTimeout(timer1);
+                                                    $(".schedule").show();
+                                                    timer1 = setTimeout(function() {
+                                                    $(".schedule").hide();
+                                                    }, 6000)
+                                            });
+                                        });
                                     };
                                             $('#html5Media2').attr('width', $(window).width() + 'px');
                                             $('#html5Media2').attr('height', $(window).height() + 'px');
@@ -2977,46 +2941,37 @@
                                             $('.goods-box').html('');
                                             var nowtime = 0;
                                             $.ajax({
-                                            url: "{eval echo $this->createMobileurl('store',array('rid'=>$rid))}",
+                                                    url: "{eval echo $this->createMobileurl('store',array('rid'=>$rid))}",
                                                     type: 'POST',
                                                     dataType: 'json',
                                                     data: {tid:'2201'},
                                                     success:function(json){
-                                                    var str = '';
-                                                            $.each(json.msg, function(index, value) {
-
+                                                        var str = '';
+                                                        $.each(json.msg, function(index, value) {
                                                             str += '<div class="goods-list clearfix"><div class="list-l"><img src="' + value.img + '"/></div><div class="list-r"><p class="r-name">' + value.title + '</p><div class="r-bottom clearfix"><p class="r-price"><span>￥</span><em>' + value.price + '</em></p>';
-                                                                    if (index == 0)
-                                                            {
-                                                            nowtime = value.nowtime;
+                                                            if (index == 0){
+                                                                nowtime = value.nowtime;
                                                             }
-                                                            if (value.endtime < nowtime)
-                                                            {
-                                                            str += '<a class="r-sub r-sub2" href="javascript:void(0);">已结束</a>';
-                                                            }
-                                                            else
-                                                            {
-                                                            if (value.startime > nowtime)
-                                                            {
-                                                            str += '<a class="r-sub r-sub2 panic" href="javascript:void(0);" value="' + value.startime + '" hashref="' + value.link + '"></a>';
-                                                            }
-                                                            else
-                                                            {
-                                                            str += '<a class="r-sub r-sub2" href="' + value.link + '">马上买</a>';
-                                                            }
-
+                                                            if (value.endtime < nowtime){
+                                                                str += '<a class="r-sub r-sub2" href="javascript:void(0);">已结束</a>';
+                                                            }else{
+                                                                if (value.startime > nowtime){
+                                                                    str += '<a class="r-sub r-sub2 panic" href="javascript:void(0);" value="' + value.startime + '" hashref="' + value.link + '"></a>';
+                                                                }else{
+                                                                    str += '<a class="r-sub r-sub2" href="' + value.link + '">马上买</a>';
+                                                                }
                                                             }
                                                             str += '</div></div></div>';
-                                                            });
-                                                            $('.goods-box').append(str);
-                                                            var gW = $(".TAstate").width() * 0.36;
-                                                            var gH = parseInt(gW * 0.58);
-                                                            $(".list-l").height(gH);
-                                                            $(".list-r").height(gH);
-                                                            $('.goods-box').show();
-                                                            window.clearInterval(se);
-                                                            countdown(nowtime * 1000);
-                                                    }
+                                                        });
+                                                        $('.goods-box').append(str);
+                                                        var gW = $(".TAstate").width() * 0.36;
+                                                        var gH = parseInt(gW * 0.58);
+                                                        $(".list-l").height(gH);
+                                                        $(".list-r").height(gH);
+                                                        $('.goods-box').show();
+                                                        window.clearInterval(se);
+                                                        countdown(nowtime * 1000);
+                                                  }
                                             });
                                     }
                                     function countdown(nowtime){
