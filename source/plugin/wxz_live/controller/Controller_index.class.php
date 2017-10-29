@@ -228,6 +228,10 @@ class Controller_index extends Controller_base {
             $reward = array_merge($reward, unserialize($reward['desc']));
         }
 
+        //直播间付费
+        $condition = "uid={$uid} AND order_type=2 AND rid={$rid}";
+        $paylog = C::t('#wxz_live#wxz_live_order')->getRow($condition);
+
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')) {
             include template("wxz_live:index/{$style}/live_ios");
         } else if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
@@ -324,10 +328,10 @@ class Controller_index extends Controller_base {
      */
     public function limit() {
         $type = $_GET['type'];
-        $roomId = $_GET['rid'];
+        $rid = $_GET['rid'];
         $password = $_GET['password'];
 
-        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($roomId);
+        $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($rid);
         $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
 
         $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
@@ -362,6 +366,118 @@ class Controller_index extends Controller_base {
             echo json_encode($result);
             exit;
         }
+
+        if ($liveInfo['limit'] == '2' || $liveInfo['limit'] == '3') {
+
+            //查询支付
+            $condition = "uid={$user['id']} AND order_type=2 AND rid={$rid}";
+            $log = C::t('#wxz_live#wxz_live_order')->getRow($condition);
+
+            if (!$log) {
+                $log['rid'] = $rid;
+                $log['money'] = $liveInfo['limit_data']["amount"];
+                $log['pay_money'] = $liveInfo['limit_data']["amount"];
+                $log['uid'] = $user['id'];
+                $log['order_type'] = 2;
+                $log['order_no'] = C::t('#wxz_live#wxz_live_order')->getOrderNo();
+                $log['create_at'] = date('Y-m-d H:i:s');
+
+                $logid = C::t('#wxz_live#wxz_live_order')->insert($log, true);
+            } else {
+                $logid = $log['id'];
+            }
+
+            echo json_encode($this->limitPay($liveInfo['limit_data']["amount"], $log, $rid));
+            exit;
+        }
+    }
+
+    /**
+     * 付费支付
+     * @param type $money
+     * @param type $log
+     * @param type $rid
+     * @return string
+     */
+    public function limitPay($money, $log, $rid) {
+        global $_G;
+
+        $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
+        require_once "{$wxpayPath}lib/WxPay.Config.php";
+
+        $user = C::t('#wxz_live#wxz_live_user')->authUser('', false);
+        $uid = $user['id'];
+
+        $params = array(
+            'fee' => $money,
+            'user' => $user['openid'],
+            'random' => $log['order_no'],
+        );
+
+        $attach = array('type' => 'paylive');
+        $notifyUrl = "{$_G['siteurl']}/source/plugin/wxz_live/notify.php"; //
+
+        $package = array();
+        $package['appid'] = WxPayConfig::$appid;
+        $package['mch_id'] = WxPayConfig::$mchid;
+        $package['nonce_str'] = random(8);
+        $package['body'] = '直播间付费';
+        $package['attach'] = json_encode($attach);
+        $package['out_trade_no'] = $params['random'];
+        $package['total_fee'] = $params['fee'];
+        $package['spbill_create_ip'] = getip();
+        $package['time_start'] = date('YmdHis', time());
+        $package['time_expire'] = date('YmdHis', time() + 600);
+        $package['notify_url'] = $notifyUrl;
+        $package['trade_type'] = 'JSAPI';
+        $package['openid'] = $user['openid'];
+//        $package['openid'] = 'o11S7wvMcT_2g8WPHVMZtGEL7mz4'; //debug
+        ksort($package, SORT_STRING);
+        $string1 = '';
+        foreach ($package as $key => $v) {
+            if (empty($v)) {
+                continue;
+            }
+            $string1 .= "{$key}={$v}&";
+        }
+        $string1 .= "key=" . WxPayConfig::$key;
+        $package['sign'] = strtoupper(md5($string1));
+        $dat = array2xml($package);
+        $response = ihttp_request('https://api.mch.weixin.qq.com/pay/unifiedorder', $dat);
+
+        $xml = @isimplexml_load_string($response['content'], 'SimpleXMLElement', LIBXML_NOCDATA);
+
+        if (is_error($response)) {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg));
+            return $result;
+        }
+
+        if (strval($xml->return_code) == 'FAIL') {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg));
+            return $result;
+        }
+
+        if (strval($xml->result_code) == 'FAIL') {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg));
+            return $result;
+        }
+
+        $prepayid = $xml->prepay_id;
+        $option['appId'] = WxPayConfig::$appid;
+        $option['timeStamp'] = TIMESTAMP;
+        $option['nonceStr'] = random(8);
+        $option['package'] = 'prepay_id=' . $prepayid;
+        $option['signType'] = 'MD5';
+        ksort($option, SORT_STRING);
+        foreach ($option as $key => $v) {
+            $string .= "{$key}={$v}&";
+        }
+        $string .= "key=" . WxPayConfig::$key;
+        $option['paySign'] = strtoupper(md5($string));
+
+        $result = array('s' => '1', 'msg' => $option);
+
+        return $result;
     }
 
     /**
@@ -709,6 +825,171 @@ class Controller_index extends Controller_base {
         exit;
     }
 
+    /**
+     * 打赏
+     */
+    public function setreward() {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableReward = new table_wxz_live_base(array('table' => 'wxz_live_reward', 'pk' => 'id'));
+
+        $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
+        require_once "{$wxpayPath}lib/WxPay.Config.php";
+
+        $rid = intval($_GET['rid']);
+        $type = intval($_GET['type']);
+        $money = floatval($_GET['money']);
+        $touid = intval($_GET['touid']);
+        $tonickname = intval($_GET['tonickname']);
+        $toheadurl = intval($_GET['toheadurl']);
+
+        $user = C::t('#wxz_live#wxz_live_user')->authUser('', false);
+        $uid = $user['id'];
+
+        $isweixin = 1;
+        if ($type == 2) {
+            $money = $money * 100;
+        }
+
+        if (empty($rid)) {
+            $result = array('s' => '-1', 'msg' => '直播不存在', 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+
+        if (empty($money) || $money < 1) {
+            $result = array('s' => '-1', 'msg' => '最少为0.01元哦！', 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+        if (!$uid || $uid == 0) {
+            $result = array('s' => '-1', 'msg' => '用户不存在！', 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+        if (!$user) {
+            $result = array('s' => '-1', 'msg' => '用户不存在！', 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+        if ($touid > 0) {
+            $touser = C::t('#wxz_live#wxz_live_user')->getById($touid);
+            if (!$touser) {
+                $touser['nickname'] = $tonickname;
+                $touser['headurl'] = $toheadurl;
+            }
+        }
+
+        $insertData = array(
+            'uid' => $uid,
+            'fee' => $money,
+            'rid' => $rid,
+            'touid' => $touid,
+            'tonickname' => $touser['nickname'],
+            'toheadurl' => $touser['headurl'],
+            'create_at' => date('Y-m-d H:i:s'),
+        );
+
+        $id = $tableReward->insert($insertData, true);
+
+        $params = array(
+            'fee' => $money,
+            'user' => $user['openid'],
+            'random' => random(16) . $id,
+        );
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
+        $wxzWeixin = new wxz_weixin();
+
+        $notifyUrl = "{$_G['siteurl']}/source/plugin/wxz_live/notify.php"; //
+
+        $attach = array('type' => 'reward');
+
+        $package = array();
+        $package['appid'] = WxPayConfig::$appid;
+        $package['mch_id'] = WxPayConfig::$mchid;
+        $package['nonce_str'] = random(8);
+        $package['body'] = '打赏';
+        $package['attach'] = json_encode($attach);
+        $package['out_trade_no'] = $params['random'];
+        $package['total_fee'] = $params['fee'];
+        $package['spbill_create_ip'] = getip();
+        $package['time_start'] = date('YmdHis', time());
+        $package['time_expire'] = date('YmdHis', time() + 600);
+        $package['notify_url'] = $notifyUrl;
+        $package['trade_type'] = 'JSAPI';
+        $package['openid'] = $user['openid'];
+//        $package['openid'] = 'o11S7wvMcT_2g8WPHVMZtGEL7mz4'; //debug
+
+        ksort($package, SORT_STRING);
+        $string1 = '';
+        foreach ($package as $key => $v) {
+            if (empty($v)) {
+                continue;
+            }
+            $string1 .= "{$key}={$v}&";
+        }
+
+        $string1 .= "key=" . WxPayConfig::$key;
+        $package['sign'] = strtoupper(md5($string1));
+        $dat = array2xml($package);
+        $response = ihttp_request('https://api.mch.weixin.qq.com/pay/unifiedorder', $dat);
+
+        $xml = @isimplexml_load_string($response['content'], 'SimpleXMLElement', LIBXML_NOCDATA);
+
+        if (is_error($response)) {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg), 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+            return $response;
+        }
+
+
+        if (strval($xml->return_code) == 'FAIL') {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg), 'isweixin' => $isweixin);
+            echo json_encode($result);
+            exit;
+        }
+
+        if (strval($xml->result_code) == 'FAIL') {
+            $result = array('s' => '-1', 'msg' => strval($xml->return_msg), 'isweixin' => $isweixin);
+
+            echo json_encode($result);
+            exit;
+        }
+
+        $prepayid = $xml->prepay_id;
+        $option['appId'] = WxPayConfig::$appid;
+        $option['timeStamp'] = TIMESTAMP;
+        $option['nonceStr'] = random(8);
+        $option['package'] = 'prepay_id=' . $prepayid;
+        $option['signType'] = 'MD5';
+        ksort($option, SORT_STRING);
+        foreach ($option as $key => $v) {
+            $string .= "{$key}={$v}&";
+        }
+        $string .= "key=" . WxPayConfig::$key;
+        $option['paySign'] = strtoupper(md5($string));
+        $option['status'] = 1;
+        $option['res'] = 'ok';
+
+        $result = array('s' => '1', 'msg' => $option, 'isweixin' => $isweixin);
+        if ($touid > 0) {
+            $result['content'] = $user['nickname'] . '给' . $touser['nickname'] . '打赏了1个<span>红包</span>';
+        } else {
+            $result['content'] = $user['nickname'] . '给主播打赏了1个<span>红包</span>';
+        }
+        $result['id'] = $id;
+        $result ['type'] = 'reward';
+        echo json_encode($result);
+        exit;
+    }
+
 }
 
 ?>
+              

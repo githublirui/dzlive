@@ -14,6 +14,8 @@ class table_wxz_live_order extends table_wxz_live_base {
      */
     public static $orderTypes = array(
         1 => '购买会员',
+        2 => '付费观看',
+        3 => '打赏主播',
     );
 
     public function __construct() {
@@ -41,14 +43,15 @@ class table_wxz_live_order extends table_wxz_live_base {
             return false;
         }
         $condition = "order_no='{$orderNo}'";
-        return $this->getRow($orderNo);
+        return $this->getRow($condition);
     }
 
     /**
      * 订单成功处理
      * @param type $orderInfo
+     * @param type $attach
      */
-    public function doSuccess($orderInfo) {
+    public function doSuccess($orderInfo, $attach = '') {
         
     }
 

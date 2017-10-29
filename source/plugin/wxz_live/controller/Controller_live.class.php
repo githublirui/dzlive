@@ -606,7 +606,7 @@ class Controller_live extends Controller_base {
         if ($info) {
             $info = array_merge($info, unserialize($info['desc']));
         }
-
+     
         if (!$this->liveInfo) {
             cpmsg('直播间不存在', $this->noRootUrl, 'error');
         }

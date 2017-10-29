@@ -70,13 +70,16 @@ class PayNotifyCallBack extends WxPayNotify {
             $msg = "失败订单";
             return false;
         }
+
         $update = array(
             'status' => 2,
             'trade_no' => $data['out_trade_no'],
             'success_at' => date('Y-m-d H:i:s'),
         );
+
+        $attach = json_decode($data['attach'], true);
         $tableObj->updateById($orderInfo['id'], $update);
-        $tableObj->doSuccess($orderInfo);
+        $tableObj->doSuccess($orderInfo, $attach);
         return true;
     }
 

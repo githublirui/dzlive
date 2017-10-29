@@ -9,6 +9,9 @@ include_once DISCUZ_ROOT . "./source/plugin/wechat/wechat.lib.class.php";
 
 class wxz_weixin extends WeChatClient {
 
+    public $appid;
+    public $appsecret;
+
     public function __construct($appid = '', $appsecret = '') {
         global $_G;
 

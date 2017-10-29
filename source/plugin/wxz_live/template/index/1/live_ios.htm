@@ -392,11 +392,11 @@
             }
         </style>
         <script>
-             window.alert = function (e) {
-                if (e != null && e.indexOf("提示内容") > - 1){
-                } else {
-                }
-             };
+//             window.alert = function (e) {
+//                if (e != null && e.indexOf("提示内容") > - 1){
+//                } else {
+//                }
+//             };
              
             function getQueryStr(str) {
                 var LocString = String(window.document.location.href);
@@ -492,12 +492,12 @@
                     </p>
                 </div>
             </div>
-        {elseif  ($liveInfo['limit'] == 2 && $paylog['status']!=1) || ($liveInfo['limit'] == 3 && $paylog['status']!=1 && ($limit_time - time())<0)}
+        {elseif  ($liveInfo['limit'] == 2 && $paylog['status']!=2) || ($liveInfo['limit'] == 3 && $paylog['status']!=2 && ($limit_time - time())<0)}
             <script>
                 $(function(){
-                var height = $(window).height() / 2;
-                        var width = $(window).width() / 2;
-                        $('focus-on').css('margin', '-' + height + ' 0 0 -' + width);
+                    var height = $(window).height() / 2;
+                    var width = $(window).width() / 2;
+                    $('focus-on').css('margin', '-' + height + ' 0 0 -' + width);
                 })
             </script>
             <div class="grap-qz" style="cursor: pointer;display:block; z-index: 245;">
@@ -567,7 +567,7 @@
                                 {elseif $playerInfo['video_type']=='1'}
                                     {$playerInfo['settings']['pic1']}
                                 {else}
-                                    <img src="{eval echo ($playerInfo['settings']['img4'])}" style="width:100%;height:210px">
+                                    <img src="{eval echo ($playerInfo['settings']['pic4'])}" style="width:100%;height:210px">
                                 {/if}
                             {else}
                                 {if $playerInfo['video_type']=='3'}
@@ -687,9 +687,9 @@
                                 <i class="iconfont"></i>
                                 <span id="browsenum">
                                     {if $liveInfo['online_user_config']['istruenum']==1}
-                                    {$liveInfo['real_num']}
+                                        {$liveInfo['real_num']}
                                     {else}
-                                    {$liveInfo['total_num']}
+                                        {$liveInfo['total_num']}
                                     {/if}
                                 </span>
                             </div>
@@ -735,7 +735,8 @@
                                                     <div class="chat_left">
                                                         <div class="head_portrait">
                                                             <img src="{$comment['headimgurl']}"></div>
-                                                            <i class="iconfont" value="user_{$comment['uid']}"></i></div>
+                                                            <i class="iconfont" value="user_{$comment['uid']}"></i>
+                                                    </div>
                                                     <div class="chat_right">
                                                         <div class="char_name">{eval echo mb_substr($comment['nickname'], 0, 5, 'utf-8')}{$adminstr}
                                                             <span style="display:block;color:gray;font-size:12px;">{eval echo $comment['create_at']}</span>
@@ -809,7 +810,7 @@
                                         <p>群发红包</p>
                                     </li>
                                     {/if}
-                                    {if $dashangsetting['is_show']== 1 && strpos($user_agent, 'MicroMessenger') !== false}
+                                    {if $reward['is_show']== 1 && strpos($user_agent, 'MicroMessenger') !== false}
                                         <li class='giftDs'  id="giftDs">
                                             <p><img src="source/plugin/wxz_live/template/index/1/image/dashang.png"></p>
                                             <p>打赏主播</p>
@@ -1369,7 +1370,7 @@
                         $(".rankpm div p").width("20%");
                     }
                     wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: "{$jssdkConfig['appId']}",
                         timestamp: "{$jssdkConfig['timestamp']}",
                         nonceStr: "{$jssdkConfig['nonceStr']}",
@@ -1435,9 +1436,9 @@
                             }
 
                             var founder = {
-                                uid:"{$dashangsetting['uid']}",
-                                nickname:"{$dashangsetting['nickname']}",
-                                headurl:"{eval echo ($dashangsetting['logo'])}"
+                                uid:"0",
+                                nickname:"{$reward['nickname']}",
+                                headurl:"{eval echo ($reward['logo'])}"
                             }
 
 
@@ -2139,48 +2140,48 @@
                                             }
                                    });
                             });
-                                    $('.c-money li').on('click', function(event) {
-                            event.preventDefault();
+                            $('.c-money li').on('click', function(event) {
+                                    event.preventDefault();
                                     var ${this} = $(this);
                                     // personal.uid = _str.split('_')[1];
 
                                     var rewardjson1 = {
-                                    money: ${this}.attr('data-money') || 0,
-                                            touid: personal.uid || 0,
-                                            type: '1',
-                                            tonickname: personal.nickname || '',
-                                            toheadurl: personal.headurl || '',
-                                            tid: tid || 0
+                                        money: ${this}.attr('data-money') || 0,
+                                        touid: personal.uid || 0,
+                                        type: '1',
+                                        tonickname: personal.nickname || '',
+                                        toheadurl: personal.headurl || '',
+                                        tid: tid || 0
                                     };
                                     $.ajax({
-                                    url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            data: rewardjson1,
-                                            success:function(result){
+                                        url: "{eval echo $this->createMobileUrl('setreward',array('rid' => $rid))}",
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: rewardjson1,
+                                        success:function(result){
                                             if (result.s == 1 && result.isweixin == 1) {
-                                            callPay(result.msg, result);
+                                                callPay(result.msg, result);
                                             } else if (result.isweixin == 0) {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.tip,
+                                                $(document).minTipsBox({
+                                                    tipsContent: result.tip,
                                                     tipsTime: 1
-                                            });
+                                                });
                                             } else {
-                                            $(document).minTipsBox({
-                                            tipsContent: result.msg || result.tip,
+                                                $(document).minTipsBox({
+                                                    tipsContent: result.msg || result.tip,
                                                     tipsTime: 1
-                                            });
+                                                });
                                             }
-                                            },
-                                            error: function() {
+                                        },
+                                        error: function() {
                                             $(document).minTipsBox({
-                                            tipsContent: 'error',
-                                                    tipsTime: 1
+                                                tipsContent: 'error',
+                                                tipsTime: 1
                                             });
-                                            }
-                                    });
+                                        }
+                                 });
                             });
-                                    //其他金额(输入框)
+                            //其他金额(输入框)
                             $('#othermoney').on('input', function(event) {
                                 var money = $(this).val();
                                 if (/\s+/.test(money)) {
@@ -2225,7 +2226,7 @@
                                         error: function() {
                                         $(document).minTipsBox({
                                             tipsContent: 'error',
-                                                    tipsTime: 1
+                                                 tipsTime: 1
                                             });
                                         }
                                     });
@@ -2280,24 +2281,24 @@
                                     });
                                 };
                             });
-                                    //支付
-                                    function callPay(json, data, otherdata) {
-                                        if (typeof WeixinJSBidge == "undefined") {
-                                            if (document.addEventListener) {
-                                                document.addEventListener('WeixinJSBidgeReady', jsApiCall(json, otherdata), false);
-                                            } else if (document.attachEvent) {
-                                                document.attachEvent('WeixinJSBidgeReady', jsApiCall(json, otherdata));
-                                                document.attachEvent('onWeixinJSBidgeReady', jsApiCall(json, otherdata));
-                                            }
-                                        } else {
-                                            jsApiCall(json, data, otherdata);
+                                //支付
+                                function callPay(json, data, otherdata) {
+                                    if (typeof WeixinJSBridge == "undefined") {
+                                        if (document.addEventListener) {
+                                            document.addEventListener('WeixinJSBridgeReady', jsApiCall(json, otherdata), false);
+                                        } else if (document.attachEvent) {
+                                            document.attachEvent('WeixinJSBridgeReady', jsApiCall(json, otherdata));
+                                            document.attachEvent('onWeixinJSBridgeReady', jsApiCall(json, otherdata));
                                         }
+                                    } else {
+                                        jsApiCall(json, data, otherdata);
                                     }
+                                }
                                     //支付
                                     function jsApiCall(obj, data, otherdata) {
                                         if (obj.status == 1) {
                                                 console.log(data);
-                                                WeixinJSBidge.invoke(
+                                                WeixinJSBridge.invoke(
                                                         'getBrandWCPayRequest', {
                                                         "appId": "" + obj.appId + "",
                                                                 "timeStamp": "" + obj.timeStamp + "",
@@ -2307,6 +2308,8 @@
                                                                 "paySign": "" + obj.paySign + "",
                                                         },
                                                         function(res) {
+                                                            console.log(res);
+                                                                
                                                             if (res.err_msg == 'get_brand_wcpay_request:ok') {
                                                                 $('.grap').hide();
                                                                 $(".two-top").hide();
@@ -2345,53 +2348,54 @@
                                                                 tis.SendMessage(data.content, '', JSON.stringify(loginInfo));
                                                             }
 
-                                                            $(document).minTipsBox({
-                                                                    tipsContent: "红包发送成功",
-                                                                    tipsTime: 1
-                                                            });
+                                                                $(document).minTipsBox({
+                                                                        tipsContent: "红包发送成功",
+                                                                        tipsTime: 1
+                                                                });
                                                                     $(".sendredbagwin").hide();
                                                             } else if (res.err_msg != "get_brand_wcpay_request:cancel") {
-                                                            //失败调起扫码
-                                                            setTimeout(function() {
-                                                                qrpay(otherdata)
-                                                                }, 500);
-                                                            }
+                                                                //失败调起扫码
+                                                                setTimeout(function() {
+                                                                    qrpay(otherdata)
+                                                                    }, 500);
+                                                             }
                                                         }
                                                 );
                                         } else {
                                             alert(obj.res);
                                         }
                                     }
+                                    
                                     //扫码支付
                                     function qrpay(otherdata) {
-                                    $(document).minTipsBox({
-                                    tipsContent: "准备付款",
-                                            tipsTime: 1
-                                    });
-                                            $.ajax({
-                                            type: "POST",
-                                                    url: "/Index/redpay?type=qr",
-                                                    data: otherdata,
-                                                    dataType: "json",
-                                                    success: function(data) {
-                                                    if (data.isok) {
-                                                    // $(".redbagBox").hide();
-                                                    // $("#payqrcode").attr("src", "/live/nt?data=" + data.Msg);
-                                                    // $(".QRcodePay").show();
-                                                    } else {
+                                        $(document).minTipsBox({
+                                        tipsContent: "准备付款",
+                                                tipsTime: 1
+                                        });
+                                        $.ajax({
+                                        type: "POST",
+                                                url: "/Index/redpay?type=qr",
+                                                data: otherdata,
+                                                dataType: "json",
+                                                success: function(data) {
+                                                if (data.isok) {
+                                                // $(".redbagBox").hide();
+                                                // $("#payqrcode").attr("src", "/live/nt?data=" + data.Msg);
+                                                // $(".QRcodePay").show();
+                                                } else {
+                                                $(document).minTipsBox({
+                                                tipsContent: data.Msg,
+                                                        tipsTime: 1
+                                                });
+                                                }
+                                                },
+                                                error: function(XMLHttpRequest, textStatus, errorThrown) {
                                                     $(document).minTipsBox({
-                                                    tipsContent: data.Msg,
-                                                            tipsTime: 1
+                                                        tipsContent: "支付失败",
+                                                        tipsTime: 1
                                                     });
-                                                    }
-                                                    },
-                                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                                        $(document).minTipsBox({
-                                                            tipsContent: "支付失败",
-                                                            tipsTime: 1
-                                                        });
-                                                    }
-                                            });
+                                                }
+                                        });
                                     }
                                     //群红包输入框判断
                                     function calc() {
@@ -2768,7 +2772,7 @@
                                             if (json.s == '1'){
                                                 if (type != 1){
                                                     var e = json.msg;
-                                                    WeixinJSBidge.invoke(
+                                                    WeixinJSBridge.invoke(
                                                             'getBrandWCPayRequest', {
                                                                 "appId":e.appId,
                                                                 "timeStamp": "" + e.timeStamp,

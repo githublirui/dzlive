@@ -233,6 +233,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_banner` (
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(50) NOT NULL DEFAULT '0' COMMENT '订单编号',
+  `rid` int(11) NOT NULL DEFAULT '0' COMMENT '直播间id',
   `uid` int(11) NOT NULL DEFAULT '0' COMMENT '1.用户id',
   `order_type` int(11) NOT NULL DEFAULT '1' COMMENT '订单类型',
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '订单状态1待处理,2成功，3失败',
@@ -245,6 +246,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  KEY `rid` (`rid`),
   KEY `uid` (`uid`),
   KEY `order_no` (`order_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -271,7 +273,25 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_zannum` (
     KEY `rid` (`rid`) USING BTREE,
     KEY `uid` (`uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;        
-        
+
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL,
+  `fee` varchar(20) NOT NULL DEFAULT '',
+  `status` varchar(255) NOT NULL DEFAULT '0',
+  `rid` int(10) DEFAULT '0',
+  `type` tinyint(1) DEFAULT '1' COMMENT '1,2',
+  `touid` int(10) DEFAULT '0',
+  `tonickname` varchar(255) DEFAULT NULL,
+  `toheadurl` varchar(255) DEFAULT NULL,
+  `success_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+    
 EOF;
 
 runquery($sql);
