@@ -884,8 +884,22 @@ class Controller_index extends Controller_base {
             }
         }
 
+        //生成订单
+        $orderNo = C::t('#wxz_live#wxz_live_order')->getOrderNo();
+        $orderData = array(
+            'order_no' => $orderNo,
+            'rid' => $rid,
+            'uid' => $uid,
+            'order_type' => 3,
+            'money' => $money,
+            'pay_money' => $money,
+            'create_at' => date('Y-m-d H:i:s'),
+        );
+        $orderId = C::t('#wxz_live#wxz_live_order')->insert($orderData, true);
+
         $insertData = array(
             'uid' => $uid,
+            'order_id' => $orderId,
             'fee' => $money,
             'rid' => $rid,
             'touid' => $touid,
@@ -899,7 +913,7 @@ class Controller_index extends Controller_base {
         $params = array(
             'fee' => $money,
             'user' => $user['openid'],
-            'random' => random(16) . $id,
+            'random' => $orderNo,
         );
 
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";

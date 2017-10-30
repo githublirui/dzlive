@@ -277,6 +277,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_zannum` (
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL,
+  `order_id` int(10) unsigned NOT NULL,
   `fee` varchar(20) NOT NULL DEFAULT '',
   `status` varchar(255) NOT NULL DEFAULT '0',
   `rid` int(10) DEFAULT '0',
@@ -289,6 +290,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
+  KEY `order_id` (`order_id`),
   KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
     
