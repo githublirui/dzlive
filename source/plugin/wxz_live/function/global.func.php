@@ -104,4 +104,31 @@ function printf_info($data) {
     }
 }
 
+/**
+ * 红包随机
+ * @param type $total
+ * @param type $num
+ * @param type $type
+ * @return type
+ */
+function randBonus($total = 0, $num = 3, $type = 1) {
+    if ($type == 1) {
+        $min = 0.01;
+        $moneys = array();
+        for ($i = 1; $i < $num; $i++) {
+            $safe_total = ($total - ($num - $i) * $min) / ($num - $i); //随机安全上限
+            $money = mt_rand($min * 100, $safe_total * 100) / 100;
+            $total = $total - $money;
+            $moneys[] = $money * 100;
+        }
+        $moneys[] = $total * 100;
+    } else {
+        $avg = ($total / $num) * 100;
+        for ($i = 0; $i < $num; $i++) {
+            $moneys[] = $avg;
+        }
+    }
+    return $moneys;
+}
+
 ?>

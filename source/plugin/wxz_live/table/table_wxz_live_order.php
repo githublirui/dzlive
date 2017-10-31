@@ -15,7 +15,9 @@ class table_wxz_live_order extends table_wxz_live_base {
     public static $orderTypes = array(
         1 => '购买会员',
         2 => '付费观看',
-        3 => '打赏主播',
+        3 => '打赏观众',
+        4 => '群红包',
+        5 => '赠送礼物',
     );
 
     public function __construct() {

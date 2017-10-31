@@ -595,6 +595,10 @@ function isimplexml_load_string($string, $class_name = 'SimpleXMLElement', $opti
     return simplexml_load_string($string, $class_name, $options, $ns, $is_prefix);
 }
 
+function iserializer($value) {
+    return serialize($value);
+}
+
 function array2xml($arr, $level = 1) {
     $s = $level == 1 ? "<xml>" : '';
     foreach ($arr as $tagname => $value) {

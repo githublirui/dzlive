@@ -53,6 +53,10 @@ class Controller_live extends Controller_base {
                 'name' => '打赏设置',
                 'act' => "reward&rid={$rid}",
             ),
+            array(
+                'name' => '礼物管理',
+                'act' => "gift&rid={$rid}",
+            ),
         );
         $this->title = "直播间设置";
 
@@ -535,10 +539,8 @@ class Controller_live extends Controller_base {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
 
-        $tableLiveSettingObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
-
         $condition = "rid={$this->rid}";
-        $list = $tableLiveSettingObj->getAll($condition);
+        $list = $tableObj->getAll($condition);
 
         include template('wxz_live:live/zanpicList');
     }
@@ -606,7 +608,7 @@ class Controller_live extends Controller_base {
         if ($info) {
             $info = array_merge($info, unserialize($info['desc']));
         }
-     
+
         if (!$this->liveInfo) {
             cpmsg('直播间不存在', $this->noRootUrl, 'error');
         }
@@ -632,6 +634,82 @@ class Controller_live extends Controller_base {
         }
 
         include template('wxz_live:live/reward');
+    }
+
+    /**
+     * 礼物管理
+     */
+    public function gift() {
+        $do = $_GET['do'];
+        if ($do) {
+            $this->$do();
+            return;
+        }
+
+        $this->setLiveNav();
+
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_gift', 'pk' => 'id'));
+
+        //保存排序
+        if (submitcheck('ordersubmit')) {
+            foreach ($_GET['ids'] as $k => $id) {
+                $ret = $tableObj->updateById($id, array('sort_order' => (int) $_GET['sort_orders'][$k]));
+            }
+        }
+
+        $condition = "rid={$this->rid}";
+        $list = $tableObj->getAll($condition, '*', 'sort_order desc');
+
+        include template('wxz_live:live/giftList');
+    }
+
+    /**
+     * 保存点赞图片
+     * @param type $param
+     */
+    private function giftSave() {
+        global $_G;
+        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+
+        $gid = $_GET['gid'];
+
+        $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_gift', 'pk' => 'id'));
+
+        if ($gid) {
+            $info = $tableObj->getById($gid);
+        }
+
+        $this->setLiveNav();
+
+        if (submitcheck('save')) {
+            $images = wxz_uploadimg();
+
+            $saveDataSetting = array(
+                'name' => $_GET['name'],
+                'amount' => (int) $_GET['amount'],
+                'sort_order' => (int) $_GET['sort_order'],
+                'is_show' => $_GET['is_show'],
+            );
+
+            $saveDataSetting['pic'] = $images['pic'] ? $images['pic'] : $_GET['pic'];
+
+            if ($info) {
+                $ret = $tableObj->updateById($info['id'], $saveDataSetting);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=gift" . "&rid={$this->rid}", 'success');
+                }
+            } else {
+                $saveDataSetting['rid'] = $this->rid;
+                $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
+                $ret = $tableObj->insert($saveDataSetting);
+                if ($ret) {
+                    cpmsg('设置成功', $this->noRootUrl . "&act=gift" . "&rid={$this->rid}", 'success');
+                }
+            }
+        }
+
+        include template('wxz_live:live/giftSave');
     }
 
 }

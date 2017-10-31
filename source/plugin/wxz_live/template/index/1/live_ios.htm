@@ -804,7 +804,7 @@
                         <div class="footer">
                             <div class="allgift">
                                 <ul class="gift-list">
-                                    {if ($liveInfo['reward']==1 && strpos($user_agent, 'MicroMessenger') !== false)}
+                                    {if ($liveInfo['enable_redpacket']==1 && strpos($user_agent, 'MicroMessenger') !== false)}
                                     <li class='giftReward' id="giftReward">
                                         <p><img src="source/plugin/wxz_live/template/index/1/image/hongbao1.png"></p>
                                         <p>群发红包</p>
@@ -817,13 +817,12 @@
                                         </li>
                                     {/if}
                                     {loop $gift $value}
-                                    <li data-id="{$value['rid']}"  class='giftlist'>
+                                    <li data-id="{$value['id']}"  class='giftlist'>
                                         <p><img src="{$value['pic']}"></p>
                                         <p>{$value['name']}</p>
                                         <p><span class="moneynum">{eval echo $value['amount']/100}</span>元</p>
                                     </li>
                                     {/loop}
-
                                 </ul>
                                 <!--数量加减-->
                                 <div class="zhuang">
@@ -1452,7 +1451,6 @@
                                             bagMessage: '恭喜发财！',
                                             msg1: '至少需要设置1个红包',
                                             msg2: '平均每人不能少于' + minMoney + '元'
-
                                     };
                                     var msgbar = $("#msg-tipbar");
                                     var bag_money_show = $(".bag-money-show");
@@ -1603,19 +1601,20 @@
                             }
                             //礼物列表
                             }).on('click', '.gift-list li', function(event) {
-                            event.preventDefault();
+                                    event.preventDefault();
                                     var ${this} = $(this);
                                     var item = ${this}.index();
-                                    var idName = ${this}.attr('rid');
+                                    var idName = ${this}.attr('id');
+                                
                                     ${this}.addClass("select").siblings().removeClass("select");
-                                    if (idName == 'giftReward') {
-                            $(".sendredbagwin").show();
+                            if (idName == 'giftReward') {
+                                    $(".sendredbagwin").show();
                                     $(".zhuang").slideUp('fast');
                                     $(".allgift").slideUp('fast');
                                     hideflag = true;
                             } else if (idName == 'giftDs'){
-                            //将主播信息赋值
-                            personal.uid = founder.uid;
+                                    //将主播信息赋值
+                                    personal.uid = founder.uid;
                                     personal.nickname = founder.nickname;
                                     personal.headurl = founder.headurl;
                                     $('.redenvelope .RedPack_Info').find('.packimgs').children('img').attr('src', personal.headurl);
@@ -1635,14 +1634,15 @@
                             }
                             //加
                             }).on('click', '.jia', function(event) {
-                            var num = $('.countKuang').val();
-                                    $('.countKuang').val(++num);
-                                    $('.gift-list li').each(function(index, el) {
-                            if ($(this).hasClass('select')) {
-                            var thismoney = parseInt($(this).find('.moneynum').html());
-                                    //var thismoney = ($(this).find('.moneynum').html());
-                                    $('.money').html('￥' + thismoney * num);
-                            }
+                                var num = $('.countKuang').val();
+                                 $('.countKuang').val(++num);
+                                 $('.gift-list li').each(function(index, el) {
+                                 if ($(this).hasClass('select')) {
+                                     var thismoney = parseFloat($(this).find('.moneynum').html());
+                                     //var thismoney = ($(this).find('.moneynum').html());
+                                     var retmoney =  parseFloat(thismoney * num).toFixed(2);
+                                     $('.money').html('￥' + retmoney);
+                                 }
                             });
                                     //减
                             }).on('click', '.jian', function(event) {
@@ -2240,7 +2240,7 @@
                                         var giftjson = {
                                         num: parseInt($('.countKuang').val()) || 1,
                                                 item: index,
-                                                id: $("#gift_id").val(),
+                                                gid: $("#gift_id").val(),
                                                 touid: founder.uid || 0,
                                                 tid: tid || 0
                                         };

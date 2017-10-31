@@ -285,7 +285,6 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
   `touid` int(10) DEFAULT '0',
   `tonickname` varchar(255) DEFAULT NULL,
   `toheadurl` varchar(255) DEFAULT NULL,
-  `success_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -293,7 +292,55 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
   KEY `order_id` (`order_id`),
   KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-    
+
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_gift` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `pic` varchar(255) DEFAULT NULL,
+  `amount` int(10) DEFAULT NULL,
+  `rid` int(10) DEFAULT NULL,
+  `is_show` tinyint(1) DEFAULT NULL,
+  `sort_order` int(10) DEFAULT NULL,
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `rid` (`rid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS  `pre_wxz_live_grouppacket` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) DEFAULT NULL,
+  `order_id` int(10) unsigned NOT NULL,
+  `rid` int(10) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  `amount` int(10) DEFAULT NULL,
+  `num` int(10) DEFAULT NULL,
+  `json` text,
+  `remark` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `rid` (`rid`) USING BTREE,
+  KEY `order_id` (`order_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_giftlog` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL,
+  `order_id` int(10) unsigned NOT NULL,
+  `giftid` int(10) NOT NULL DEFAULT '0',
+  `status` varchar(255) NOT NULL DEFAULT '0',
+  `rid` int(10) DEFAULT '0',
+  `num` int(10) DEFAULT NULL,
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `rid` (`rid`) USING BTREE,
+  KEY `order_id` (`order_id`),
+  KEY `giftid` (`giftid`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 EOF;
 
 runquery($sql);
