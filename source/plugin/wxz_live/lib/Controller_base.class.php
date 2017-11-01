@@ -37,9 +37,12 @@ class Controller_base {
      */
     public function createMobileUrl($act, $param, $hasHost = false) {
         global $_G;
-        $param = http_build_query($param);
-        $url = $this->fBaseUrl . "&act={$act}&" . $param;
 
+        $url = $this->fBaseUrl . "&act={$act}";
+        if ($param) {
+            $param = http_build_query($param);
+            $url .= "&{$param}";
+        }
         if ($hasHost) {
             $url = $_G['siteurl'] . $url;
         }
@@ -51,10 +54,21 @@ class Controller_base {
      * @param type $act
      * @param type $param
      */
-    public function createWebUrl($act, $param, $hasHost = false) {
+    public function createWebUrl($act, $param = '', $hasHost = false) {
         global $_G;
-        $param = http_build_query($param);
-        $url = $this->baseUrl . "&act={$act}&" . $param;
+
+        if (isset($param['pmod'])) {
+            $this->baseUrl = "admin.php?action=plugins&amp;operation=config&amp;identifier=%s&amp;pmod=%s";
+            $this->baseUrl = sprintf($this->baseUrl, 'wxz_live', $param['pmod']);
+            unset($param['pmod']);
+        }
+
+        $url = $this->baseUrl . "&act={$act}";
+
+        if ($param) {
+            $param = http_build_query($param);
+            $url .= "&{$param}";
+        }
         if ($hasHost) {
             $url = $_G['siteurl'] . $url;
         }

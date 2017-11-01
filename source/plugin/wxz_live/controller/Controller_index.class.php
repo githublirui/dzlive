@@ -11,7 +11,6 @@ class Controller_index extends Controller_base {
      */
     public function index() {
         include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxz_weixin.class.php";
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
         $wxzWeixin = new wxz_weixin();
 
@@ -138,7 +137,7 @@ class Controller_index extends Controller_base {
 
         $roomNo = $_GET['roomno'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
+        //$user_agent = "MicroMessenger"; //debug
         //获取直播间详情
         $liveInfo = C::t('#wxz_live#wxz_live_room')->getByRoomNo($roomNo);
         $liveSettingInfo = C::t('#wxz_live#wxz_live_room')->getRoomSetting($liveInfo['id']);
@@ -156,7 +155,6 @@ class Controller_index extends Controller_base {
 
         $shutup = 0; //黑名单
         //获取所有
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
         $tableZanPicObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
@@ -165,7 +163,7 @@ class Controller_index extends Controller_base {
         $tableSetting = C::t('#wxz_live#wxz_live_setting');
 
         //直播间管理员
-        $condition = "room_id={$rid} AND role=2";
+        $condition = "rid={$rid} AND role=2";
         $roomadmins = $tableViewerObj->getAll($condition, 'uid');
         $roomadmin = json_encode($roomadmins);
 
@@ -309,15 +307,13 @@ class Controller_index extends Controller_base {
      * @param type $user
      */
     public function intoroom($roomId, $user) {
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
 
-        $condition = "room_id={$roomId} AND uid={$user['id']}";
+        $condition = "rid={$roomId} AND uid={$user['id']}";
         $viewer = $tablePlayerObj->getRow($condition);
 
         if (!$viewer) {
-            $data['room_id'] = $roomId;
+            $data['rid'] = $roomId;
             $data['uid'] = $user['id'];
             $data['create_at'] = date('Y-m-d H:i:s');
             $data['id'] = $tablePlayerObj->insert($data, true);
@@ -327,9 +323,7 @@ class Controller_index extends Controller_base {
     }
 
     /**
-     * @desc
-     * @param
-     * @return
+     * 观看限制
      */
     public function limit() {
         $type = $_GET['type'];
@@ -364,7 +358,7 @@ class Controller_index extends Controller_base {
 
         if ($liveInfo['limit'] == '1') {
             $data['password'] = $password;
-            $condition = "room_id={$liveInfo['id']} AND uid={$user['id']}";
+            $condition = "rid={$liveInfo['id']} AND uid={$user['id']}";
             $tableViewerObj->updateData($condition, $data);
             $result['s'] = 1;
             $result['msg'] = '密码正确';
@@ -404,7 +398,7 @@ class Controller_index extends Controller_base {
      * @param type $rid
      * @return string
      */
-    public function limitPay($money, $log, $rid) {
+    private function limitPay($money, $log, $rid) {
         global $_G;
 
         $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
@@ -560,9 +554,6 @@ class Controller_index extends Controller_base {
      */
     public function headupload() {
         $rid = intval($_GET['rid']);
-
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $tableViewerObj = new table_wxz_live_base(array('table' => 'wxz_live_viewer', 'pk' => 'id'));
         $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
         $tablePollingObj = new table_wxz_live_base(array('table' => 'wxz_live_polling', 'pk' => 'id'));
@@ -578,7 +569,7 @@ class Controller_index extends Controller_base {
             exit;
         }
 
-        $condition = "room_id={$rid} and uid={$uid}";
+        $condition = "rid={$rid} and uid={$uid}";
         $viewer = $tableViewerObj->getRow($condition);
 
         if ($viewer['isshutup'] == 1) {
@@ -657,89 +648,11 @@ class Controller_index extends Controller_base {
     }
 
     /**
-     * 支付测试
-     */
-    public function payment() {
-        global $_G;
-        $tableOrder = C::t('#wxz_live#wxz_live_order');
-
-        $user = C::t('#wxz_live#wxz_live_user')->authUser(array(), false);
-
-        $orderTypes = table_wxz_live_order::$orderTypes;
-        $orderTypeValues = array_keys($orderTypes);
-
-        $uid = $user['id'];
-        $orderType = $_GET['order_type']; //订单类型
-        $money = $_GET['money']; //按分计算
-        $payMoney = $_GET['pay_money']; //需要支付的金额
-
-        if (!$payMoney) {
-            $payMoney = $money;
-        }
-
-        if (!is_numeric($money)) {
-            //            showmessage('订单金额参数错误: ' . $money);//debug
-        }
-
-        if (!in_array($orderType, $orderTypeValues)) {
-//            showmessage('订单类型参数错误: ' . $orderType);//debug
-        }
-
-        //生成订单
-        $orderNo = $tableOrder->getOrderNo();
-        $orderData = array(
-            'order_no' => $orderNo,
-            'uid' => $uid,
-            'order_type' => $orderType,
-            'money' => $money,
-            'pay_money' => $payMoney,
-            'create_at' => date('Y-m-d H:i:d'),
-        );
-        $orderId = $tableOrder->insert($orderData, true);
-
-        //微信jsapipay
-        $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
-        require_once "{$wxpayPath}lib/WxPay.Api.php";
-        require_once "{$wxpayPath}example/WxPay.JsApiPay.php";
-        require_once "{$wxpayPath}example/log.php";
-
-        //初始化日志
-        $logHandler = new CLogFileHandler("{$wxpayPath}/logs/" . date('Y-m-d') . '.log');
-        $log = Log::Init($logHandler, 15);
-
-        //①、获取用户openid
-        $tools = new JsApiPay();
-//        $openId = $tools->GetOpenid();
-        $openId = $user['openid'];
-        $notifyUrl = "{$_G['siteurl']}/source/plugin/wxz_live/notify.php";
-        //②、统一下单
-        $input = new WxPayUnifiedOrder();
-        $input->SetBody("test1");
-        $input->SetAttach("test2");
-        $input->SetOut_trade_no($orderNo);
-        $input->SetTotal_fee($payMoney);
-        $input->SetTime_start(date("YmdHis"));
-        $input->SetTime_expire(date("YmdHis", time() + 600));
-        $input->SetGoods_tag($orderTypes[$orderType]);
-        $input->SetNotify_url($notifyUrl);
-        $input->SetTrade_type("JSAPI");
-        $input->SetOpenid($openId);
-        $order = WxPayApi::unifiedOrder($input);
-
-        $jsApiParameters = $tools->GetJsApiParameters($order);
-
-        //获取共享收货地址js函数参数
-//        $editAddress = $tools->GetEditAddressParameters();
-        include template("wxz_live:pay/jsapi");
-    }
-
-    /**
      * 评论分页
      */
     public function commentpage() {
         global $_G;
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableCommentObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
 
         $rid = intval($_GET['rid']);
@@ -788,8 +701,6 @@ class Controller_index extends Controller_base {
      */
     public function setzan() {
         ob_end_clean();
-
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableZanNumObj = new table_wxz_live_base(array('table' => 'wxz_live_zannum', 'pk' => 'id'));
 
         $rid = intval($_GET['rid']);
@@ -835,7 +746,6 @@ class Controller_index extends Controller_base {
      */
     public function setreward() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableReward = new table_wxz_live_base(array('table' => 'wxz_live_reward', 'pk' => 'id'));
 
         $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
@@ -1013,8 +923,6 @@ class Controller_index extends Controller_base {
      */
     public function setpacket($param) {
         global $_G;
-
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableGrouppacket = new table_wxz_live_base(array('table' => 'wxz_live_grouppacket', 'pk' => 'id'));
 
         $wxpayPath = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/wxpay/";
@@ -1166,7 +1074,6 @@ class Controller_index extends Controller_base {
     public function setgift() {
         global $_G;
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableGift = new table_wxz_live_base(array('table' => 'wxz_live_gift', 'pk' => 'id'));
         $tableGiftLog = new table_wxz_live_base(array('table' => 'wxz_live_giftlog', 'pk' => 'id'));
 
@@ -1190,7 +1097,7 @@ class Controller_index extends Controller_base {
 
         $gift = $tableGift->getById($id);
         $money = $gift['amount'] * $num;
-    
+
         if (empty($money) || $money < 1) {
             $result = array('s' => '-1', 'msg' => '最少为0.01元哦！', 'isweixin' => $isweixin);
             echo json_encode($result);

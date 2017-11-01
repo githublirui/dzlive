@@ -15,11 +15,31 @@ if ($_G['setting']['debug']) {
 function runController() {
     $controller = $_GET['pmod'];
     $action = $_GET['act'] ? $_GET['act'] : 'index';
+    $do = $_GET['do'] ? $_GET['do'] : 'index';
 
-    $path = DISCUZ_ROOT . "./source/plugin/wxz_live/controller/Controller_base.class.php";
+    $path = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/Controller_base.class.php";
+    include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
     include_once $path;
 
     $path = DISCUZ_ROOT . "./source/plugin/wxz_live/controller/Controller_{$controller}.class.php";
+
+    //优先走文件夹
+    $folderController = DISCUZ_ROOT . "./source/plugin/wxz_live/controller/$controller/";
+    if (file_exists($folderController)) {
+        $actionClass = "Action_{$action}" . $actionClass;
+
+        $actionPath = $folderController . "{$actionClass}.php";
+
+        if (file_exists($actionPath)) {
+            include $actionPath;
+            $class = new $actionClass();
+            if (method_exists($class, $do)) {
+                //运行
+                $class->$do();
+                return true;
+            }
+        }
+    }
 
     if (!file_exists($path)) {
         if (defined('IN_ADMINCP')) {

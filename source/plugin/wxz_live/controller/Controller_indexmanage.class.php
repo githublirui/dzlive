@@ -55,8 +55,6 @@ class Controller_indexmanage extends Controller_base {
      * 轮播图列表
      */
     public function bannerList() {
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $page = (int) $_GET['page'];
         $page = $page <= 0 ? 1 : $page;
         $query['perpage'] = 10;
@@ -96,7 +94,6 @@ class Controller_indexmanage extends Controller_base {
         global $_G;
         $id = $_GET['id'];
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_banner', 'pk' => 'id'));
 
         if ($id) {

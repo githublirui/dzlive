@@ -616,4 +616,17 @@ function array2xml($arr, $level = 1) {
     return $level == 1 ? $s . "</xml>" : $s;
 }
 
+/**
+ * 获取图片url
+ * @param type $pic
+ */
+function tomedia($pic) {
+    global $_G;
+    $result = $pic;
+    if (strpos($pic, 'http') === false) {
+        $result = $_G['siteurl'] . $pic;
+    }
+    return $result;
+}
+
 ?>

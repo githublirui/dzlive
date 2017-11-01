@@ -42,7 +42,7 @@
                 <td>{$row['update_at']}</td>
                 <td>{$row['create_at']}</td>
                 <td>
-                    <a href="{$this->baseUrl}&amp;act=menuSetting&amp;rid={$row['room_id']}&amp;mid={$row['id']}&amp;do=menuSettingSave" class="act">编辑</a>
+                    <a href="{$this->baseUrl}&amp;act=menuSetting&amp;rid={$row['rid']}&amp;mid={$row['id']}&amp;do=menuSettingSave" class="act">编辑</a>
                     <a onclick="delTable('wxz_live_menu', '{$row['id']}', '{$row['name']}')" href="javascript:;" class="act">删除</a>
                 </td>
                 {/loop}

@@ -1646,21 +1646,21 @@
                             });
                                     //减
                             }).on('click', '.jian', function(event) {
-                            var num = $('.countKuang').val();
-                                    --num;
-                                    if (num < 2) {
-                            num = 1;
+                                var num = $('.countKuang').val();
+                                 --num;
+                                if (num < 2) {
+                                    num = 1;
                                     $('.countKuang').val(num);
-                            } else {
+                                } else {
+                                    $('.countKuang').val(num);
+                                }
                             $('.countKuang').val(num);
-                            }
-                            $('.countKuang').val(num);
-                                    $('.gift-list li').each(function(index, el) {
+                            $('.gift-list li').each(function(index, el) {
                             if ($(this).hasClass('select')) {
-                            var thismoney = parseInt($(this).find('.moneynum').html());
+                                var thismoney = parseInt($(this).find('.moneynum').html());
                                     var thismoney = ($(this).find('.moneynum').html());
                                     $('.money').html('￥' + thismoney * num);
-                            }
+                                }
                             });
                                     //更多
                             }).on('click', '.functions', function(event) {
@@ -1669,17 +1669,17 @@
                                     $(".function-all").slideDown('fast');
                                     //红包个数
                             }).on("input", "#bagAmount", function() {
-                            calc();
+                                calc();
                                     //总金额
                             }).on("input", "#bagMoney", function() {
-                            calc();
+                                calc();
                                     //留言
                             }).on("input", "#bagMessage", function() {
-                            var _val = $(this).val();
-                                    if (_val.length > 25) {
-                            $(this).val(_val.substring(0, 25));
-                            }
-                            calc();
+                                var _val = $(this).val();
+                                if (_val.length > 25) {
+                                    $(this).val(_val.substring(0, 25));
+                                }
+                                    calc();
                                     //群红包类型
                             }).on("click", "#changeRedType", function() {
                             pd.bagType = pd.bagType == 1 ? 2 : 1;
@@ -1765,7 +1765,7 @@
                                     $(".grap").hide();
                                     //单人红包关闭
                             }).on('click', '.cose', function(event) {
-                            $(".redenvelope").hide();
+                                    $(".redenvelope").hide();
                                     //禁言管理关闭
                             }).on('click', '.colose', function(event) {
                             $(".Bannedmages").hide();
@@ -1777,11 +1777,11 @@
                             $(".two-top").show();
                                     //其他金额遮罩层关闭
                             }).on('click', '.masks', function(event) {
-                            $(".two-top").hide();
-                                    $('.redlist').hide();
+                                $(".two-top").hide();
+                                $('.redlist').hide();
                                     //头像点击底部向上滑动(拉黑、禁言)
                             }).on('click', '.clickhead', function(event) {
-                            event.preventDefault();
+                                    event.preventDefault();
                                     var user = $(this).attr('user');
                                     var username = $(this).attr("username");
                                     $.ajax({
@@ -2144,11 +2144,15 @@
                                     event.preventDefault();
                                     var ${this} = $(this);
                                     // personal.uid = _str.split('_')[1];
-
+                                    var uid = personal.uid || 0;
+                                    var type='1';
+                                    if(uid == 0) {
+                                       type= '2';   
+                                    }
                                     var rewardjson1 = {
                                         money: ${this}.attr('data-money') || 0,
-                                        touid: personal.uid || 0,
-                                        type: '1',
+                                        touid: uid,
+                                        type: type,
                                         tonickname: personal.nickname || '',
                                         toheadurl: personal.headurl || '',
                                         tid: tid || 0

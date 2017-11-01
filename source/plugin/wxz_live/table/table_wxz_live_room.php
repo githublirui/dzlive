@@ -4,8 +4,6 @@ if (!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
 
-include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
 class table_wxz_live_room extends table_wxz_live_base {
 
     public function __construct() {
@@ -34,7 +32,7 @@ class table_wxz_live_room extends table_wxz_live_base {
         }
         $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_player', 'pk' => 'id'));
 
-        $condition = "room_id={$roomId}";
+        $condition = "rid={$roomId}";
         $info = $tablePlayerObj->getRow($roomId);
         if (!$info) {
             return false;
@@ -54,7 +52,7 @@ class table_wxz_live_room extends table_wxz_live_base {
         }
         $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_room_setting', 'pk' => 'id'));
 
-        $condition = "room_id={$roomId}";
+        $condition = "rid={$roomId}";
         $info = $tablePlayerObj->getRow($roomId);
         if (!$info) {
             return false;
@@ -72,7 +70,7 @@ class table_wxz_live_room extends table_wxz_live_base {
         }
 
         $tablePlayerObj = new table_wxz_live_base(array('table' => 'wxz_live_room_setting', 'pk' => 'id'));
-        $condition = "room_id={$roomId}";
+        $condition = "rid={$roomId}";
         $info = $tablePlayerObj->getRow($roomId);
 
         if (!$info) {
@@ -99,7 +97,7 @@ class table_wxz_live_room extends table_wxz_live_base {
      */
     public function getMenus($rid) {
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
-        $condition = "room_id={$rid} AND is_show=1";
+        $condition = "rid={$rid} AND is_show=1";
         $menus = $tableObj->getAll($condition, '*', 'sort_order desc');
         foreach ($menus as $k => $menu) {
             $menus[$k]['settings'] = $menus[$k]['settings'] ? unserialize($menus[$k]['settings']) : '';

@@ -60,8 +60,6 @@ class Controller_live extends Controller_base {
         );
         $this->title = "直播间设置";
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $this->tableRoom = C::t('#wxz_live#wxz_live_room');
         $this->rid = $rid;
         $this->liveInfo = $this->tableRoom->getById($this->rid);
@@ -89,8 +87,6 @@ class Controller_live extends Controller_base {
         }
 
         $this->setLiveNav();
-
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
 
         if (submitcheck('ordersubmit')) {
@@ -101,7 +97,7 @@ class Controller_live extends Controller_base {
 
         $tableLiveSettingObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
 
-        $condition = "room_id={$this->rid}";
+        $condition = "rid={$this->rid}";
         $list = $tableLiveSettingObj->getAll($condition);
 
         include template('wxz_live:live/menuSettingList');
@@ -112,8 +108,6 @@ class Controller_live extends Controller_base {
      */
     private function menuSettingSave() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $mid = $_GET['mid'];
         $type = $_GET['type'];
 
@@ -147,7 +141,7 @@ class Controller_live extends Controller_base {
                     cpmsg('设置成功', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveDataSetting['room_id'] = $this->rid;
+                $saveDataSetting['rid'] = $this->rid;
                 $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
                 $ret = $tableObj->insert($saveDataSetting);
                 if ($ret) {
@@ -164,8 +158,6 @@ class Controller_live extends Controller_base {
      */
     public function activitySetting() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $rid = $_GET['rid'];
 
         $this->setLiveNav();
@@ -204,7 +196,7 @@ class Controller_live extends Controller_base {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveDataSetting['room_id'] = $rid;
+                $saveDataSetting['rid'] = $rid;
                 $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
                 $ret = $tableLiveSettingObj->insert($saveDataSetting);
                 if ($ret) {
@@ -248,8 +240,6 @@ class Controller_live extends Controller_base {
      */
     public function playerSetting() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         //子导航
         $this->setLiveNav();
 
@@ -277,7 +267,7 @@ class Controller_live extends Controller_base {
                     cpmsg('设置成功', $this->curNoRootUrlAct . "&rid={$this->rid}", 'success');
                 }
             } else {
-                $saveDataSetting['room_id'] = $this->rid;
+                $saveDataSetting['rid'] = $this->rid;
                 $saveDataSetting['create_at'] = date('Y-m-d H:i:s');
                 $ret = $tablePlayerObj->insert($saveDataSetting);
                 if ($ret) {
@@ -536,7 +526,6 @@ class Controller_live extends Controller_base {
         }
         $this->setLiveNav();
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
 
         $condition = "rid={$this->rid}";
@@ -551,8 +540,6 @@ class Controller_live extends Controller_base {
      */
     private function zanpicSave($param) {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $pid = $_GET['pid'];
 
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
@@ -595,7 +582,6 @@ class Controller_live extends Controller_base {
      */
     public function reward() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
         $rid = $_GET['rid'];
 
@@ -648,7 +634,6 @@ class Controller_live extends Controller_base {
 
         $this->setLiveNav();
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_gift', 'pk' => 'id'));
 
         //保存排序
@@ -670,7 +655,6 @@ class Controller_live extends Controller_base {
      */
     private function giftSave() {
         global $_G;
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
 
         $gid = $_GET['gid'];
 

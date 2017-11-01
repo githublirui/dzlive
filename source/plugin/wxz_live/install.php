@@ -8,7 +8,7 @@ $sql = <<<EOF
 
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_player` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `room_id` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
+  `rid` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
   `video_type` tinyint(2) DEFAULT NULL,
   `settings` text,
   `player_weight` int(10) DEFAULT '1280',
@@ -16,13 +16,13 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_player` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `room_id` (`room_id`) USING BTREE
+  KEY `rid` (`rid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_room_setting` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `room_id` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
+  `rid` int(11) NOT NULL DEFAULT '0' COMMENT '房间id',
   `activity_title` varchar(255) DEFAULT '' COMMENT '活动标题',
   `activity_img` varchar(255) DEFAULT '' COMMENT '活动封面',
   `default_avatar` varchar(255) DEFAULT '' COMMENT '默认游客头像',
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_room_setting` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `room_id` (`room_id`)
+  KEY `rid` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '直播间配置表';
 
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_room` (
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_user` (
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_viewer` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` int(10) DEFAULT NULL,
-  `room_id` int(10) DEFAULT NULL,
+  `rid` int(10) DEFAULT NULL,
   `share` tinyint(1) DEFAULT '0',
   `amount` int(10) DEFAULT '0',
   `ispay` tinyint(1) DEFAULT '0',
@@ -133,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_viewer` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `room_id` (`room_id`) USING BTREE,
+  KEY `rid` (`rid`) USING BTREE,
   KEY `uid` (`uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  CREATE TABLE IF NOT EXISTS `pre_wxz_live_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_id` int(10) DEFAULT '0',
+  `rid` int(10) DEFAULT '0',
   `sort_order` int(11) NOT NULL,
   `is_show` tinyint(1) NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_viewer` (
   `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `room_id` (`room_id`) USING BTREE,
+  KEY `rid` (`rid`) USING BTREE,
   KEY `is_show` (`is_show`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_reward` (
   `fee` varchar(20) NOT NULL DEFAULT '',
   `status` varchar(255) NOT NULL DEFAULT '0',
   `rid` int(10) DEFAULT '0',
-  `type` tinyint(1) DEFAULT '1' COMMENT '1,2',
+  `type` tinyint(1) DEFAULT '1' COMMENT '1个人打赏2主播打赏',
   `touid` int(10) DEFAULT '0',
   `tonickname` varchar(255) DEFAULT NULL,
   `toheadurl` varchar(255) DEFAULT NULL,
@@ -340,7 +340,26 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_giftlog` (
   KEY `rid` (`rid`) USING BTREE,
   KEY `order_id` (`order_id`),
   KEY `giftid` (`giftid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+        
+CREATE TABLE IF NOT EXISTS 'pre_wxz_live_money_log' (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `rid` int(10) DEFAULT NULL,
+  `uid` int(10) DEFAULT NULL,
+  `amount` int(10) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT '0' COMMENT '1打赏2群红包3助力4分享',
+  `fromuid` int(10) DEFAULT NULL,
+  `fromnickname` varchar(255) DEFAULT NULL,
+  `fromheadimgurl` varchar(255) DEFAULT NULL,
+  `fromid` int(10) DEFAULT '0',
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `rid` (`rid`) USING BTREE,
+  KEY `uid` (`uid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+   
 EOF;
 
 runquery($sql);

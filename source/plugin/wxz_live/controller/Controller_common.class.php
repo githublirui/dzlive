@@ -32,8 +32,6 @@ class Controller_common extends Controller_base {
             $this->ajaxError('参数错误');
         }
 
-        include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-
         $tableObj = new table_wxz_live_base(array('table' => $table, 'pk' => 'id'));
 
         $ret = $tableObj->delById($id);
