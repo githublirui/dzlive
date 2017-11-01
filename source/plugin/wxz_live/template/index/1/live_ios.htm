@@ -509,7 +509,7 @@
                                                                                            z-index: 235;">
                     <span class = "focus-on-click" style="display:none;">+</span>
                     <img src="source/plugin/wxz_live/template/index/1/image/money.jpg">
-                    <p>直播间限制观看需支付<font color=red>{eval echo ($liveInfo['amount']/100)}</font>元</p><p>
+                    <p>直播间限制观看需支付<font color=red>{eval echo ($liveInfo['limit_data']['amount']/100)}</font>元</p><p>
                         <button type="button" class="mui-btn mui-btn-success" data-loading-icon-position="right" onClick="limit({$liveInfo['limit']})">确定</button>
                     </p>
                 </div>
@@ -783,8 +783,8 @@
                                                     <span style="display:block;color:gray;font-size:12px;">{eval echo $comment['create_at'];}</span>
                                                 </div>
                                                 <div class="char_message red_message">
-                                                        <div class="red-red" value="{$comment['rid']}">
-                                                            <img src="http://hefei.hfwxz.com/addons/wxz_wzb/template/mobile/2/image/hongbao.png" height="45px">
+                                                        <div class="red-red" value="{$comment['id']}">
+                                                            <img src="source/plugin/wxz_live/template/index/1/image/hongbao.png" height="45px">
                                                             <div class="red-cent"><p class="red-title">恭喜发财！</p><p>领取红包</p>
                                                             </div>
                                                         </div>
@@ -2040,7 +2040,7 @@
                                 $('.redlist').find('.alllist').children('h5').html(red.rednum + '个红包,共' + (red.redMoney / 100) + '元');
                                 if (red.redid > 0) {
                                     $.ajax({
-                                            url: "{eval echo $this->createMobileUrl('getpacket',array('rid' => $rid))}",
+                                            url: "{eval echo $this->createMobileUrl('checkpacket',array('do'=>'getpacket','rid' => $rid))}",
                                             type: 'POST',
                                             dataType: 'json',
                                             data: {sendid: red.redid},
@@ -2144,15 +2144,11 @@
                                     event.preventDefault();
                                     var ${this} = $(this);
                                     // personal.uid = _str.split('_')[1];
-                                    var uid = personal.uid || 0;
-                                    var type='1';
-                                    if(uid == 0) {
-                                       type= '2';   
-                                    }
+
                                     var rewardjson1 = {
                                         money: ${this}.attr('data-money') || 0,
-                                        touid: uid,
-                                        type: type,
+                                        touid: personal.uid || 0,
+                                        type: '1',
                                         tonickname: personal.nickname || '',
                                         toheadurl: personal.headurl || '',
                                         tid: tid || 0

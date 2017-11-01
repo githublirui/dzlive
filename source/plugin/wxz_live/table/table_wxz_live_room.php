@@ -115,7 +115,7 @@ class table_wxz_live_room extends table_wxz_live_base {
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_comment', 'pk' => 'id'));
 
         $condition = "rid = {$rid} and is_auth=1";
-        $field = "id,uid,nickname,headimgurl,create_at,content,ispacket,tonickname,touid,dsid,giftid,giftnum,giftpic,ispic";
+        $field = "id,uid,rid,nickname,headimgurl,create_at,content,ispacket,tonickname,touid,dsid,giftid,giftnum,giftpic,ispic";
         $Comments = $tableObj->getAll($condition, $field, 'id desc', '0,15');
         $Comments = array_values($Comments);
         krsort($Comments);

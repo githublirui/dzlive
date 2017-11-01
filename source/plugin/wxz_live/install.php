@@ -254,7 +254,6 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_order` (
 CREATE TABLE IF NOT EXISTS `pre_wxz_live_zanpic` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `pic` varchar(255) DEFAULT NULL,
-    `uniacid` int(10) unsigned NOT NULL DEFAULT '0',
     `rid` int(10) unsigned NOT NULL DEFAULT '0',
     `is_show` tinyint(1) DEFAULT NULL DEFAULT '1' COMMENT '1显示 2不显示',
     `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -342,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `pre_wxz_live_giftlog` (
   KEY `giftid` (`giftid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
         
-CREATE TABLE IF NOT EXISTS 'pre_wxz_live_money_log' (
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_money_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `rid` int(10) DEFAULT NULL,
   `uid` int(10) DEFAULT NULL,
@@ -359,7 +358,20 @@ CREATE TABLE IF NOT EXISTS 'pre_wxz_live_money_log' (
   KEY `uid` (`uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-   
+CREATE TABLE IF NOT EXISTS `pre_wxz_live_grouppacket_log` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `hid` int(10) DEFAULT NULL,
+  `rid` int(10) DEFAULT NULL,
+  `uid` int(10) DEFAULT NULL,
+  `comment_id` int(10) DEFAULT NULL,
+  `amount` int(10) DEFAULT NULL,
+  `headimgurl` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  `create_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;   
 EOF;
 
 runquery($sql);

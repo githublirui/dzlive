@@ -101,9 +101,14 @@ class table_wxz_live_order extends table_wxz_live_base {
         $tableReward = new table_wxz_live_base(array('table' => 'wxz_live_reward', 'pk' => 'id'));
 
         $reward = $this->getRewardByOrderId($orderInfo['id']);
+
+        if (!$reward) {
+            return;
+        }
+
         $user = C::t('#wxz_live#wxz_live_user')->getById($orderInfo['uid']);
 
-        $tableReward->updateById($reward['id'], array('status' => '1'));
+        $tableReward->updateById($reward['id'], array('status' => '1', 'success_at' => date('Y-m-d H:i:s')));
 
         $condition = "uid={$user['id']} AND dsid={$reward['id']} AND rid={$reward['rid']}";
         $comment = $tableComment->getRow($condition);
@@ -126,8 +131,8 @@ class table_wxz_live_order extends table_wxz_live_base {
             $pollingData['type'] = 6;
 
             if ($reward['touid'] > 0) {
-                $touser = C::t('#wxz_live#wxz_live_user')->getById($orderInfo['touid']);
-                $condition = "uid={$orderInfo['touid']} AND rid={$reward['rid']}";
+                $touser = C::t('#wxz_live#wxz_live_user')->getById($reward['touid']);
+                $condition = "uid={$reward['touid']} AND rid={$reward['rid']}";
                 $viewer = $tableViewerObj->getRow($condition);
                 if ($touser) {
                     $data['touid'] = $touser['id'];
@@ -177,6 +182,9 @@ class table_wxz_live_order extends table_wxz_live_base {
      */
     public function doSuccessGrouppacket($orderInfo) {
         $grouppacket = $this->getGrouppacketByOrderId($orderInfo['id']);
+        if (!$grouppacket) {
+            return;
+        }
 
         $user = C::t('#wxz_live#wxz_live_user')->getById($orderInfo['uid']);
         $tableGrouppacket = new table_wxz_live_base(array('table' => 'wxz_live_grouppacket', 'pk' => 'id'));
@@ -229,6 +237,11 @@ class table_wxz_live_order extends table_wxz_live_base {
         $condition = "order_id={$orderInfo['id']}";
         $giftLog = $tableGiftLog->getRow($condition);
         $user = C::t('#wxz_live#wxz_live_user')->getById($orderInfo['uid']);
+        
+        if(!$giftLog) {
+            return;
+        }
+        
         $gift = $tableGift->getById($giftLog['giftid']);
 
         $tableGiftLog->updateById($giftLog['id'], array('status' => '1'));

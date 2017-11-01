@@ -47,10 +47,10 @@ class PayNotifyCallBack extends WxPayNotify {
             $msg = "订单查询失败";
             return false;
         }
-
+        
         $tableObj = C::t('#wxz_live#wxz_live_order');
         $orderInfo = $tableObj->getByOrderNo($data['out_trade_no']);
-
+        
         if (!$orderInfo) {
             $msg = "订单不存在";
             return false;

@@ -8,7 +8,11 @@ class Action_test extends Controller_base {
      * @return
      */
     public function index() {
-        echo 'test';
+        $orderId = '51'; //debug
+        $orderInfo = C::t('#wxz_live#wxz_live_order')->getById($orderId);
+        $ret = C::t('#wxz_live#wxz_live_order')->doSuccessGrouppacket($orderInfo);
+        var_dump($ret);
+        die;
     }
 
     /**

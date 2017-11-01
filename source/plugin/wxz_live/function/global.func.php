@@ -1,7 +1,10 @@
 <?php
 
 global $_G;
+
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/function/wqglobal.func.php";
+include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
+include_once DISCUZ_ROOT . "./source/plugin/wxz_live/lib/Controller_base.class.php";
 
 if ($_G['setting']['debug']) {
     ini_set('display_errors', 1);
@@ -16,10 +19,6 @@ function runController() {
     $controller = $_GET['pmod'];
     $action = $_GET['act'] ? $_GET['act'] : 'index';
     $do = $_GET['do'] ? $_GET['do'] : 'index';
-
-    $path = DISCUZ_ROOT . "./source/plugin/wxz_live/lib/Controller_base.class.php";
-    include_once DISCUZ_ROOT . "./source/plugin/wxz_live/table/table_wxz_live_base.php";
-    include_once $path;
 
     $path = DISCUZ_ROOT . "./source/plugin/wxz_live/controller/Controller_{$controller}.class.php";
 

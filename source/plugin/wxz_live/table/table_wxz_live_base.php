@@ -61,7 +61,7 @@ class table_wxz_live_base extends discuz_table {
         $query = DB::query($sql);
 
         while ($value = DB::fetch($query)) {
-            $result[$value[$this->_pk]] = $value;
+            $result[] = $value;
         }
 
         return $result;

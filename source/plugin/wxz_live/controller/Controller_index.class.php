@@ -134,7 +134,6 @@ class Controller_index extends Controller_base {
      */
     public function live() {
         global $_G;
-
         $roomNo = $_GET['roomno'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         //$user_agent = "MicroMessenger"; //debug
@@ -184,7 +183,11 @@ class Controller_index extends Controller_base {
         }
 
         $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
-
+        
+        //直播间付费
+        $condition = "uid={$uid} AND order_type=2 AND rid={$rid}";
+        $paylog = C::t('#wxz_live#wxz_live_order')->getRow($condition);
+        
         //会员观看限制
         if ($liveInfo['limit'] == 5) {
             if ($user['is_vip'] != 2) {
@@ -195,7 +198,12 @@ class Controller_index extends Controller_base {
                 $vipValidLimit = 1; //过期
             }
         }
-
+        
+        $limit_time = 0;
+        if($liveInfo['limit'] == 3 && $paylog){
+             $limit_time = strtotime($paylog['create_at']) + $liveInfo['limit_data']['delayed'];
+	}
+        
         //点攒总数
         $condition = "rid={$rid}";
         $totalzannum = $tableZanNumObj->getRow($condition, 'sum(num) total_num');
@@ -226,10 +234,6 @@ class Controller_index extends Controller_base {
         if ($reward) {
             $reward = array_merge($reward, unserialize($reward['desc']));
         }
-
-        //直播间付费
-        $condition = "uid={$uid} AND order_type=2 AND rid={$rid}";
-        $paylog = C::t('#wxz_live#wxz_live_order')->getRow($condition);
 
         //礼物列表
         $condition = "rid={$rid} AND is_show=1";
@@ -921,7 +925,7 @@ class Controller_index extends Controller_base {
     /**
      * 群红包
      */
-    public function setpacket($param) {
+    public function setpacket() {
         global $_G;
         $tableGrouppacket = new table_wxz_live_base(array('table' => 'wxz_live_grouppacket', 'pk' => 'id'));
 
