@@ -2607,10 +2607,10 @@
                                             $.post("{eval echo $this->createMobileurl('commentpage',array('rid'=>$rid))}", {page:page}, function(data) {
                                                 if (data.s == 1) {
                                                     var str = '';
-                                                    if(data.content == 0) {
-                                                        showtipsbox('已无更多数据');
-                                                        return;
-                                                    }
+//                                                    if(data.content == 0) {
+//                                                        showtipsbox('已无更多数据');
+//                                                        return;
+//                                                    }
                                                     $.each(data.content, function(index, value) {
 //                                                        var start = new Date(value.dateline * 1000);
 //                                                        var times = start.getFullYear() + '-' + (start.getMonth() + 1) + '-' + start.getDate() + ' ' + (start.getHours() < 10 ? '0' + start.getHours() : start.getHours()) + ':' + (start.getMinutes() < 10 ? '0' + start.getMinutes() : start.getMinutes()) + ':' + (start.getSeconds() < 10 ? '0' + start.getSeconds() : start.getSeconds());
