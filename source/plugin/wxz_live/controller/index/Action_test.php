@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 class Action_test extends Controller_base {
 
     /**
@@ -47,9 +51,9 @@ class Action_test extends Controller_base {
         $orderTypeValues = array_keys($orderTypes);
 
         $uid = $user['id'];
-        $orderType = $_GET['order_type']; //订单类型
-        $money = $_GET['money']; //按分计算
-        $payMoney = $_GET['pay_money']; //需要支付的金额
+        $orderType = (int) $_GET['order_type']; //订单类型
+        $money = (int) $_GET['money']; //按分计算
+        $payMoney = (string) $_GET['pay_money']; //需要支付的金额
 
         if (!$payMoney) {
             $payMoney = $money;
@@ -112,5 +116,3 @@ class Action_test extends Controller_base {
     }
 
 }
-
-?>

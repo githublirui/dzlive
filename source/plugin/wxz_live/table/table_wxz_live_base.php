@@ -127,5 +127,3 @@ class table_wxz_live_base extends discuz_table {
     }
 
 }
-
-?>

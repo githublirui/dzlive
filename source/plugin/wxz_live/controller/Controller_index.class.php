@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 /**
  * 
  * 前台页面
@@ -38,7 +42,7 @@ class Controller_index extends Controller_base {
     public function ajaxGetlive() {
         global $_G;
         $page = intval($_GET['page']);
-        $cid = intval($_GET['cid']);
+        $cid = (int) intval($_GET['cid']);
 
         $isweixin = 1;
         $pindex = max(0, intval($_GET['page']));
@@ -134,7 +138,7 @@ class Controller_index extends Controller_base {
      */
     public function live() {
         global $_G;
-        $roomNo = $_GET['roomno'];
+        $roomNo = (string) $_GET['roomno'];
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         //$user_agent = "MicroMessenger"; //debug
         //获取直播间详情
@@ -145,7 +149,7 @@ class Controller_index extends Controller_base {
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo, false);
 
-        $rid = $liveInfo['id'];
+        $rid = (int) $liveInfo['id'];
         $uid = $user['id'];
 
         if (!$liveInfo) {
@@ -183,11 +187,11 @@ class Controller_index extends Controller_base {
         }
 
         $style = $liveInfo['style'] ? $liveInfo['style'] : 1;
-        
+
         //直播间付费
         $condition = "uid={$uid} AND order_type=2 AND rid={$rid}";
         $paylog = C::t('#wxz_live#wxz_live_order')->getRow($condition);
-        
+
         //会员观看限制
         if ($liveInfo['limit'] == 5) {
             if ($user['is_vip'] != 2) {
@@ -198,12 +202,12 @@ class Controller_index extends Controller_base {
                 $vipValidLimit = 1; //过期
             }
         }
-        
+
         $limit_time = 0;
-        if($liveInfo['limit'] == 3 && $paylog){
-             $limit_time = strtotime($paylog['create_at']) + $liveInfo['limit_data']['delayed'];
-	}
-        
+        if ($liveInfo['limit'] == 3 && $paylog) {
+            $limit_time = strtotime($paylog['create_at']) + $liveInfo['limit_data']['delayed'];
+        }
+
         //点攒总数
         $condition = "rid={$rid}";
         $totalzannum = $tableZanNumObj->getRow($condition, 'sum(num) total_num');
@@ -331,7 +335,7 @@ class Controller_index extends Controller_base {
      */
     public function limit() {
         $type = $_GET['type'];
-        $rid = $_GET['rid'];
+        $rid = (int) $_GET['rid'];
         $password = $_GET['password'];
 
         $liveInfo = C::t('#wxz_live#wxz_live_room')->getById($rid);
@@ -1219,6 +1223,3 @@ class Controller_index extends Controller_base {
     }
 
 }
-
-?>
-              

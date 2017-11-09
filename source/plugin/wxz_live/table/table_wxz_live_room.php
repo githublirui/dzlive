@@ -151,5 +151,3 @@ class table_wxz_live_room extends table_wxz_live_base {
     }
 
 }
-
-?>

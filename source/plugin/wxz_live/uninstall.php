@@ -54,5 +54,3 @@ function wxzfolder_del($path) {
         @unlink($path);
     }
 }
-
-?>

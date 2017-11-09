@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 class Controller_category extends Controller_base {
 
     public function __construct() {
@@ -73,7 +77,7 @@ class Controller_category extends Controller_base {
      */
     public function add() {
         global $_G;
-        $id = $_GET['id'];
+        $id = (int) $_GET['id'];
 
         if ($id) {
             $info = C::t('#wxz_live#wxz_live_category')->fetch($id);
@@ -124,5 +128,3 @@ class Controller_category extends Controller_base {
     }
 
 }
-
-?>

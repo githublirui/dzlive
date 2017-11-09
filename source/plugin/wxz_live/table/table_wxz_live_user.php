@@ -95,5 +95,3 @@ class table_wxz_live_user extends table_wxz_live_base {
     }
 
 }
-
-?>

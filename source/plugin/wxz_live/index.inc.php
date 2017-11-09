@@ -16,4 +16,3 @@ if (!defined('IN_DISCUZ')) {
  */
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/function/global.func.php";
 runController();
-?>

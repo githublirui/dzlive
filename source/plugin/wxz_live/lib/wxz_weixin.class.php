@@ -165,5 +165,3 @@ class wxz_weixin extends WeChatClient {
     }
 
 }
-
-?>

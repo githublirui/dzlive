@@ -22,5 +22,3 @@ class table_wxz_live_category extends table_wxz_live_base {
     }
 
 }
-
-?>

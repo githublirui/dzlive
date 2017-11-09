@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 class Controller_common extends Controller_base {
 
     public function __construct() {
@@ -25,8 +29,8 @@ class Controller_common extends Controller_base {
     public function ajaxDelTable() {
         ob_end_clean();
 
-        $table = $_GET['tableName'];
-        $id = $_GET['id'];
+        $table = (string) $_GET['tableName'];
+        $id = (int) $_GET['id'];
 
         if (!$table || !$id) {
             $this->ajaxError('参数错误');
@@ -97,9 +101,9 @@ class Controller_common extends Controller_base {
                 'password' => trim($_GET['password']),
                 'ip' => trim($_GET['ip']),
             );
-            
+
             $getSetting['img'] = $images['img'] ? $images['img'] : $_GET['img'];
-            
+
             $saveData = array(
                 'type' => 3,
                 'desc' => serialize($getSetting),
@@ -134,5 +138,3 @@ class Controller_common extends Controller_base {
     }
 
 }
-
-?>

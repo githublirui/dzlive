@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 /**
  * 点击红包
  */
@@ -11,8 +15,8 @@ class Action_checkpacket extends Controller_base {
         $tableGrouppacket = new table_wxz_live_base(array('table' => 'wxz_live_grouppacket', 'pk' => 'id'));
         $tableGrouppacketLog = new table_wxz_live_base(array('table' => 'wxz_live_grouppacket_log', 'pk' => 'id'));
 
-        $rid = $_GET['rid'];
-        $hb_id = $_GET['sendid'];
+        $rid = (int) $_GET['rid'];
+        $hb_id = (int) $_GET['sendid'];
 
         $condition = "id={$hb_id} AND rid={$rid}";
         $hb_msg = $tableComment->getRow($condition);
@@ -74,8 +78,8 @@ class Action_checkpacket extends Controller_base {
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser('', false);
         $uid = $user['id'];
-        $rid = $_GET['rid'];
-        $hb_id = $_GET['sendid'];
+        $rid = (int) $_GET['rid'];
+        $hb_id = (int) $_GET['sendid'];
 
         $condition = "id={$hb_id} AND rid={$rid}";
 
@@ -173,5 +177,3 @@ class Action_checkpacket extends Controller_base {
     }
 
 }
-
-?>

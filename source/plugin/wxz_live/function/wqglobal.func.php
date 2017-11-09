@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 function ihttp_request($url, $post = '', $extra = array(), $timeout = 60) {
     if (function_exists('curl_init') && function_exists('curl_exec') && $timeout > 0) {
         $ch = ihttp_build_curl($url, $post, $extra, $timeout);
@@ -628,5 +632,3 @@ function tomedia($pic) {
     }
     return $result;
 }
-
-?>

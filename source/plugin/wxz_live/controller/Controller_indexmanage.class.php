@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 class Controller_indexmanage extends Controller_base {
 
     public function __construct() {
@@ -92,7 +96,7 @@ class Controller_indexmanage extends Controller_base {
      */
     public function bannerSave() {
         global $_G;
-        $id = $_GET['id'];
+        $id = (int) $_GET['id'];
 
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_banner', 'pk' => 'id'));
 
@@ -141,5 +145,3 @@ class Controller_indexmanage extends Controller_base {
     }
 
 }
-
-?>

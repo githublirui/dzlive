@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 global $_G;
 
 include_once DISCUZ_ROOT . "./source/plugin/wxz_live/function/wqglobal.func.php";
@@ -19,10 +23,10 @@ function runController() {
     $controller = preg_replace('/[^\[A-Za-z0-9_\]]/', '', getgpc('pmod'));
     $action = preg_replace('/[^\[A-Za-z0-9_\]]/', '', getgpc('act'));
     $do = preg_replace('/[^\[A-Za-z0-9_\]]/', '', getgpc('do'));
-    
+
     $action = $action ? $action : 'index';
     $do = $do ? $do : 'index';
-    
+
     if (!$controller) {
         if (defined('IN_ADMINCP')) {
             cpmsg('页面不存在', '', 'error');
@@ -160,5 +164,3 @@ function randBonus($total = 0, $num = 3, $type = 1) {
     }
     return $moneys;
 }
-
-?>

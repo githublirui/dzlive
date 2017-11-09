@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 class Controller_live extends Controller_base {
 
     public function __construct() {
@@ -22,7 +26,7 @@ class Controller_live extends Controller_base {
     private function setLiveNav() {
         global $_G;
 
-        $rid = $_GET['rid'];
+        $rid = (int) $_GET['rid'];
         if (!$rid) {
             cpmsg('直播间不存在', $this->noRootUrl, 'success');
         }
@@ -70,7 +74,7 @@ class Controller_live extends Controller_base {
      * 导航栏管理
      */
     public function menuSetting() {
-        $do = $_GET['do'];
+        $do = (string) $_GET['do'];
 
         $this->types = array(
             1 => 'iframe嵌入',
@@ -82,7 +86,11 @@ class Controller_live extends Controller_base {
         );
 
         if ($do) {
-            $this->$do();
+            if (method_exists($this, $do)) {
+                $this->$do();
+            } else {
+                cpmsg('页面不存在', $this->noRootUrl . "&act=menuSetting" . "&rid={$this->rid}", 'success');
+            }
             return;
         }
 
@@ -108,7 +116,7 @@ class Controller_live extends Controller_base {
      */
     private function menuSettingSave() {
         global $_G;
-        $mid = $_GET['mid'];
+        $mid = (int) $_GET['mid'];
         $type = $_GET['type'];
 
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_menu', 'pk' => 'id'));
@@ -158,7 +166,7 @@ class Controller_live extends Controller_base {
      */
     public function activitySetting() {
         global $_G;
-        $rid = $_GET['rid'];
+        $rid = (int) $_GET['rid'];
 
         $this->setLiveNav();
 
@@ -402,7 +410,7 @@ class Controller_live extends Controller_base {
      */
     public function liveSave() {
         global $_G;
-        $id = $_GET['id'];
+        $id = (int) $_GET['id'];
         $tableObj = C::t('#wxz_live#wxz_live_room');
         if ($id) {
             $info = $tableObj->fetch($id);
@@ -540,7 +548,7 @@ class Controller_live extends Controller_base {
      */
     private function zanpicSave($param) {
         global $_G;
-        $pid = $_GET['pid'];
+        $pid = (int) $_GET['pid'];
 
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_zanpic', 'pk' => 'id'));
 
@@ -583,7 +591,7 @@ class Controller_live extends Controller_base {
     public function reward() {
         global $_G;
 
-        $rid = $_GET['rid'];
+        $rid = (int) $_GET['rid'];
 
         $this->setLiveNav();
         $moneyNum = 6; //显示打赏红包数量
@@ -656,7 +664,7 @@ class Controller_live extends Controller_base {
     private function giftSave() {
         global $_G;
 
-        $gid = $_GET['gid'];
+        $gid = (int) $_GET['gid'];
 
         $tableObj = new table_wxz_live_base(array('table' => 'wxz_live_gift', 'pk' => 'id'));
 
@@ -697,6 +705,3 @@ class Controller_live extends Controller_base {
     }
 
 }
-
-?>
-    

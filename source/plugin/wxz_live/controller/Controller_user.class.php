@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('IN_DISCUZ')) {
+    exit('Access Denied');
+}
+
 /**
  * 用户管理
  */
@@ -70,7 +74,7 @@ class Controller_user extends Controller_base {
      */
 
     public function editUser() {
-        $id = $_GET['id'];
+        $id = (int) $_GET['id'];
 
         $tableObj = C::t('#wxz_live#wxz_live_user');
 
@@ -95,5 +99,3 @@ class Controller_user extends Controller_base {
     }
 
 }
-
-?>

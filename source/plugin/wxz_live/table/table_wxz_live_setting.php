@@ -66,5 +66,3 @@ class table_wxz_live_setting extends table_wxz_live_base {
     }
 
 }
-
-?>

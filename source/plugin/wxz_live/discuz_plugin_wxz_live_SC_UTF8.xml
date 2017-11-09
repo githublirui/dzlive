@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='ISO-8859-1' ?> 
+ï»¿<?xml version='1.0' encoding="ISO-8859-1"?> 
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X3.4]]></item>
@@ -8,18 +8,18 @@
 		<item id="plugin">
 			<item id="available"><![CDATA[0]]></item>
 			<item id="adminid"><![CDATA[0]]></item>
-			<item id="name"><![CDATA[Î¢Ð¡ÖÇÊÓÆµÖ±²¥]]></item>
+			<item id="name"><![CDATA[å¾®å°æ™ºè§†é¢‘ç›´æ’­]]></item>
 			<item id="identifier"><![CDATA[wxz_live]]></item>
-			<item id="description"><![CDATA[Î¢Ð¡ÖÇÊÓÆµÖ±²¥]]></item>
+			<item id="description"><![CDATA[å¾®å°æ™ºè§†é¢‘ç›´æ’­]]></item>
 			<item id="datatables"><![CDATA[]]></item>
 			<item id="directory"><![CDATA[wxz_live/]]></item>
-			<item id="copyright"><![CDATA[wxz-ºÏ·ÊÎ¢Ð¡ÖÇ]]></item>
+			<item id="copyright"><![CDATA[wxz-åˆè‚¥å¾®å°æ™º]]></item>
 			<item id="version"><![CDATA[v1.0.0]]></item>
 			<item id="__modules">
 				<item id="0">
 					<item id="name"><![CDATA[live]]></item>
 					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[Ö±²¥¼ä¹ÜÀí]]></item>
+					<item id="menu"><![CDATA[ç›´æ’­é—´ç®¡ç†]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
@@ -32,7 +32,7 @@
 				<item id="1">
 					<item id="name"><![CDATA[category]]></item>
 					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[Ö±²¥¼ä·ÖÀà]]></item>
+					<item id="menu"><![CDATA[ç›´æ’­é—´åˆ†ç±»]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
@@ -45,7 +45,7 @@
 				<item id="2">
 					<item id="name"><![CDATA[indexmanage]]></item>
 					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[Ê×Ò³ÉèÖÃ]]></item>
+					<item id="menu"><![CDATA[é¦–é¡µè®¾ç½®]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
@@ -58,7 +58,7 @@
 				<item id="3">
 					<item id="name"><![CDATA[user]]></item>
 					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[ÓÃ»§¹ÜÀí]]></item>
+					<item id="menu"><![CDATA[ç”¨æˆ·ç®¡ç†]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>
@@ -71,7 +71,7 @@
 				<item id="4">
 					<item id="name"><![CDATA[common]]></item>
 					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[³£ÓÃ¹¦ÄÜ]]></item>
+					<item id="menu"><![CDATA[å¸¸ç”¨åŠŸèƒ½]]></item>
 					<item id="url"><![CDATA[]]></item>
 					<item id="type"><![CDATA[3]]></item>
 					<item id="adminid"><![CDATA[0]]></item>

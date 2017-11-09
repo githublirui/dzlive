@@ -277,5 +277,3 @@ class table_wxz_live_order extends table_wxz_live_base {
     }
 
 }
-
-?>
