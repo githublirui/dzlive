@@ -27,9 +27,9 @@ class Controller_user extends Controller_base {
      */
     public function index() {
         $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
-        $query['nickname'] = trim($_GET['nickname']);
-        $query['openid'] = trim($_GET['openid']);
-        $query['city'] = trim($_GET['city']);
+        $query['nickname'] = daddslashes($_GET['nickname']);
+        $query['openid'] = daddslashes($_GET['openid']);
+        $query['city'] = daddslashes($_GET['city']);
         $query['orderby'] = $_GET['orderby'] ? $_GET['orderby'] : 'create_at';
         $query['ordersc'] = $_GET['ordersc'] ? $_GET['ordersc'] : 'desc';
         $page = (int) $_GET['page'];

@@ -150,7 +150,7 @@ class Controller_index extends Controller_base {
         $user = C::t('#wxz_live#wxz_live_user')->authUser($liveSettingInfo, false);
 
         $rid = (int) $liveInfo['id'];
-        $uid = $user['id'];
+        $uid = (int)$user['id'];
 
         if (!$liveInfo) {
             showmessage('直播间不存在');
@@ -413,7 +413,7 @@ class Controller_index extends Controller_base {
         require_once "{$wxpayPath}lib/WxPay.Config.php";
 
         $user = C::t('#wxz_live#wxz_live_user')->authUser('', false);
-        $uid = $user['id'];
+        $uid = (int)$user['id'];
 
         $params = array(
             'fee' => $money,

@@ -293,7 +293,7 @@ class Controller_live extends Controller_base {
     private function _getPlayerSetting() {
         $result = array();
 
-        $videoType = $_GET["video_type"];
+        $videoType = (int)$_GET["video_type"];
 
         $images = wxz_uploadimg();
 
@@ -342,7 +342,7 @@ class Controller_live extends Controller_base {
     public function index() {
         $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
         $query['room_no'] = trim($_GET['room_no']);
-        $query['category_name'] = trim($_GET['category_name']);
+        $query['category_name'] = daddslashes($_GET['category_name']);
         $query['start_time'] = $_GET['start_time'];
         $query['end_time'] = $_GET['end_time'];
         $query['orderby'] = $_GET['orderby'] ? $_GET['orderby'] : 'sort_order';
@@ -479,7 +479,7 @@ class Controller_live extends Controller_base {
      */
     public function liveUser() {
         $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
-        $query['name'] = trim($_GET['name']);
+        $query['name'] = daddslashes($_GET['name']);
         $query['startTime'] = $_GET['startTime'];
         $query['endTime'] = $_GET['endTime'];
         $query['orderby'] = $_GET['orderby'] ? $_GET['orderby'] : 'sort_order';

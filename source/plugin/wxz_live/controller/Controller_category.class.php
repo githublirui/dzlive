@@ -28,7 +28,7 @@ class Controller_category extends Controller_base {
      */
     public function index() {
         $query['perpage'] = $_GET['perpage'] ? $_GET['perpage'] : 10;
-        $query['name'] = trim($_GET['name']);
+        $query['name'] = daddslashes($_GET['name']);
         $query['startTime'] = $_GET['startTime'];
         $query['endTime'] = $_GET['endTime'];
         $query['orderby'] = $_GET['orderby'] ? $_GET['orderby'] : 'sort_order';
